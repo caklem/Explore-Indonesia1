@@ -1,0 +1,1770 @@
+---
+// Halaman Product - Indonesia Travel
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product - Indonesia Travel - Explore with Zikra Speedboat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Header Styles - CONSISTENT UNTUK SEMUA HALAMAN */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #333;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .logo-highlight {
+            color: #ff6b6b;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #ff6b6b;
+        }
+
+        .nav-menu a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: #ff6b6b;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-menu a:hover:after {
+            width: 100%;
+        }
+
+        .nav-menu a.active {
+            color: #ff6b6b;
+        }
+
+        .nav-menu a.active:after {
+            width: 100%;
+        }
+
+        /* Mobile Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Mobile Sidebar */
+        .mobile-sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 1001;
+            transition: right 0.3s ease;
+            padding-top: 100px;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-sidebar.active {
+            right: 0;
+        }
+
+        .mobile-sidebar .nav-menu {
+            flex-direction: column;
+            gap: 0;
+            padding: 0 30px;
+        }
+
+        .mobile-sidebar .nav-menu a {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-sidebar .nav-menu a:hover {
+            color: #ff6b6b;
+            transform: translateX(5px);
+        }
+
+        /* Overlay */
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Product Section */
+        .product-section {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+
+        .product-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .product-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 60px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .products-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background: #f8f8f8;
+            border-radius: 25px;
+            overflow: visible;
+            box-shadow: none;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            border: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .product-header {
+            padding: 30px 30px 15px 30px;
+            background: transparent;
+            border-radius: 25px 25px 0 0;
+        }
+
+        .product-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .product-body {
+            display: flex;
+            align-items: flex-start;
+            padding: 0 30px 30px 30px;
+            gap: 30px;
+        }
+
+        .product-image-container {
+            width: 250px;
+            height: 250px;
+            border-radius: 20px;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image-container::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 5;
+            pointer-events: none;
+            background: rgba(163, 177, 132, 0.9);
+            border: 2px solid white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-image-container::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 22px;
+            height: 22px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 6;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='white' d='M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .product-image-container:hover::after,
+        .product-image-container:hover::before {
+            opacity: 1;
+        }
+
+        .product-image-container:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-image:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        .image-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .slider-nav:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-nav.prev {
+            left: 10px;
+        }
+
+        .slider-nav.next {
+            right: 10px;
+        }
+
+        .slider-nav svg {
+            width: 14px;
+            height: 14px;
+            fill: #333;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 10;
+        }
+
+        .slider-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background: white;
+            transform: scale(1.3);
+        }
+
+        .product-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .trip-options {
+            display: inline-flex;
+            gap: 0;
+            margin-bottom: 20px;
+            align-self: flex-start;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            height: 45px;
+            min-width: fit-content;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .trip-option {
+            padding: 0 28px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Noto Sans', sans-serif;
+            white-space: nowrap;
+            min-width: 110px;
+            position: relative;
+        }
+
+        /* Trip Options dengan specificity tinggi */
+        .product-card .trip-options .trip-option:first-child {
+            background: #EDE6DA !important;
+            color: #6B5B47 !important;
+            border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .product-card .trip-options .trip-option:last-child {
+            background: #A3B184 !important;
+            color: white !important;
+        }
+
+        /* Hapus active state yang menyamakan warna */
+        .product-card .trip-options .trip-option.active:first-child {
+            background: #EDE6DA !important;
+            color: #6B5B47 !important;
+        }
+
+        .product-card .trip-options .trip-option.active:last-child {
+            background: #A3B184 !important;
+            color: white !important;
+        }
+
+        .product-price {
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .trip-time {
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        .destinations {
+            list-style: none;
+            margin-bottom: 20px;
+            padding: 0;
+        }
+
+        .destinations li {
+            font-family: 'Noto Sans', sans-serif;
+            color: #555;
+            font-size: 0.95rem;
+            padding: 2px 0;
+            position: relative;
+            padding-left: 20px;
+            font-weight: 400;
+        }
+
+        .destinations li:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 14px;
+            height: 14px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0YyODQ4MiIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .view-details-btn {
+            background: transparent;
+            color: #ff8a80;
+            border: 1.5px solid #ff8a80;
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 400;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-transform: lowercase;
+            letter-spacing: 0.3px;
+            align-self: flex-start;
+            font-family: 'Noto Sans', sans-serif;
+        }
+
+        .view-details-btn:hover {
+            background-color: #ff6b6b;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Special styling for Rent Car */
+        .product-card.rent-car .trip-option:first-child {
+            background: #e6f3ff;
+            color: #4a90e2;
+            border-right: 1px solid rgba(74, 144, 226, 0.2);
+        }
+
+        .product-card.rent-car .trip-option:last-child {
+            background: #4a90e2;
+            color: white;
+        }
+
+        .additional-info {
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        /* Image Modal Styles */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            margin: 5% auto;
+            text-align: center;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -50px;
+            right: 10px;
+            color: #F28482;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10001;
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-close:hover {
+            color: #ff6b6b;
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .modal-image-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .modal-image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 15px;
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(163, 177, 132, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-nav:hover {
+            background: rgba(163, 177, 132, 1);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-nav.prev {
+            left: 30px;
+        }
+
+        .modal-nav.next {
+            right: 30px;
+        }
+
+        .modal-nav svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        .modal-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 25px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .modal-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .modal-dot:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.1);
+            border-color: white;
+        }
+
+        .modal-dot.active {
+            background: #F28482;
+            transform: scale(1.3);
+            border-color: white;
+            box-shadow: 0 0 15px rgba(242, 132, 130, 0.8);
+        }
+
+        /* Detail Modal Styles */
+        .detail-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .detail-modal.show {
+            display: flex;
+        }
+
+        .detail-modal-content {
+            position: relative;
+            width: 95%;
+            max-width: 550px;
+            max-height: 85vh;
+            background: white;
+            border-radius: 20px;
+            padding: 0;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-modal-body {
+            overflow-y: auto;
+            flex: 1;
+            padding-bottom: 60px;
+        }
+
+        .detail-modal-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .detail-modal-body::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .detail-modal-body::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .detail-modal-body::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        .detail-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: #666;
+            font-size: 26px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10001;
+            transition: color 0.3s ease;
+        }
+
+        .detail-modal-close:hover {
+            color: #F28482;
+        }
+
+        .detail-header {
+            background: #f8f9fa;
+            padding: 30px 30px 25px;
+            border-bottom: 1px solid #eee;
+            margin-top: 0;
+        }
+
+        .detail-model {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+            display: block;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .detail-specs {
+            font-size: 15px;
+            color: #666;
+            font-weight: 400;
+            line-height: 1.3;
+        }
+
+        .detail-trip-options {
+            display: flex;
+            margin: 30px 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .detail-trip-option {
+            flex: 1;
+            padding: 22px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .detail-trip-option.active {
+            background: #A3B184;
+            color: white;
+        }
+
+        .detail-trip-option:not(.active) {
+            background: #EDE6DA;
+            color: #6B5B47;
+        }
+
+        .detail-trip-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-trip-price {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .detail-trip-time {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .detail-destinations {
+            display: flex;
+            gap: 35px;
+            margin: 30px 30px;
+            padding: 0;
+        }
+
+        .detail-dest-column {
+            flex: 1;
+        }
+
+        .detail-dest-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 15px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .detail-dest-icon {
+            width: 14px;
+            height: 14px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0YyODQ4MiIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .detail-section {
+            margin: 30px 30px;
+            border-top: 1px solid #eee;
+            padding-top: 30px;
+        }
+
+        .detail-section h3 {
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: #333;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-included-excluded {
+            display: flex;
+            gap: 35px;
+        }
+
+        .detail-included,
+        .detail-excluded {
+            flex: 1;
+        }
+
+        .detail-include-item,
+        .detail-exclude-item {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .detail-include-item {
+            color: #4CAF50;
+        }
+
+        .detail-exclude-item {
+            color: #f44336;
+        }
+
+        .detail-footer {
+            border-top: 1px solid #eee;
+            padding: 25px 30px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            background: #fafafa;
+        }
+
+        .detail-contact {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .detail-phone {
+            font-weight: 700;
+            color: #333;
+            font-size: 15px;
+        }
+
+        .detail-back-btn {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            color: #666;
+            border: 2px solid #ddd;
+            padding: 14px 28px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .detail-back-btn:hover {
+            background: #f8f9fa;
+            border-color: #bbb;
+            transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-sidebar {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                height: 100vh;
+                width: 300px;
+                background: white;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+                z-index: 1001;
+                padding: 80px 20px 20px;
+            }
+
+            .mobile-sidebar.active {
+                right: 0;
+            }
+
+            .mobile-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                z-index: 1000;
+            }
+
+            .mobile-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .mobile-menu {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .mobile-menu li {
+                margin-bottom: 15px;
+            }
+
+            .mobile-menu a {
+                display: block;
+                color: #333;
+                text-decoration: none;
+                font-size: 18px;
+                font-weight: 500;
+                padding: 10px 0;
+                border-bottom: 1px solid #eee;
+            }
+
+            .product-container {
+                padding: 0 20px;
+                max-width: 100%;
+            }
+
+            .product-title {
+                font-size: 2.5rem;
+                margin-bottom: 40px;
+            }
+
+            .product-body {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .product-image-container {
+                width: 100%;
+                height: 250px;
+                border-radius: 20px;
+            }
+
+            .product-content {
+                gap: 12px;
+            }
+
+            .product-header {
+                padding: 25px 25px 15px;
+            }
+
+            .product-body {
+                padding: 0 25px 25px;
+            }
+
+            .product-image-container {
+                width: 100%;
+                height: 220px;
+                border-radius: 20px;
+            }
+
+            .slider-nav {
+                width: 35px;
+                height: 35px;
+            }
+
+            .slider-nav svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            .slider-dots {
+                bottom: 12px;
+            }
+
+            .slider-dot {
+                width: 10px;
+                height: 10px;
+            }
+
+            .trip-options {
+                flex-wrap: wrap;
+            }
+
+            .additional-info {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .product-container {
+                padding: 0 20px;
+            }
+
+            .product-title {
+                font-size: 2.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .nav-container {
+                padding: 0 20px;
+            }
+
+            /* Modal responsive */
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+
+            .modal-image-container {
+                height: 300px;
+            }
+
+            .modal-nav {
+                width: 50px;
+                height: 50px;
+            }
+
+            .modal-nav.prev {
+                left: 15px;
+            }
+
+            .modal-nav.next {
+                right: 15px;
+            }
+
+            .modal-nav svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .modal-close {
+                top: -40px;
+                right: 5px;
+                font-size: 32px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .modal-dots {
+                gap: 8px;
+                margin-top: 20px;
+                padding: 8px 15px;
+            }
+
+            .modal-dot {
+                width: 12px;
+                height: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/" class="logo">
+                INDO<span class="logo-highlight">NESIA</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/product" class="active">Product</a></li>
+                <li><a href="/gallery">Gallery</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+            <!-- Hamburger Menu -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar">
+        <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/product" class="active">Product</a></li>
+            <li><a href="/gallery">Gallery</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Product Section -->
+        <section class="product-section">
+            <div class="product-container">
+                <h1 class="product-title">OUR PRODUCTS</h1>
+                
+                <div class="products-grid">
+                    <!-- Zikita Speedboat -->
+                    <div class="product-card">
+                        <div class="product-header">
+                            <h3 class="product-name">Zikita Speedboat</h3>
+                        </div>
+                        <div class="product-body">
+                            <div class="product-image-container">
+<div class="image-slider">
+                                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=250&h=250&fit=crop&crop=center" alt="Zikita Speedboat Interior" class="product-image" data-slide="0">
+                                    <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?w=250&h=250&fit=crop&crop=center" alt="Zikita Speedboat Exterior" class="product-image" data-slide="1" style="display: none;">
+                                    <img src="https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=250&h=250&fit=crop&crop=center" alt="Zikita Speedboat Deck" class="product-image" data-slide="2" style="display: none;">
+                                    
+                                    <button class="slider-nav prev" data-slider="zikita">
+                                        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                                    </button>
+                                    <button class="slider-nav next" data-slider="zikita">
+                                        <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                                    </button>
+                                    
+                                    <div class="slider-dots">
+                                        <div class="slider-dot active" data-slider="zikita" data-slide="0"></div>
+                                        <div class="slider-dot" data-slider="zikita" data-slide="1"></div>
+                                        <div class="slider-dot" data-slider="zikita" data-slide="2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <div class="trip-options">
+                                    <button class="trip-option active">Half Day Trip</button>
+                                    <button class="trip-option">Full Day Trip</button>
+                                </div>
+                                <div class="product-price">Rp 9.000.000,-</div>
+                                <div class="trip-time">06,30 AM - 05,00 PM</div>
+                                <ul class="destinations">
+                                    <li>Padar Island</li>
+                                    <li>Komodo Island</li>
+                                    <li>Pink Beach</li>
+                                    <li>etc</li>
+                                </ul>
+                                <a href="#" class="view-details-btn">view details</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Zaviero Speedboat -->
+                    <div class="product-card">
+                        <div class="product-header">
+                            <h3 class="product-name">Zaviero Speedboat</h3>
+                        </div>
+                        <div class="product-body">
+                            <div class="product-image-container">
+                                <div class="image-slider">
+                                    <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=250&h=250&fit=crop&crop=center" alt="Zaviero Speedboat Interior" class="product-image" data-slide="0">
+                                    <img src="https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=250&h=250&fit=crop&crop=center" alt="Zaviero Speedboat Exterior" class="product-image" data-slide="1" style="display: none;">
+                                    <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=250&h=250&fit=crop&crop=center" alt="Zaviero Speedboat Deck" class="product-image" data-slide="2" style="display: none;">
+                                    
+                                    <button class="slider-nav prev" data-slider="zaviero">
+                                        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                                    </button>
+                                    <button class="slider-nav next" data-slider="zaviero">
+                                        <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                                    </button>
+                                    
+                                    <div class="slider-dots">
+                                        <div class="slider-dot active" data-slider="zaviero" data-slide="0"></div>
+                                        <div class="slider-dot" data-slider="zaviero" data-slide="1"></div>
+                                        <div class="slider-dot" data-slider="zaviero" data-slide="2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <div class="trip-options">
+                                    <button class="trip-option active">Half Day Trip</button>
+                                    <button class="trip-option">Full Day Trip</button>
+                                </div>
+                                <div class="product-price">Rp 4.500.000,-</div>
+                                <div class="trip-time">06:30 AM - 02:00 PM</div>
+                                <ul class="destinations">
+                                    <li>Loh Buaya (Komodo Island)</li>
+                                    <li>Kelor Island</li>
+                                    <li>Manjeriti Island</li>
+                                </ul>
+                                <a href="#" class="view-details-btn">view details</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rent Car -->
+                    <div class="product-card rent-car">
+                        <div class="product-header">
+                            <h3 class="product-name">Rent Car</h3>
+                        </div>
+                        <div class="product-body">
+                            <div class="product-image-container">
+                                <div class="image-slider">
+                                    <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=250&h=250&fit=crop&crop=center" alt="Toyota Hiace" class="product-image" data-slide="0">
+                                    <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=250&h=250&fit=crop&crop=center" alt="Innova Reborn" class="product-image" data-slide="1" style="display: none;">
+                                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=250&h=250&fit=crop&crop=center" alt="Car Interior" class="product-image" data-slide="2" style="display: none;">
+                                    
+                                    <button class="slider-nav prev" data-slider="rentcar">
+                                        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                                    </button>
+                                    <button class="slider-nav next" data-slider="rentcar">
+                                        <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                                    </button>
+                                    
+                                    <div class="slider-dots">
+                                        <div class="slider-dot active" data-slider="rentcar" data-slide="0"></div>
+                                        <div class="slider-dot" data-slider="rentcar" data-slide="1"></div>
+                                        <div class="slider-dot" data-slider="rentcar" data-slide="2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <div class="trip-options">
+                                    <button class="trip-option active">Toyota Hiace</button>
+                                    <button class="trip-option">Innova Reborn</button>
+                                </div>
+                                <div class="product-price">Rp 1.250.000,-</div>
+                                <div class="additional-info">
+                                    We also provide premium car (Toyota Alphard & Mercedes-Benz) 
+                                    for personal or corporate. Product & details, please contact our 
+                                    admin at +62 811-3787-741
+                                </div>
+                                <a href="#" class="view-details-btn">view details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-image-container">
+                <img id="modalImage" src="" alt="">
+                <button class="modal-nav prev" id="modalPrev">
+                    <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                </button>
+                <button class="modal-nav next" id="modalNext">
+                    <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                </button>
+            </div>
+            <div class="modal-dots" id="modalDots"></div>
+        </div>
+    </div>
+
+    <!-- Detail Modal -->
+    <div class="detail-modal" id="detailModal">
+        <div class="detail-modal-content">
+            <span class="detail-modal-close">&times;</span>
+            
+            <div class="detail-modal-body">
+                <!-- Header -->
+                <div class="detail-header">
+                    <div class="detail-title">
+                        <span class="detail-model">Yamaha 250 HP x2</span>
+                        <span class="detail-specs">GPS | Compass | Map | VHF Radio | 11.7 x 3 x 1.10</span>
+                    </div>
+                </div>
+
+                <!-- Trip Options -->
+                <div class="detail-trip-options">
+                    <div class="detail-trip-option active">
+                        <div class="detail-trip-title">HALF DAY TRIP</div>
+                        <div class="detail-trip-price">Rp. 5.500.000,-</div>
+                        <div class="detail-trip-time">06.30 AM - 02.00 PM</div>
+                    </div>
+                    <div class="detail-trip-option">
+                        <div class="detail-trip-title">FULL DAY TRIP</div>
+                        <div class="detail-trip-price">Rp 9.000.000,-</div>
+                        <div class="detail-trip-time">06.30 AM - 05.00 PM</div>
+                    </div>
+                </div>
+
+                <!-- Destinations -->
+                <div class="detail-destinations">
+                    <div class="detail-dest-column">
+                        <div class="detail-dest-item">
+                            <span class="detail-dest-icon"></span>
+                            <span>Rinca Island</span>
+                        </div>
+                        <div class="detail-dest-item">
+                            <span class="detail-dest-icon"></span>
+                            <span>Kelor Island</span>
+                        </div>
+                        <div class="detail-dest-item">
+                            <span class="detail-dest-icon"></span>
+                            <span>Menjerite Island</span>
+                        </div>
+                    </div>
+                    <div class="detail-dest-column">
+                        <div class="detail-dest-item">
+                            <span class="detail-dest-icon"></span>
+                            <span>Padar Island</span>
+                        </div>
+                        <div class="detail-dest-item">
+                            <span class="detail-dest-icon"></span>
+                            <span>Komodo Island</span>
+                        </div>
+                        <div class="detail-dest-item">
+                            <span class="detail-dest-icon"></span>
+                            <span>Pink Beach</span>
+                        </div>
+                        <div class="detail-dest-item">
+                            <span class="detail-dest-icon"></span>
+                            <span>Taka Makassar, Manta Point</span>
+                        </div>
+                        <div class="detail-dest-item">
+                            <span class="detail-dest-icon"></span>
+                            <span>Kanawa Island</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- What's Included -->
+                <div class="detail-section">
+                    <h3>WHAT'S INCLUDED & EXCLUDED</h3>
+                    <div class="detail-included-excluded">
+                        <div class="detail-included">
+                            <div class="detail-include-item">✓ Boat Crew</div>
+                            <div class="detail-include-item">✓ Snack & Soft Drinks</div>
+                            <div class="detail-include-item">✓ Snorkeling Gear</div>
+                            <div class="detail-include-item">✓ Mineral Water Free Flow</div>
+                            <div class="detail-include-item">✓ Lunch Box</div>
+                            <div class="detail-include-item">✓ Documentation</div>
+                            <div class="detail-include-item">✓ Life Jacket</div>
+                            <div class="detail-include-item">✓ Life Ring Boy</div>
+                            <div class="detail-include-item">✓ First Aid (P3K)</div>
+                            <div class="detail-include-item">✓ Toilet</div>
+                        </div>
+                        <div class="detail-excluded">
+                            <div class="detail-exclude-item">⊗ Komodo National Park</div>
+                            <div class="detail-exclude-item">⊗ Entrance & Ranger Fee</div>
+                            <div class="detail-exclude-item">⊗ Rental Diving Gear</div>
+                            <div class="detail-exclude-item">⊗ Photographer (By Request)</div>
+                            <div class="detail-exclude-item">⊗ Tipping Crew (Optional)</div>
+                            <div class="detail-exclude-item">⊗ Insurance</div>
+                            <div class="detail-exclude-item">⊗ (Make sure bring enough IDR cash)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="detail-footer">
+                    <p>Prices very based on destination & number of passengers.</p>
+                    <div class="detail-contact">
+                        <span>Contact info</span>
+                        <span class="detail-phone">0811-3787-741</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back Button -->
+            <button class="detail-back-btn">back</button>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links (hash links only)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+
+                // Close mobile sidebar when clicking a link
+                const mobileSidebar = document.querySelector('.mobile-sidebar');
+                const mobileOverlay = document.querySelector('.mobile-overlay');
+                const hamburger = document.querySelector('.hamburger');
+                
+                if (mobileSidebar && mobileOverlay && hamburger) {
+                    mobileSidebar.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                    hamburger.classList.remove('active');
+                }
+            });
+        });
+
+        // Handle external links (like /) - just close mobile menu
+        document.querySelectorAll('a[href^="/"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Close mobile sidebar when clicking a link
+                const mobileSidebar = document.querySelector('.mobile-sidebar');
+                const mobileOverlay = document.querySelector('.mobile-overlay');
+                const hamburger = document.querySelector('.hamburger');
+                
+                if (mobileSidebar && mobileOverlay && hamburger) {
+                    mobileSidebar.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                    hamburger.classList.remove('active');
+                }
+            });
+        });
+
+        // Mobile Hamburger Menu
+        const hamburger = document.querySelector('.hamburger');
+        const mobileSidebar = document.querySelector('.mobile-sidebar');
+        const mobileOverlay = document.querySelector('.mobile-overlay');
+
+        if (hamburger && mobileSidebar && mobileOverlay) {
+            // Toggle sidebar when hamburger is clicked
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileSidebar.classList.toggle('active');
+                mobileOverlay.classList.toggle('active');
+            });
+
+            // Close sidebar when overlay is clicked
+            mobileOverlay.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileSidebar.classList.remove('active');
+                this.classList.remove('active');
+            });
+
+            // Close sidebar when pressing Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    hamburger.classList.remove('active');
+                    mobileSidebar.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                }
+            });
+        }
+
+        // Header scroll effect (enhanced shadow on scroll)
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 2px 25px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Image Slider Functions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize all sliders
+            const sliders = document.querySelectorAll('.image-slider');
+            
+            sliders.forEach(slider => {
+                const images = slider.querySelectorAll('.product-image');
+                const dots = slider.querySelectorAll('.slider-dot');
+                const prevBtn = slider.querySelector('.slider-nav.prev');
+                const nextBtn = slider.querySelector('.slider-nav.next');
+                
+                let currentIndex = 0;
+                
+                // Show initial image
+                showSlide(slider, currentIndex);
+                
+                // Previous button
+                prevBtn.addEventListener('click', () => {
+                    currentIndex = currentIndex > 0 ? currentIndex - 1 : images.length - 1;
+                    showSlide(slider, currentIndex);
+                });
+                
+                // Next button
+                nextBtn.addEventListener('click', () => {
+                    currentIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
+                    showSlide(slider, currentIndex);
+                });
+                
+                // Dots navigation
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        currentIndex = index;
+                        showSlide(slider, currentIndex);
+                    });
+                });
+            });
+            
+            function showSlide(slider, index) {
+                const images = slider.querySelectorAll('.product-image');
+                const dots = slider.querySelectorAll('.slider-dot');
+                
+                // Hide all images
+                images.forEach(img => {
+                    img.style.display = 'none';
+                    img.classList.remove('active');
+                });
+                
+                // Remove active from all dots
+                dots.forEach(dot => {
+                    dot.classList.remove('active');
+                });
+                
+                // Show current image
+                images[index].style.display = 'block';
+                images[index].classList.add('active');
+                dots[index].classList.add('active');
+            }
+            
+            // Modal functionality
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalClose = document.querySelector('.modal-close');
+            const modalPrev = document.getElementById('modalPrev');
+            const modalNext = document.getElementById('modalNext');
+            const modalDots = document.getElementById('modalDots');
+            
+            let currentModal = {
+                images: [],
+                index: 0
+            };
+            
+            // Add click event to all product images
+            document.querySelectorAll('.product-image').forEach((img, imgIndex) => {
+                img.style.cursor = 'pointer';
+                img.addEventListener('click', () => {
+                    const slider = img.closest('.image-slider');
+                    const sliderImages = slider.querySelectorAll('.product-image');
+                    
+                    // Get all image sources for this slider
+                    currentModal.images = Array.from(sliderImages).map(image => {
+                        return image.src.replace('w=250&h=250', 'w=800&h=600');
+                    });
+                    
+                    currentModal.index = parseInt(img.dataset.slide);
+                    
+                    showModalImage();
+                    modal.style.display = 'block';
+                    
+                    // Create dots for modal
+                    createModalDots();
+                });
+            });
+            
+            function showModalImage() {
+                modalImg.src = currentModal.images[currentModal.index];
+                
+                // Update dots
+                const dots = modalDots.querySelectorAll('.modal-dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentModal.index);
+                });
+            }
+            
+            function createModalDots() {
+                modalDots.innerHTML = '';
+                currentModal.images.forEach((_, index) => {
+                    const dot = document.createElement('div');
+                    dot.className = 'modal-dot';
+                    if (index === currentModal.index) dot.classList.add('active');
+                    
+                    dot.addEventListener('click', () => {
+                        currentModal.index = index;
+                        showModalImage();
+                    });
+                    
+                    modalDots.appendChild(dot);
+                });
+            }
+            
+            // Modal navigation
+            modalPrev.addEventListener('click', () => {
+                currentModal.index = currentModal.index > 0 ? currentModal.index - 1 : currentModal.images.length - 1;
+                showModalImage();
+            });
+            
+            modalNext.addEventListener('click', () => {
+                currentModal.index = currentModal.index < currentModal.images.length - 1 ? currentModal.index + 1 : 0;
+                showModalImage();
+            });
+            
+            // Close modal
+            modalClose.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.style.display === 'block') {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Detail Modal functionality
+            const detailModal = document.getElementById('detailModal');
+            const detailModalClose = document.querySelector('.detail-modal-close');
+            const detailBackBtn = document.querySelector('.detail-back-btn');
+            
+            // Add click event to all view details buttons
+            document.querySelectorAll('.view-details-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    detailModal.classList.add('show');
+                });
+            });
+            
+            // Close detail modal
+            detailModalClose.addEventListener('click', () => {
+                detailModal.classList.remove('show');
+            });
+            
+            detailBackBtn.addEventListener('click', () => {
+                detailModal.classList.remove('show');
+            });
+            
+            // Close detail modal when clicking outside
+            detailModal.addEventListener('click', (e) => {
+                if (e.target === detailModal) {
+                    detailModal.classList.remove('show');
+                }
+            });
+            
+            // Close detail modal with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && detailModal.classList.contains('show')) {
+                    detailModal.classList.remove('show');
+                }
+            });
+
+            // Detail trip options toggle
+            document.querySelectorAll('.detail-trip-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove active from all options
+                    document.querySelectorAll('.detail-trip-option').forEach(opt => {
+                        opt.classList.remove('active');
+                    });
+                    // Add active to clicked option
+                    option.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

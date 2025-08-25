@@ -1,11 +1,1329 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Tidak perlu import Layout karena ini akan menjadi halaman HTML standalone
 ---
 
-<Layout>
-	<Welcome />
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indonesia Travel - Explore with Zikra Speedboat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+        }
+
+        .logo {
+            color: #fff;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo-highlight {
+            color: #ff6b6b;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-menu a:hover {
+            color: #ff6b6b;
+        }
+
+        .nav-menu a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: #ff6b6b;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-menu a:hover:after {
+            width: 100%;
+        }
+
+        .nav-menu a.active {
+            color: #ff6b6b;
+        }
+
+        .nav-menu a.active:after {
+            width: 100%;
+        }
+
+        /* Mobile Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* Hamburger color when scrolled */
+        .header.scrolled .hamburger span {
+            background-color: #333;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Mobile Sidebar */
+        .mobile-sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 9999;
+            transition: right 0.3s ease;
+            padding: 80px 30px 30px;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-sidebar.active {
+            right: 0;
+        }
+
+        .mobile-sidebar .nav-menu {
+            flex-direction: column;
+            gap: 20px;
+            display: flex;
+        }
+
+        .mobile-sidebar .nav-menu a {
+            color: #2c3e50;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            text-shadow: none;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-sidebar .nav-menu a:hover {
+            color: #ff6b6b;
+            transform: translateX(5px);
+        }
+
+        /* Overlay */
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
+            overflow: hidden;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .hero-bg.active {
+            opacity: 1;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto 0 80px;
+            padding: 0 40px;
+            color: white;
+            z-index: 2;
+            position: relative;
+            text-align: left;
+            margin-top: 80px;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            font-weight: 300;
+            opacity: 0.9;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-style: normal;
+            letter-spacing: 0.3px;
+        }
+
+        .hero-description {
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: 300;
+            letter-spacing: 0.3px;
+            line-height: 1.4;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #ff6b6b, #ff5252);
+            color: white;
+            padding: 14px 35px;
+            border: none;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Speedboat Image in Hero - REMOVED */
+        /*
+        .hero-boat {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 450px;
+            height: auto;
+            z-index: 1;
+            opacity: 0.95;
+        }
+        */
+
+        /* Social Icons */
+        .social-section {
+            text-align: center;
+            padding: 60px 0;
+            background-color: #f8f9fa;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #666;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-icon:nth-child(1):hover {
+            background-color: #25d366;
+            color: white;
+            border-color: #25d366;
+            transform: translateY(-2px);
+        }
+
+        .social-icon:nth-child(2):hover {
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+            color: white;
+            border-color: #bc1888;
+            transform: translateY(-2px);
+        }
+
+        .social-icon:nth-child(3):hover {
+            background-color: #000;
+            color: white;
+            border-color: #000;
+            transform: translateY(-2px);
+        }
+
+        .why-choose {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .why-choose h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .why-choose p {
+            font-family: 'Noto Sans', sans-serif;
+            color: #666;
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Vehicle Packages */
+        .packages-section {
+            padding: 100px 0;
+            background-color: #fff;
+        }
+
+        .packages-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .packages-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 70px;
+            text-align: left;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+            margin-bottom: 60px;
+        }
+
+        .package-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .package-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12);
+        }
+
+        .package-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            position: relative;
+        }
+
+        .package-content {
+            padding: 25px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
+
+        .package-name {
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            line-height: 1.3;
+        }
+
+        .package-price {
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ff6b6b;
+            margin-bottom: 0;
+            position: relative;
+        }
+
+        .package-price::before {
+            content: 'IDR ';
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #666;
+        }
+
+        .view-details-section {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .view-details-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ff5252);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.25);
+        }
+
+        .view-details-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(255, 107, 107, 0.35);
+            background: linear-gradient(135deg, #ff5252, #e53e3e);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .packages-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .packages-container {
+                padding: 0 30px;
+            }
+
+            /* .hero-boat removed */
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero-content {
+                margin-top: 0px;
+                margin-left: 20px;
+                text-align: left;
+                padding: 0 20px;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+                letter-spacing: 2px;
+            }
+
+            .hero-subtitle {
+                font-size: 1.4rem;
+            }
+
+            .packages-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .package-card {
+                margin: 0 auto;
+                max-width: 350px;
+            }
+
+            .social-icons {
+                gap: 25px;
+            }
+
+            .social-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+
+            /* .hero-boat removed */
+
+            .nav-container,
+            .hero-content,
+            .packages-container {
+                padding: 0 20px;
+            }
+
+            .packages-title {
+                font-size: 1.8rem;
+                text-align: center;
+                margin-bottom: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .packages-title,
+            .why-choose h2 {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* Additional styling for better visual appeal */
+        .package-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(255, 107, 107, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 16px;
+        }
+
+        .package-card:hover::before {
+            opacity: 1;
+        }
+
+        .package-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #ff5252);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .package-card:hover::after {
+            opacity: 1;
+        }
+
+        /* Smooth animations */
+        .hero-content > * {
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero h1 {
+            animation-delay: 0.2s;
+        }
+
+        .hero-subtitle {
+            animation-delay: 0.4s;
+        }
+
+        .hero-description {
+            animation-delay: 0.6s;
+        }
+
+        .cta-button {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/" class="logo">
+                INDO<span class="logo-highlight">NESIA</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/product">Product</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <!-- Hamburger Menu -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar">
+        <ul class="nav-menu">
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/product">Product</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <!-- Hero Background Images Slider -->
+        <img src="https://picsum.photos/1920/1080?random=1" alt="White speedboat cruising through crystal clear turquoise waters with tropical islands in the background" class="hero-bg active">
+        <img src="https://picsum.photos/1920/1080?random=2" alt="Luxury speedboat at sunset with golden reflections on calm ocean waters and tropical coastline" class="hero-bg">
+        <img src="https://picsum.photos/1920/1080?random=3" alt="Modern speedboat racing across emerald green waters with lush tropical mountains in the distance" class="hero-bg">
+        <img src="https://picsum.photos/1920/1080?random=4" alt="Sleek speedboat navigating through azure blue waters with pristine white sand beaches and palm trees" class="hero-bg">
+        <div class="hero-content">
+            <h1>EXPLORE INDONESIA</h1>
+            <p class="hero-subtitle">with zikra speedboat</p>
+            <p class="hero-description">Fast, Scenic, Safe island adventures</p>
+            <a href="#packages" class="cta-button">BOOK NOW</a>
+        </div>
+    </section>
+
+    <!-- Social Icons & Why Choose Us -->
+    <section class="social-section">
+        <div class="social-icons">
+            <a href="#" class="social-icon" title="WhatsApp">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.531 3.488"/>
+                </svg>
+            </a>
+            <a href="#" class="social-icon" title="Instagram">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.40z"/>
+                </svg>
+            </a>
+            <a href="#" class="social-icon" title="TikTok">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                </svg>
+            </a>
+        </div>
+        
+        <div class="why-choose">
+            <h2>WHY CHOOSE US?</h2>
+            <p>Experience the ultimate island adventure with our professional crew, top-quality speedboats, and unmatched safety standards. We provide personalized service and unforgettable memories for every journey across Indonesia's stunning waters.</p>
+        </div>
+    </section>
+
+    <!-- Vehicle Packages -->
+    <section class="packages-section" id="packages">
+        <div class="packages-container">
+            <h2 class="packages-title">VEHICLE PACKAGES</h2>
+            
+            <div class="packages-grid">
+                <div class="package-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dc012b31-e445-47e9-b69a-ec82b2a851eb.png" alt="White luxury speedboat with blue accents on calm turquoise water, modern design with comfortable seating for island hopping adventures" class="package-image">
+                    <div class="package-content">
+                        <h3 class="package-name">ZIKRA SPEEDBOAT</h3>
+                        <p class="package-price">5.500.000</p>
+                    </div>
+                </div>
+
+                <div class="package-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/25f0f095-5ddf-4a55-be67-66d1f8bf8f28.png" alt="Sleek blue and white speedboat with modern hull design cutting through tropical waters with mountains in the background" class="package-image">
+                    <div class="package-content">
+                        <h3 class="package-name">ZAVIERO SPEEDBOAT</h3>
+                        <p class="package-price">4.500.000</p>
+                    </div>
+                </div>
+
+                <div class="package-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a27bb5e8-93b3-42a5-8abd-81574c63eacb.png" alt="White luxury van with tinted windows parked on tropical beach with palm trees and ocean view, perfect for comfortable island transportation" class="package-image">
+                    <div class="package-content">
+                        <h3 class="package-name">RENT CAR</h3>
+                        <p class="package-price">350.000</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="view-details-section">
+                <a href="#" class="view-details-btn">VIEW DETAILS</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+
+                // Close mobile sidebar when clicking a link
+                const mobileSidebar = document.querySelector('.mobile-sidebar');
+                const mobileOverlay = document.querySelector('.mobile-overlay');
+                const hamburger = document.querySelector('.hamburger');
+                
+                if (mobileSidebar && mobileOverlay && hamburger) {
+                    mobileSidebar.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                    hamburger.classList.remove('active');
+                }
+            });
+        });
+
+        // Handle external links (like /about) - just close mobile menu
+        document.querySelectorAll('a[href^="/"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Close mobile sidebar when clicking a link
+                const mobileSidebar = document.querySelector('.mobile-sidebar');
+                const mobileOverlay = document.querySelector('.mobile-overlay');
+                const hamburger = document.querySelector('.hamburger');
+                
+                if (mobileSidebar && mobileOverlay && hamburger) {
+                    mobileSidebar.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                    hamburger.classList.remove('active');
+                }
+            });
+        });
+
+        // Mobile Hamburger Menu
+        const hamburger = document.querySelector('.hamburger');
+        const mobileSidebar = document.querySelector('.mobile-sidebar');
+        const mobileOverlay = document.querySelector('.mobile-overlay');
+
+        if (hamburger && mobileSidebar && mobileOverlay) {
+            // Toggle sidebar when hamburger is clicked
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileSidebar.classList.toggle('active');
+                mobileOverlay.classList.toggle('active');
+            });
+
+            // Close sidebar when overlay is clicked
+            mobileOverlay.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileSidebar.classList.remove('active');
+                this.classList.remove('active');
+            });
+
+            // Close sidebar when pressing Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    hamburger.classList.remove('active');
+                    mobileSidebar.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                }
+            });
+        }
+
+        // Header background change on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            const logo = document.querySelector('.logo');
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(20px)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+                header.style.borderBottom = '1px solid rgba(255, 255, 255, 0.2)';
+                
+                // Change text color to dark when scrolled
+                logo.style.color = '#333';
+                logo.style.textShadow = 'none';
+                navLinks.forEach(link => {
+                    link.style.color = '#333';
+                    link.style.textShadow = 'none';
+                });
+            } else {
+                header.classList.remove('scrolled');
+                header.style.background = 'transparent';
+                header.style.backdropFilter = 'none';
+                header.style.boxShadow = 'none';
+                header.style.borderBottom = 'none';
+                
+                // Change text color back to white when at top
+                logo.style.color = '#fff';
+                logo.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.5)';
+                navLinks.forEach(link => {
+                    link.style.color = '#fff';
+                    link.style.textShadow = '1px 1px 2px rgba(0, 0, 0, 0.5)';
+                });
+            }
+        });
+
+        // Enhanced package cards hover animation
+        document.querySelectorAll('.package-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-20px) scale(1.02)';
+                this.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            });
+        });
+
+        // Parallax effect for hero background
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroBgs = document.querySelectorAll('.hero-bg');
+            
+            heroBgs.forEach(bg => {
+                if (scrolled < window.innerHeight) {
+                    bg.style.transform = `translateY(${scrolled * 0.3}px)`;
+                }
+            });
+        });
+
+        // Auto-slide hero background images
+        let currentSlide = 0;
+        const heroImages = document.querySelectorAll('.hero-bg');
+        const totalSlides = heroImages.length;
+
+        function nextSlide() {
+            // Remove active class from current slide
+            heroImages[currentSlide].classList.remove('active');
+            
+            // Move to next slide
+            currentSlide = (currentSlide + 1) % totalSlides;
+            
+            // Add active class to new slide
+            heroImages[currentSlide].classList.add('active');
+        }
+
+        // Auto-slide every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Price formatting with currency animation
+        document.querySelectorAll('.package-price').forEach(price => {
+            const originalText = price.textContent;
+            
+            price.addEventListener('mouseenter', function() {
+                this.style.fontSize = '1.4rem';
+                this.style.transition = 'all 0.3s ease';
+                this.style.color = '#ff5252';
+            });
+            
+            price.addEventListener('mouseleave', function() {
+                this.style.fontSize = '1.3rem';
+                this.style.color = '#ff6b6b';
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe package cards for scroll animations
+        document.querySelectorAll('.package-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Enhanced social icon interactions
+        document.querySelectorAll('.social-icon').forEach(icon => {
+            icon.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.1)';
+                this.style.transition = 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+            });
+            
+            icon.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.transition = 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+            });
+        });
+    </script>
+</body>
+</html>
+			</a>
+		</div>
+
+		<!-- Why Choose Us Section -->
+		
+
+		<!-- Vehicle Packages Section -->
+		<!-- <section class="vehicle-packages">
+			<div class="container">
+				<h2 class="section-title">VEHICLE PACKAGES</h2>
+				<div class="packages-grid">
+					<div class="package-card">
+						<div class="package-image zikira-bg"></div>
+						<div class="package-info">
+							<h3 class="package-name">ZIKIRA SPEEDBOAT</h3>
+							<p class="package-price">5.000.000</p>
+						</div>
+					</div>
+					<div class="package-card">
+						<div class="package-image zaviero-bg"></div>
+						<div class="package-info">
+							<h3 class="package-name">ZAVIERO SPEEDBOAT</h3>
+							<p class="package-price">4.500.000</p>
+						</div>
+					</div>
+					<div class="package-card">
+						<div class="package-image rentcar-bg"></div>
+						<div class="package-info">
+							<h3 class="package-name">RENT CAR</h3>
+							<p class="package-price">850.000</p>
+						</div>
+					</div>
+				</div>
+				<button class="view-details-btn">VIEW DETAILS</button>
+			</div>
+		</section> -->
+	</main>
 </Layout>
+
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	body {
+		font-family: 'Arial', sans-serif;
+		line-height: 1.6;
+		overflow-x: hidden;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 20px;
+	}
+
+	/* Header - PERSIS seperti gambar */
+	.header {
+		position: absolute;
+		top: 0;
+		width: 100%;
+		z-index: 1000;
+		padding: 20px 0;
+	}
+
+	.header .container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.logo-text {
+		color: white;
+		font-size: 20px;
+		font-weight: 800;
+		letter-spacing: 2px;
+		text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+	}
+
+	.nav {
+		display: flex;
+		gap: 40px;
+	}
+
+	.nav-link {
+		color: white;
+		text-decoration: none;
+		font-size: 15px;
+		font-weight: 500;
+		transition: all 0.3s;
+		text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+		text-transform: capitalize;
+	}
+
+	.nav-link.active {
+		opacity: 1;
+	}
+
+	.nav-link:hover {
+		opacity: 0.8;
+	}
+
+	/* Hero Section - Background PERSIS seperti gambar dengan gunung yang tajam */
+	.hero {
+		height: 100vh;
+		background: 
+			url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2387CEEB;stop-opacity:1" /><stop offset="30%" style="stop-color:%2370B7D3;stop-opacity:1" /><stop offset="70%" style="stop-color:%235F9EA0;stop-opacity:1" /></linearGradient><linearGradient id="mountain1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2332CD32;stop-opacity:1" /><stop offset="30%" style="stop-color:%23228B22;stop-opacity:1" /><stop offset="100%" style="stop-color:%23006400;stop-opacity:1" /></linearGradient><linearGradient id="mountain2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2300FA9A;stop-opacity:0.9" /><stop offset="100%" style="stop-color:%23228B22;stop-opacity:1" /></linearGradient><linearGradient id="ocean" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2300CED1;stop-opacity:1" /><stop offset="50%" style="stop-color:%2320B2AA;stop-opacity:1" /><stop offset="100%" style="stop-color:%234682B4;stop-opacity:1" /></linearGradient></defs><rect width="1200" height="800" fill="url(%23sky)"/><polygon points="0,500 80,180 160,220 240,160 320,200 400,140 480,180 560,120 640,160 720,100 800,140 880,80 960,120 1040,60 1120,100 1200,40 1200,650 0,650" fill="url(%23mountain1)"/><polygon points="60,520 140,250 220,290 300,230 380,270 460,210 540,250 620,190 700,230 780,170 860,210 940,150 1020,190 1100,130 1180,170 1200,150 1200,650 60,650" fill="url(%23mountain2)" opacity="0.85"/><rect y="650" width="1200" height="150" fill="url(%23ocean)"/></svg>');
+		background-size: cover;
+		background-position: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		color: white;
+		position: relative;
+	}
+
+	.hero-content {
+		z-index: 10;
+		margin-bottom: 120px;
+		max-width: 800px;
+	}
+
+	.hero-title {
+		font-size: 5rem;
+		font-weight: 900;
+		margin-bottom: 20px;
+		letter-spacing: 6px;
+		text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+		text-transform: uppercase;
+	}
+
+	.hero-subtitle {
+		font-size: 1.6rem;
+		margin-bottom: 15px;
+		font-weight: 300;
+		letter-spacing: 2px;
+		text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+		font-style: italic;
+	}
+
+	.hero-description {
+		font-size: 1.1rem;
+		margin-bottom: 40px;
+		opacity: 0.95;
+		text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+		letter-spacing: 1px;
+	}
+
+	.book-now-btn {
+		background: linear-gradient(135deg, #FF6B47 0%, #FF5722 100%);
+		color: white;
+		border: none;
+		padding: 15px 40px;
+		font-size: 16px;
+		font-weight: 700;
+		border-radius: 30px;
+		cursor: pointer;
+		transition: all 0.3s;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		box-shadow: 0 6px 20px rgba(255, 107, 71, 0.4);
+	}
+
+	.book-now-btn:hover {
+		background: linear-gradient(135deg, #FF5722 0%, #E64A19 100%);
+		transform: translateY(-3px);
+		box-shadow: 0 8px 25px rgba(255, 107, 71, 0.6);
+	}
+
+	/* Speedboat di hero - PERSIS seperti gambar dengan jejak air */
+	.speedboat-hero {
+		position: absolute;
+		bottom: 80px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 200px;
+		height: 100px;
+		background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100"><defs><linearGradient id="wake" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:%23ffffff;stop-opacity:0.8" /><stop offset="50%" style="stop-color:%23ffffff;stop-opacity:0.4" /><stop offset="100%" style="stop-color:%23ffffff;stop-opacity:0" /></linearGradient></defs><ellipse cx="20" cy="70" rx="15" ry="8" fill="url(%23wake)"/><ellipse cx="40" cy="75" rx="20" ry="10" fill="url(%23wake)"/><ellipse cx="60" cy="80" rx="25" ry="12" fill="url(%23wake)"/><ellipse cx="100" cy="60" rx="80" ry="30" fill="%23ffffff"/><ellipse cx="100" cy="55" rx="65" ry="20" fill="%23FF6B47"/><rect x="85" y="40" width="30" height="25" fill="%23ffffff"/><rect x="90" y="45" width="20" height="15" fill="%23333333" opacity="0.7"/><ellipse cx="100" cy="80" rx="20" ry="10" fill="%23ffffff" opacity="0.7"/><polygon points="160,55 180,50 185,60 170,65" fill="%23ffffff"/></svg>');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		z-index: 5;
+	}
+
+	/* Why Choose Us Section - PERSIS seperti gambar */
+	.why-choose-us {
+		padding: 60px 0;
+		text-align: center;
+		background: #F5F5F5;
+	}
+
+	.section-title {
+		font-size: 2.5rem;
+		font-weight: 800;
+		margin-bottom: 20px;
+		color: #2C3E50;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+	}
+
+	.section-description {
+		font-size: 1rem;
+		color: #666;
+	}
+
+	/* Vehicle Packages Section - PERSIS seperti gambar */
+	.vehicle-packages {
+		padding: 60px 0;
+		background: white;
+	}
+
+	.vehicle-packages .section-title {
+		text-align: center;
+		margin-bottom: 40px;
+	}
+
+	.packages-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 30px;
+		margin-bottom: 40px;
+	}
+
+	.package-card {
+		background: white;
+		border-radius: 15px;
+		overflow: hidden;
+		box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+		transition: all 0.4s;
+		border: 1px solid rgba(0,0,0,0.05);
+	}
+
+	.package-card:hover {
+		transform: translateY(-8px);
+		box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+	}
+
+	.package-image {
+		width: 100%;
+		height: 200px;
+		background-size: cover;
+		background-position: center;
+	}
+
+	/* Background images untuk packages - realistis sesuai gambar */
+	.zikira-bg {
+		background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><defs><linearGradient id="water1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2300CED1;stop-opacity:1" /><stop offset="50%" style="stop-color:%2320B2AA;stop-opacity:1" /><stop offset="100%" style="stop-color:%234682B4;stop-opacity:1" /></linearGradient><linearGradient id="boat1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:%23ffffff;stop-opacity:1" /><stop offset="50%" style="stop-color:%23f0f0f0;stop-opacity:1" /><stop offset="100%" style="stop-color:%23ffffff;stop-opacity:1" /></linearGradient></defs><rect width="300" height="200" fill="url(%23water1)"/><ellipse cx="150" cy="140" rx="90" ry="35" fill="url(%23boat1)"/><ellipse cx="150" cy="135" rx="75" ry="25" fill="%23FF6B47"/><rect x="130" y="115" width="40" height="30" fill="%23ffffff"/><rect x="135" y="120" width="30" height="20" fill="%23333333" opacity="0.8"/><ellipse cx="150" cy="165" rx="25" ry="12" fill="%23ffffff" opacity="0.6"/><polygon points="200,135 220,130 225,140 210,145" fill="%23ffffff"/><text x="150" y="185" font-family="Arial" font-size="12" fill="%23ffffff" text-anchor="middle" font-weight="bold">ZIKIRA</text></svg>');
+		background-size: cover;
+		background-position: center;
+	}
+
+	.zaviero-bg {
+		background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><defs><linearGradient id="water2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2300CED1;stop-opacity:1" /><stop offset="50%" style="stop-color:%2320B2AA;stop-opacity:1" /><stop offset="100%" style="stop-color:%234682B4;stop-opacity:1" /></linearGradient><linearGradient id="boat2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:%23ffffff;stop-opacity:1" /><stop offset="50%" style="stop-color:%23f0f0f0;stop-opacity:1" /><stop offset="100%" style="stop-color:%23ffffff;stop-opacity:1" /></linearGradient></defs><rect width="300" height="200" fill="url(%23water2)"/><ellipse cx="150" cy="140" rx="90" ry="35" fill="url(%23boat2)"/><ellipse cx="150" cy="135" rx="75" ry="25" fill="%234169E1"/><rect x="130" y="115" width="40" height="30" fill="%23ffffff"/><rect x="135" y="120" width="30" height="20" fill="%23333333" opacity="0.8"/><ellipse cx="150" cy="165" rx="25" ry="12" fill="%23ffffff" opacity="0.6"/><polygon points="200,135 220,130 225,140 210,145" fill="%23ffffff"/><text x="150" y="185" font-family="Arial" font-size="12" fill="%23ffffff" text-anchor="middle" font-weight="bold">ZAVIERO</text></svg>');
+		background-size: cover;
+		background-position: center;
+	}
+
+	.rentcar-bg {
+		background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><defs><linearGradient id="landscape" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2387CEEB;stop-opacity:1" /><stop offset="40%" style="stop-color:%2332CD32;stop-opacity:1" /><stop offset="100%" style="stop-color:%23228B22;stop-opacity:1" /></linearGradient><linearGradient id="car" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:%23f8f8f8;stop-opacity:1" /><stop offset="50%" style="stop-color:%23ffffff;stop-opacity:1" /><stop offset="100%" style="stop-color:%23f0f0f0;stop-opacity:1" /></linearGradient></defs><rect width="300" height="200" fill="url(%23landscape)"/><rect x="60" y="125" width="180" height="55" fill="url(%23car)" rx="15"/><rect x="70" y="135" width="160" height="35" fill="%23E8E8E8" rx="8"/><circle cx="100" cy="175" r="15" fill="%23333333"/><circle cx="240" cy="175" r="15" fill="%23333333"/><circle cx="100" cy="175" r="8" fill="%23666666"/><circle cx="240" cy="175" r="8" fill="%23666666"/><rect x="80" y="145" width="140" height="20" fill="%234A90E2" opacity="0.7"/><rect x="75" y="140" width="20" height="8" fill="%23ffffff"/><rect x="205" y="140" width="20" height="8" fill="%23ffffff"/></svg>');
+		background-size: cover;
+		background-position: center;
+	}
+
+	.package-info {
+		padding: 20px;
+		text-align: center;
+	}
+
+	.package-name {
+		font-size: 1.2rem;
+		font-weight: 700;
+		margin-bottom: 10px;
+		color: #2C3E50;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	.package-price {
+		font-size: 1.1rem;
+		color: #7F8C8D;
+		font-weight: 600;
+	}
+
+	.view-details-btn {
+		display: block;
+		margin: 0 auto;
+		background: transparent;
+		color: #FF6B47;
+		border: 2px solid #FF6B47;
+		padding: 12px 30px;
+		font-size: 15px;
+		font-weight: 700;
+		border-radius: 25px;
+		cursor: pointer;
+		transition: all 0.4s;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	.view-details-btn:hover {
+		background: linear-gradient(135deg, #FF6B47 0%, #FF5722 100%);
+		color: white;
+		transform: translateY(-2px);
+		box-shadow: 0 8px 25px rgba(255, 107, 71, 0.3);
+	}
+
+	/* Responsive Design */
+	@media (max-width: 768px) {
+		.hero-title {
+			font-size: 2.8rem;
+			letter-spacing: 3px;
+		}
+		
+		.hero-subtitle {
+			font-size: 1.2rem;
+			letter-spacing: 1px;
+		}
+		
+		.hero-description {
+			font-size: 1rem;
+		}
+		
+		.nav {
+			display: none;
+		}
+		
+		.packages-grid {
+			grid-template-columns: 1fr;
+			gap: 20px;
+		}
+		
+		.social-icons {
+			position: static;
+			flex-direction: row;
+			justify-content: center;
+			transform: none;
+			margin: 20px 0;
+			left: auto;
+			top: auto;
+		}
+		
+		.speedboat-hero {
+			width: 150px;
+			height: 75px;
+			bottom: 60px;
+		}
+		
+		.section-title {
+			font-size: 2rem;
+		}
+		
+		.logo-text {
+			font-size: 18px;
+		}
+	}
+</style>
