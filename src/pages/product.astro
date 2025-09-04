@@ -21,6 +21,12 @@
             line-height: 1.6;
             color: #333;
             background-color: #f8f9fa;
+            opacity: 0;
+            transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1);
+        body.fade-out {
+            opacity: 0;
+            transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1);
+        }
         }
 
         /* Header Styles - CONSISTENT UNTUK SEMUA HALAMAN */
@@ -30,21 +36,33 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 0;
+            /* background: rgba(255, 255, 255, 0.95); */
             backdrop-filter: blur(20px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            /* box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1); */
+            /* border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
+            /* background: transparent; */
             transition: all 0.3s ease;
         }
 
-        .nav-container {
+        /* .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            background: transparent;
+            transition: all 0.3s ease;
+        } */
+
+         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 40px;
-            height: 80px;
         }
 
         .logo {
@@ -61,12 +79,12 @@
             color: #ff6b6b;
         }
 
-        .nav-menu {
+       .nav-menu {
             display: flex;
             list-style: none;
             gap: 40px;
+            font-family: 'Noto Sans', sans-serif;
         }
-
         .nav-menu a {
             text-decoration: none;
             color: #333;
@@ -82,7 +100,7 @@
             color: #ff6b6b;
         }
 
-        .nav-menu a:after {
+         .nav-menu a:after {
             content: '';
             position: absolute;
             width: 0;
@@ -141,11 +159,11 @@
             right: -300px;
             width: 300px;
             height: 100vh;
-            background: rgba(255, 255, 255, 0.98);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            z-index: 1001;
+            z-index: 9999;
             transition: right 0.3s ease;
-            padding-top: 100px;
+            padding: 80px 30px 30px;
             box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
         }
 
@@ -155,16 +173,17 @@
 
         .mobile-sidebar .nav-menu {
             flex-direction: column;
-            gap: 0;
-            padding: 0 30px;
+            gap: 20px;
+            display: flex;
         }
 
         .mobile-sidebar .nav-menu a {
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             color: #2c3e50;
-            font-weight: 500;
             font-size: 16px;
+            font-weight: 500;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            text-shadow: none;
             transition: all 0.3s ease;
         }
 
@@ -568,19 +587,28 @@
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .image-modal.show {
+            display: flex;
         }
 
         .modal-content {
             position: relative;
             width: 90%;
             max-width: 800px;
-            margin: 5% auto;
+            margin: 0;
             text-align: center;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .modal-close {
             position: absolute;
-            top: -50px;
+            top: -15px;
             right: 10px;
             color: #F28482;
             font-size: 40px;
@@ -661,20 +689,32 @@
             fill: white;
         }
 
-        .modal-dots {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 25px;
+        /* Image Info Display */
+        .modal-image-info {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
             padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .modal-image-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .modal-image-counter {
+            font-size: 12px;
+            opacity: 0.9;
+            font-family: 'Noto Sans', sans-serif;
         }
 
         .modal-dot {
@@ -1090,6 +1130,17 @@
 
             .trip-options {
                 flex-wrap: wrap;
+                justify-content: center;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            .trip-option {
+                flex: 1;
+                min-width: 120px;
+                font-size: 12px;
+                padding: 0 20px;
+                height: 40px;
             }
 
             .additional-info {
@@ -1124,19 +1175,141 @@
                 padding: 0 20px;
             }
 
-            /* Modal responsive */
+            /* Modal responsive for tablets */
             .modal-content {
                 width: 95%;
-                margin: 10% auto;
+                margin: 8% auto;
             }
 
             .modal-image-container {
-                height: 300px;
+                height: 350px;
             }
 
             .modal-nav {
-                width: 50px;
-                height: 50px;
+                width: 55px;
+                height: 55px;
+            }
+
+            .modal-nav.prev {
+                left: 20px;
+            }
+
+            .modal-nav.next {
+                right: 20px;
+            }
+
+            .modal-nav svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            /* Modal Image Info for tablets */
+            .modal-image-info {
+                bottom: 15px;
+                padding: 10px 18px;
+                border-radius: 18px;
+            }
+
+            .modal-image-title {
+                font-size: 16px;
+                margin-bottom: 4px;
+            }
+
+            .modal-image-counter {
+                font-size: 12px;
+            }
+
+            .modal-close {
+                top: -15px;
+                right: 8px;
+                font-size: 36px;
+                width: 48px;
+                height: 48px;
+            }
+
+            .modal-dots {
+                gap: 10px;
+                margin-top: 18px;
+                padding: 10px 18px;
+            }
+        }
+
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            /* Modal styles for medium screens */
+            .modal-content {
+                width: 90%;
+                margin: 6% auto;
+            }
+
+            .modal-image-container {
+                height: 400px;
+            }
+
+            .modal-nav {
+                width: 58px;
+                height: 58px;
+            }
+
+            .modal-nav.prev {
+                left: 25px;
+            }
+
+            .modal-nav.next {
+                right: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-title {
+                font-size: 2rem;
+            }
+
+            /* Enhanced Mobile Modal Styles - Same as Gallery */
+            .modal {
+                align-items: center;
+                justify-content: center;
+                padding: 20px 10px;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 0;
+                padding: 0;
+                position: relative;
+                top: 0;
+                transform: none;
+                max-height: 85vh;
+                overflow-y: auto;
+            }
+
+            .modal-image-container {
+                height: 60vh;
+                min-height: 300px;
+                border-radius: 15px;
+            }
+
+            .modal-close {
+                top: 15px;
+                right: 15px;
+                font-size: 24px;
+                width: 35px;
+                height: 35px;
+                background: rgba(0, 0, 0, 0.8);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+            }
+
+            .modal-nav {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
             }
 
             .modal-nav.prev {
@@ -1148,33 +1321,108 @@
             }
 
             .modal-nav svg {
-                width: 20px;
-                height: 20px;
+                width: 18px;
+                height: 18px;
             }
 
-            .modal-close {
-                top: -40px;
-                right: 5px;
-                font-size: 32px;
-                width: 45px;
-                height: 45px;
+            .modal-image-info {
+                bottom: 15px;
+                padding: 8px 15px;
+                border-radius: 15px;
+                max-width: 90%;
+            }
+
+            .modal-image-title {
+                font-size: 14px;
+                margin-bottom: 3px;
+            }
+
+            .modal-image-counter {
+                font-size: 10px;
             }
 
             .modal-dots {
-                gap: 8px;
-                margin-top: 20px;
-                padding: 8px 15px;
+                gap: 6px;
+                margin-top: 15px;
+                padding: 6px 12px;
+                border-radius: 20px;
             }
 
             .modal-dot {
-                width: 12px;
-                height: 12px;
+                width: 10px;
+                height: 10px;
             }
-        }
 
-        @media (max-width: 480px) {
-            .product-title {
-                font-size: 2rem;
+            /* Detail Modal Mobile Styles */
+            .detail-modal-content {
+                width: 95%;
+                margin: 5% auto;
+                padding: 15px;
+                border-radius: 15px;
+            }
+
+            .detail-modal-close {
+                top: 10px;
+                right: 15px;
+                font-size: 28px;
+                width: 35px;
+                height: 35px;
+            }
+
+            .detail-modal h2 {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+            }
+
+            .detail-modal p {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+
+            .detail-modal .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                margin-top: 15px;
+            }
+
+            /* Trip Options Mobile Responsiveness */
+            .trip-options {
+                display: flex;
+                width: 100%;
+                margin-bottom: 15px;
+                justify-content: center;
+                flex-wrap: nowrap;
+                gap: 0;
+                border-radius: 20px;
+                height: 42px;
+                overflow: hidden;
+                max-width: 100%;
+            }
+
+            .trip-option {
+                flex: 1;
+                min-width: 0;
+                font-size: 10px;
+                padding: 0 12px;
+                height: 42px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 600;
+                letter-spacing: 0.5px;
+            }
+
+            .product-card .trip-options .trip-option:first-child {
+                border-top-left-radius: 20px;
+                border-bottom-left-radius: 20px;
+            }
+
+            .product-card .trip-options .trip-option:last-child {
+                border-top-right-radius: 20px;
+                border-bottom-right-radius: 20px;
             }
         }
     </style>
@@ -1190,8 +1438,8 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About</a></li>
                 <li><a href="/product" class="active">Product</a></li>
-                <li><a href="/gallery">Gallery</a></li>
-                <li><a href="/contact">Contact</a></li>
+                <li><a href="/Gallery">Gallery</a></li>
+                <li><a href="/Contact">Contact</a></li>
             </ul>
             <!-- Hamburger Menu -->
             <div class="hamburger">
@@ -1208,8 +1456,8 @@
             <li><a href="/">Home</a></li>
             <li><a href="/about">About</a></li>
             <li><a href="/product" class="active">Product</a></li>
-            <li><a href="/gallery">Gallery</a></li>
-            <li><a href="/contact">Contact</a></li>
+            <li><a href="/Gallery">Gallery</a></li>
+            <li><a href="/Contact">Contact</a></li>
         </ul>
     </div>
 
@@ -1276,7 +1524,7 @@
                         <div class="product-body">
                             <div class="product-image-container">
                                 <div class="image-slider">
-                                    <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=250&h=250&fit=crop&crop=center" alt="Zaviero Speedboat Interior" class="product-image" data-slide="0">
+                                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=250&h=250&fit=crop&crop=center" alt="Zaviero Speedboat Interior" class="product-image" data-slide="0">
                                     <img src="https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=250&h=250&fit=crop&crop=center" alt="Zaviero Speedboat Exterior" class="product-image" data-slide="1" style="display: none;">
                                     <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=250&h=250&fit=crop&crop=center" alt="Zaviero Speedboat Deck" class="product-image" data-slide="2" style="display: none;">
                                     
@@ -1369,8 +1617,11 @@
                 <button class="modal-nav next" id="modalNext">
                     <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
                 </button>
+                <div class="modal-image-info" id="modalImageInfo">
+                    <div class="modal-image-title" id="modalImageTitle"></div>
+                    <div class="modal-image-counter" id="modalImageCounter"></div>
+                </div>
             </div>
-            <div class="modal-dots" id="modalDots"></div>
         </div>
     </div>
 
@@ -1486,6 +1737,33 @@
     </div>
 
     <script>
+        // Fade-in animation on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 50);
+        });
+        // Fade-out animation on navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.nav-menu a').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href && !href.startsWith('#')) {
+                        e.preventDefault();
+                        document.body.classList.add('fade-out');
+                        setTimeout(() => {
+                            window.location.href = href;
+                        }, 500);
+                    }
+                });
+            });
+        });
+        // Fade-in animation on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 10);
+        });
         // Smooth scrolling for navigation links (hash links only)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1538,6 +1816,7 @@
                 this.classList.toggle('active');
                 mobileSidebar.classList.toggle('active');
                 mobileOverlay.classList.toggle('active');
+                document.body.style.overflow = mobileSidebar.classList.contains('active') ? 'hidden' : '';
             });
 
             // Close sidebar when overlay is clicked
@@ -1545,14 +1824,27 @@
                 hamburger.classList.remove('active');
                 mobileSidebar.classList.remove('active');
                 this.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            // Close sidebar when nav links are clicked
+            const navLinks = document.querySelectorAll('.mobile-sidebar .nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    mobileSidebar.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
             });
 
             // Close sidebar when pressing Escape key
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
+                if (e.key === 'Escape' && mobileSidebar.classList.contains('active')) {
                     hamburger.classList.remove('active');
                     mobileSidebar.classList.remove('active');
                     mobileOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
                 }
             });
         }
@@ -1564,7 +1856,7 @@
             if (window.scrollY > 50) {
                 header.style.boxShadow = '0 2px 25px rgba(0, 0, 0, 0.15)';
             } else {
-                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+                header.style.boxShadow = 'none';
             }
         });
 
@@ -1632,7 +1924,6 @@
             const modalClose = document.querySelector('.modal-close');
             const modalPrev = document.getElementById('modalPrev');
             const modalNext = document.getElementById('modalNext');
-            const modalDots = document.getElementById('modalDots');
             
             let currentModal = {
                 images: [],
@@ -1645,6 +1936,8 @@
                 img.addEventListener('click', () => {
                     const slider = img.closest('.image-slider');
                     const sliderImages = slider.querySelectorAll('.product-image');
+                    const productCard = slider.closest('.product-card');
+                    const productTitle = productCard ? productCard.querySelector('h3')?.textContent : 'Indonesia Travel Package';
                     
                     // Get all image sources for this slider
                     currentModal.images = Array.from(sliderImages).map(image => {
@@ -1652,39 +1945,28 @@
                     });
                     
                     currentModal.index = parseInt(img.dataset.slide);
+                    currentModal.title = productTitle;
                     
                     showModalImage();
-                    modal.style.display = 'block';
-                    
-                    // Create dots for modal
-                    createModalDots();
+                    modal.classList.add('show');
+                    document.body.style.overflow = 'hidden';
                 });
             });
             
             function showModalImage() {
                 modalImg.src = currentModal.images[currentModal.index];
                 
-                // Update dots
-                const dots = modalDots.querySelectorAll('.modal-dot');
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentModal.index);
-                });
-            }
-            
-            function createModalDots() {
-                modalDots.innerHTML = '';
-                currentModal.images.forEach((_, index) => {
-                    const dot = document.createElement('div');
-                    dot.className = 'modal-dot';
-                    if (index === currentModal.index) dot.classList.add('active');
-                    
-                    dot.addEventListener('click', () => {
-                        currentModal.index = index;
-                        showModalImage();
-                    });
-                    
-                    modalDots.appendChild(dot);
-                });
+                // Update image info
+                const modalImageTitle = document.getElementById('modalImageTitle');
+                const modalImageCounter = document.getElementById('modalImageCounter');
+                
+                if (modalImageTitle) {
+                    modalImageTitle.textContent = currentModal.title || 'Image Gallery';
+                }
+                
+                if (modalImageCounter) {
+                    modalImageCounter.textContent = `${currentModal.index + 1} / ${currentModal.images.length}`;
+                }
             }
             
             // Modal navigation
@@ -1700,20 +1982,37 @@
             
             // Close modal
             modalClose.addEventListener('click', () => {
-                modal.style.display = 'none';
+                modal.classList.remove('show');
+                document.body.style.overflow = '';
             });
             
             // Close modal when clicking outside
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
-                    modal.style.display = 'none';
+                    modal.classList.remove('show');
+                    document.body.style.overflow = '';
                 }
             });
             
-            // Close modal with Escape key
+            // Modal keyboard navigation
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && modal.style.display === 'block') {
-                    modal.style.display = 'none';
+                if (modal.classList.contains('show')) {
+                    switch(e.key) {
+                        case 'Escape':
+                            modal.classList.remove('show');
+                            document.body.style.overflow = '';
+                            break;
+                        case 'ArrowLeft':
+                            e.preventDefault();
+                            currentModal.index = currentModal.index > 0 ? currentModal.index - 1 : currentModal.images.length - 1;
+                            showModalImage();
+                            break;
+                        case 'ArrowRight':
+                            e.preventDefault();
+                            currentModal.index = currentModal.index < currentModal.images.length - 1 ? currentModal.index + 1 : 0;
+                            showModalImage();
+                            break;
+                    }
                 }
             });
 

@@ -1,0 +1,130 @@
+<!-- ---
+const { active } = Astro.props;
+---
+<header class="header">
+  <nav class="nav-container">
+    <a href="/" class="logo">
+      INDO<span class="logo-highlight">NESIA</span>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="/" class={active === 'home' ? 'active' : ''}>Home</a></li>
+      <li><a href="/about" class={active === 'about' ? 'active' : ''}>About</a></li>
+      <li><a href="/product" class={active === 'product' ? 'active' : ''}>Product</a></li>
+      <li><a href="/gallery" class={active === 'gallery' ? 'active' : ''}>Gallery</a></li>
+      <li><a href="/contact" class={active === 'contact' ? 'active' : ''}>Contact</a></li>
+    </ul>
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+</header>
+<style>
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 20px 0;
+  background: transparent;
+  transition: all 0.3s ease;
+  font-family: 'Noto Sans', sans-serif;
+}
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+}
+.logo {
+  color: #333;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.logo-highlight {
+  color: #ff6b6b;
+}
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+  font-family: 'Noto Sans', sans-serif;
+}
+.nav-menu a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+.nav-menu a:hover {
+  color: #ff6b6b;
+}
+.nav-menu a:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 50%;
+  background-color: #ff6b6b;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+.nav-menu a:hover:after {
+  width: 100%;
+}
+.nav-menu a.active {
+  color: #ff6b6b;
+}
+.nav-menu a.active:after {
+  width: 100%;
+}
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+}
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+.header.scrolled .hamburger span {
+  background-color: #333;
+}
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+  .nav-menu {
+    gap: 20px;
+    font-size: 14px;
+  }
+}
+</style> -->
