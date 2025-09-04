@@ -1,5 +1,6 @@
 ---
 // Halaman Product - Indonesia Travel
+import Footer from '../components/Footer.astro';
 ---
 
 <!DOCTYPE html>
@@ -23,10 +24,14 @@
             background-color: #f8f9fa;
             opacity: 0;
             transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
         body.fade-out {
             opacity: 0;
             transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1);
-        }
         }
 
         /* Header Styles - CONSISTENT UNTUK SEMUA HALAMAN */
@@ -2065,5 +2070,8 @@
             });
         });
     </script>
+
+    <!-- Footer -->
+    <Footer />
 </body>
 </html>

@@ -1,0 +1,244 @@
+---
+// Footer Component
+---
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-content">
+            <!-- Logo Section -->
+            <div class="footer-logo-section">
+                <a href="/" class="footer-logo">
+                    INDO<span class="logo-highlight">NESIA</span>
+                </a>
+                <p class="footer-description">
+                    Explore the beauty of Indonesia with professional speedboat services 
+                    and unforgettable travel experiences.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/product">Product</a></li>
+                    <li><a href="/Gallery">Gallery</a></li>
+                    <li><a href="/Contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div class="footer-services">
+                <h4>Our Services</h4>
+                <ul>
+                    <li>Speedboat Rental</li>
+                    <li>Island Hopping</li>
+                    <li>Car Rental</li>
+                    <li>Tour Package</li>
+                    <li>Custom Trip</li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <span>+62 811-3787-741</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <span>info@exploreindonesia.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <span>Labuan Bajo, Flores, Indonesia</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p>&copy; 2024 Explore Indonesia. All rights reserved.</p>
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook">📘</a>
+                <a href="#" aria-label="Instagram">📷</a>
+                <a href="#" aria-label="WhatsApp">💬</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .footer {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: #ecf0f1;
+        margin-top: auto;
+        font-family: 'Noto Sans', sans-serif;
+    }
+
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 60px 40px 20px;
+    }
+
+    .footer-content {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1.5fr;
+        gap: 40px;
+        margin-bottom: 40px;
+    }
+
+    .footer-logo-section {
+        max-width: 300px;
+    }
+
+    .footer-logo {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        text-decoration: none;
+        color: #ecf0f1;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    .logo-highlight {
+        color: #ff6b6b;
+    }
+
+    .footer-description {
+        color: #bdc3c7;
+        line-height: 1.6;
+        font-size: 0.9rem;
+    }
+
+    .footer-links h4,
+    .footer-services h4,
+    .footer-contact h4 {
+        color: #ecf0f1;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .footer-links ul,
+    .footer-services ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer-links li,
+    .footer-services li {
+        margin-bottom: 10px;
+    }
+
+    .footer-links a {
+        color: #bdc3c7;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+        color: #ff6b6b;
+    }
+
+    .footer-services li {
+        color: #bdc3c7;
+        font-size: 0.9rem;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+        color: #bdc3c7;
+        font-size: 0.9rem;
+    }
+
+    .contact-icon {
+        margin-right: 10px;
+        font-size: 1rem;
+    }
+
+    .footer-bottom {
+        border-top: 1px solid #34495e;
+        padding-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .footer-bottom p {
+        color: #95a5a6;
+        font-size: 0.85rem;
+        margin: 0;
+    }
+
+    .footer-social {
+        display: flex;
+        gap: 15px;
+    }
+
+    .footer-social a {
+        color: #bdc3c7;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .footer-social a:hover {
+        color: #ff6b6b;
+        transform: translateY(-2px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .footer-container {
+            padding: 40px 20px 20px;
+        }
+
+        .footer-content {
+            grid-template-columns: 1fr;
+            gap: 30px;
+            text-align: center;
+        }
+
+        .footer-logo-section {
+            max-width: 100%;
+        }
+
+        .footer-bottom {
+            flex-direction: column;
+            text-align: center;
+            gap: 10px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .footer-container {
+            padding: 30px 15px 15px;
+        }
+
+        .footer-content {
+            gap: 25px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+        }
+
+        .contact-item {
+            justify-content: center;
+        }
+    }
+</style>

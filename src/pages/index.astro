@@ -1,5 +1,6 @@
 ---
-// Tidak perlu import Layout karena ini akan menjadi halaman HTML standalone
+// Import Footer component
+import Footer from '../components/Footer.astro';
 ---
 
  <!DOCTYPE html>
@@ -21,6 +22,9 @@
             line-height: 1.6;
             color: #333;
             background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* Header Styles */
@@ -196,6 +200,11 @@
         .mobile-overlay.active {
             opacity: 1;
             visibility: visible;
+        }
+
+        /* Main content wrapper for footer positioning */
+        .main-content {
+            flex: 1;
         }
 
         /* Hero Section */
@@ -684,7 +693,9 @@
     <!-- Mobile Overlay -->
     <div class="mobile-overlay"></div>
 
-    <!-- Hero Section -->
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
     <section class="hero" id="home">
         <!-- Hero Background Images Slider -->
         <img src="https://picsum.photos/1920/1080?random=1" alt="White speedboat cruising through crystal clear turquoise waters with tropical islands in the background" class="hero-bg active">
@@ -761,6 +772,7 @@
             </div>
         </div>
     </section>
+    </main>
 
     <script>
         // Smooth scrolling for navigation links
@@ -981,6 +993,9 @@
             });
         });
     </script>
+
+    <!-- Footer -->
+    <Footer />
 </body>
 </html>
 			</a>
