@@ -1,311 +1,147 @@
 ---
-// Import Footer component
-import Footer from '../components/Footer.astro';
+// Import components
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
 
- <!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indonesia Travel - Explore with Zikra Speedboat</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home | Explore Indonesia</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/LOGO.png?v=2" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/LOGO.png?v=2" />
+    <link rel="shortcut icon" type="image/png" href="/LOGO.png?v=2" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/LOGO.png?v=2" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Noto+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #fff;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f4f4f4;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
 
-        /* Header Styles */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 20px 0;
-            background: transparent;
-            transition: all 0.3s ease;
-        }
+      /* Main content wrapper for footer positioning */
+      .main-content {
+        flex: 1;
+      }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 40px;
-        }
+      /* Hero Section */
+      .hero {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.2),
+          rgba(0, 0, 0, 0.1)
+        );
+        overflow: hidden;
+      }
 
-        .logo {
-            color: #fff;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
+      .hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 2s ease-in-out;
+      }
 
-        .logo-highlight {
-            color: #ff6b6b;
-        }
+      .hero-bg.active {
+        opacity: 1;
+      }
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 40px;
-            font-family: 'Noto Sans', sans-serif;
-        }
+      .hero-content {
+        max-width: 1200px;
+        margin: 0 auto 0 80px;
+        padding: 0 40px;
+        color: white;
+        z-index: 2;
+        position: relative;
+        text-align: left;
+        margin-top: 80px;
+      }
 
-        .nav-menu a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            transition: all 0.3s ease;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
+      .hero h1 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 4rem;
+        font-weight: 600;
+        letter-spacing: 3px;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        line-height: 1.1;
+      }
 
-        .nav-menu a:hover {
-            color: #ff6b6b;
-        }
+      .hero-subtitle {
+        font-family: "Noto Sans", sans-serif;
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        font-weight: 300;
+        opacity: 0.9;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        font-style: normal;
+        letter-spacing: 0.3px;
+        line-height: 1.4;
+      }
 
-        .nav-menu a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 50%;
-            background-color: #ff6b6b;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
+      .hero-description {
+        font-family: "Noto Sans", sans-serif;
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        opacity: 0.9;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        font-weight: 300;
+        letter-spacing: 0.3px;
+        line-height: 1.4;
+      }
 
-        .nav-menu a:hover:after {
-            width: 100%;
-        }
+      .cta-button {
+        background: white;
+        color: #F28482;
+        border: 2px solid #F28482;
+        padding: 10px 24px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 400;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        align-self: flex-start;
+        font-family: "Noto Sans", sans-serif;
+      }
 
-        .nav-menu a.active {
-            color: #ff6b6b;
-        }
+      .cta-button:hover {
+        background-color: #f28482;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(242, 132, 130, 0.3);
+      }
 
-        .nav-menu a.active:after {
-            width: 100%;
-        }
-
-        /* Mobile Hamburger Menu */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 4px;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background-color: #fff;
-            transition: all 0.3s ease;
-            border-radius: 2px;
-        }
-
-        /* Hamburger color when scrolled */
-        .header.scrolled .hamburger span {
-            background-color: #333;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-
-        /* Mobile Sidebar */
-        .mobile-sidebar {
-            position: fixed;
-            top: 0;
-            right: -300px;
-            width: 300px;
-            height: 100vh;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            z-index: 9999;
-            transition: right 0.3s ease;
-            padding: 80px 30px 30px;
-            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .mobile-sidebar.active {
-            right: 0;
-        }
-
-        .mobile-sidebar .nav-menu {
-            flex-direction: column;
-            gap: 20px;
-            display: flex;
-        }
-
-        .mobile-sidebar .nav-menu a {
-            color: #2c3e50;
-            font-size: 16px;
-            font-weight: 500;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-            text-shadow: none;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-sidebar .nav-menu a:hover {
-            color: #ff6b6b;
-            transform: translateX(5px);
-        }
-
-        /* Overlay */
-        .mobile-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 9998;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Main content wrapper for footer positioning */
-        .main-content {
-            flex: 1;
-        }
-
-        /* Hero Section */
-        .hero {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
-            overflow: hidden;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            border-bottom-left-radius: 50px;
-            border-bottom-right-radius: 50px;
-            opacity: 0;
-            transition: opacity 2s ease-in-out;
-        }
-
-        .hero-bg.active {
-            opacity: 1;
-        }
-
-        .hero-content {
-            max-width: 1200px;
-            margin: 0 auto 0 80px;
-            padding: 0 40px;
-            color: white;
-            z-index: 2;
-            position: relative;
-            text-align: left;
-            margin-top: 80px;
-        }
-
-        .hero h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 4rem;
-            font-weight: 600;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-            line-height: 1.1;
-        }
-
-        .hero-subtitle {
-            font-family: 'Noto Sans', sans-serif;
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-            font-weight: 300;
-            opacity: 0.9;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            font-style: normal;
-            letter-spacing: 0.3px;
-        }
-
-        .hero-description {
-            font-family: 'Noto Sans', sans-serif;
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            font-weight: 300;
-            letter-spacing: 0.3px;
-            line-height: 1.4;
-        }
-
-        .cta-button {
-            background: linear-gradient(135deg, #ff6b6b, #ff5252);
-            color: white;
-            padding: 14px 35px;
-            border: none;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
-        }
-
-        /* Speedboat Image in Hero - REMOVED */
-        /*
+      /* Speedboat Image in Hero - REMOVED */
+      /*
         .hero-boat {
             position: absolute;
             bottom: 0;
@@ -318,2047 +154,1819 @@ import Footer from '../components/Footer.astro';
         }
         */
 
-        /* Social Icons */
-        .social-section {
-            text-align: center;
-            padding: 60px 0;
-            background-color: #f8f9fa;
-        }
+      /* Social Icons */
+      .social-section {
+        text-align: center;
+        padding: 60px 0;
+        background-color: #f4f4f4;
+      }
 
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 40px;
+      }
 
-        .social-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: #666;
-            font-size: 24px;
-            transition: all 0.3s ease;
-            border: 1px solid #e9ecef;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
+      .social-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: #666;
+        font-size: 24px;
+        transition: all 0.3s ease;
+        border: 1px solid #e9ecef;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
 
-        .social-icon:nth-child(1):hover {
-            background-color: #25d366;
-            color: white;
-            border-color: #25d366;
-            transform: translateY(-2px);
-        }
+      .social-icon:nth-child(1):hover {
+        background-color: #25d366;
+        color: white;
+        border-color: #25d366;
+        transform: translateY(-2px);
+      }
 
-        .social-icon:nth-child(2):hover {
-            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
-            color: white;
-            border-color: #bc1888;
-            transform: translateY(-2px);
-        }
+      .social-icon:nth-child(2):hover {
+        background: linear-gradient(
+          45deg,
+          #f09433 0%,
+          #e6683c 25%,
+          #dc2743 50%,
+          #cc2366 75%,
+          #bc1888 100%
+        );
+        color: white;
+        border-color: #bc1888;
+        transform: translateY(-2px);
+      }
 
-        .social-icon:nth-child(3):hover {
-            background-color: #000;
-            color: white;
-            border-color: #000;
-            transform: translateY(-2px);
-        }
+      .social-icon:nth-child(3):hover {
+        background-color: #000;
+        color: white;
+        border-color: #000;
+        transform: translateY(-2px);
+      }
 
-        .why-choose {
-            text-align: center;
-            margin-top: 30px;
-        }
+      .why-choose {
+        text-align: center;
+        margin-top: 30px;
+      }
 
-        .why-choose h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
+      .why-choose h2 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
 
-        .why-choose p {
-            font-family: 'Noto Sans', sans-serif;
-            color: #666;
-            font-size: 1rem;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
+      .why-choose p {
+        font-family: "Noto Sans", sans-serif;
+        color: #666;
+        font-size: 1rem;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
 
-        /* Vehicle Packages */
-        .packages-section {
-            padding: 100px 0;
-            background-color: #fff;
+      /* Vehicle Packages */
+      .packages-section {
+        padding: 100px 0;
+        background-color: #f4f4f4;
+      }
+
+      .packages-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+
+      .packages-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2.2rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 70px;
+        text-align: left;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .packages-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 35px;
+        margin-bottom: 60px;
+      }
+
+      .package-card {
+        background: white;
+        border-radius: 50px;
+        overflow: hidden;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        position: relative;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .package-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12);
+      }
+
+      .package-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        position: relative;
+      }
+
+      .package-content {
+        padding: 10px 100px;
+        text-align: center;
+        background: linear-gradient(135deg, #ffffff 0%);
+      }
+
+      .package-name {
+        font-family: "Noto Sans", sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        line-height: 1.3;
+      }
+
+      .package-price {
+        font-family: "Noto Sans", sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #ff6b6b;
+        margin-bottom: 0;
+        position: relative;
+      }
+
+      .package-price::before {
+        content: "IDR ";
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #666;
+      }
+
+      .view-details-section {
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      .view-details-btn {
+        background: transparent;
+        color: #f28482;
+        border: 1.5px solid #f28482;
+        padding: 10px 24px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 400;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+        text-transform: lowercase;
+        letter-spacing: 0.3px;
+        font-family: "Noto Sans", sans-serif;
+        position: relative;
+        z-index: 999;
+        pointer-events: auto;
+        user-select: none;
+      }
+
+      .view-details-btn:hover {
+        background-color: #f28482;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(242, 132, 130, 0.3);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .packages-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 30px;
         }
 
         .packages-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px;
+          padding: 0 30px;
         }
 
-        .packages-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.2rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 70px;
-            text-align: left;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        /* Ensure header consistency on tablet */
+        .header {
+          padding: 18px 0;
         }
 
-        .packages-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 35px;
-            margin-bottom: 60px;
+        .nav-container {
+          padding: 0 30px;
         }
 
-        .package-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+        /* .hero-boat removed */
+      }
+
+      @media (max-width: 768px) {
+        .nav-menu {
+          display: none;
         }
 
-        .package-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12);
+        .hamburger {
+          display: flex;
         }
 
-        .package-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            position: relative;
-        }
-
-        .package-content {
-            padding: 25px 20px;
-            text-align: center;
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-        }
-
-        .package-name {
-            font-family: 'Noto Sans', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            line-height: 1.3;
-        }
-
-        .package-price {
-            font-family: 'Noto Sans', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #ff6b6b;
-            margin-bottom: 0;
-            position: relative;
-        }
-
-        .package-price::before {
-            content: 'IDR ';
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #666;
-        }
-
-        .view-details-section {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .view-details-btn {
-            background: transparent;
-            color: #F28482;
-            border: 1.5px solid #F28482;
-            padding: 10px 24px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 400;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            text-transform: lowercase;
-            letter-spacing: 0.3px;
-            font-family: 'Noto Sans', sans-serif;
-            position: relative;
-            z-index: 999;
-            pointer-events: auto;
-            user-select: none;
-        }
-
-        .view-details-btn:hover {
-            background-color: #F28482;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(242, 132, 130, 0.3);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .packages-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 30px;
-            }
-
-            .packages-container {
-                padding: 0 30px;
-            }
-
-            /* .hero-boat removed */
-        }
-
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .hero-content {
-                margin-top: 0px;
-                margin-left: 20px;
-                text-align: left;
-                padding: 0 20px;
-            }
-
-            .hero h1 {
-                font-size: 3rem;
-                letter-spacing: 2px;
-            }
-
-            .hero-subtitle {
-                font-size: 1.4rem;
-            }
-
-            .packages-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-
-            .package-card {
-                margin: 0 auto;
-                max-width: 350px;
-            }
-
-            .social-icons {
-                gap: 25px;
-            }
-
-            .social-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
-            }
-
-            /* .hero-boat removed */
-
-            .nav-container,
-            .hero-content,
-            .packages-container {
-                padding: 0 20px;
-            }
-
-            .packages-title {
-                font-size: 1.8rem;
-                text-align: center;
-                margin-bottom: 50px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .packages-title,
-            .why-choose h2 {
-                font-size: 1.6rem;
-            }
-        }
-
-        /* Additional styling for better visual appeal */
-        .package-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, transparent 0%, rgba(255, 107, 107, 0.05) 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            border-radius: 16px;
-        }
-
-        .package-card:hover::before {
-            opacity: 1;
-        }
-
-        .package-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #ff6b6b, #ff5252);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .package-card:hover::after {
-            opacity: 1;
-        }
-
-        /* Smooth animations */
-        .hero-content > * {
-            animation: fadeInUp 0.8s ease forwards;
-            opacity: 0;
-            transform: translateY(30px);
+        .hero-content {
+          margin-top: 0px;
+          margin-left: 20px;
+          text-align: left;
+          padding: 0 20px;
         }
 
         .hero h1 {
-            animation-delay: 0.2s;
+          font-size: 3rem;
+          letter-spacing: 2px;
         }
 
         .hero-subtitle {
-            animation-delay: 0.4s;
+          font-size: 1.4rem;
+          margin-bottom: 15px;
         }
 
-        .hero-description {
-            animation-delay: 0.6s;
+        .packages-grid {
+          grid-template-columns: 1fr;
+          gap: 25px;
         }
 
-        .cta-button {
-            animation-delay: 0.8s;
+        .package-card {
+          margin: 0 auto;
+          max-width: 350px;
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .social-icons {
+          gap: 25px;
         }
 
-        /* Modal CSS */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
+        .social-icon {
+          width: 60px;
+          height: 60px;
+          font-size: 24px;
         }
 
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: none;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 600px;
-            position: relative;
-            animation: slideIn 0.3s;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            position: absolute;
-            right: 20px;
-            top: 15px;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .modal-header h2 {
-            margin: 0 0 20px 0;
-            color: #333;
-            font-size: 24px;
-        }
+        /* .hero-boat removed */
 
-        .modal-body {
-            line-height: 1.6;
-        }
-
-        .package-detail-info {
-            margin-bottom: 20px;
+        .nav-container,
+        .hero-content,
+        .packages-container {
+          padding: 0 20px;
         }
 
-        .package-detail-info h3 {
-            color: #007bff;
-            margin-bottom: 10px;
-            font-size: 18px;
+        /* Ensure header consistency on mobile */
+        .header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 1000;
+          padding: 15px 0;
+          transition: all 0.3s ease;
         }
 
-        .package-detail-info p, .package-detail-info ul {
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .package-detail-info ul {
-            padding-left: 20px;
-        }
-
-        .package-detail-info li {
-            margin-bottom: 5px;
-        }
-
-        .package-price-detail {
-            background: linear-gradient(135deg, #007bff, #0056b3);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .package-price-detail h3 {
-            margin: 0;
-            font-size: 20px;
-        }
-
-        /* Detail Modal Styles - PRIORITY CSS */
-        #detailModal.detail-modal {
-            display: flex !important;
-            position: fixed !important;
-            z-index: 999999 !important;
-            left: 0 !important;
-            top: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            background-color: rgba(0, 0, 0, 0.8) !important;
-            backdrop-filter: blur(5px) !important;
-            opacity: 0 !important;
-            visibility: hidden !important;
-            transition: all 0.3s ease !important;
-        }
-
-        #detailModal.detail-modal.show {
-            opacity: 1 !important;
-            visibility: visible !important;
-        }
-
-        #detailModal .detail-modal-content {
-            background-color: #fff !important;
-            margin: 2% auto !important;
-            border-radius: 25px !important;
-            width: 95% !important;
-            max-width: 900px !important;
-            max-height: 90vh !important;
-            overflow-y: auto !important;
-            position: relative !important;
-            animation: modalSlideIn 0.4s ease-out !important;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3) !important;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        #detailModal .detail-modal-close {
-            position: absolute !important;
-            top: 20px !important;
-            right: 25px !important;
-            font-size: 28px !important;
-            font-weight: bold !important;
-            color: #666 !important;
-            cursor: pointer !important;
-            z-index: 10 !important;
-            transition: color 0.3s ease !important;
-            width: 40px !important;
-            height: 40px !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            border-radius: 50% !important;
-            background: rgba(255, 255, 255, 0.9) !important;
-        }
-
-        #detailModal .detail-modal-close:hover {
-            color: #ff6b6b !important;
-            background: rgba(255, 107, 107, 0.1) !important;
-        }
-
-        #detailModal .detail-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-            color: white !important;
-            padding: 40px 30px 30px 30px !important;
-            border-radius: 25px 25px 0 0 !important;
-            text-align: center !important;
-            position: relative !important;
-        }
-
-        #detailModal .detail-header h2 {
-            font-size: 28px !important;
-            font-weight: 700 !important;
-            margin: 0 0 10px 0 !important;
-            letter-spacing: 1px !important;
-            font-family: 'Cormorant Garamond', serif !important;
-        }
-
-        #detailModal .detail-subtitle {
-            font-size: 16px !important;
-            opacity: 0.9 !important;
-            margin-bottom: 20px !important;
-            font-weight: 300 !important;
-        }
-
-        #detailModal .detail-price-info {
-            display: flex !important;
-            justify-content: space-between !important;
-            align-items: center !important;
-            background: rgba(255, 255, 255, 0.15) !important;
-            padding: 15px 20px !important;
-            border-radius: 15px !important;
-            backdrop-filter: blur(10px) !important;
-        }
-
-        #detailModal .detail-price {
-            font-size: 24px !important;
-            font-weight: 700 !important;
-            color: #fff !important;
-        }
-
-        #detailModal .detail-duration {
-            font-size: 14px !important;
-            opacity: 0.8 !important;
-        }
-
-        #detailModal .detail-trip-options {
-            padding: 25px 30px !important;
-            border-bottom: 1px solid #f0f0f0 !important;
-        }
-
-        #detailModal .detail-trip-option {
-            background: linear-gradient(135deg, #f8f9ff 0%, #e3f2fd 100%) !important;
-            padding: 20px !important;
-            border-radius: 15px !important;
-            border: 2px solid #e1e8ff !important;
-            text-align: center !important;
-        }
-
-        #detailModal .detail-model {
-            display: block !important;
-            font-size: 18px !important;
-            font-weight: 600 !important;
-            color: #333 !important;
-            margin-bottom: 8px !important;
-        }
-
-        #detailModal .detail-specs {
-            font-size: 14px !important;
-            color: #666 !important;
-            font-style: italic !important;
-        }
-
-        #detailModal .detail-section {
-            padding: 25px 30px !important;
-            border-bottom: 1px solid #f0f0f0 !important;
-        }
-
-        #detailModal .detail-section h3 {
-            font-size: 20px !important;
-            font-weight: 700 !important;
-            color: #333 !important;
-            margin-bottom: 20px !important;
-            display: flex !important;
-            align-items: center !important;
-            gap: 10px !important;
-        }
-
-        #detailModal .detail-section h3:before {
-            content: '●' !important;
-            color: #667eea !important;
-            font-size: 12px !important;
-        }
-
-        #detailModal .detail-destinations {
-            display: grid !important;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
-            gap: 15px !important;
-        }
-
-        #detailModal .detail-dest-item {
-            display: flex !important;
-            align-items: center !important;
-            gap: 12px !important;
-            padding: 12px 15px !important;
-            background: #f8f9fa !important;
-            border-radius: 10px !important;
-            font-size: 15px !important;
-            color: #333 !important;
-            transition: all 0.3s ease !important;
-        }
-
-        #detailModal .detail-dest-item:hover {
-            background: #e3f2fd !important;
-            transform: translateX(5px) !important;
-        }
-
-        #detailModal .detail-dest-icon {
-            width: 20px !important;
-            height: 20px !important;
-            background: linear-gradient(135deg, #667eea, #764ba2) !important;
-            border-radius: 50% !important;
-            position: relative !important;
-            flex-shrink: 0 !important;
-        }
-
-        #detailModal .detail-dest-icon:after {
-            content: '📍' !important;
-            position: absolute !important;
-            top: 50% !important;
-            left: 50% !important;
-            transform: translate(-50%, -50%) !important;
-            font-size: 10px !important;
-        }
-
-        #detailModal .detail-features {
-            display: grid !important;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
-            gap: 12px !important;
-        }
-
-        #detailModal .detail-feature-item {
-            display: flex !important;
-            align-items: center !important;
-            gap: 10px !important;
-            padding: 10px 15px !important;
-            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%) !important;
-            border-radius: 8px !important;
-            font-size: 14px !important;
-            color: #333 !important;
-        }
-
-        #detailModal .detail-feature-icon {
-            color: #ff9800 !important;
-            font-size: 16px !important;
-        }
-
-        #detailModal .detail-included-excluded {
-            display: grid !important;
-            grid-template-columns: 1fr 1fr !important;
-            gap: 30px !important;
-        }
-
-        #detailModal .detail-included h4,
-        #detailModal .detail-excluded h4 {
-            font-size: 16px !important;
-            font-weight: 600 !important;
-            margin-bottom: 15px !important;
-            color: #333 !important;
-        }
-
-        #detailModal .detail-include-item {
-            display: flex !important;
-            align-items: flex-start !important;
-            gap: 10px !important;
-            padding: 8px 0 !important;
-            font-size: 14px !important;
-            color: #4CAF50 !important;
-            border-bottom: 1px solid #f0f8f0 !important;
-        }
-
-        #detailModal .detail-exclude-item {
-            display: flex !important;
-            align-items: flex-start !important;
-            gap: 10px !important;
-            padding: 8px 0 !important;
-            font-size: 14px !important;
-            color: #f44336 !important;
-            border-bottom: 1px solid #fff0f0 !important;
-        }
-
-        #detailModal .detail-footer {
-            background: #f8f9fa !important;
-            padding: 25px 30px !important;
-            text-align: center !important;
-            border-radius: 0 0 25px 25px !important;
+        .header.scrolled {
+          background: rgba(255, 255, 255, 0.95) !important;
+          backdrop-filter: blur(20px) !important;
+          box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1) !important;
         }
 
-        #detailModal .detail-footer p {
-            margin-bottom: 15px !important;
-            color: #666 !important;
-            font-size: 14px !important;
-        }
-
-        #detailModal .detail-contact {
-            display: flex !important;
-            justify-content: center !important;
-            gap: 30px !important;
-            flex-wrap: wrap !important;
-        }
-
-        #detailModal .detail-phone,
-        #detailModal .detail-email {
-            background: linear-gradient(135deg, #F28482, #A3B184) !important;
-            color: white !important;
-            padding: 12px 20px !important;
-            border-radius: 25px !important;
-            font-size: 14px !important;
-            font-weight: 600 !important;
-            text-decoration: none !important;
-            transition: all 0.3s ease !important;
+        .nav-container {
+          max-width: 100%;
+          padding: 0 15px;
         }
-
-        #detailModal .detail-phone:hover,
-        #detailModal .detail-email:hover {
-            transform: translateY(-2px) !important;
-            box-shadow: 0 8px 20px rgba(242, 132, 130, 0.4) !important;
-        }
-
-        #detailModal .detail-back-btn {
-            position: absolute !important;
-            bottom: -25px !important;
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-            background: linear-gradient(135deg, #ff6b6b, #ff5252) !important;
-            color: white !important;
-            border: none !important;
-            padding: 15px 30px !important;
-            border-radius: 25px !important;
-            font-size: 14px !important;
-            font-weight: 600 !important;
-            cursor: pointer !important;
-            transition: all 0.3s ease !important;
-            text-transform: uppercase !important;
-            letter-spacing: 1px !important;
-            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4) !important;
-        }
-
-        #detailModal .detail-back-btn:hover {
-            transform: translateX(-50%) translateY(-3px) !important;
-            box-shadow: 0 12px 25px rgba(255, 107, 107, 0.6) !important;
-        }
-
-        #detailModal .detail-modal-content {
-            max-height: 80vh !important;
-            overflow-y: auto !important;
-            padding: 0 !important;
-        }
-
-        #detailModal .detail-modal-close {
-            color: #666 !important;
-            float: right !important;
-            font-size: 24px !important;
-            font-weight: bold !important;
-            position: absolute !important;
-            right: 20px !important;
-            top: 15px !important;
-            z-index: 1001 !important;
-            cursor: pointer !important;
-            transition: color 0.3s ease !important;
-        }
-
-        #detailModal .detail-modal-close:hover {
-            color: #F28482 !important;
-        }
-
-        .detail-modal-body::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .detail-modal-body::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 3px;
-        }
-
-        .detail-modal-body::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 3px;
-        }
-
-        .detail-modal-body::-webkit-scrollbar-thumb:hover {
-            background: #a8a8a8;
-        }
-
-        #detailModal .detail-header {
-            background: linear-gradient(135deg, #F28482 0%, #A3B184 100%) !important;
-            color: white !important;
-            padding: 40px 30px 30px !important;
-            border-radius: 25px 25px 0 0 !important;
-            text-align: center !important;
-            position: relative !important;
-            overflow: hidden !important;
-        }
-
-        #detailModal .detail-header::before {
-            content: "" !important;
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            bottom: 0 !important;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="30" cy="30" r="1" fill="rgba(255,255,255,0.03)"/><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.08)"/><circle cx="70" cy="70" r="1" fill="rgba(255,255,255,0.04)"/><circle cx="90" cy="90" r="1" fill="rgba(255,255,255,0.06)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') !important;
-            opacity: 0.6 !important;
-        }
-
-        #detailModal .detail-title {
-            display: block !important;
-        }
-
-        #detailModal .detail-model {
-            font-size: 28px !important;
-            font-weight: 800 !important;
-            color: #fff !important;
-            display: block !important;
-            margin-bottom: 15px !important;
-            line-height: 1.2 !important;
-            font-family: 'Cormorant Garamond', serif !important;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3) !important;
-            letter-spacing: 1px !important;
-            position: relative !important;
-            z-index: 2 !important;
-        }
-
-        #detailModal .detail-specs {
-            font-size: 16px !important;
-            color: rgba(255,255,255,0.9) !important;
-            font-weight: 400 !important;
-            line-height: 1.4 !important;
-            font-family: 'Noto Sans', sans-serif !important;
-            font-style: italic !important;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2) !important;
-            position: relative !important;
-            z-index: 2 !important;
-        }
-
-        #detailModal .detail-trip-options {
-            display: flex !important;
-            margin: 30px 30px !important;
-            border-radius: 20px !important;
-            overflow: hidden !important;
-            border: none !important;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
-            background: linear-gradient(135deg, #F28482 0%, #A3B184 100%) !important;
-        }
-
-        #detailModal .detail-trip-option {
-            flex: 1 !important;
-            padding: 25px 20px !important;
-            text-align: center !important;
-            cursor: pointer !important;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-            font-family: 'Noto Sans', sans-serif !important;
-            position: relative !important;
-            overflow: hidden !important;
-        }
-
-        #detailModal .detail-trip-option.active {
-            background: linear-gradient(135deg, #A3B184 0%, #F28482 100%) !important;
-            color: white !important;
-            transform: scale(1.02) !important;
-            box-shadow: 0 8px 25px rgba(163, 177, 132, 0.4) !important;
-        }
-
-        #detailModal .detail-trip-option.active::before {
-            content: "" !important;
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            bottom: 0 !important;
-            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.05) 100%) !important;
-            pointer-events: none !important;
-        }
-
-        #detailModal .detail-trip-option:not(.active) {
-            background: #EDE6DA !important;
-            color: #333 !important;
-            backdrop-filter: blur(10px) !important;
-        }
-
-        #detailModal .detail-trip-option:not(.active):hover {
-            background: #F4F4F4 !important;
-            transform: translateY(-2px) !important;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
-        }
-
-        #detailModal .detail-trip-title {
-            font-size: 14px !important;
-            font-weight: 700 !important;
-            text-transform: uppercase !important;
-            margin-bottom: 12px !important;
-            letter-spacing: 0.5px !important;
-        }
-
-        #detailModal .detail-trip-price {
-            font-size: 16px !important;
-            font-weight: 700 !important;
-            margin-bottom: 8px !important;
-        }
-
-        #detailModal .detail-trip-time {
-            font-size: 13px !important;
-            opacity: 0.9 !important;
-        }
-
-        #detailModal .detail-destinations {
-            display: flex !important;
-            gap: 35px !important;
-            margin: 30px 30px !important;
-            padding: 25px !important;
-            background: linear-gradient(135deg, #F4F4F4 0%, #EDE6DA 100%) !important;
-            border-radius: 20px !important;
-            border: 1px solid rgba(163, 177, 132, 0.2) !important;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important;
-        }
-
-        #detailModal .detail-dest-column {
-            flex: 1 !important;
-        }
-
-        #detailModal .detail-dest-item {
-            display: flex !important;
-            align-items: flex-start !important;
-            gap: 15px !important;
-            margin-bottom: 16px !important;
-            font-size: 15px !important;
-            color: #333 !important;
-            line-height: 1.5 !important;
-            font-family: 'Noto Sans', sans-serif !important;
-            padding: 12px 15px !important;
-            background: rgba(255,255,255,0.7) !important;
-            border-radius: 12px !important;
-            transition: all 0.3s ease !important;
-            border: 1px solid rgba(163, 177, 132, 0.2) !important;
-        }
-
-        #detailModal .detail-dest-item:hover {
-            background: rgba(255,255,255,1) !important;
-            transform: translateX(5px) !important;
-            border-color: rgba(163, 177, 132, 0.5) !important;
-            box-shadow: 0 3px 10px rgba(163, 177, 132, 0.2) !important;
-        }
-
-        #detailModal .detail-dest-icon {
-            width: 18px !important;
-            height: 18px !important;
-            background: linear-gradient(135deg, #F28482 0%, #A3B184 100%) !important;
-            border-radius: 50% !important;
-            flex-shrink: 0 !important;
-            margin-top: 1px !important;
-            position: relative !important;
-            transition: all 0.3s ease !important;
-        }
-
-        #detailModal .detail-dest-icon::before {
-            content: "📍" !important;
-            position: absolute !important;
-            top: 50% !important;
-            left: 50% !important;
-            transform: translate(-50%, -50%) !important;
-            font-size: 10px !important;
-        }
-
-        #detailModal .detail-dest-item:hover .detail-dest-icon {
-            transform: scale(1.2) !important;
-            box-shadow: 0 3px 8px rgba(242, 132, 130, 0.4) !important;
-        }
-
-        #detailModal .detail-section {
-            margin: 30px 30px !important;
-            background: linear-gradient(135deg, #F4F4F4 0%, #EDE6DA 100%) !important;
-            border-radius: 20px !important;
-            padding: 25px !important;
-            border: 1px solid rgba(163, 177, 132, 0.2) !important;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important;
-        }
-
-        #detailModal .detail-section h3 {
-            font-size: 18px !important;
-            font-weight: 700 !important;
-            text-transform: uppercase !important;
-            margin-bottom: 25px !important;
-            color: #A3B184 !important;
-            letter-spacing: 0.8px !important;
-            font-family: 'Noto Sans', sans-serif !important;
-            position: relative !important;
-            padding-bottom: 10px !important;
-        }
-
-        #detailModal .detail-section h3::after {
-            content: "" !important;
-            position: absolute !important;
-            bottom: 0 !important;
-            left: 0 !important;
-            width: 40px !important;
-            height: 3px !important;
-            background: linear-gradient(135deg, #F28482 0%, #A3B184 100%) !important;
-            border-radius: 2px !important;
-        }
-
-        #detailModal .detail-included-excluded {
-            display: flex !important;
-            gap: 35px !important;
-        }
-
-        #detailModal .detail-included,
-        #detailModal .detail-excluded {
-            flex: 1 !important;
-        }
-
-        #detailModal .detail-include-item,
-        #detailModal .detail-exclude-item {
-            font-size: 14px !important;
-            margin-bottom: 12px !important;
-            color: #333 !important;
-            line-height: 1.5 !important;
-            font-family: 'Noto Sans', sans-serif !important;
-            padding: 8px 12px !important;
-            border-radius: 8px !important;
-            transition: all 0.3s ease !important;
-            position: relative !important;
-            padding-left: 30px !important;
-        }
-
-        #detailModal .detail-include-item {
-            color: #A3B184 !important;
-            background: rgba(163, 177, 132, 0.15) !important;
-            border-left: 4px solid #A3B184 !important;
-        }
-
-        #detailModal .detail-include-item::before {
-            content: "✓" !important;
-            position: absolute !important;
-            left: 10px !important;
-            top: 50% !important;
-            transform: translateY(-50%) !important;
-            font-weight: bold !important;
-            color: #A3B184 !important;
-        }
-
-        #detailModal .detail-exclude-item {
-            color: #F28482 !important;
-            background: rgba(242, 132, 130, 0.15) !important;
-            border-left: 4px solid #F28482 !important;
-        }
-
-        #detailModal .detail-exclude-item::before {
-            content: "✗" !important;
-            position: absolute !important;
-            left: 10px !important;
-            top: 50% !important;
-            transform: translateY(-50%) !important;
-            font-weight: bold !important;
-            color: #F28482 !important;
-        }
-
-        #detailModal .detail-include-item:hover,
-        #detailModal .detail-exclude-item:hover {
-            transform: translateX(5px) !important;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
-        }
-
-        #detailModal .detail-footer {
-            border-top: 1px solid #eee !important;
-            padding: 25px 30px !important;
-            text-align: center !important;
-            font-size: 14px !important;
-            color: #666 !important;
-            background: #fafafa !important;
-            font-family: 'Noto Sans', sans-serif !important;
-        }
-
-        #detailModal .detail-contact {
-            margin-top: 15px !important;
-            display: flex !important;
-            justify-content: center !important;
-            align-items: center !important;
-            gap: 20px !important;
-        }
-
-        #detailModal .detail-back-btn {
-            position: relative !important;
-            bottom: auto !important;
-            left: auto !important;
-            transform: none !important;
-            background: linear-gradient(135deg, #F28482 0%, #A3B184 100%) !important;
-            color: white !important;
-            border: none !important;
-            padding: 14px 28px !important;
-            border-radius: 25px !important;
-            font-size: 14px !important;
-            cursor: pointer !important;
-            transition: all 0.3s ease !important;
-            font-family: 'Noto Sans', sans-serif !important;
-            font-weight: 600 !important;
-            box-shadow: 0 4px 15px rgba(242, 132, 130, 0.3) !important;
-            margin: 20px auto !important;
-            display: block !important;
-            text-transform: uppercase !important;
-            letter-spacing: 0.5px !important;
-        }
-
-        #detailModal .detail-back-btn:hover {
-            transform: translateY(-2px) !important;
-            box-shadow: 0 6px 20px rgba(242, 132, 130, 0.4) !important;
-        }
-
-        .detail-footer {
-            border-top: 1px solid #eee;
-            padding: 25px 30px;
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-            background: #fafafa;
-        }
-
-        .detail-contact {
-            margin-top: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .detail-phone {
-            font-weight: 700;
-            color: #333;
-            font-size: 15px;
-        }
-
-        /* Mobile Responsive untuk Detail Modal */
-        @media (max-width: 768px) {
-            .detail-modal-content {
-                width: 95%;
-                margin: 5% auto;
-                border-radius: 15px;
-            }
-
-            .detail-header {
-                padding: 20px 20px 15px;
-            }
-
-            .detail-model {
-                font-size: 18px;
-            }
-
-            .detail-specs {
-                font-size: 14px;
-            }
-
-            .detail-trip-options {
-                margin: 20px 20px;
-                flex-direction: column;
-            }
-
-            .detail-trip-option {
-                padding: 18px 15px;
-            }
-
-            .detail-destinations {
-                flex-direction: column;
-                gap: 20px;
-                margin: 20px 20px;
-            }
-
-            .detail-included-excluded {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .detail-section {
-                margin: 20px 20px;
-                padding-top: 20px;
-            }
-
-            .detail-footer {
-                padding: 20px;
-            }
-
-            .detail-contact {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .detail-modal-body {
-                max-height: 85vh;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .detail-modal-content {
-                width: 98%;
-                margin: 2% auto;
-            }
-
-            .detail-header {
-                padding: 15px 15px 10px;
-            }
-
-            .detail-trip-options,
-            .detail-destinations,
-            .detail-section {
-                margin: 15px 15px;
-            }
-
-            .detail-dest-item {
-                font-size: 14px;
-            }
-
-            .detail-include-item,
-            .detail-exclude-item {
-                font-size: 13px;
-            }
-        }
-        /* Responsive Design for Detail Modal */
-        @media (max-width: 768px) {
-            #detailModal .detail-modal {
-                width: calc(100vw - 32px) !important;
-                margin: 16px !important;
-                max-height: calc(100vh - 32px) !important;
-                border-radius: 15px !important;
-            }
-
-            #detailModal .detail-header {
-                padding: 20px 20px 15px 20px !important;
-                margin: 0 !important;
-            }
-
-            #detailModal .detail-header h2 {
-                font-size: 18px !important;
-            }
-
-            #detailModal .detail-trip-options {
-                flex-direction: column !important;
-                gap: 15px !important;
-                margin: 20px 20px !important;
-            }
-
-            #detailModal .detail-trip-option {
-                padding: 12px 15px !important;
-            }
-
-            #detailModal .detail-destinations {
-                flex-direction: column !important;
-                gap: 20px !important;
-                margin: 20px 20px !important;
-            }
-
-            #detailModal .detail-section {
-                margin: 20px 20px !important;
-                padding-top: 20px !important;
-            }
-
-            #detailModal .detail-included-excluded {
-                flex-direction: column !important;
-                gap: 20px !important;
-            }
-
-            #detailModal .detail-footer {
-                padding: 20px 20px !important;
-            }
-
-            #detailModal .detail-contact {
-                flex-direction: column !important;
-                gap: 10px !important;
-            }
-        }
-
-        @media (max-width: 480px) {
-            #detailModal .detail-modal {
-                width: calc(100vw - 16px) !important;
-                margin: 8px !important;
-                border-radius: 12px !important;
-            }
-
-            #detailModal .detail-header {
-                padding: 15px 15px 12px 15px !important;
-            }
-
-            #detailModal .detail-header h2 {
-                font-size: 16px !important;
-            }
-
-            #detailModal .detail-trip-options,
-            #detailModal .detail-destinations,
-            #detailModal .detail-section {
-                margin: 15px 15px !important;
-            }
-
-            #detailModal .detail-footer {
-                padding: 15px 15px !important;
-            }
+
+        .logo {
+          font-size: 1.5rem;
         }
-
+
+        .packages-title {
+          font-size: 1.8rem;
+          text-align: center;
+          margin-bottom: 50px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .packages-title,
+        .why-choose h2 {
+          font-size: 1.6rem;
+        }
+      }
+
+      /* Additional styling for better visual appeal */
+      .package-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          transparent 0%,
+          rgba(255, 107, 107, 0.05) 100%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: 16px;
+      }
+
+      .package-card:hover::before {
+        opacity: 1;
+      }
+
+      .package-card::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #ff6b6b, #ff5252);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .package-card:hover::after {
+        opacity: 1;
+      }
+
+      /* Smooth animations */
+      .hero-content > * {
+        animation: fadeInUp 0.8s ease forwards;
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      .hero h1 {
+        animation-delay: 0.2s;
+      }
+
+      .hero-subtitle {
+        animation-delay: 0.4s;
+      }
+
+      .hero-description {
+        animation-delay: 0.6s;
+      }
+
+      .cta-button {
+        animation-delay: 0.8s;
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Modal CSS */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: none;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 600px;
+        position: relative;
+        animation: slideIn 0.3s;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        position: absolute;
+        right: 20px;
+        top: 15px;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .modal-header h2 {
+        margin: 0 0 20px 0;
+        color: #333;
+        font-size: 24px;
+      }
+
+      .modal-body {
+        line-height: 1.6;
+      }
+
+      .package-detail-info {
+        margin-bottom: 20px;
+      }
+
+      .package-detail-info h3 {
+        color: #007bff;
+        margin-bottom: 10px;
+        font-size: 18px;
+      }
+
+      .package-detail-info p,
+      .package-detail-info ul {
+        color: #666;
+        margin-bottom: 15px;
+      }
+
+      .package-detail-info ul {
+        padding-left: 20px;
+      }
+
+      .package-detail-info li {
+        margin-bottom: 5px;
+      }
+
+      .package-price-detail {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      .package-price-detail h3 {
+        margin: 0;
+        font-size: 20px;
+      }
+
+      /* Detail Modal Styles */
+      .detail-modal {
+        display: none !important; /* Force hidden secara default */
+        position: fixed;
+        z-index: 10000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .detail-modal.show {
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+
+      .detail-modal-content {
+        position: relative;
+        width: 95%;
+        max-width: 550px;
+        max-height: 85vh;
+        background: white;
+        border-radius: 20px;
+        padding: 0;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        border: 2px solid #f28482;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .detail-modal-body {
+        overflow-y: auto;
+        flex: 1;
+        padding-bottom: 60px;
+      }
+
+      .detail-modal-body::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .detail-modal-body::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+      }
+
+      .detail-modal-body::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 3px;
+      }
+
+      .detail-modal-body::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+      }
+
+      .detail-modal-close {
+        position: absolute;
+        top: 20px;
+        right: 25px;
+        color: #666;
+        font-size: 26px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 10001;
+        transition: color 0.3s ease;
+      }
+
+      .detail-modal-close:hover {
+        color: #f28482;
+      }
+
+      .detail-header {
+        background: #ffff;
+        padding: 30px 30px 25px;
+        border-bottom: 1px solid #eee;
+        margin-top: 0;
+      }
+
+      .detail-model {
+        font-size: 20px;
+        font-weight: 700;
+        color: #333;
+        display: block;
+        margin-bottom: 10px;
+        line-height: 1.2;
+      }
+
+      .detail-specs {
+        font-size: 15px;
+        color: #666;
+        font-weight: 400;
+        line-height: 1.3;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .spec-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        color: #555;
+        white-space: nowrap;
+      }
+
+      .spec-separator {
+        color: #ccc;
+        font-weight: 300;
+        margin: 0 4px;
+      }
+
+      .detail-trip-options {
+        display: flex;
+        margin: 30px 30px;
+        border-radius: 15px;
+        overflow: hidden;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .detail-trip-option {
+        flex: 1;
+        padding: 22px 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .detail-trip-option.active {
+        background: #a3b184;
+        color: white;
+      }
+
+      .detail-trip-option:not(.active) {
+        background: #ede6da;
+        color: #6b5b47;
+      }
+
+      .detail-trip-title {
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        letter-spacing: 0.5px;
+      }
+
+      .detail-trip-price {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .detail-trip-time {
+        font-size: 13px;
+        opacity: 0.9;
+      }
+
+      .detail-destinations {
+        display: flex;
+        gap: 35px;
+        margin: 30px 30px;
+        padding: 0;
+      }
+
+      .detail-dest-column {
+        flex: 1;
+      }
+
+      .detail-dest-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 14px;
+        font-size: 15px;
+        color: #333;
+        line-height: 1.4;
+      }
+
+      .detail-dest-icon {
+        width: 14px;
+        height: 14px;
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0YyODQ4MiIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      .detail-section {
+        margin: 30px 30px;
+        border-top: 1px solid #eee;
+        padding-top: 30px;
+      }
+
+      .detail-section h3 {
+        font-size: 15px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 25px;
+        color: #333;
+        letter-spacing: 0.5px;
+      }
+
+      .detail-included-excluded {
+        display: flex;
+        gap: 35px;
+        background-color: #ede6da;
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      .detail-included,
+      .detail-excluded {
+        flex: 1;
+      }
+
+      .detail-include-item,
+      .detail-exclude-item {
+        font-size: 14px;
+        margin-bottom: 10px;
+        color: #333;
+        line-height: 1.5;
+      }
+
+      .detail-include-item {
+        color: #333;
+      }
+
+      .detail-exclude-item {
+        color: #333;
+      }
+
+      /* .detail-footer {
+        border-top: 1px solid #eee;
+        padding: 25px 30px;
+        text-align: center;
+        font-size: 14px;
+        color: #333;
+        background: #333;
+      } */
+
+      .detail-contact {
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .detail-phone {
+        font-weight: 700;
+        color: #333;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .whatsapp-icon {
+        width: 20px;
+        height: 20px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2325D366'%3E%3Cpath d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.488'/%3E%3C/svg%3E");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: inline-block;
+        flex-shrink: 0;
+      }
+
+      .detail-back-btn {
+        background: transparent;
+        border: 2px solid #f28482;
+        color: #f28482;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: lowercase;
+        letter-spacing: 0.5px;
+        margin: 20px auto;
+        display: block;
+        font-family: "Noto Sans", sans-serif;
+        outline: none;
+      }
+
+      .detail-back-btn:hover {
+        background: #f28482;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(242, 132, 130, 0.3);
+      }
+
+      .detail-back-btn:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(242, 132, 130, 0.2);
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .hamburger {
+          display: flex;
+        }
+
+        .nav-menu {
+          display: none;
+        }
+
+        /* Ensure header consistency on mobile */
+        .header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 1000;
+          padding: 15px 0;
+          transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+          background: rgba(255, 255, 255, 0.95) !important;
+          backdrop-filter: blur(20px) !important;
+          box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .nav-container {
+          max-width: 100%;
+          padding: 0 15px;
+        }
+
+        .logo {
+          font-size: 1.5rem;
+          color: #333 !important; /* Force dark color on mobile */
+        }
+
+        /* Force dark colors for mobile navigation */
+        .logo {
+          color: #333 !important;
+          text-shadow: none !important;
+        }
+
+        .nav-menu a {
+          color: #333 !important;
+          text-shadow: none !important;
+        }
+
+        .nav-menu a.active {
+          color: #ff6b6b !important;
+        }
+
+        .header .logo {
+          color: #333 !important;
+        }
+
+        .header .nav-menu a {
+          color: #333 !important;
+        }
+
+        .header .nav-menu a.active {
+          color: #ff6b6b !important;
+        }
+
+        /* Force dark hamburger menu on mobile */
+        .hamburger span {
+          background-color: #333 !important;
+        }
+
+        .header .hamburger span {
+          background-color: #333 !important;
+        }
+
+        .header.scrolled .hamburger span {
+          background-color: #333 !important;
+        }
+
+        .mobile-sidebar {
+          position: fixed;
+          top: 0;
+          right: -300px;
+          height: 100vh;
+          width: 300px;
+          background: white;
+          box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+          transition: right 0.3s ease;
+          z-index: 1001;
+          padding: 80px 20px 20px;
+        }
+
+        .mobile-sidebar.active {
+          right: 0;
+        }
+
+        .mobile-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.3s ease;
+          z-index: 1000;
+        }
+
+        .mobile-overlay.active {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .mobile-menu {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+
+        .mobile-menu li {
+          margin-bottom: 15px;
+        }
+
+        .mobile-menu a {
+          display: block;
+          color: #333;
+          text-decoration: none;
+          font-size: 18px;
+          font-weight: 500;
+          padding: 10px 0;
+          border-bottom: 1px solid #eee;
+        }
+
+        .product-container {
+          padding: 0 20px;
+          max-width: 100%;
+          overflow: visible !important; /* Pastikan checkmark tidak terpotong */
+        }
+
+        .product-title {
+          font-size: 2.5rem;
+          margin-bottom: 40px;
+        }
+
+        .products-grid {
+          overflow: visible !important; /* Pastikan checkmark tidak terpotong */
+        }
+
+        .product-body {
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .product-image-container {
+          width: 100%;
+          height: 250px;
+          border-radius: 20px;
+        }
+
+        .product-content {
+          gap: 12px;
+        }
+
+        .product-header {
+          padding: 25px 25px 15px;
+        }
+
+        .product-body {
+          padding: 0 25px 25px;
+          flex-direction: column; /* Stack vertically pada mobile */
+          align-items: center; /* Center alignment */
+          text-align: center; /* Center text */
+        }
+
+        .product-content {
+          width: 100%; /* Full width pada mobile */
+          max-width: none; /* Remove max-width restriction */
+          align-items: center; /* Ensure center alignment */
+          padding: 0; /* Remove extra padding */
+        }
+
+        .product-image-container {
+          width: 100%;
+          height: 220px;
+          border-radius: 20px;
+        }
+
+        .slider-nav {
+          width: 35px;
+          height: 35px;
+        }
+
+        .slider-nav svg {
+          width: 16px;
+          height: 16px;
+        }
+
+        .slider-dots {
+          bottom: 12px;
+        }
+
+        .slider-dot {
+          width: 10px;
+          height: 10px;
+        }
+
+        .trip-options {
+          flex-wrap: nowrap;
+          justify-content: center;
+          width: 100%;
+          margin-bottom: 20px;
+          overflow: visible !important; /* Force visible untuk checkmark */
+          position: relative;
+          border-radius: 25px;
+          height: 45px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          z-index: 100; /* Z-index tinggi untuk mobile */
+          clip-path: none !important; /* Pastikan tidak ada clipping */
+          mask: none !important; /* Pastikan tidak ada masking */
+        }
+
+        .trip-option {
+          flex: 1;
+          min-width: 100px;
+          font-size: 11px;
+          padding: 0 15px;
+          height: 45px;
+          transition: all 0.3s ease;
+          cursor: pointer;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+
+        .additional-info {
+          font-size: 0.8rem;
+        }
+
+        /* Touch optimizations for mobile */
+        .trip-option:active {
+          transform: scale(0.98);
+          background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .trip-option.active:active {
+          transform: scale(0.98);
+        }
+      }
+
+      /* Responsive Design untuk Packages pada Mobile */
+      @media (max-width: 768px) {
+        .packages {
+          gap: 30px !important;
+          flex-wrap: wrap !important;
+        }
+      }
+
+      .detail-footer {
+        border-top: 1px solid #eee;
+        padding: 25px 30px;
+        text-align: center;
+        font-size: 14px;
+        color: #333;
+        background: #ffffff;
+      }
+
+      .detail-contact {
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .detail-phone {
+        font-weight: 700;
+        color: #333;
+        font-size: 15px;
+      }
+
+      /* Mobile Responsive untuk Detail Modal */
+      @media (max-width: 480px) {
+        /* Detail modal mobile responsive */
+        .detail-modal {
+          padding: 10px !important;
+        }
+
+        .detail-modal-content {
+          width: 95% !important;
+          margin: 5% auto !important;
+          padding: 15px !important;
+          border-radius: 15px !important;
+          border: 2px solid #f28482 !important;
+        }
+
+        .detail-modal-close {
+          top: 10px !important;
+          right: 15px !important;
+          font-size: 24px !important;
+          width: 30px !important;
+          height: 30px !important;
+        }
+
+        .detail-modal h3 {
+          font-size: 1.3rem !important;
+          margin-bottom: 15px !important;
+        }
+
+        .detail-modal .included,
+        .detail-modal .excluded {
+          margin-bottom: 15px !important;
+        }
+
+        .detail-modal .included h4,
+        .detail-modal .excluded h4 {
+          font-size: 1rem !important;
+          margin-bottom: 8px !important;
+        }
+
+        .detail-modal .included ul,
+        .detail-modal .excluded ul {
+          font-size: 0.85rem !important;
+          line-height: 1.4 !important;
+        }
+
+        .detail-modal .included li,
+        .detail-modal .excluded li {
+          margin-bottom: 4px !important;
+          padding-left: 16px !important;
+        }
+
+        .detail-modal .contact-info {
+          margin-top: 15px !important;
+          text-align: center !important;
+        }
+
+        .detail-modal .contact-info h4 {
+          font-size: 1rem !important;
+          margin-bottom: 8px !important;
+        }
+      }
     </style>
-</head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav-container">
-            <a href="/" class="logo">
-                INDO<span class="logo-highlight">NESIA</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="/" class="active">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/product">Product</a></li>
-                <li><a href="/Gallery">Gallery</a></li>
-                <li><a href="/Contact">Contact</a></li>
-            </ul>
-            <!-- Hamburger Menu -->
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Mobile Sidebar -->
-    <div class="mobile-sidebar">
-        <ul class="nav-menu">
-            <li><a href="/" class="active">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/product">Product</a></li>
-            <li><a href="/Gallery">Gallery</a></li>
-            <li><a href="/Contact">Contact</a></li>
-        </ul>
-    </div>
-
-    <!-- Mobile Overlay -->
-    <div class="mobile-overlay"></div>
+  </head>
+  <body>
+    <!-- Header Component -->
+    <Header currentPage="home" />
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Hero Section -->
-    <section class="hero" id="home">
+      <!-- Hero Section -->
+      <section class="hero" id="home">
         <!-- Hero Background Images Slider -->
-        <img src="https://picsum.photos/1920/1080?random=1" alt="White speedboat cruising through crystal clear turquoise waters with tropical islands in the background" class="hero-bg active">
-        <img src="https://picsum.photos/1920/1080?random=2" alt="Luxury speedboat at sunset with golden reflections on calm ocean waters and tropical coastline" class="hero-bg">
-        <img src="https://picsum.photos/1920/1080?random=3" alt="Modern speedboat racing across emerald green waters with lush tropical mountains in the distance" class="hero-bg">
-        <img src="https://picsum.photos/1920/1080?random=4" alt="Sleek speedboat navigating through azure blue waters with pristine white sand beaches and palm trees" class="hero-bg">
+        <img
+          src="https://picsum.photos/1920/1080?random=1"
+          alt="White speedboat cruising through crystal clear turquoise waters with tropical islands in the background"
+          class="hero-bg active"
+        />
+        <img
+          src="https://picsum.photos/1920/1080?random=2"
+          alt="Luxury speedboat at sunset with golden reflections on calm ocean waters and tropical coastline"
+          class="hero-bg"
+        />
+        <img
+          src="https://picsum.photos/1920/1080?random=3"
+          alt="Modern speedboat racing across emerald green waters with lush tropical mountains in the distance"
+          class="hero-bg"
+        />
+        <img
+          src="https://picsum.photos/1920/1080?random=4"
+          alt="Sleek speedboat navigating through azure blue waters with pristine white sand beaches and palm trees"
+          class="hero-bg"
+        />
         <div class="hero-content">
-            <h1>EXPLORE INDONESIA</h1>
-            <p class="hero-subtitle">with zikra speedboat</p>
-            <p class="hero-description">Fast, Scenic, Safe island adventures</p>
-            <a href="#packages" class="cta-button">BOOK NOW</a>
+          <h1>EXPLORE INDONESIA</h1>
+          <p class="hero-subtitle">with zikra speedboat</p>
+          <p class="hero-subtitle">Fast, Scenic, Safe island adventures</p>
+          <a href="#packages" class="cta-button">BOOK NOW</a>
         </div>
-    </section>
+      </section>
 
-    <!-- Social Icons & Why Choose Us -->
-    <section class="social-section">
+      <!-- Social Icons & Why Choose Us -->
+      <section class="social-section">
         <div class="social-icons">
-            <a href="https://wa.me/6281137877741" class="social-icon" title="WhatsApp" target="_blank">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.531 3.488"/>
-                </svg>
-            </a>
-            <a href="https://instagram.com/exploreindonesiatravel" class="social-icon" title="Instagram" target="_blank">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.40z"/>
-                </svg>
-            </a>
-            <a href="https://tiktok.com/@exploreindonesiatravel" class="social-icon" title="TikTok" target="_blank">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
-                </svg>
-            </a>
+          <a
+            href="https://wa.me/6281137877741"
+            class="social-icon"
+            title="WhatsApp"
+            target="_blank"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.531 3.488"
+              ></path>
+            </svg>
+          </a>
+          <a
+            href="https://instagram.com/exploreindonesiatravel"
+            class="social-icon"
+            title="Instagram"
+            target="_blank"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.40z"
+              ></path>
+            </svg>
+          </a>
+          <a
+            href="https://tiktok.com/@exploreindonesiatravel"
+            class="social-icon"
+            title="TikTok"
+            target="_blank"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"
+              ></path>
+            </svg>
+          </a>
         </div>
-        
+
         <div class="why-choose">
-            <h2>WHY CHOOSE US?</h2>
-            <p>Experience the ultimate island adventure with our professional crew, top-quality speedboats, and unmatched safety standards. We provide personalized service and unforgettable memories for every journey across Indonesia's stunning waters.</p>
+          <h2>WHY CHOOSE US?</h2>
+          <p>
+            Experience the ultimate island adventure with our professional crew,
+            top-quality speedboats, and unmatched safety standards. We provide
+            personalized service and unforgettable memories for every journey
+            across Indonesia's stunning waters.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- Vehicle Packages -->
-    <section class="packages-section" id="packages">
+      <!-- Vehicle Packages -->
+      <section class="packages-section" id="packages">
         <div class="packages-container">
-            <h2 class="packages-title">VEHICLE PACKAGES</h2>
-            
-            <div class="packages-grid">
-                <div class="package-card" data-package="zikra">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dc012b31-e445-47e9-b69a-ec82b2a851eb.png" alt="White luxury speedboat with blue accents on calm turquoise water, modern design with comfortable seating for island hopping adventures" class="package-image">
-                    <div class="package-content">
-                        <h3 class="package-name">ZIKRA SPEEDBOAT</h3>
-                        <p class="package-price">5.500.000</p>
-                        <a href="#" class="view-details-btn">view details</a>
-                    </div>
-                </div>
+          <h2 class="packages-title">VEHICLE PACKAGES</h2>
 
-                <div class="package-card" data-package="zaviero">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/25f0f095-5ddf-4a55-be67-66d1f8bf8f28.png" alt="Sleek blue and white speedboat with modern hull design cutting through tropical waters with mountains in the background" class="package-image">
-                    <div class="package-content">
-                        <h3 class="package-name">ZAVIERO SPEEDBOAT</h3>
-                        <p class="package-price">4.500.000</p>
-                        <a href="#" class="view-details-btn">view details</a>
-                    </div>
-                </div>
-
-                <div class="package-card" data-package="rentcar">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a27bb5e8-93b3-42a5-8abd-81574c63eacb.png" alt="White luxury van with tinted windows parked on tropical beach with palm trees and ocean view, perfect for comfortable island transportation" class="package-image">
-                    <div class="package-content">
-                        <h3 class="package-name">RENT CAR</h3>
-                        <p class="package-price">350.000</p>
-                        <a href="#" class="view-details-btn">view details</a>
-                    </div>
-                </div>
+          <div class="packages-grid">
+            <div class="package-card" data-package="zikra">
+              <img
+                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dc012b31-e445-47e9-b69a-ec82b2a851eb.png"
+                alt="White luxury speedboat with blue accents on calm turquoise water, modern design with comfortable seating for island hopping adventures"
+                class="package-image"
+              />
+              <div class="package-content">
+                <h3 class="package-name">ZIKRA SPEEDBOAT</h3>
+                <p class="package-price">5.500.000</p>
+                <a href="#" class="view-details-btn">view details</a>
+              </div>
             </div>
+
+            <div class="package-card" data-package="zaviero">
+              <img
+                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/25f0f095-5ddf-4a55-be67-66d1f8bf8f28.png"
+                alt="Sleek blue and white speedboat with modern hull design cutting through tropical waters with mountains in the background"
+                class="package-image"
+              />
+              <div class="package-content">
+                <h3 class="package-name">ZAVIERO SPEEDBOAT</h3>
+                <p class="package-price">4.500.000</p>
+                <a href="#" class="view-details-btn">view details</a>
+              </div>
+            </div>
+
+            <div class="package-card" data-package="rentcar">
+              <img
+                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a27bb5e8-93b3-42a5-8abd-81574c63eacb.png"
+                alt="White luxury van with tinted windows parked on tropical beach with palm trees and ocean view, perfect for comfortable island transportation"
+                class="package-image"
+              />
+              <div class="package-content">
+                <h3 class="package-name">RENT CAR</h3>
+                <p class="package-price">350.000</p>
+                <a href="#" class="view-details-btn">view details</a>
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
+      </section>
     </main>
 
-    <!-- Detail Modal dengan konten lengkap -->
+    <!-- Detail Modal -->
     <div class="detail-modal" id="detailModal">
-        <div class="detail-modal-content">
-            <span class="detail-modal-close">&times;</span>
-            
-            <div class="detail-header">
-                <h2>PACKAGE TITLE</h2>
-                <p class="detail-subtitle">Package Subtitle</p>
-                <div class="detail-price-info">
-                    <span class="detail-price">Rp 1.200.000</span>
-                    <span class="detail-duration">Full Day (8 hours)</span>
-                </div>
-            </div>
+      <div class="detail-modal-content">
+        <span class="detail-modal-close">&times;</span>
 
-            <div class="detail-trip-options">
-                <div class="detail-trip-option active">
-                    <span class="detail-model">Premium Speedboat</span>
-                    <span class="detail-specs">Capacity: 10 passengers • Speed: 45 knots</span>
-                </div>
+        <div class="detail-modal-body">
+          <!-- Header -->
+          <div class="detail-header">
+            <div class="detail-title">
+              <span class="detail-model">Yamaha 250 HP x2</span>
+              <span class="detail-specs">
+                <span class="spec-item">📡 GPS</span>
+                <span class="spec-separator">|</span>
+                <span class="spec-item">🧭 Compass</span>
+                <span class="spec-separator">|</span>
+                <span class="spec-item">🗺️ Map</span>
+                <span class="spec-separator">|</span>
+                <span class="spec-item">📻 VHF Radio</span>
+                <span class="spec-separator">|</span>
+                <span class="spec-item">📏 11.7 x 3 x 1.10</span>
+              </span>
             </div>
+          </div>
 
-            <div class="detail-section">
-                <h3>Destinations</h3>
-                <div class="detail-destinations">
-                    <!-- Will be populated by JavaScript -->
-                </div>
+          <!-- Trip Options -->
+          <div class="detail-trip-options">
+            <div class="detail-trip-option active">
+              <div class="detail-trip-title">HALF DAY TRIP</div>
+              <div class="detail-trip-price">Rp. 5.500.000,-</div>
+              <div class="detail-trip-time">06.30 AM - 02.00 PM</div>
             </div>
-
-            <div class="detail-section">
-                <h3>Features & Equipment</h3>
-                <div class="detail-features">
-                    <!-- Will be populated by JavaScript -->
-                </div>
+            <div class="detail-trip-option">
+              <div class="detail-trip-title">FULL DAY TRIP</div>
+              <div class="detail-trip-price">Rp 9.000.000,-</div>
+              <div class="detail-trip-time">06.30 AM - 05.00 PM</div>
             </div>
+          </div>
 
-            <div class="detail-section">
-                <h3>Package Includes</h3>
-                <div class="detail-included-excluded">
-                    <div class="detail-included">
-                        <!-- Will be populated by JavaScript -->
-                    </div>
-                    <div class="detail-excluded">
-                        <h4>Not Included:</h4>
-                        <!-- Will be populated by JavaScript -->
-                    </div>
-                </div>
+          <!-- Destinations -->
+          <div class="detail-destinations">
+            <div class="detail-dest-column">
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Rinca Island</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Kelor Island</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Menjerite Island</span>
+              </div>
             </div>
-
-            <div class="detail-footer">
-                <p>For booking and inquiries, contact us:</p>
-                <div class="detail-contact">
-                    <span class="detail-phone">+62 361 123456</span>
-                    <span class="detail-email">info@explore-indonesia.com</span>
-                </div>
+            <div class="detail-dest-column">
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Padar Island</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Komodo Island</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Pink Beach</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Taka Makassar, Manta Point</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Kanawa Island</span>
+              </div>
             </div>
+          </div>
 
-            <!-- Back Button -->
-            <button class="detail-back-btn">back</button>
+          <!-- What's Included -->
+          <div class="detail-section">
+            <h3>WHAT'S INCLUDED & EXCLUDED</h3>
+            <div class="detail-included-excluded">
+              <div class="detail-included">
+                <div class="detail-include-item">✓ Boat Crew</div>
+                <div class="detail-include-item">✓ Snack & Soft Drinks</div>
+                <div class="detail-include-item">✓ Snorkeling Gear</div>
+                <div class="detail-include-item">✓ Mineral Water Free Flow</div>
+                <div class="detail-include-item">✓ Lunch Box</div>
+                <div class="detail-include-item">✓ Documentation</div>
+                <div class="detail-include-item">✓ Life Jacket</div>
+                <div class="detail-include-item">✓ Life Ring Boy</div>
+                <div class="detail-include-item">✓ First Aid (P3K)</div>
+                <div class="detail-include-item">✓ Toilet</div>
+              </div>
+              <div class="detail-excluded">
+                <div class="detail-exclude-item">⊗ Komodo National Park</div>
+                <div class="detail-exclude-item">⊗ Entrance & Ranger Fee</div>
+                <div class="detail-exclude-item">⊗ Rental Diving Gear</div>
+                <div class="detail-exclude-item">
+                  ⊗ Photographer (By Request)
+                </div>
+                <div class="detail-exclude-item">⊗ Tipping Crew (Optional)</div>
+                <div class="detail-exclude-item">⊗ Insurance</div>
+                <div class="detail-exclude-item">
+                  ⊗ (Make sure bring enough IDR cash)
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="detail-footer">
+            <p>Prices very based on destination & number of passengers.</p>
+            <div class="detail-contact">
+              <span>Contact info</span>
+              <span class="detail-phone">
+                <span class="whatsapp-icon"></span>
+                0811-3787-741
+              </span>
+            </div>
+          </div>
         </div>
+
+        <!-- <div class="detail-footer">
+          <p>For booking and inquiries, contact us:</p>
+          <div class="detail-contact">
+            <span class="detail-phone">+62 361 123456</span>
+            <span class="detail-email">info@explore-indonesia.com</span>
+          </div>
+        </div> -->
+
+        <button class="detail-back-btn">back</button>
+      </div>
     </div>
 
     <script>
-        // SIMPLE MODAL SYSTEM - EXACT COPY dari product.astro
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM loaded - setting up modal');
-            
-            // Detail Modal functionality
-            const detailModal = document.getElementById('detailModal');
-            const detailModalClose = document.querySelector('.detail-modal-close');
-            const detailBackBtn = document.querySelector('.detail-back-btn');
-            
-            console.log('Found elements:', {
-                modal: !!detailModal,
-                closeBtn: !!detailModalClose,
-                backBtn: !!detailBackBtn
-            });
-            
-            // Add click event to all view details buttons
-            const viewDetailsButtons = document.querySelectorAll('.view-details-btn');
-            console.log('Found', viewDetailsButtons.length, 'view details buttons');
-            
-            viewDetailsButtons.forEach((btn, index) => {
-                console.log('Setting up button', index);
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    console.log('Button clicked!');
-                    
-                    // Determine package type based on button position or parent element
-                    let packageType = 'zikra';
-                    const packageCard = btn.closest('.package-card');
-                    if (packageCard) {
-                        const packageName = packageCard.querySelector('.package-name');
-                        if (packageName) {
-                            const name = packageName.textContent.toLowerCase();
-                            if (name.includes('zaviero')) packageType = 'zaviero';
-                            else if (name.includes('rent car')) packageType = 'rentcar';
-                        }
-                    }
-                    
-                    console.log('Package type detected:', packageType);
-                    
-                    if (detailModal) {
-                        console.log('Adding show class to modal');
-                        updateModalContent(packageType);
-                        detailModal.classList.add('show');
-                    } else {
-                        console.error('Modal not found!');
-                    }
-                });
-            });
-            
-            // Function to update modal content
-            function updateModalContent(packageType) {
-                const packageData = {
-                    zikra: {
-                        title: 'ZIKRA SPEEDBOAT',
-                        subtitle: 'Premium Island Hopping Experience',
-                        model: 'Luxury Speedboat',
-                        specs: 'Capacity: 10 passengers • Speed: 45 knots • Length: 12m',
-                        price: 'Rp 1.200.000',
-                        duration: 'Full Day (8 hours)',
-                        destinations: [
-                            'Nusa Penida East Coast',
-                            'Angel\'s Billabong',
-                            'Broken Beach',
-                            'Kelingking Beach',
-                            'Crystal Bay',
-                            'Manta Point (Snorkeling)'
-                        ],
-                        included: [
-                            'Professional captain & crew',
-                            'Life jackets & safety equipment',
-                            'Snorkeling gear',
-                            'Fresh towels',
-                            'Complimentary water',
-                            'Insurance coverage',
-                            'Fuel & boat maintenance'
-                        ],
-                        excluded: [
-                            'Meals & beverages',
-                            'Land transportation',
-                            'Entrance fees',
-                            'Personal expenses',
-                            'Gratuities'
-                        ],
-                        features: [
-                            'GPS Navigation System',
-                            'Sound System',
-                            'Comfortable Seating',
-                            'Storage Compartments',
-                            'Emergency Equipment'
-                        ]
-                    },
-                    zaviero: {
-                        title: 'ZAVIERO SPEEDBOAT',
-                        subtitle: 'Ultimate Luxury Marine Adventure',
-                        model: 'Super Luxury Speedboat',
-                        specs: 'Capacity: 15 passengers • Speed: 50 knots • Length: 15m',
-                        price: 'Rp 1.500.000',
-                        duration: 'Full Day (8 hours)',
-                        destinations: [
-                            'Nusa Penida West Coast',
-                            'Kelingking Secret Point',
-                            'Diamond Beach',
-                            'Thousand Islands Viewpoint',
-                            'Atuh Beach',
-                            'Tree House Molenteng'
-                        ],
-                        included: [
-                            'Expert captain & crew',
-                            'Premium life jackets',
-                            'Professional snorkeling gear',
-                            'Luxury towels & amenities',
-                            'Welcome drinks',
-                            'Comprehensive insurance',
-                            'All fuel & maintenance'
-                        ],
-                        excluded: [
-                            'Gourmet meals',
-                            'Private transportation',
-                            'Park entrance fees',
-                            'Shopping & souvenirs',
-                            'Tips & gratuities'
-                        ],
-                        features: [
-                            'Advanced GPS & Sonar',
-                            'Premium Sound System',
-                            'Luxury Leather Seating',
-                            'Refrigerated Storage',
-                            'Advanced Safety Systems'
-                        ]
-                    },
-                    rentcar: {
-                        title: 'RENT CAR SERVICES',
-                        subtitle: 'Comfortable Land Transportation',
-                        model: 'Various Vehicle Types',
-                        specs: 'AC Vehicles • Professional Drivers • Full Insurance',
-                        price: 'Rp 850.000',
-                        duration: 'Per Day (12 hours)',
-                        destinations: [
-                            'Airport Transfer',
-                            'Hotel to Attractions',
-                            'Nusa Penida Tour',
-                            'Ubud Cultural Sites',
-                            'Beach Hopping',
-                            'Custom Itinerary'
-                        ],
-                        included: [
-                            'Professional driver',
-                            'Air conditioning',
-                            'Fuel & toll fees',
-                            'Vehicle insurance',
-                            'Driver accommodation',
-                            'Free waiting time',
-                            'Local guide assistance'
-                        ],
-                        excluded: [
-                            'Meals for passengers',
-                            'Entrance tickets',
-                            'Personal shopping',
-                            'Overtime charges',
-                            'Driver tips'
-                        ],
-                        features: [
-                            'Toyota Avanza',
-                            'Honda Brio',
-                            'Suzuki Ertiga',
-                            'Clean & Comfortable',
-                            'Experienced Drivers'
-                        ]
-                    }
-                };
-                
-                const data = packageData[packageType];
-                if (!data) return;
-                
-                // Update header
-                const titleEl = document.querySelector('#detailModal .detail-header h2');
-                const subtitleEl = document.querySelector('#detailModal .detail-subtitle');
-                const modelEl = document.querySelector('#detailModal .detail-model');
-                const specsEl = document.querySelector('#detailModal .detail-specs');
-                const priceEl = document.querySelector('#detailModal .detail-price');
-                const durationEl = document.querySelector('#detailModal .detail-duration');
-                
-                if (titleEl) titleEl.textContent = data.title;
-                if (subtitleEl) subtitleEl.textContent = data.subtitle;
-                if (modelEl) modelEl.textContent = data.model;
-                if (specsEl) specsEl.textContent = data.specs;
-                if (priceEl) priceEl.textContent = data.price;
-                if (durationEl) durationEl.textContent = data.duration;
-                
-                // Update destinations
-                const destContainer = document.querySelector('#detailModal .detail-destinations');
-                if (destContainer) {
-                    destContainer.innerHTML = data.destinations.map(dest => `
-                        <div class="detail-dest-item">
-                            <div class="detail-dest-icon"></div>
-                            <span>${dest}</span>
-                        </div>
-                    `).join('');
-                }
-                
-                // Update included items
-                const includedContainer = document.querySelector('#detailModal .detail-included');
-                if (includedContainer) {
-                    includedContainer.innerHTML = data.included.map(item => `
-                        <div class="detail-include-item">✓ ${item}</div>
-                    `).join('');
-                }
-                
-                // Update excluded items
-                const excludedContainer = document.querySelector('#detailModal .detail-excluded');
-                if (excludedContainer) {
-                    excludedContainer.innerHTML = data.excluded.map(item => `
-                        <div class="detail-exclude-item">✗ ${item}</div>
-                    `).join('');
-                }
-                
-                // Update features
-                const featuresContainer = document.querySelector('#detailModal .detail-features');
-                if (featuresContainer) {
-                    featuresContainer.innerHTML = data.features.map(feature => `
-                        <div class="detail-feature-item">
-                            <div class="detail-feature-icon">⚡</div>
-                            <span>${feature}</span>
-                        </div>
-                    `).join('');
-                }
-            }
-            
-            // Close detail modal
-            if (detailModalClose) {
-                detailModalClose.addEventListener('click', () => {
-                    detailModal.classList.remove('show');
-                });
-            }
-            
-            if (detailBackBtn) {
-                detailBackBtn.addEventListener('click', () => {
-                    detailModal.classList.remove('show');
-                });
-            }
-            
-            // Close modal when clicking outside
-            if (detailModal) {
-                detailModal.addEventListener('click', (e) => {
-                    if (e.target === detailModal) {
-                        detailModal.classList.remove('show');
-                    }
-                });
-            }
-            
-            // Close modal with ESC key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && detailModal && detailModal.classList.contains('show')) {
-                    detailModal.classList.remove('show');
-                }
-            });
+      // SIMPLE MODAL SYSTEM - EXACT COPY dari product.astro
+      document.addEventListener("DOMContentLoaded", function () {
+        // Detail Modal functionality
+        const detailModal = document.getElementById("detailModal");
+        const detailModalClose = document.querySelector(".detail-modal-close");
+
+        // Add click event to all view details buttons
+        document.querySelectorAll(".view-details-btn").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            detailModal.classList.add("show");
+          });
         });
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                
-                // Skip if it's just # (view details buttons)
-                if (href === '#') {
-                    return;
-                }
-                
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-
-                // Close mobile sidebar when clicking a link
-                const mobileSidebar = document.querySelector('.mobile-sidebar');
-                const mobileOverlay = document.querySelector('.mobile-overlay');
-                const hamburger = document.querySelector('.hamburger');
-                
-                if (mobileSidebar && mobileOverlay && hamburger) {
-                    mobileSidebar.classList.remove('active');
-                    mobileOverlay.classList.remove('active');
-                    hamburger.classList.remove('active');
-                }
-            });
+        // Close detail modal
+        detailModalClose.addEventListener("click", () => {
+          detailModal.classList.remove("show");
         });
 
-        // Handle external links (like /about) - just close mobile menu
-        document.querySelectorAll('a[href^="/"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                // Close mobile sidebar when clicking a link
-                const mobileSidebar = document.querySelector('.mobile-sidebar');
-                const mobileOverlay = document.querySelector('.mobile-overlay');
-                const hamburger = document.querySelector('.hamburger');
-                
-                if (mobileSidebar && mobileOverlay && hamburger) {
-                    mobileSidebar.classList.remove('active');
-                    mobileOverlay.classList.remove('active');
-                    hamburger.classList.remove('active');
-                }
-            });
-        });
-
-        // Mobile Hamburger Menu
-        const hamburger = document.querySelector('.hamburger');
-        const mobileSidebar = document.querySelector('.mobile-sidebar');
-        const mobileOverlay = document.querySelector('.mobile-overlay');
-
-        if (hamburger && mobileSidebar && mobileOverlay) {
-            // Toggle sidebar when hamburger is clicked
-            hamburger.addEventListener('click', function() {
-                this.classList.toggle('active');
-                mobileSidebar.classList.toggle('active');
-                mobileOverlay.classList.toggle('active');
-                document.body.style.overflow = mobileSidebar.classList.contains('active') ? 'hidden' : '';
-            });
-
-            // Close sidebar when overlay is clicked
-            mobileOverlay.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                mobileSidebar.classList.remove('active');
-                this.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-
-            // Close sidebar when nav links are clicked
-            const navLinks = document.querySelectorAll('.mobile-sidebar .nav-menu a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    hamburger.classList.remove('active');
-                    mobileSidebar.classList.remove('active');
-                    mobileOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
-            });
-
-            // Close sidebar when pressing Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && mobileSidebar.classList.contains('active')) {
-                    hamburger.classList.remove('active');
-                    mobileSidebar.classList.remove('active');
-                    mobileOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
+        // Close detail modal with back button
+        const detailBackBtn = document.querySelector(".detail-back-btn");
+        if (detailBackBtn) {
+          detailBackBtn.addEventListener("click", () => {
+            detailModal.classList.remove("show");
+          });
         }
 
-        // Header background change on scroll
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('.header');
-            const logo = document.querySelector('.logo');
-            const navLinks = document.querySelectorAll('.nav-menu a');
-            
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.backdropFilter = 'blur(20px)';
-                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-                header.style.borderBottom = '1px solid rgba(255, 255, 255, 0.2)';
-                
-                // Change text color to dark when scrolled
-                logo.style.color = '#333';
-                logo.style.textShadow = 'none';
-                navLinks.forEach(link => {
-                    link.style.color = '#333';
-                    link.style.textShadow = 'none';
-                });
+        // Close detail modal when clicking outside
+        detailModal.addEventListener("click", (e) => {
+          if (e.target === detailModal) {
+            detailModal.classList.remove("show");
+          }
+        });
+
+        // Close detail modal with Escape key
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && detailModal.classList.contains("show")) {
+            detailModal.classList.remove("show");
+          }
+        });
+
+        // Detail trip options toggle
+        document.querySelectorAll(".detail-trip-option").forEach((option) => {
+          option.addEventListener("click", () => {
+            // Remove active from all options
+            document.querySelectorAll(".detail-trip-option").forEach((opt) => {
+              opt.classList.remove("active");
+            });
+            // Add active to clicked option
+            option.classList.add("active");
+          });
+        });
+      });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          const href = this.getAttribute("href");
+
+          // Skip if it's just # (view details buttons)
+          if (href === "#") {
+            return;
+          }
+
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+
+          // Close mobile sidebar when clicking a link
+          const mobileSidebar = document.querySelector(".mobile-sidebar");
+          const mobileOverlay = document.querySelector(".mobile-overlay");
+          const hamburger = document.querySelector(".hamburger");
+
+          if (mobileSidebar && mobileOverlay && hamburger) {
+            mobileSidebar.classList.remove("active");
+            mobileOverlay.classList.remove("active");
+            hamburger.classList.remove("active");
+          }
+        });
+      });
+
+      // Handle external links (like /about) - just close mobile menu
+      document.querySelectorAll('a[href^="/"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          // Close mobile sidebar when clicking a link
+          const mobileSidebar = document.querySelector(".mobile-sidebar");
+          const mobileOverlay = document.querySelector(".mobile-overlay");
+          const hamburger = document.querySelector(".hamburger");
+
+          if (mobileSidebar && mobileOverlay && hamburger) {
+            mobileSidebar.classList.remove("active");
+            mobileOverlay.classList.remove("active");
+            hamburger.classList.remove("active");
+          }
+        });
+      });
+
+      // Mobile Hamburger Menu
+      const hamburger = document.querySelector(".hamburger");
+      const mobileSidebar = document.querySelector(".mobile-sidebar");
+      const mobileOverlay = document.querySelector(".mobile-overlay");
+
+      if (hamburger && mobileSidebar && mobileOverlay) {
+        // Toggle sidebar when hamburger is clicked
+        hamburger.addEventListener("click", function () {
+          this.classList.toggle("active");
+          mobileSidebar.classList.toggle("active");
+          mobileOverlay.classList.toggle("active");
+          document.body.style.overflow = mobileSidebar.classList.contains(
+            "active"
+          )
+            ? "hidden"
+            : "";
+        });
+
+        // Close sidebar when overlay is clicked
+        mobileOverlay.addEventListener("click", function () {
+          hamburger.classList.remove("active");
+          mobileSidebar.classList.remove("active");
+          this.classList.remove("active");
+          document.body.style.overflow = "";
+        });
+
+        // Close sidebar when nav links are clicked
+        const navLinks = document.querySelectorAll(
+          ".mobile-sidebar .nav-menu a"
+        );
+        navLinks.forEach((link) => {
+          link.addEventListener("click", function () {
+            hamburger.classList.remove("active");
+            mobileSidebar.classList.remove("active");
+            mobileOverlay.classList.remove("active");
+            document.body.style.overflow = "";
+          });
+        });
+
+        // Close sidebar when pressing Escape key
+        document.addEventListener("keydown", function (e) {
+          if (
+            e.key === "Escape" &&
+            mobileSidebar.classList.contains("active")
+          ) {
+            hamburger.classList.remove("active");
+            mobileSidebar.classList.remove("active");
+            mobileOverlay.classList.remove("active");
+            document.body.style.overflow = "";
+          }
+        });
+      }
+
+      // Header background change on scroll
+      window.addEventListener("scroll", function () {
+        const header = document.querySelector(".header");
+        const logo = document.querySelector(".logo");
+        const navLinks = document.querySelectorAll(".nav-menu a");
+
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+          header.style.background = "rgba(255, 255, 255, 0.95)";
+          header.style.backdropFilter = "blur(20px)";
+          header.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.1)";
+          header.style.borderBottom = "1px solid rgba(255, 255, 255, 0.2)";
+
+          // Change text color to dark when scrolled
+          logo.style.color = "#333";
+          logo.style.textShadow = "none";
+          navLinks.forEach((link) => {
+            if (link.classList.contains("active")) {
+              link.style.color = "#ff6b6b"; // Keep active link red
             } else {
-                header.classList.remove('scrolled');
-                header.style.background = 'transparent';
-                header.style.backdropFilter = 'none';
-                header.style.boxShadow = 'none';
-                header.style.borderBottom = 'none';
-                
-                // Change text color back to white when at top
-                logo.style.color = '#fff';
-                logo.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.5)';
-                navLinks.forEach(link => {
-                    link.style.color = '#fff';
-                    link.style.textShadow = '1px 1px 2px rgba(0, 0, 0, 0.5)';
-                });
+              link.style.color = "#333";
             }
+            link.style.textShadow = "none";
+          });
+        } else {
+          header.classList.remove("scrolled");
+          header.style.background = "transparent";
+          header.style.backdropFilter = "none";
+          header.style.boxShadow = "none";
+          header.style.borderBottom = "none";
+
+          // Change text color back to white when at top
+          logo.style.color = "#fff";
+          logo.style.textShadow = "none";
+          navLinks.forEach((link) => {
+            if (link.classList.contains("active")) {
+              link.style.color = "#ff6b6b"; // Keep active link red
+            } else {
+              link.style.color = "#fff";
+            }
+            link.style.textShadow = "none";
+          });
+        }
+      });
+
+      // Set active navigation based on current page
+      function setActiveNavigation() {
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll(".nav-menu a");
+        const mobileNavLinks = document.querySelectorAll(
+          ".mobile-sidebar .nav-menu a"
+        );
+
+        // Remove active class from all links
+        [...navLinks, ...mobileNavLinks].forEach((link) => {
+          link.classList.remove("active");
         });
 
-        // Enhanced package cards hover animation
-        document.querySelectorAll('.package-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-20px) scale(1.02)';
-                this.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-                this.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            });
+        // Add active class to current page link
+        [...navLinks, ...mobileNavLinks].forEach((link) => {
+          const linkPath = new URL(link.href).pathname;
+          if (
+            currentPath === linkPath ||
+            (currentPath === "/" && linkPath === "/")
+          ) {
+            link.classList.add("active");
+          }
+        });
+      }
+
+      // Call function on page load
+      setActiveNavigation();
+
+      // Enhanced package cards hover animation
+      document.querySelectorAll(".package-card").forEach((card) => {
+        card.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-20px) scale(1.02)";
+          this.style.transition =
+            "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
         });
 
-        // Parallax effect for hero background
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const heroBgs = document.querySelectorAll('.hero-bg');
-            
-            heroBgs.forEach(bg => {
-                if (scrolled < window.innerHeight) {
-                    bg.style.transform = `translateY(${scrolled * 0.3}px)`;
-                }
-            });
+        card.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(0) scale(1)";
+          this.style.transition =
+            "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+        });
+      });
+
+      // Parallax effect for hero background
+      window.addEventListener("scroll", function () {
+        const scrolled = window.pageYOffset;
+        const heroBgs = document.querySelectorAll(".hero-bg");
+
+        heroBgs.forEach((bg) => {
+          if (scrolled < window.innerHeight) {
+            bg.style.transform = `translateY(${scrolled * 0.3}px)`;
+          }
+        });
+      });
+
+      // Auto-slide hero background images
+      let currentSlide = 0;
+      const heroImages = document.querySelectorAll(".hero-bg");
+      const totalSlides = heroImages.length;
+
+      function nextSlide() {
+        // Remove active class from current slide
+        heroImages[currentSlide].classList.remove("active");
+
+        // Move to next slide
+        currentSlide = (currentSlide + 1) % totalSlides;
+
+        // Add active class to new slide
+        heroImages[currentSlide].classList.add("active");
+      }
+
+      // Auto-slide every 5 seconds
+      setInterval(nextSlide, 5000);
+
+      // Price formatting with currency animation
+      document.querySelectorAll(".package-price").forEach((price) => {
+        const originalText = price.textContent;
+
+        price.addEventListener("mouseenter", function () {
+          this.style.fontSize = "1.4rem";
+          this.style.transition = "all 0.3s ease";
+          this.style.color = "#ff5252";
         });
 
-        // Auto-slide hero background images
-        let currentSlide = 0;
-        const heroImages = document.querySelectorAll('.hero-bg');
-        const totalSlides = heroImages.length;
+        price.addEventListener("mouseleave", function () {
+          this.style.fontSize = "1.3rem";
+          this.style.color = "#ff6b6b";
+        });
+      });
 
-        function nextSlide() {
-            // Remove active class from current slide
-            heroImages[currentSlide].classList.remove('active');
-            
-            // Move to next slide
-            currentSlide = (currentSlide + 1) % totalSlides;
-            
-            // Add active class to new slide
-            heroImages[currentSlide].classList.add('active');
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Observe package cards for scroll animations
+      document.querySelectorAll(".package-card").forEach((card) => {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(50px)";
+        card.style.transition = "all 0.6s ease";
+        observer.observe(card);
+      });
+
+      // Enhanced social icon interactions
+      document.querySelectorAll(".social-icon").forEach((icon) => {
+        icon.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-8px) scale(1.1)";
+          this.style.transition =
+            "all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)";
+        });
+
+        icon.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(0) scale(1)";
+          this.style.transition =
+            "all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)";
+        });
+      });
+
+      // Package Data
+      const packageData = {
+        zikra: {
+          title: "ZIKRA SPEEDBOAT",
+          price: "IDR 5.500.000",
+          description:
+            "Speedboat mewah dengan kapasitas hingga 8 orang. Dilengkapi dengan fasilitas modern dan desain elegan untuk petualangan island hopping yang tak terlupakan.",
+          features: [
+            "Kapasitas 8 penumpang",
+            "AC dan sound system",
+            "Snorkeling equipment",
+            "Life jacket tersedia",
+            "Professional captain",
+            "Fuel included",
+          ],
+          // specifications: "Length: 8.5m | Engine: 250HP | Speed: 35 knots",
+        },
+        zaviero: {
+          title: "ZAVIERO SPEEDBOAT",
+          price: "IDR 4.500.000",
+          description:
+            "Speedboat sporty dengan performa tinggi untuk eksplorasi pulau-pulau eksotis. Cocok untuk grup kecil yang ingin menikmati kecepatan dan kenyamanan.",
+          features: [
+            "Kapasitas 6 penumpang",
+            "GPS navigation system",
+            "Snorkeling gear",
+            "Safety equipment",
+            "Experienced pilot",
+            "Fuel included",
+          ],
+          specifications: "Length: 7.5m | Engine: 200HP | Speed: 30 knots",
+        },
+        rentcar: {
+          title: "RENT CAR",
+          price: "IDR 350.000",
+          description:
+            "Mobil rental nyaman untuk eksplorasi darat. Ideal untuk perjalanan wisata, bandara transfer, atau city tour dengan driver berpengalaman.",
+          features: [
+            "AC dan audio system",
+            "Driver berpengalaman",
+            "Fuel included",
+            "Insurance covered",
+            "Airport pickup",
+            "City tour guide",
+          ],
+          specifications: "Type: MPV | Seats: 7 passengers | Fuel: Gasoline",
+        },
+      };
+
+      // Global Debug Function
+      window.openModal = function (packageType) {
+        console.log("openModal called with packageType:", packageType);
+        const modal = document.getElementById("detailModal");
+        const modalBody = document.getElementById("modalDetailBody");
+
+        console.log("Modal element:", modal);
+        console.log("Modal body element:", modalBody);
+
+        if (!modal || !modalBody) {
+          console.error("Modal elements not found");
+          return;
         }
 
-        // Auto-slide every 5 seconds
-        setInterval(nextSlide, 5000);
+        let content = "";
 
-        // Price formatting with currency animation
-        document.querySelectorAll('.package-price').forEach(price => {
-            const originalText = price.textContent;
-            
-            price.addEventListener('mouseenter', function() {
-                this.style.fontSize = '1.4rem';
-                this.style.transition = 'all 0.3s ease';
-                this.style.color = '#ff5252';
-            });
-            
-            price.addEventListener('mouseleave', function() {
-                this.style.fontSize = '1.3rem';
-                this.style.color = '#ff6b6b';
-            });
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe package cards for scroll animations
-        document.querySelectorAll('.package-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(50px)';
-            card.style.transition = 'all 0.6s ease';
-            observer.observe(card);
-        });
-
-        // Enhanced social icon interactions
-        document.querySelectorAll('.social-icon').forEach(icon => {
-            icon.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-8px) scale(1.1)';
-                this.style.transition = 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-            });
-            
-            icon.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-                this.style.transition = 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-            });
-        });
-
-        // Package Data
-        const packageData = {
-            zikra: {
-                title: "ZIKRA SPEEDBOAT",
-                price: "IDR 5.500.000",
-                description: "Speedboat mewah dengan kapasitas hingga 8 orang. Dilengkapi dengan fasilitas modern dan desain elegan untuk petualangan island hopping yang tak terlupakan.",
-                features: [
-                    "Kapasitas 8 penumpang",
-                    "AC dan sound system",
-                    "Snorkeling equipment",
-                    "Life jacket tersedia",
-                    "Professional captain",
-                    "Fuel included"
-                ],
-                specifications: "Length: 8.5m | Engine: 250HP | Speed: 35 knots"
-            },
-            zaviero: {
-                title: "ZAVIERO SPEEDBOAT", 
-                price: "IDR 4.500.000",
-                description: "Speedboat sporty dengan performa tinggi untuk eksplorasi pulau-pulau eksotis. Cocok untuk grup kecil yang ingin menikmati kecepatan dan kenyamanan.",
-                features: [
-                    "Kapasitas 6 penumpang",
-                    "GPS navigation system",
-                    "Snorkeling gear",
-                    "Safety equipment",
-                    "Experienced pilot",
-                    "Fuel included"
-                ],
-                specifications: "Length: 7.5m | Engine: 200HP | Speed: 30 knots"
-            },
-            rentcar: {
-                title: "RENT CAR",
-                price: "IDR 350.000",
-                description: "Mobil rental nyaman untuk eksplorasi darat. Ideal untuk perjalanan wisata, bandara transfer, atau city tour dengan driver berpengalaman.",
-                features: [
-                    "AC dan audio system",
-                    "Driver berpengalaman", 
-                    "Fuel included",
-                    "Insurance covered",
-                    "Airport pickup",
-                    "City tour guide"
-                ],
-                specifications: "Type: MPV | Seats: 7 passengers | Fuel: Gasoline"
-            }
-        };
-
-        // Global Debug Function
-        window.openModal = function(packageType) {
-            console.log('openModal called with packageType:', packageType);
-            const modal = document.getElementById('detailModal');
-            const modalBody = document.getElementById('modalDetailBody');
-            
-            console.log('Modal element:', modal);
-            console.log('Modal body element:', modalBody);
-            
-            if (!modal || !modalBody) {
-                console.error('Modal elements not found');
-                return;
-            }
-            
-            let content = '';
-            
-            if (packageType === 'zikra') {
-                content = `
+        if (packageType === "zikra") {
+          content = `
                     <!-- Header -->
                     <div class="detail-header">
                         <div class="detail-title">
@@ -2458,8 +2066,8 @@ import Footer from '../components/Footer.astro';
                         </div>
                     </div>
                 `;
-            } else if (packageType === 'zaviero') {
-                content = `
+        } else if (packageType === "zaviero") {
+          content = `
                     <!-- Header -->
                     <div class="detail-header">
                         <div class="detail-title">
@@ -2548,8 +2156,8 @@ import Footer from '../components/Footer.astro';
                         </div>
                     </div>
                 `;
-            } else if (packageType === 'rentcar') {
-                content = `
+        } else if (packageType === "rentcar") {
+          content = `
                     <!-- Header -->
                     <div class="detail-header">
                         <div class="detail-title">
@@ -2635,115 +2243,114 @@ import Footer from '../components/Footer.astro';
                         </div>
                     </div>
                 `;
-            }
-            
-            modalBody.innerHTML = content;
-            
-            // Show modal with animation
-            modal.style.display = 'block';
-            setTimeout(() => {
-                modal.classList.add('show');
-            }, 10);
-            
-            // Setup trip option switching
-            setupTripOptions();
         }
 
-        window.closeDetailModal = function() {
-            console.log('Closing modal');
-            const modal = document.getElementById('detailModal');
-            if (modal) {
-                modal.classList.remove('show');
-                setTimeout(() => {
-                    modal.style.display = 'none';
-                }, 300);
-            }
-        }
+        modalBody.innerHTML = content;
 
-        function setupTripOptions() {
-            const tripOptions = document.querySelectorAll('.detail-trip-option');
-            tripOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    // Remove active from all options
-                    tripOptions.forEach(opt => opt.classList.remove('active'));
-                    // Add active to clicked option
-                    this.classList.add('active');
-                });
-            });
-        }
+        // Show modal with animation
+        modal.style.display = "block";
+        setTimeout(() => {
+          modal.classList.add("show");
+        }, 10);
 
-        // Event Listeners untuk Detail Modal
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM loaded, setting up button listeners');
-            
-            // Setup view details buttons dengan cara yang lebih langsung
-            const buttons = document.querySelectorAll('.view-details-btn[data-package]');
-            console.log('Found buttons:', buttons.length);
-            
-            // Setup setiap button satu per satu
-            buttons.forEach(function(btn, index) {
-                console.log('Setting up button', index, btn);
-                
-                // Hapus semua event listener yang ada
-                const newBtn = btn.cloneNode(true);
-                btn.parentNode.replaceChild(newBtn, btn);
-                
-                // Tambah event listener baru
-                newBtn.onclick = function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('Button clicked!', this);
-                    
-                    const packageType = this.getAttribute('data-package');
-                    console.log('Package type:', packageType);
-                    
-                    // Panggil function secara langsung
-                    if (window.openModal) {
-                        window.openModal(packageType);
-                    } else {
-                        console.error('openModal function not found');
-                    }
-                };
-            });
-            
-            const modal = document.getElementById('detailModal');
-            const closeBtn = document.querySelector('.detail-modal-close');
-            
-            // Close modal dengan tombol X
-            if (closeBtn) {
-                closeBtn.addEventListener('click', window.closeDetailModal);
-            }
-            
-            // Close modal dengan klik background
-            if (modal) {
-                modal.addEventListener('click', function(event) {
-                    if (event.target === modal) {
-                        window.closeDetailModal();
-                    }
-                });
-            }
-            
-            // Close modal dengan ESC key
-            document.addEventListener('keydown', function(event) {
-                if (event.key === 'Escape') {
-                    window.closeDetailModal();
-                }
-            });
+        // Setup trip option switching
+        setupTripOptions();
+      };
+
+      window.closeDetailModal = function () {
+        console.log("Closing modal");
+        const modal = document.getElementById("detailModal");
+        if (modal) {
+          modal.classList.remove("show");
+          setTimeout(() => {
+            modal.style.display = "none";
+          }, 300);
+        }
+      };
+
+      function setupTripOptions() {
+        const tripOptions = document.querySelectorAll(".detail-trip-option");
+        tripOptions.forEach((option) => {
+          option.addEventListener("click", function () {
+            // Remove active from all options
+            tripOptions.forEach((opt) => opt.classList.remove("active"));
+            // Add active to clicked option
+            this.classList.add("active");
+          });
         });
+      }
+
+      // Event Listeners untuk Detail Modal
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("DOM loaded, setting up button listeners");
+
+        // Setup view details buttons dengan cara yang lebih langsung
+        const buttons = document.querySelectorAll(
+          ".view-details-btn[data-package]"
+        );
+        console.log("Found buttons:", buttons.length);
+
+        // Setup setiap button satu per satu
+        buttons.forEach(function (btn, index) {
+          console.log("Setting up button", index, btn);
+
+          // Hapus semua event listener yang ada
+          const newBtn = btn.cloneNode(true);
+          btn.parentNode.replaceChild(newBtn, btn);
+
+          // Tambah event listener baru
+          newBtn.onclick = function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log("Button clicked!", this);
+
+            const packageType = this.getAttribute("data-package");
+            console.log("Package type:", packageType);
+
+            // Panggil function secara langsung
+            if (window.openModal) {
+              window.openModal(packageType);
+            } else {
+              console.error("openModal function not found");
+            }
+          };
+        });
+
+        const modal = document.getElementById("detailModal");
+        const closeBtn = document.querySelector(".detail-modal-close");
+
+        // Close modal dengan tombol X
+        if (closeBtn) {
+          closeBtn.addEventListener("click", window.closeDetailModal);
+        }
+
+        // Close modal dengan klik background
+        if (modal) {
+          modal.addEventListener("click", function (event) {
+            if (event.target === modal) {
+              window.closeDetailModal();
+            }
+          });
+        }
+
+        // Close modal dengan ESC key
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape") {
+            window.closeDetailModal();
+          }
+        });
+      });
     </script>
 
     <!-- Footer -->
     <Footer />
-</body>
+  </body>
 </html>
-			</a>
-		</div>
 
-		<!-- Why Choose Us Section -->
-		
+<!-- Why Choose Us Section -->
 
-		<!-- Vehicle Packages Section -->
-		<!-- <section class="vehicle-packages">
+<!-- Vehicle Packages Section -->
+<!-- <section class="vehicle-packages">
 			<div class="container">
 				<h2 class="section-title">VEHICLE PACKAGES</h2>
 				<div class="packages-grid">
@@ -2772,328 +2379,325 @@ import Footer from '../components/Footer.astro';
 				<button class="view-details-btn">VIEW DETAILS</button>
 			</div>
 		</section> -->
-	</main>
-</Layout>
 
 <style>
-	* {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-	body {
-		font-family: 'Arial', sans-serif;
-		line-height: 1.6;
-		overflow-x: hidden;
-	}
+  body {
+    font-family: "Arial", sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
 
-	.container {
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 0 20px;
-	}
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
 
-	/* Header - PERSIS seperti gambar */
-	.header {
-		position: absolute;
-		top: 0;
-		width: 100%;
-		z-index: 1000;
-		padding: 20px 0;
-	}
+  /* Header - PERSIS seperti gambar */
+  .header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 0;
+  }
 
-	.header .container {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
+  .header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-	.logo-text {
-		color: white;
-		font-size: 20px;
-		font-weight: 800;
-		letter-spacing: 2px;
-		text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-	}
+  .logo-text {
+    color: white;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
 
-	.nav {
-		display: flex;
-		gap: 40px;
-	}
+  .nav {
+    display: flex;
+    gap: 40px;
+  }
 
-	.nav-link {
-		color: white;
-		text-decoration: none;
-		font-size: 15px;
-		font-weight: 500;
-		transition: all 0.3s;
-		text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-		text-transform: capitalize;
-	}
+  .nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.3s;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    text-transform: capitalize;
+  }
 
-	.nav-link.active {
-		opacity: 1;
-	}
+  .nav-link.active {
+    opacity: 1;
+  }
 
-	.nav-link:hover {
-		opacity: 0.8;
-	}
+  .nav-link:hover {
+    opacity: 0.8;
+  }
 
-	/* Hero Section - Background PERSIS seperti gambar dengan gunung yang tajam */
-	.hero {
-		height: 100vh;
-		background: 
-			url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2387CEEB;stop-opacity:1" /><stop offset="30%" style="stop-color:%2370B7D3;stop-opacity:1" /><stop offset="70%" style="stop-color:%235F9EA0;stop-opacity:1" /></linearGradient><linearGradient id="mountain1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2332CD32;stop-opacity:1" /><stop offset="30%" style="stop-color:%23228B22;stop-opacity:1" /><stop offset="100%" style="stop-color:%23006400;stop-opacity:1" /></linearGradient><linearGradient id="mountain2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2300FA9A;stop-opacity:0.9" /><stop offset="100%" style="stop-color:%23228B22;stop-opacity:1" /></linearGradient><linearGradient id="ocean" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2300CED1;stop-opacity:1" /><stop offset="50%" style="stop-color:%2320B2AA;stop-opacity:1" /><stop offset="100%" style="stop-color:%234682B4;stop-opacity:1" /></linearGradient></defs><rect width="1200" height="800" fill="url(%23sky)"/><polygon points="0,500 80,180 160,220 240,160 320,200 400,140 480,180 560,120 640,160 720,100 800,140 880,80 960,120 1040,60 1120,100 1200,40 1200,650 0,650" fill="url(%23mountain1)"/><polygon points="60,520 140,250 220,290 300,230 380,270 460,210 540,250 620,190 700,230 780,170 860,210 940,150 1020,190 1100,130 1180,170 1200,150 1200,650 60,650" fill="url(%23mountain2)" opacity="0.85"/><rect y="650" width="1200" height="150" fill="url(%23ocean)"/></svg>');
-		background-size: cover;
-		background-position: center;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		text-align: center;
-		color: white;
-		position: relative;
-	}
+  /* Hero Section - Background PERSIS seperti gambar dengan gunung yang tajam */
+  .hero {
+    height: 100vh;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2387CEEB;stop-opacity:1" /><stop offset="30%" style="stop-color:%2370B7D3;stop-opacity:1" /><stop offset="70%" style="stop-color:%235F9EA0;stop-opacity:1" /></linearGradient><linearGradient id="mountain1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2332CD32;stop-opacity:1" /><stop offset="30%" style="stop-color:%23228B22;stop-opacity:1" /><stop offset="100%" style="stop-color:%23006400;stop-opacity:1" /></linearGradient><linearGradient id="mountain2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2300FA9A;stop-opacity:0.9" /><stop offset="100%" style="stop-color:%23228B22;stop-opacity:1" /></linearGradient><linearGradient id="ocean" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2300CED1;stop-opacity:1" /><stop offset="50%" style="stop-color:%2320B2AA;stop-opacity:1" /><stop offset="100%" style="stop-color:%234682B4;stop-opacity:1" /></linearGradient></defs><rect width="1200" height="800" fill="url(%23sky)"/><polygon points="0,500 80,180 160,220 240,160 320,200 400,140 480,180 560,120 640,160 720,100 800,140 880,80 960,120 1040,60 1120,100 1200,40 1200,650 0,650" fill="url(%23mountain1)"/><polygon points="60,520 140,250 220,290 300,230 380,270 460,210 540,250 620,190 700,230 780,170 860,210 940,150 1020,190 1100,130 1180,170 1200,150 1200,650 60,650" fill="url(%23mountain2)" opacity="0.85"/><rect y="650" width="1200" height="150" fill="url(%23ocean)"/></svg>');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+  }
 
-	.hero-content {
-		z-index: 10;
-		margin-bottom: 120px;
-		max-width: 800px;
-	}
+  .hero-content {
+    z-index: 10;
+    margin-bottom: 120px;
+    max-width: 800px;
+  }
 
-	.hero-title {
-		font-size: 5rem;
-		font-weight: 900;
-		margin-bottom: 20px;
-		letter-spacing: 6px;
-		text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
-		text-transform: uppercase;
-	}
+  .hero-title {
+    font-size: 5rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+    letter-spacing: 6px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+  }
 
-	.hero-subtitle {
-		font-size: 1.6rem;
-		margin-bottom: 15px;
-		font-weight: 300;
-		letter-spacing: 2px;
-		text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-		font-style: italic;
-	}
+  .hero-subtitle {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-style: italic;
+  }
 
-	.hero-description {
-		font-size: 1.1rem;
-		margin-bottom: 40px;
-		opacity: 0.95;
-		text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-		letter-spacing: 1px;
-	}
+  .hero-description {
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    opacity: 0.95;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+  }
 
-	.book-now-btn {
-		background: linear-gradient(135deg, #FF6B47 0%, #FF5722 100%);
-		color: white;
-		border: none;
-		padding: 15px 40px;
-		font-size: 16px;
-		font-weight: 700;
-		border-radius: 30px;
-		cursor: pointer;
-		transition: all 0.3s;
-		text-transform: uppercase;
-		letter-spacing: 2px;
-		box-shadow: 0 6px 20px rgba(255, 107, 71, 0.4);
-	}
+  .book-now-btn {
+    background: linear-gradient(135deg, #ff6b47 0%, #ff5722 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 6px 20px rgba(255, 107, 71, 0.4);
+  }
 
-	.book-now-btn:hover {
-		background: linear-gradient(135deg, #FF5722 0%, #E64A19 100%);
-		transform: translateY(-3px);
-		box-shadow: 0 8px 25px rgba(255, 107, 71, 0.6);
-	}
+  .book-now-btn:hover {
+    background: linear-gradient(135deg, #ff5722 0%, #e64a19 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 107, 71, 0.6);
+  }
 
-	/* Speedboat di hero - PERSIS seperti gambar dengan jejak air */
-	.speedboat-hero {
-		position: absolute;
-		bottom: 80px;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 200px;
-		height: 100px;
-		background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100"><defs><linearGradient id="wake" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:%23ffffff;stop-opacity:0.8" /><stop offset="50%" style="stop-color:%23ffffff;stop-opacity:0.4" /><stop offset="100%" style="stop-color:%23ffffff;stop-opacity:0" /></linearGradient></defs><ellipse cx="20" cy="70" rx="15" ry="8" fill="url(%23wake)"/><ellipse cx="40" cy="75" rx="20" ry="10" fill="url(%23wake)"/><ellipse cx="60" cy="80" rx="25" ry="12" fill="url(%23wake)"/><ellipse cx="100" cy="60" rx="80" ry="30" fill="%23ffffff"/><ellipse cx="100" cy="55" rx="65" ry="20" fill="%23FF6B47"/><rect x="85" y="40" width="30" height="25" fill="%23ffffff"/><rect x="90" y="45" width="20" height="15" fill="%23333333" opacity="0.7"/><ellipse cx="100" cy="80" rx="20" ry="10" fill="%23ffffff" opacity="0.7"/><polygon points="160,55 180,50 185,60 170,65" fill="%23ffffff"/></svg>');
-		background-size: contain;
-		background-repeat: no-repeat;
-		background-position: center;
-		z-index: 5;
-	}
+  /* Speedboat di hero - PERSIS seperti gambar dengan jejak air */
+  .speedboat-hero {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 100px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100"><defs><linearGradient id="wake" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:%23ffffff;stop-opacity:0.8" /><stop offset="50%" style="stop-color:%23ffffff;stop-opacity:0.4" /><stop offset="100%" style="stop-color:%23ffffff;stop-opacity:0" /></linearGradient></defs><ellipse cx="20" cy="70" rx="15" ry="8" fill="url(%23wake)"/><ellipse cx="40" cy="75" rx="20" ry="10" fill="url(%23wake)"/><ellipse cx="60" cy="80" rx="25" ry="12" fill="url(%23wake)"/><ellipse cx="100" cy="60" rx="80" ry="30" fill="%23ffffff"/><ellipse cx="100" cy="55" rx="65" ry="20" fill="%23FF6B47"/><rect x="85" y="40" width="30" height="25" fill="%23ffffff"/><rect x="90" y="45" width="20" height="15" fill="%23333333" opacity="0.7"/><ellipse cx="100" cy="80" rx="20" ry="10" fill="%23ffffff" opacity="0.7"/><polygon points="160,55 180,50 185,60 170,65" fill="%23ffffff"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 5;
+  }
 
-	/* Why Choose Us Section - PERSIS seperti gambar */
-	.why-choose-us {
-		padding: 60px 0;
-		text-align: center;
-		background: #F5F5F5;
-	}
+  /* Why Choose Us Section - PERSIS seperti gambar */
+  .why-choose-us {
+    padding: 60px 0;
+    text-align: center;
+    background: #f5f5f5;
+  }
 
-	.section-title {
-		font-size: 2.5rem;
-		font-weight: 800;
-		margin-bottom: 20px;
-		color: #2C3E50;
-		letter-spacing: 2px;
-		text-transform: uppercase;
-	}
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
 
-	.section-description {
-		font-size: 1rem;
-		color: #666;
-	}
+  .section-description {
+    font-size: 1rem;
+    color: #666;
+  }
 
-	/* Vehicle Packages Section - PERSIS seperti gambar */
-	.vehicle-packages {
-		padding: 60px 0;
-		background: white;
-	}
+  /* Vehicle Packages Section - PERSIS seperti gambar */
+  .vehicle-packages {
+    padding: 60px 0;
+    background: white;
+  }
 
-	.vehicle-packages .section-title {
-		text-align: center;
-		margin-bottom: 40px;
-	}
+  .vehicle-packages .section-title {
+    text-align: center;
+    margin-bottom: 40px;
+  }
 
-	.packages-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 30px;
-		margin-bottom: 40px;
-	}
+  .packages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 40px;
+  }
 
-	.package-card {
-		background: white;
-		border-radius: 15px;
-		overflow: hidden;
-		box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-		transition: all 0.4s;
-		border: 1px solid rgba(0,0,0,0.05);
-	}
+  .package-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
 
-	.package-card:hover {
-		transform: translateY(-8px);
-		box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-	}
+  .package-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  }
 
-	.package-image {
-		width: 100%;
-		height: 200px;
-		background-size: cover;
-		background-position: center;
-	}
+  .package-image {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+  }
 
-	/* Background images untuk packages - realistis sesuai gambar */
-	.zikira-bg {
-		background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><defs><linearGradient id="water1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2300CED1;stop-opacity:1" /><stop offset="50%" style="stop-color:%2320B2AA;stop-opacity:1" /><stop offset="100%" style="stop-color:%234682B4;stop-opacity:1" /></linearGradient><linearGradient id="boat1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:%23ffffff;stop-opacity:1" /><stop offset="50%" style="stop-color:%23f0f0f0;stop-opacity:1" /><stop offset="100%" style="stop-color:%23ffffff;stop-opacity:1" /></linearGradient></defs><rect width="300" height="200" fill="url(%23water1)"/><ellipse cx="150" cy="140" rx="90" ry="35" fill="url(%23boat1)"/><ellipse cx="150" cy="135" rx="75" ry="25" fill="%23FF6B47"/><rect x="130" y="115" width="40" height="30" fill="%23ffffff"/><rect x="135" y="120" width="30" height="20" fill="%23333333" opacity="0.8"/><ellipse cx="150" cy="165" rx="25" ry="12" fill="%23ffffff" opacity="0.6"/><polygon points="200,135 220,130 225,140 210,145" fill="%23ffffff"/><text x="150" y="185" font-family="Arial" font-size="12" fill="%23ffffff" text-anchor="middle" font-weight="bold">ZIKIRA</text></svg>');
-		background-size: cover;
-		background-position: center;
-	}
+  /* Background images untuk packages - realistis sesuai gambar */
+  .zikira-bg {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><defs><linearGradient id="water1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2300CED1;stop-opacity:1" /><stop offset="50%" style="stop-color:%2320B2AA;stop-opacity:1" /><stop offset="100%" style="stop-color:%234682B4;stop-opacity:1" /></linearGradient><linearGradient id="boat1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:%23ffffff;stop-opacity:1" /><stop offset="50%" style="stop-color:%23f0f0f0;stop-opacity:1" /><stop offset="100%" style="stop-color:%23ffffff;stop-opacity:1" /></linearGradient></defs><rect width="300" height="200" fill="url(%23water1)"/><ellipse cx="150" cy="140" rx="90" ry="35" fill="url(%23boat1)"/><ellipse cx="150" cy="135" rx="75" ry="25" fill="%23FF6B47"/><rect x="130" y="115" width="40" height="30" fill="%23ffffff"/><rect x="135" y="120" width="30" height="20" fill="%23333333" opacity="0.8"/><ellipse cx="150" cy="165" rx="25" ry="12" fill="%23ffffff" opacity="0.6"/><polygon points="200,135 220,130 225,140 210,145" fill="%23ffffff"/><text x="150" y="185" font-family="Arial" font-size="12" fill="%23ffffff" text-anchor="middle" font-weight="bold">ZIKIRA</text></svg>');
+    background-size: cover;
+    background-position: center;
+  }
 
-	.zaviero-bg {
-		background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><defs><linearGradient id="water2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2300CED1;stop-opacity:1" /><stop offset="50%" style="stop-color:%2320B2AA;stop-opacity:1" /><stop offset="100%" style="stop-color:%234682B4;stop-opacity:1" /></linearGradient><linearGradient id="boat2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:%23ffffff;stop-opacity:1" /><stop offset="50%" style="stop-color:%23f0f0f0;stop-opacity:1" /><stop offset="100%" style="stop-color:%23ffffff;stop-opacity:1" /></linearGradient></defs><rect width="300" height="200" fill="url(%23water2)"/><ellipse cx="150" cy="140" rx="90" ry="35" fill="url(%23boat2)"/><ellipse cx="150" cy="135" rx="75" ry="25" fill="%234169E1"/><rect x="130" y="115" width="40" height="30" fill="%23ffffff"/><rect x="135" y="120" width="30" height="20" fill="%23333333" opacity="0.8"/><ellipse cx="150" cy="165" rx="25" ry="12" fill="%23ffffff" opacity="0.6"/><polygon points="200,135 220,130 225,140 210,145" fill="%23ffffff"/><text x="150" y="185" font-family="Arial" font-size="12" fill="%23ffffff" text-anchor="middle" font-weight="bold">ZAVIERO</text></svg>');
-		background-size: cover;
-		background-position: center;
-	}
+  .zaviero-bg {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><defs><linearGradient id="water2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2300CED1;stop-opacity:1" /><stop offset="50%" style="stop-color:%2320B2AA;stop-opacity:1" /><stop offset="100%" style="stop-color:%234682B4;stop-opacity:1" /></linearGradient><linearGradient id="boat2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:%23ffffff;stop-opacity:1" /><stop offset="50%" style="stop-color:%23f0f0f0;stop-opacity:1" /><stop offset="100%" style="stop-color:%23ffffff;stop-opacity:1" /></linearGradient></defs><rect width="300" height="200" fill="url(%23water2)"/><ellipse cx="150" cy="140" rx="90" ry="35" fill="url(%23boat2)"/><ellipse cx="150" cy="135" rx="75" ry="25" fill="%234169E1"/><rect x="130" y="115" width="40" height="30" fill="%23ffffff"/><rect x="135" y="120" width="30" height="20" fill="%23333333" opacity="0.8"/><ellipse cx="150" cy="165" rx="25" ry="12" fill="%23ffffff" opacity="0.6"/><polygon points="200,135 220,130 225,140 210,145" fill="%23ffffff"/><text x="150" y="185" font-family="Arial" font-size="12" fill="%23ffffff" text-anchor="middle" font-weight="bold">ZAVIERO</text></svg>');
+    background-size: cover;
+    background-position: center;
+  }
 
-	.rentcar-bg {
-		background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><defs><linearGradient id="landscape" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2387CEEB;stop-opacity:1" /><stop offset="40%" style="stop-color:%2332CD32;stop-opacity:1" /><stop offset="100%" style="stop-color:%23228B22;stop-opacity:1" /></linearGradient><linearGradient id="car" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:%23f8f8f8;stop-opacity:1" /><stop offset="50%" style="stop-color:%23ffffff;stop-opacity:1" /><stop offset="100%" style="stop-color:%23f0f0f0;stop-opacity:1" /></linearGradient></defs><rect width="300" height="200" fill="url(%23landscape)"/><rect x="60" y="125" width="180" height="55" fill="url(%23car)" rx="15"/><rect x="70" y="135" width="160" height="35" fill="%23E8E8E8" rx="8"/><circle cx="100" cy="175" r="15" fill="%23333333"/><circle cx="240" cy="175" r="15" fill="%23333333"/><circle cx="100" cy="175" r="8" fill="%23666666"/><circle cx="240" cy="175" r="8" fill="%23666666"/><rect x="80" y="145" width="140" height="20" fill="%234A90E2" opacity="0.7"/><rect x="75" y="140" width="20" height="8" fill="%23ffffff"/><rect x="205" y="140" width="20" height="8" fill="%23ffffff"/></svg>');
-		background-size: cover;
-		background-position: center;
-	}
+  .rentcar-bg {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><defs><linearGradient id="landscape" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2387CEEB;stop-opacity:1" /><stop offset="40%" style="stop-color:%2332CD32;stop-opacity:1" /><stop offset="100%" style="stop-color:%23228B22;stop-opacity:1" /></linearGradient><linearGradient id="car" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:%23f8f8f8;stop-opacity:1" /><stop offset="50%" style="stop-color:%23ffffff;stop-opacity:1" /><stop offset="100%" style="stop-color:%23f0f0f0;stop-opacity:1" /></linearGradient></defs><rect width="300" height="200" fill="url(%23landscape)"/><rect x="60" y="125" width="180" height="55" fill="url(%23car)" rx="15"/><rect x="70" y="135" width="160" height="35" fill="%23E8E8E8" rx="8"/><circle cx="100" cy="175" r="15" fill="%23333333"/><circle cx="240" cy="175" r="15" fill="%23333333"/><circle cx="100" cy="175" r="8" fill="%23666666"/><circle cx="240" cy="175" r="8" fill="%23666666"/><rect x="80" y="145" width="140" height="20" fill="%234A90E2" opacity="0.7"/><rect x="75" y="140" width="20" height="8" fill="%23ffffff"/><rect x="205" y="140" width="20" height="8" fill="%23ffffff"/></svg>');
+    background-size: cover;
+    background-position: center;
+  }
 
-	.package-info {
-		padding: 20px;
-		text-align: center;
-	}
+  .package-info {
+    padding: 20px;
+    text-align: center;
+  }
 
-	.package-name {
-		font-size: 1.2rem;
-		font-weight: 700;
-		margin-bottom: 10px;
-		color: #2C3E50;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-	}
+  .package-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
 
-	.package-price {
-		font-size: 1.1rem;
-		color: #7F8C8D;
-		font-weight: 600;
-	}
+  .package-price {
+    font-size: 1.1rem;
+    color: #7f8c8d;
+    font-weight: 600;
+  }
 
-	.view-details-btn {
-		display: block;
-		margin: 0 auto;
-		background: transparent;
-		color: #F28482;
-		border: 1.5px solid #F28482;
-		padding: 10px 24px;
-		font-size: 14px;
-		font-weight: 400;
-		border-radius: 20px;
-		cursor: pointer;
-		transition: all 0.3s ease;
-		text-transform: lowercase;
-		letter-spacing: 0.3px;
-		text-decoration: none;
-		font-family: 'Noto Sans', sans-serif;
-	}
+  .view-details-btn {
+    display: block;
+    margin: 0 auto;
+    background: transparent;
+    color: #f28482;
+    border: 1.5px solid #f28482;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: lowercase;
+    letter-spacing: 0.3px;
+    text-decoration: none;
+    font-family: "Noto Sans", sans-serif;
+  }
 
-	.view-details-btn:hover {
-		background-color: #F28482;
-		color: white;
-		transform: translateY(-2px);
-		box-shadow: 0 5px 15px rgba(242, 132, 130, 0.3);
-	}
+  .view-details-btn:hover {
+    background-color: #f28482;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(242, 132, 130, 0.3);
+  }
 
-	/* Responsive Design */
-	@media (max-width: 768px) {
-		.hero-title {
-			font-size: 2.8rem;
-			letter-spacing: 3px;
-		}
-		
-		.hero-subtitle {
-			font-size: 1.2rem;
-			letter-spacing: 1px;
-		}
-		
-		.hero-description {
-			font-size: 1rem;
-		}
-		
-		.nav {
-			display: none;
-		}
-		
-		.packages-grid {
-			grid-template-columns: 1fr;
-			gap: 20px;
-		}
-		
-		.social-icons {
-			position: static;
-			flex-direction: row;
-			justify-content: center;
-			transform: none;
-			margin: 20px 0;
-			left: auto;
-			top: auto;
-		}
-		
-		.speedboat-hero {
-			width: 150px;
-			height: 75px;
-			bottom: 60px;
-		}
-		
-		.section-title {
-			font-size: 2rem;
-		}
-		
-		.logo-text {
-			font-size: 18px;
-		}
-	}
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.8rem;
+      letter-spacing: 3px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+    }
+
+    .hero-description {
+      font-size: 1rem;
+    }
+
+    .nav {
+      display: none;
+    }
+
+    .packages-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .social-icons {
+      position: static;
+      flex-direction: row;
+      justify-content: center;
+      transform: none;
+      margin: 20px 0;
+      left: auto;
+      top: auto;
+    }
+
+    .speedboat-hero {
+      width: 150px;
+      height: 75px;
+      bottom: 60px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .logo-text {
+      font-size: 18px;
+    }
+  }
 </style>

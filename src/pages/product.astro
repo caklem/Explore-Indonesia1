@@ -1,2078 +1,3884 @@
 ---
 // Halaman Product - Indonesia Travel
-import Footer from '../components/Footer.astro';
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product - Indonesia Travel - Explore with Zikra Speedboat</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product | Explore Indonesia</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/LOGO.png?v=2" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/LOGO.png?v=2" />
+    <link rel="shortcut icon" type="image/png" href="/LOGO.png?v=2" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/LOGO.png?v=2" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Noto+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Noto Sans", sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #F4F4F4;
+        opacity: 0;
+        transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      body.fade-out {
+        opacity: 0;
+        transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Header Styles - CONSISTENT UNTUK SEMUA HALAMAN */
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        padding: 20px 0;
+        background: transparent;
+        transition: all 0.3s ease;
+      }
+
+      .header.scrolled {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .header.scrolled .logo {
+        color: #333;
+        text-shadow: none;
+      }
+
+      .header.scrolled .nav-menu a {
+        color: #333;
+        text-shadow: none;
+      }
+
+      .header.scrolled .nav-menu a.active {
+        color: #ff6b6b;
+      }
+
+      .header.scrolled .nav-menu a:hover {
+        color: #ff6b6b;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 40px;
+      }
+
+      .logo {
+        color: #333;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
+      }
+
+      .logo-highlight {
+        color: #ff6b6b;
+      }
+
+      .nav-menu {
+        display: flex;
+        list-style: none;
+        gap: 40px;
+        font-family: "Noto Sans", sans-serif;
+      }
+      .nav-menu a {
+        color: #333;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 14px;
+        text-transform: none;
+        letter-spacing: 0.5px;
+        position: relative;
+        transition: all 0.3s ease;
+        /* text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); */
+      }
+
+      .nav-menu a:hover {
+        color: #ff6b6b;
+      }
+
+      .nav-menu a.active {
+        color: #ff6b6b;
+      }
+
+      /* Mobile Hamburger Menu */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 4px;
+      }
+
+      .hamburger span {
+        width: 25px;
+        height: 3px;
+        background-color: #333; /* Changed from #fff to #333 for dark color */
+        transition: all 0.3s ease;
+        border-radius: 2px;
+      }
+
+      /* Hamburger color when scrolled - keep the same dark color */
+      .header.scrolled .hamburger span {
+        background-color: #333;
+      }
+
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+
+      /* Mobile Sidebar */
+      .mobile-sidebar {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 300px;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        z-index: 9999;
+        transition: right 0.3s ease;
+        padding: 80px 30px 30px;
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .mobile-sidebar.active {
+        right: 0;
+      }
+
+      .mobile-sidebar .nav-menu {
+        flex-direction: column;
+        gap: 20px;
+        display: flex;
+      }
+
+      .mobile-sidebar .nav-menu a {
+        color: #2c3e50;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        text-shadow: none;
+        text-transform: none;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .mobile-sidebar .nav-menu a:hover {
+        color: #ff6b6b;
+        transform: translateX(5px);
+      }
+
+      /* Overlay */
+      .mobile-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .mobile-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      /* Main Content */
+      .main-content {
+        margin-top: 80px;
+        min-height: calc(100vh - 80px);
+        margin-bottom: 60px;
+      }
+
+      /* Product Section */
+      .product-section {
+        padding: 80px 0;
+        background-color: #F4F4F4;
+      }
+
+      .product-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+
+      .product-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 60px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+      }
+
+      .products-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        margin-bottom: 60px;
+      }
+
+      .product-card {
+        background: #F4F4F4;
+        border-radius: 25px;
+        overflow: visible;
+        box-shadow: none;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        position: relative;
+        border: none;
+        padding: 0;
+        margin-bottom: 30px;
+      }
+
+      .product-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      .product-header {
+        padding: 30px 30px 15px 30px;
+        background: transparent;
+        border-radius: 25px 25px 0 0;
+      }
+
+      .product-name {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .product-body {
+        display: flex;
+        align-items: center; /* Center alignment untuk semua konten */
+        justify-content: center; /* Center horizontal */
+        padding: 0 30px 30px 30px;
+        gap: 30px;
+        flex-wrap: wrap; /* Allow wrapping untuk responsive */
+      }
+
+      .product-image-container {
+        width: 250px;
+        height: 250px;
+        border-radius: 20px;
+        flex-shrink: 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .product-image-container::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 5;
+        pointer-events: none;
+        background: rgba(163, 177, 132, 0.9);
+        border: 2px solid white;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .product-image-container::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 22px;
+        height: 22px;
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 6;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='white' d='M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z'/%3E%3C/svg%3E");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      .product-image-container:hover::after,
+      .product-image-container:hover::before {
+        opacity: 1;
+      }
+
+      .product-image-container:hover {
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .product-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .product-image:hover {
+        transform: scale(1.05);
+        filter: brightness(1.1);
+      }
+
+      .image-slider {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .slider-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .slider-nav:hover {
+        background: white;
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .slider-nav.prev {
+        left: 10px;
+      }
+
+      .slider-nav.next {
+        right: 10px;
+      }
+
+      .slider-nav svg {
+        width: 14px;
+        height: 14px;
+        fill: #333;
+      }
+
+      .slider-dots {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 6px;
+        z-index: 10;
+      }
+
+      .slider-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .slider-dot.active {
+        background: white;
+        transform: scale(1.3);
+      }
+
+      .product-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: center; /* Center semua konten */
+        justify-content: center; /* Center vertical */
+        text-align: center; /* Center text alignment */
+        padding: 0 20px; /* Padding untuk breathing space */
+      }
+
+      .trip-options {
+        display: flex; /* Gunakan flex untuk full width */
+        gap: 0;
+        margin-bottom: 20px;
+        align-self: center; /* Center container sendiri */
+        width: 100%; /* Full width untuk sesuai dengan elemen lain */
+        max-width: 300px; /* Maksimal width yang reasonable */
+        justify-content: center; /* Center buttons dalam container */
+        border-radius: 25px;
+        border-radius: 25px;
+        overflow: visible; /* Penting: biarkan checkmark keluar */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        height: 45px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        position: relative;
+        z-index: 50; /* Z-index tinggi untuk checkmark */
+      }
+
+      .trip-option {
+        flex: 1; /* Setiap button ambil ruang yang sama */
+        padding: 0 20px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        border: none;
+        cursor: pointer;
+        /* Hapus transition untuk menghilangkan delay */
+        font-family: "Noto Sans", sans-serif;
+        white-space: nowrap;
+        position: relative;
+        /* Hapus overflow: hidden agar checkmark tidak terpotong */
+      }
+
+      .trip-option:hover {
+        opacity: 0.9;
+      }
+
+      /* Trip Options dengan specificity tinggi */
+      .product-card .trip-options .trip-option:first-child {
+        background: #ede6da !important;
+        color: #6b5b47 !important;
+        border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+        position: relative;
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+      }
+
+      .product-card .trip-options .trip-option:last-child {
+        background: #a3b184 !important;
+        color: white !important;
+        position: relative;
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+      }
+
+      /* Active state dengan checkmark eksternal dan efek text menarik */
+      .product-card .trip-options .trip-option.active:first-child {
+        background: #d4c4a8 !important;
+        color: #5a4a37 !important;
+        font-weight: 700 !important;
+        position: relative;
+        animation: buttonGlow 0.4s ease-out;
+        transform: scale(1.02);
+        box-shadow:
+          0 4px 15px rgba(212, 196, 168, 0.4),
+          inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        text-shadow: 0 1px 2px rgba(90, 74, 55, 0.2);
+      }
+
+      .product-card .trip-options .trip-option.active:last-child {
+        background: #8fa06c !important;
+        color: white !important;
+        font-weight: 700 !important;
+        position: relative;
+        animation: buttonGlow 0.4s ease-out;
+        transform: scale(1.02);
+        box-shadow:
+          0 4px 15px rgba(143, 160, 108, 0.4),
+          inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Animasi glow effect untuk button active */
+      @keyframes buttonGlow {
+        0% {
+          transform: scale(1);
+          box-shadow:
+            0 2px 8px rgba(0, 0, 0, 0.1),
+            inset 0 1px 2px rgba(255, 255, 255, 0.1);
+        }
+        50% {
+          transform: scale(1.05);
+          box-shadow:
+            0 6px 20px rgba(242, 132, 130, 0.3),
+            inset 0 3px 6px rgba(255, 255, 255, 0.4);
+        }
+        100% {
+          transform: scale(1.02);
+          box-shadow:
+            0 4px 15px rgba(242, 132, 130, 0.2),
+            inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        }
+      }
+
+      /* Hover effect untuk button active dengan animasi text */
+      .product-card .trip-options .trip-option.active:first-child:hover {
+        background: #c9bb9f !important;
+        color: #4a3e2b !important;
+        transform: scale(1.05);
+        transition: all 0.2s ease;
+        text-shadow: 0 2px 4px rgba(90, 74, 55, 0.4);
+        letter-spacing: 0.5px;
+      }
+
+      .product-card .trip-options .trip-option.active:last-child:hover {
+        background: #7d8f5a !important;
+        color: white !important;
+        transform: scale(1.05);
+        transition: all 0.2s ease;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        letter-spacing: 0.5px;
+      }
+
+      /* Efek shimmer di dalam button - rata untuk semua button */
+      .product-card .trip-options .trip-option.active::before {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        right: 2px;
+        bottom: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        background-size: 200% 100%;
+        animation: shimmerInternal 2s infinite;
+        pointer-events: none;
+        z-index: 1;
+        border-radius: 23px; /* Sedikit lebih kecil dari button untuk mengikuti bentuk */
+      }
+
+      /* Shimmer khusus untuk button pertama (Half Day Trip) */
+      .product-card .trip-options .trip-option.active:first-child::before {
+        border-radius: 23px 0 0 23px; /* Rounded di sisi kiri saja */
+      }
+
+      /* Shimmer khusus untuk button terakhir (Full Day Trip) */
+      .product-card .trip-options .trip-option.active:last-child::before {
+        border-radius: 0 23px 23px 0; /* Rounded di sisi kanan saja */
+      }
+
+      /* Animasi shimmer internal - bergerak dari kiri ke kanan di dalam button */
+      @keyframes shimmerInternal {
+        0% {
+          background-position: -200% 0;
+        }
+        100% {
+          background-position: 200% 0;
+        }
+      }
+
+      /* Animasi shimmer effect */
+      @keyframes shimmer {
+        0% {
+          left: -100%;
+        }
+        50% {
+          left: 100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+
+      /* Pastikan text tetap di atas shimmer effect */
+      .product-card .trip-options .trip-option.active {
+        position: relative;
+        z-index: 2;
+      }
+
+      /* Checkmark tetap di z-index tinggi dan tidak terpengaruh shimmer */
+
+      /* Checkmark responsif dan mudah dibaca - tidak menutupi teks */
+      .product-card .trip-options .trip-option.active::after {
+        content: "✓" !important;
+        display: flex !important;
+        position: absolute !important;
+        z-index: 99999 !important;
+        pointer-events: none !important;
+      }
+
+      /* Checkmark Half Day Trip - positioned outside button untuk readability */
+      .product-card .trip-options .trip-option.active:first-child::after {
+        content: "✓";
+        position: absolute;
+        top: -12px; /* Di atas button, tidak overlap dengan teks */
+        left: -12px; /* Di luar button, tidak overlap dengan teks */
+        width: 32px; /* Sedikit lebih besar untuk visibility */
+        height: 32px;
+        background: linear-gradient(135deg, #f28482, #ff6b6b);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px; /* Font lebih besar untuk readability */
+        font-weight: bold;
+        border: 3px solid white;
+        box-shadow:
+          0 6px 20px rgba(242, 132, 130, 0.6),
+          0 3px 12px rgba(0, 0, 0, 0.3);
+        z-index: 99999;
+        pointer-events: none;
+        animation:
+          checkmarkPulse 0.6s ease-out,
+          checkmarkBounce 0.4s ease-out;
+        transform: scale(1);
+      }
+
+      /* Checkmark Full Day Trip - positioned outside button untuk readability */
+      .product-card .trip-options .trip-option.active:last-child::after {
+        content: "✓";
+        position: absolute;
+        top: -12px; /* Di atas button, tidak overlap dengan teks */
+        right: -12px; /* Di luar button, tidak overlap dengan teks */
+        width: 32px; /* Sedikit lebih besar untuk visibility */
+        height: 32px;
+        background: linear-gradient(135deg, #f28482, #ff6b6b);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px; /* Font lebih besar untuk readability */
+        font-weight: bold;
+        border: 3px solid white;
+        box-shadow:
+          0 6px 20px rgba(242, 132, 130, 0.6),
+          0 3px 12px rgba(0, 0, 0, 0.3);
+        z-index: 99999;
+        pointer-events: none;
+        animation:
+          checkmarkPulse 0.6s ease-out,
+          checkmarkBounce 0.4s ease-out;
+        transform: scale(1);
+      }
+
+      /* Animasi pulse effect untuk checkmark */
+      @keyframes checkmarkPulse {
+        0% {
+          box-shadow:
+            0 5px 18px rgba(242, 132, 130, 0.5),
+            0 2px 10px rgba(0, 0, 0, 0.25);
+        }
+        50% {
+          box-shadow:
+            0 7px 25px rgba(242, 132, 130, 0.7),
+            0 0 0 8px rgba(242, 132, 130, 0.2);
+        }
+        100% {
+          box-shadow:
+            0 5px 18px rgba(242, 132, 130, 0.5),
+            0 2px 10px rgba(0, 0, 0, 0.25);
+        }
+      }
+
+      /* Animasi bounce effect untuk checkmark */
+      @keyframes checkmarkBounce {
+        0% {
+          transform: scale(0.3);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* Animasi glow effect untuk checkmark - subtle dan menarik */
+      @keyframes checkmarkGlow {
+        0% {
+          box-shadow:
+            0 3px 12px rgba(242, 132, 130, 0.5),
+            0 1px 4px rgba(0, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        50% {
+          box-shadow:
+            0 4px 16px rgba(242, 132, 130, 0.7),
+            0 2px 6px rgba(0, 0, 0, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4),
+            0 0 0 3px rgba(242, 132, 130, 0.2);
+        }
+        100% {
+          box-shadow:
+            0 3px 12px rgba(242, 132, 130, 0.5),
+            0 1px 4px rgba(0, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+      }
+
+      /* Hover effect untuk checkmark */
+      .product-card .trip-options .trip-option.active:first-child:hover::after,
+      .product-card .trip-options .trip-option.active:last-child:hover::after {
+        transform: scale(1.15);
+        box-shadow:
+          0 6px 20px rgba(242, 132, 130, 0.8),
+          0 2px 8px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5),
+          0 0 0 4px rgba(242, 132, 130, 0.3);
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Enhanced mobile hover effect - konsisten dengan desktop */
+      @media (max-width: 768px) {
+        .product-card
+          .trip-options
+          .trip-option.active:first-child:hover::after,
+        .product-card
+          .trip-options
+          .trip-option.active:last-child:hover::after {
+          transform: scale(1.1);
+          box-shadow:
+            0 6px 20px rgba(242, 132, 130, 0.6),
+            0 0 0 4px rgba(242, 132, 130, 0.3);
+          transition: all 0.2s ease;
         }
 
-        body {
-            font-family: 'Noto Sans', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-            opacity: 0;
-            transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+        /* Responsive checkmark untuk tablet */
+        .product-card .trip-options .trip-option.active:first-child::after {
+          top: -10px !important;
+          left: -10px !important;
+          width: 28px !important;
+          height: 28px !important;
+          font-size: 14px !important;
         }
 
-        body.fade-out {
-            opacity: 0;
-            transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1);
+        .product-card .trip-options .trip-option.active:last-child::after {
+          top: -10px !important;
+          right: -10px !important;
+          width: 28px !important;
+          height: 28px !important;
+          font-size: 14px !important;
         }
 
-        /* Header Styles - CONSISTENT UNTUK SEMUA HALAMAN */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 20px 0;
-            /* background: rgba(255, 255, 255, 0.95); */
-            backdrop-filter: blur(20px);
-            /* box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1); */
-            /* border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
-            /* background: transparent; */
-            transition: all 0.3s ease;
-        }
-
-        /* .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 20px 0;
-            background: transparent;
-            transition: all 0.3s ease;
-        } */
-
-         .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 40px;
-        }
-
-        .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            text-decoration: none;
-            color: #333;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .logo-highlight {
-            color: #ff6b6b;
-        }
-
-       .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 40px;
-            font-family: 'Noto Sans', sans-serif;
-        }
-        .nav-menu a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .nav-menu a:hover {
-            color: #ff6b6b;
-        }
-
-         .nav-menu a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 50%;
-            background-color: #ff6b6b;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .nav-menu a:hover:after {
-            width: 100%;
-        }
-
-        .nav-menu a.active {
-            color: #ff6b6b;
-        }
-
-        .nav-menu a.active:after {
-            width: 100%;
-        }
-
-        /* Mobile Hamburger Menu */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 4px;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background-color: #333;
-            transition: all 0.3s ease;
-            border-radius: 2px;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-
-        /* Mobile Sidebar */
-        .mobile-sidebar {
-            position: fixed;
-            top: 0;
-            right: -300px;
-            width: 300px;
-            height: 100vh;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            z-index: 9999;
-            transition: right 0.3s ease;
-            padding: 80px 30px 30px;
-            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .mobile-sidebar.active {
-            right: 0;
-        }
-
-        .mobile-sidebar .nav-menu {
-            flex-direction: column;
-            gap: 20px;
-            display: flex;
-        }
-
-        .mobile-sidebar .nav-menu a {
-            color: #2c3e50;
-            font-size: 16px;
-            font-weight: 500;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-            text-shadow: none;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-sidebar .nav-menu a:hover {
-            color: #ff6b6b;
-            transform: translateX(5px);
-        }
-
-        /* Overlay */
-        .mobile-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Main Content */
-        .main-content {
-            margin-top: 80px;
-            min-height: calc(100vh - 80px);
-            margin-bottom: 60px;
-        }
-
-        /* Product Section */
-        .product-section {
-            padding: 80px 0;
-            background-color: #f8f9fa;
-        }
-
-        .product-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        .product-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 60px;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .products-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-
-        .product-card {
-            background: #f8f8f8;
-            border-radius: 25px;
-            overflow: visible;
-            box-shadow: none;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            border: none;
-            padding: 0;
-            margin-bottom: 30px;
-        }
-
-        .product-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-        }
-
-        .product-header {
-            padding: 30px 30px 15px 30px;
-            background: transparent;
-            border-radius: 25px 25px 0 0;
-        }
-
-        .product-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .product-body {
-            display: flex;
-            align-items: flex-start;
-            padding: 0 30px 30px 30px;
-            gap: 30px;
-        }
-
-        .product-image-container {
-            width: 250px;
-            height: 250px;
-            border-radius: 20px;
-            flex-shrink: 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .product-image-container::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 5;
-            pointer-events: none;
-            background: rgba(163, 177, 132, 0.9);
-            border: 2px solid white;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .product-image-container::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 22px;
-            height: 22px;
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 6;
-            pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='white' d='M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z'/%3E%3C/svg%3E");
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-
-        .product-image-container:hover::after,
-        .product-image-container:hover::before {
-            opacity: 1;
-        }
-
-        .product-image-container:hover {
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .product-image:hover {
-            transform: scale(1.05);
-            filter: brightness(1.1);
-        }
-
-        .image-slider {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-
-        .slider-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 30px;
-            height: 30px;
-            background: rgba(255, 255, 255, 0.9);
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .slider-nav:hover {
-            background: white;
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .slider-nav.prev {
-            left: 10px;
-        }
-
-        .slider-nav.next {
-            right: 10px;
-        }
-
-        .slider-nav svg {
-            width: 14px;
-            height: 14px;
-            fill: #333;
-        }
-
-        .slider-dots {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 6px;
-            z-index: 10;
-        }
-
-        .slider-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .slider-dot.active {
-            background: white;
-            transform: scale(1.3);
-        }
-
-        .product-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
+        /* Trip options untuk tablet */
         .trip-options {
-            display: inline-flex;
-            gap: 0;
-            margin-bottom: 20px;
-            align-self: flex-start;
-            border-radius: 25px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            height: 45px;
-            min-width: fit-content;
-            border: 1px solid rgba(0, 0, 0, 0.1);
+          max-width: 320px !important;
+          margin: 0 auto 20px auto !important;
         }
 
         .trip-option {
-            padding: 0 28px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Noto Sans', sans-serif;
-            white-space: nowrap;
-            min-width: 110px;
-            position: relative;
+          font-size: 12px !important;
+          padding: 0 16px !important;
+        }
+      }
+
+      /* Responsive checkmark untuk mobile */
+      @media (max-width: 480px) {
+        /* Checkmark positioning yang lebih akurat */
+        .product-card .trip-options .trip-option.active:first-child::after {
+          top: -8px !important;
+          left: -8px !important;
+          width: 24px !important;
+          height: 24px !important;
+          font-size: 12px !important;
+          border: 2px solid white !important;
+          z-index: 10 !important;
         }
 
-        /* Trip Options dengan specificity tinggi */
-        .product-card .trip-options .trip-option:first-child {
-            background: #EDE6DA !important;
-            color: #6B5B47 !important;
-            border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+        .product-card .trip-options .trip-option.active:last-child::after {
+          top: -8px !important;
+          right: -8px !important;
+          width: 24px !important;
+          height: 24px !important;
+          font-size: 12px !important;
+          border: 2px solid white !important;
+          z-index: 10 !important;
         }
 
-        .product-card .trip-options .trip-option:last-child {
-            background: #A3B184 !important;
-            color: white !important;
+        /* Pastikan container tidak overflow */
+        .product-content {
+          overflow: visible !important;
+          position: relative !important;
+          z-index: 1 !important;
         }
 
-        /* Hapus active state yang menyamakan warna */
-        .product-card .trip-options .trip-option.active:first-child {
-            background: #EDE6DA !important;
-            color: #6B5B47 !important;
+        .product-card {
+          overflow: visible !important;
+          position: relative !important;
+        }
+      }
+
+      /* Styling langsung tanpa animasi untuk perubahan instant */
+      .product-price {
+        font-family: "Noto Sans", sans-serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 5px;
+        text-align: center; /* Center aligned */
+      }
+
+      .trip-time {
+        font-family: "Noto Sans", sans-serif;
+        font-size: 0.9rem;
+        color: #666;
+        margin-bottom: 15px;
+        font-weight: 400;
+        text-align: center; /* Center aligned */
+      }
+
+      .destinations {
+        list-style: none;
+        margin-bottom: 20px;
+        padding: 0;
+        display: flex; /* Flexbox untuk positioning container di tengah */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Container berada di tengah halaman */
+        text-align: left; /* Text dalam container rata kiri */
+      }
+
+      .destinations li {
+        font-family: "Noto Sans", sans-serif;
+        color: #555;
+        font-size: 0.95rem;
+        padding: 2px 0;
+        position: relative;
+        padding-left: 20px;
+        font-weight: 400;
+        transition: all 0.3s ease;
+        display: block; /* Block untuk left alignment dalam flex container */
+        text-align: left; /* Text left dalam center positioned container */
+      }
+
+      .destinations li:before {
+        content: "" !important;
+        position: absolute !important;
+        left: 0 !important;
+        top: 2px !important;
+        width: 14px !important;
+        height: 14px !important;
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0YyODQ4MiIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+") !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        z-index: 1 !important;
+      }
+
+      .view-details-btn {
+        background: transparent;
+        color: #f28482;
+        border: 2px solid #f28482;
+        padding: 10px 24px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 400;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        text-transform: lowercase;
+        letter-spacing: 0.3px;
+        align-self: center; /* Center mengikuti destinations */
+        font-family: "Noto Sans", sans-serif;
+        display: block; /* Block element untuk text centering */
+        text-align: center; /* Center text konsisten dengan destinations */
+        margin: 0 auto; /* Center horizontal positioning */
+        width: fit-content; /* Width sesuai content */
+      }
+
+      .view-details-btn:hover {
+        background-color: #f28482;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      /* Styling sederhana untuk rent car */
+      .product-card.rent-car .trip-option:first-child {
+        background: #e6f3ff;
+        color: #4a90e2;
+        border-right: 1px solid rgba(74, 144, 226, 0.2);
+      }
+
+      .product-card.rent-car .trip-option:last-child {
+        background: #4a90e2;
+        color: white;
+      }
+      .additional-info {
+        font-family: "Noto Sans", sans-serif;
+        font-size: 0.9rem;
+        color: #666;
+        line-height: 1.5;
+        margin-bottom: 20px;
+        font-weight: 400;
+      }
+
+      /* Image Modal Styles */
+      .image-modal {
+        display: none !important; /* Force hidden secara default */
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .image-modal.show {
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+
+      .modal-content {
+        position: relative;
+        width: 90%;
+        max-width: 800px;
+        margin: 0;
+        text-align: center;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: -15px;
+        right: 10px;
+        color: #f28482;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 10001;
+        transition: all 0.3s ease;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .modal-close:hover {
+        color: #ff6b6b;
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.1);
+      }
+
+      .modal-image-container {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .modal-image-container img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: 15px;
+      }
+
+      .modal-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(163, 177, 132, 0.9);
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .modal-nav:hover {
+        background: rgba(163, 177, 132, 1);
+        transform: translateY(-50%) scale(1.1);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .modal-nav.prev {
+        left: 30px;
+      }
+
+      .modal-nav.next {
+        right: 30px;
+      }
+
+      .modal-nav svg {
+        width: 24px;
+        height: 24px;
+        fill: white;
+      }
+
+      /* Image Info Display */
+      .modal-image-info {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        text-align: center;
+        z-index: 10;
+      }
+
+      .modal-image-title {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        font-family: "Cormorant Garamond", serif;
+      }
+
+      .modal-image-counter {
+        font-size: 12px;
+        opacity: 0.9;
+        font-family: "Noto Sans", sans-serif;
+      }
+
+      .modal-dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+      }
+
+      .modal-dot:hover {
+        background: rgba(255, 255, 255, 0.9);
+        transform: scale(1.1);
+        border-color: white;
+      }
+
+      .modal-dot.active {
+        background: #f28482;
+        transform: scale(1.3);
+        border-color: white;
+        box-shadow: 0 0 15px rgba(242, 132, 130, 0.8);
+      }
+
+      /* Detail Modal Styles */
+      .detail-modal {
+        display: none !important; /* Force hidden secara default */
+        position: fixed;
+        z-index: 10000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .detail-modal.show {
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+
+      .detail-modal-content {
+        position: relative;
+        width: 95%;
+        max-width: 550px;
+        max-height: 85vh;
+        background: white;
+        border-radius: 20px;
+        padding: 0;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        border: 2px solid #f28482;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .detail-modal-body {
+        overflow-y: auto;
+        flex: 1;
+        padding-bottom: 60px;
+      }
+
+      .detail-modal-body::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .detail-modal-body::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+      }
+
+      .detail-modal-body::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 3px;
+      }
+
+      .detail-modal-body::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+      }
+
+      .detail-modal-close {
+        position: absolute;
+        top: 20px;
+        right: 25px;
+        color: #666;
+        font-size: 26px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 10001;
+        transition: color 0.3s ease;
+      }
+
+      .detail-modal-close:hover {
+        color: #f28482;
+      }
+
+      .detail-header {
+        background: #ffff;
+        padding: 30px 30px 25px;
+        border-bottom: 1px solid #Ffff;
+        margin-top: 0;
+      }
+
+      .detail-model {
+        font-size: 20px;
+        font-weight: 700;
+        color: #333;
+        display: block;
+        margin-bottom: 10px;
+        line-height: 1.2;
+      }
+
+      .detail-specs {
+        font-size: 15px;
+        color: #666;
+        font-weight: 400;
+        line-height: 1.3;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .spec-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        color: #555;
+        white-space: nowrap;
+      }
+
+      .spec-separator {
+        color: #ccc;
+        font-weight: 300;
+        margin: 0 4px;
+      }
+
+      .detail-trip-options {
+        display: flex;
+        margin: 30px 30px;
+        border-radius: 15px;
+        overflow: hidden;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .detail-trip-option {
+        flex: 1;
+        padding: 22px 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .detail-trip-option.active {
+        background: #a3b184;
+        color: white;
+      }
+
+      .detail-trip-option:not(.active) {
+        background: #ede6da;
+        color: #6b5b47;
+      }
+
+      .detail-trip-title {
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        letter-spacing: 0.5px;
+      }
+
+      .detail-trip-price {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .detail-trip-time {
+        font-size: 13px;
+        opacity: 0.9;
+      }
+
+      .detail-destinations {
+        display: flex;
+        gap: 35px;
+        margin: 30px 30px;
+        padding: 0;
+      }
+
+      .detail-dest-column {
+        flex: 1;
+      }
+
+      .detail-dest-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 14px;
+        font-size: 15px;
+        color: #333;
+        line-height: 1.4;
+      }
+
+      .detail-dest-icon {
+        width: 14px;
+        height: 14px;
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0YyODQ4MiIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      .detail-section {
+        margin: 30px 30px;
+        border-top: 1px solid #eee;
+        padding-top: 30px;
+      }
+
+      .detail-section h3 {
+        font-size: 15px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 25px;
+        color: #333;
+        letter-spacing: 0.5px;
+      }
+
+      .detail-included-excluded {
+        display: flex;
+        gap: 35px;
+        background-color: #ede6da;
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      .detail-included,
+      .detail-excluded {
+        flex: 1;
+      }
+
+      .detail-include-item,
+      .detail-exclude-item {
+        font-size: 14px;
+        margin-bottom: 10px;
+        color: #333;
+        line-height: 1.5;
+      }
+
+      .detail-include-item {
+        color: #333;
+      }
+
+      .detail-exclude-item {
+        color: #333;
+      }
+
+      .detail-footer {
+        border-top: 1px solid #eee;
+        padding: 25px 30px;
+        text-align: center;
+        font-size: 14px;
+        color: #333;
+        background: #ffffff;
+      }
+
+      .detail-contact {
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .detail-phone {
+        font-weight: 700;
+        color: #333;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .whatsapp-icon {
+        width: 20px;
+        height: 20px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2325D366'%3E%3Cpath d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.488'/%3E%3C/svg%3E");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: inline-block;
+        flex-shrink: 0;
+      }
+
+      .detail-back-btn {
+        background: transparent;
+        border: 2px solid #f28482;
+        color: #f28482;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: lowercase;
+        letter-spacing: 0.5px;
+        margin: 20px auto;
+        display: block;
+        font-family: "Noto Sans", sans-serif;
+        outline: none;
+      }
+
+      .detail-back-btn:hover {
+        background: #f28482;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(242, 132, 130, 0.3);
+      }
+
+      .detail-back-btn:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(242, 132, 130, 0.2);
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .hamburger {
+          display: flex;
         }
 
-        .product-card .trip-options .trip-option.active:last-child {
-            background: #A3B184 !important;
-            color: white !important;
+        .nav-menu {
+          display: none;
         }
 
-        .product-price {
-            font-family: 'Noto Sans', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 5px;
+        /* Ensure header consistency on mobile */
+        .header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 1000;
+          padding: 15px 0;
+          transition: all 0.3s ease;
         }
 
-        .trip-time {
-            font-family: 'Noto Sans', sans-serif;
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 15px;
-            font-weight: 400;
+        .header.scrolled {
+          background: rgba(255, 255, 255, 0.95) !important;
+          backdrop-filter: blur(20px) !important;
+          box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1) !important;
         }
 
-        .destinations {
-            list-style: none;
-            margin-bottom: 20px;
-            padding: 0;
+        .nav-container {
+          max-width: 100%;
+          padding: 0 15px;
         }
 
-        .destinations li {
-            font-family: 'Noto Sans', sans-serif;
-            color: #555;
-            font-size: 0.95rem;
-            padding: 2px 0;
-            position: relative;
-            padding-left: 20px;
-            font-weight: 400;
+        .logo {
+          font-size: 1.5rem;
+          color: #333 !important; /* Force dark color on mobile */
         }
 
-        .destinations li:before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 2px;
-            width: 14px;
-            height: 14px;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0YyODQ4MiIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
+        /* Force dark colors for mobile navigation */
+        .logo {
+          color: #333 !important;
+          text-shadow: none !important;
         }
 
-        .view-details-btn {
-            background: transparent;
-            color: #ff8a80;
-            border: 1.5px solid #ff8a80;
-            padding: 10px 24px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 400;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            text-transform: lowercase;
-            letter-spacing: 0.3px;
-            align-self: flex-start;
-            font-family: 'Noto Sans', sans-serif;
+        .nav-menu a {
+          color: #333 !important;
+          text-shadow: none !important;
         }
 
-        .view-details-btn:hover {
-            background-color: #ff6b6b;
-            color: white;
-            transform: translateY(-2px);
+        .nav-menu a.active {
+          color: #ff6b6b !important;
         }
 
-        /* Special styling for Rent Car */
-        .product-card.rent-car .trip-option:first-child {
-            background: #e6f3ff;
-            color: #4a90e2;
-            border-right: 1px solid rgba(74, 144, 226, 0.2);
+        .header .logo {
+          color: #333 !important;
         }
 
-        .product-card.rent-car .trip-option:last-child {
-            background: #4a90e2;
-            color: white;
+        .header .nav-menu a {
+          color: #333 !important;
+        }
+
+        .header .nav-menu a.active {
+          color: #ff6b6b !important;
+        }
+
+        /* Force dark hamburger menu on mobile */
+        .hamburger span {
+          background-color: #333 !important;
+        }
+
+        .header .hamburger span {
+          background-color: #333 !important;
+        }
+
+        .header.scrolled .hamburger span {
+          background-color: #333 !important;
+        }
+
+        .mobile-sidebar {
+          position: fixed;
+          top: 0;
+          right: -300px;
+          height: 100vh;
+          width: 300px;
+          background: white;
+          box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+          transition: right 0.3s ease;
+          z-index: 1001;
+          padding: 80px 20px 20px;
+        }
+
+        .mobile-sidebar.active {
+          right: 0;
+        }
+
+        .mobile-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.3s ease;
+          z-index: 1000;
+        }
+
+        .mobile-overlay.active {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .mobile-menu {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+
+        .mobile-menu li {
+          margin-bottom: 15px;
+        }
+
+        .mobile-menu a {
+          display: block;
+          color: #333;
+          text-decoration: none;
+          font-size: 18px;
+          font-weight: 500;
+          padding: 10px 0;
+          border-bottom: 1px solid #eee;
+        }
+
+        .product-container {
+          padding: 0 20px;
+          max-width: 100%;
+          overflow: visible !important; /* Pastikan checkmark tidak terpotong */
+        }
+
+        .product-title {
+          font-size: 2.5rem;
+          margin-bottom: 40px;
+        }
+
+        .products-grid {
+          overflow: visible !important; /* Pastikan checkmark tidak terpotong */
+        }
+
+        .product-body {
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .product-image-container {
+          width: 100%;
+          height: 250px;
+          border-radius: 20px;
+        }
+
+        .product-content {
+          gap: 12px;
+        }
+
+        .product-header {
+          padding: 25px 25px 15px;
+        }
+
+        .product-body {
+          padding: 0 25px 25px;
+          flex-direction: column; /* Stack vertically pada mobile */
+          align-items: center; /* Center alignment */
+          text-align: center; /* Center text */
+        }
+
+        .product-content {
+          width: 100%; /* Full width pada mobile */
+          max-width: none; /* Remove max-width restriction */
+          align-items: center; /* Ensure center alignment */
+          padding: 0; /* Remove extra padding */
+        }
+
+        .product-image-container {
+          width: 100%;
+          height: 220px;
+          border-radius: 20px;
+        }
+
+        .slider-nav {
+          width: 35px;
+          height: 35px;
+        }
+
+        .slider-nav svg {
+          width: 16px;
+          height: 16px;
+        }
+
+        .slider-dots {
+          bottom: 12px;
+        }
+
+        .slider-dot {
+          width: 10px;
+          height: 10px;
+        }
+
+        .trip-options {
+          flex-wrap: nowrap;
+          justify-content: center;
+          width: 100%;
+          margin-bottom: 20px;
+          overflow: visible !important; /* Force visible untuk checkmark */
+          position: relative;
+          border-radius: 25px;
+          height: 45px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          z-index: 100; /* Z-index tinggi untuk mobile */
+          clip-path: none !important; /* Pastikan tidak ada clipping */
+          mask: none !important; /* Pastikan tidak ada masking */
+        }
+
+        .trip-option {
+          flex: 1;
+          min-width: 100px;
+          font-size: 11px;
+          padding: 0 15px;
+          height: 45px;
+          transition: all 0.3s ease;
+          cursor: pointer;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
         }
 
         .additional-info {
-            font-family: 'Noto Sans', sans-serif;
-            font-size: 0.9rem;
-            color: #666;
-            line-height: 1.5;
-            margin-bottom: 20px;
-            font-weight: 400;
+          font-size: 0.8rem;
         }
 
-        /* Image Modal Styles */
-        .image-modal {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+        /* Touch optimizations for mobile */
+        .trip-option:active {
+          transform: scale(0.98);
+          background-color: rgba(0, 0, 0, 0.05);
         }
 
-        .image-modal.show {
-            display: flex;
+        .trip-option.active:active {
+          transform: scale(0.98);
         }
 
+        /* Better spacing for small screens */
+        .product-card {
+          margin-bottom: 25px;
+          padding: 20px;
+          overflow: visible !important; /* Pastikan checkmark tidak terpotong */
+          position: relative; /* Untuk z-index context */
+        }
+
+        .product-name {
+          font-size: 1.8rem;
+          margin-bottom: 15px;
+        }
+
+        /* Mobile responsive untuk product info elements */
+        .product-price {
+          font-size: 1.2rem; /* Sedikit lebih kecil untuk mobile */
+          margin-bottom: 8px;
+          text-align: center;
+        }
+
+        .trip-time {
+          font-size: 0.85rem; /* Sedikit lebih kecil untuk mobile */
+          margin-bottom: 12px;
+          text-align: center;
+        }
+
+        .destinations {
+          margin-bottom: 18px;
+          text-align: center; /* Center untuk konsistensi */
+        }
+
+        .destinations li {
+          font-size: 0.9rem; /* Sedikit lebih kecil untuk mobile */
+          padding: 3px 0; /* Sedikit lebih besar spacing */
+          display: inline-block; /* Konsisten dengan desktop */
+          text-align: left; /* Text left tapi container center */
+          padding-left: 20px; /* Restore padding untuk icon */
+          margin-bottom: 4px;
+          position: relative; /* Required untuk icon positioning */
+        }
+
+        .destinations li:before {
+          content: "" !important;
+          position: absolute !important;
+          left: 0 !important;
+          top: 2px !important;
+          width: 12px !important;
+          height: 12px !important;
+          background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0YyODQ4MiIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+") !important;
+          background-size: contain !important;
+          background-repeat: no-repeat !important;
+          background-position: center !important;
+          display: block !important;
+          opacity: 1 !important;
+          visibility: visible !important;
+          z-index: 1 !important;
+        }
+
+        /* Mobile checkmark positioning - overlap DI ATAS button dan timbul keluar */
+        .product-card .trip-options .trip-option.active:first-child::after {
+          content: "✓";
+          position: absolute !important;
+          top: 4px !important; /* Agak ke atas agar timbul keluar */
+          left: 4px !important; /* Agak ke kiri agar timbul keluar */
+          width: 28px; /* Diperbesar agar timbul keluar button */
+          height: 28px; /* Diperbesar agar timbul keluar button */
+          font-size: 14px; /* Font lebih besar */
+          font-weight: bold;
+          color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 3px solid white; /* Border lebih tebal */
+          box-shadow:
+            0 5px 18px rgba(242, 132, 130, 0.5),
+            0 2px 10px rgba(0, 0, 0, 0.25);
+          background: linear-gradient(135deg, #f28482, #ff6b6b);
+          z-index: 99999 !important;
+          pointer-events: none;
+          animation:
+            checkmarkPulse 0.6s ease-out,
+            checkmarkBounce 0.4s ease-out;
+          transform: scale(1);
+        }
+
+        .product-card .trip-options .trip-option.active:last-child::after {
+          content: "✓";
+          position: absolute !important;
+          top: 4px !important; /* Agak ke atas agar timbul keluar */
+          right: 4px !important; /* Agak ke kanan agar timbul keluar */
+          width: 28px; /* Diperbesar agar timbul keluar button */
+          height: 28px; /* Diperbesar agar timbul keluar button */
+          font-size: 14px; /* Font lebih besar */
+          font-weight: bold;
+          color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 3px solid white; /* Border lebih tebal */
+          box-shadow:
+            0 5px 18px rgba(242, 132, 130, 0.5),
+            0 2px 10px rgba(0, 0, 0, 0.25);
+          background: linear-gradient(135deg, #f28482, #ff6b6b);
+          z-index: 99999 !important;
+          pointer-events: none;
+          animation:
+            checkmarkPulse 0.6s ease-out,
+            checkmarkBounce 0.4s ease-out;
+          transform: scale(1);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .nav-menu {
+          display: none;
+        }
+
+        .hamburger {
+          display: flex;
+        }
+
+        .product-container {
+          padding: 0 20px;
+        }
+
+        .product-title {
+          font-size: 2.5rem;
+        }
+
+        .products-grid {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+
+        .nav-container {
+          padding: 0 20px;
+        }
+
+        /* Trip Options optimization for tablets */
+        .trip-options {
+          margin-bottom: 20px;
+          height: 45px;
+          border-radius: 25px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+        }
+
+        .trip-option {
+          font-size: 12px;
+          padding: 0 18px;
+          height: 45px;
+          font-weight: 600;
+        }
+
+        /* Modal responsive for tablets */
         .modal-content {
-            position: relative;
-            width: 90%;
-            max-width: 800px;
-            margin: 0;
-            text-align: center;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: -15px;
-            right: 10px;
-            color: #F28482;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 10001;
-            transition: all 0.3s ease;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .modal-close:hover {
-            color: #ff6b6b;
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.1);
+          width: 95%;
+          margin: 8% auto;
         }
 
         .modal-image-container {
-            position: relative;
-            width: 100%;
-            height: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .modal-image-container img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: 15px;
+          height: 350px;
         }
 
         .modal-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(163, 177, 132, 0.9);
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .modal-nav:hover {
-            background: rgba(163, 177, 132, 1);
-            transform: translateY(-50%) scale(1.1);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+          width: 55px;
+          height: 55px;
         }
 
         .modal-nav.prev {
-            left: 30px;
+          left: 20px;
         }
 
         .modal-nav.next {
-            right: 30px;
+          right: 20px;
         }
 
         .modal-nav svg {
-            width: 24px;
-            height: 24px;
-            fill: white;
+          width: 22px;
+          height: 22px;
         }
 
-        /* Image Info Display */
+        /* Modal Image Info for tablets */
         .modal-image-info {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            text-align: center;
-            z-index: 10;
+          bottom: 15px;
+          padding: 10px 18px;
+          border-radius: 18px;
         }
 
         .modal-image-title {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            font-family: 'Cormorant Garamond', serif;
+          font-size: 16px;
+          margin-bottom: 4px;
         }
 
         .modal-image-counter {
-            font-size: 12px;
-            opacity: 0.9;
-            font-family: 'Noto Sans', sans-serif;
+          font-size: 12px;
+        }
+
+        .modal-close {
+          top: -15px;
+          right: 8px;
+          font-size: 36px;
+          width: 48px;
+          height: 48px;
+        }
+
+        .modal-dots {
+          gap: 10px;
+          margin-top: 18px;
+          padding: 10px 18px;
+        }
+      }
+
+      @media (max-width: 1024px) and (min-width: 769px) {
+        .products-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        /* Ensure header consistency on tablet */
+        .header {
+          padding: 12px 0;
+        }
+
+        .nav-container {
+          padding: 0 20px;
+        }
+
+        /* Force dark colors for tablet navigation */
+        .logo {
+          color: #333 !important;
+          text-shadow: none !important;
+        }
+
+        .nav-menu a {
+          color: #333 !important;
+          text-shadow: none !important;
+        }
+
+        .nav-menu a.active {
+          color: #ff6b6b !important;
+        }
+
+        /* Modal styles for medium screens */
+        .modal-content {
+          width: 90%;
+          margin: 6% auto;
+        }
+
+        .modal-image-container {
+          height: 400px;
+        }
+
+        .modal-nav {
+          width: 58px;
+          height: 58px;
+        }
+
+        .modal-nav.prev {
+          left: 25px;
+        }
+
+        .modal-nav.next {
+          right: 25px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .product-title {
+          font-size: 2rem;
+        }
+
+        /* Enhanced Mobile Modal Styles - Same as Gallery */
+        .modal {
+          align-items: center;
+          justify-content: center;
+          padding: 20px 10px;
+        }
+
+        .modal-content {
+          width: 95%;
+          margin: 0;
+          padding: 0;
+          position: relative;
+          top: 0;
+          transform: none;
+          max-height: 85vh;
+          overflow-y: auto;
+        }
+
+        .modal-image-container {
+          height: 60vh;
+          min-height: 300px;
+          border-radius: 15px;
+        }
+
+        .modal-close {
+          top: 15px;
+          right: 15px;
+          font-size: 24px;
+          width: 35px;
+          height: 35px;
+          background: rgba(0, 0, 0, 0.8);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+        }
+
+        .modal-nav {
+          width: 45px;
+          height: 45px;
+          font-size: 20px;
+        }
+
+        .modal-nav.prev {
+          left: 15px;
+        }
+
+        .modal-nav.next {
+          right: 15px;
+        }
+
+        .modal-nav svg {
+          width: 18px;
+          height: 18px;
+        }
+
+        .modal-image-info {
+          bottom: 15px;
+          padding: 8px 15px;
+          border-radius: 15px;
+          max-width: 90%;
+        }
+
+        .modal-image-title {
+          font-size: 14px;
+          margin-bottom: 3px;
+        }
+
+        .modal-image-counter {
+          font-size: 10px;
+        }
+
+        .modal-dots {
+          gap: 6px;
+          margin-top: 15px;
+          padding: 6px 12px;
+          border-radius: 20px;
         }
 
         .modal-dot {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.6);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.8);
+          width: 10px;
+          height: 10px;
         }
 
-        .modal-dot:hover {
-            background: rgba(255, 255, 255, 0.9);
-            transform: scale(1.1);
-            border-color: white;
+        /* Very small mobile responsive untuk product info elements */
+        .product-price {
+          font-size: 1.1rem; /* Lebih kecil untuk layar sangat kecil */
+          margin-bottom: 6px;
+          text-align: center;
         }
 
-        .modal-dot.active {
-            background: #F28482;
-            transform: scale(1.3);
-            border-color: white;
-            box-shadow: 0 0 15px rgba(242, 132, 130, 0.8);
+        .trip-time {
+          font-size: 0.8rem; /* Lebih kecil untuk layar sangat kecil */
+          margin-bottom: 10px;
+          text-align: center;
         }
 
-        /* Detail Modal Styles */
-        .detail-modal {
-            display: none;
-            position: fixed;
-            z-index: 10000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+        .destinations {
+          margin-bottom: 15px;
+          text-align: center; /* Center untuk konsistensi */
         }
 
-        .detail-modal.show {
-            display: flex;
+        .destinations li {
+          font-size: 0.85rem; /* Lebih kecil untuk layar sangat kecil */
+          padding: 2px 0;
+          display: inline-block; /* Konsisten dengan desktop */
+          text-align: left; /* Text left tapi container center */
+          padding-left: 18px; /* Restore padding untuk icon */
+          margin-bottom: 3px;
+          position: relative; /* Required untuk icon positioning */
         }
 
+        .destinations li:before {
+          content: "" !important;
+          position: absolute !important;
+          left: 0 !important;
+          top: 2px !important;
+          width: 10px !important;
+          height: 10px !important;
+          background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0YyODQ4MiIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+") !important;
+          background-size: contain !important;
+          background-repeat: no-repeat !important;
+          background-position: center !important;
+          display: block !important;
+          opacity: 1 !important;
+          visibility: visible !important;
+          z-index: 1 !important;
+        }
+
+        /* Very small mobile checkmark positioning - konsisten dengan desktop */
+        .product-card .trip-options .trip-option.active:first-child::after {
+          content: "✓" !important;
+          position: absolute !important;
+          top: -8px !important; /* Posisi sama dengan responsive CSS sebelumnya */
+          left: -8px !important; /* Posisi sama dengan responsive CSS sebelumnya */
+          width: 24px !important; /* Ukuran sama dengan responsive CSS sebelumnya */
+          height: 24px !important; /* Ukuran sama dengan responsive CSS sebelumnya */
+          font-size: 12px !important; /* Font size sama dengan responsive CSS sebelumnya */
+          font-weight: bold !important;
+          color: white !important;
+          border-radius: 50% !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          background: linear-gradient(135deg, #f28482, #ff6b6b) !important;
+          border: 2px solid white !important; /* Border sama dengan responsive CSS sebelumnya */
+          box-shadow:
+            0 6px 20px rgba(242, 132, 130, 0.6),
+            0 3px 12px rgba(0, 0, 0, 0.3) !important;
+          z-index: 99999 !important;
+          pointer-events: none !important;
+          animation:
+            checkmarkPulse 0.6s ease-out,
+            checkmarkBounce 0.4s ease-out !important;
+          transform: scale(1) !important;
+        }
+
+        .product-card .trip-options .trip-option.active:last-child::after {
+          content: "✓" !important;
+          position: absolute !important;
+          top: -8px !important; /* Posisi sama dengan responsive CSS sebelumnya */
+          right: -8px !important; /* Posisi sama dengan responsive CSS sebelumnya */
+          width: 24px !important; /* Ukuran sama dengan responsive CSS sebelumnya */
+          height: 24px !important; /* Ukuran sama dengan responsive CSS sebelumnya */
+          font-size: 12px !important; /* Font size sama dengan responsive CSS sebelumnya */
+          font-weight: bold !important;
+          color: white !important;
+          border-radius: 50% !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          background: linear-gradient(135deg, #f28482, #ff6b6b) !important;
+          border: 2px solid white !important; /* Border sama dengan responsive CSS sebelumnya */
+          box-shadow:
+            0 6px 20px rgba(242, 132, 130, 0.6),
+            0 3px 12px rgba(0, 0, 0, 0.3) !important;
+          z-index: 99999 !important;
+          pointer-events: none !important;
+          animation:
+            checkmarkPulse 0.6s ease-out,
+            checkmarkBounce 0.4s ease-out !important;
+          transform: scale(1) !important;
+        }
+
+        /* Force container untuk checkmark mobile */
+        .product-card .trip-options {
+          overflow: visible !important;
+          position: relative !important;
+          z-index: 100 !important;
+        }
+
+        .product-card {
+          overflow: visible !important;
+          position: relative !important;
+        }
+
+        /* View details button mobile responsive - tetap center */
+        .view-details-btn {
+          margin: 15px auto 0 auto !important; /* Center dengan margin top */
+          text-align: center !important;
+          display: block !important;
+          width: fit-content !important;
+        }
+
+        /* Detail Modal Mobile Styles untuk sangat kecil */
         .detail-modal-content {
-            position: relative;
-            width: 95%;
-            max-width: 550px;
-            max-height: 85vh;
-            background: white;
-            border-radius: 20px;
-            padding: 0;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .detail-modal-body {
-            overflow-y: auto;
-            flex: 1;
-            padding-bottom: 60px;
-        }
-
-        .detail-modal-body::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .detail-modal-body::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 3px;
-        }
-
-        .detail-modal-body::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 3px;
-        }
-
-        .detail-modal-body::-webkit-scrollbar-thumb:hover {
-            background: #a8a8a8;
+          width: 95%;
+          margin: 5% auto;
+          padding: 15px;
+          border-radius: 15px;
+          border: 2px solid #f28482;
         }
 
         .detail-modal-close {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            color: #666;
-            font-size: 26px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 10001;
-            transition: color 0.3s ease;
+          top: 10px;
+          right: 15px;
+          font-size: 28px;
+          width: 35px;
+          height: 35px;
         }
 
-        .detail-modal-close:hover {
-            color: #F28482;
+        .detail-modal h2 {
+          font-size: 1.5rem;
+          margin-bottom: 10px;
         }
 
-        .detail-header {
-            background: #f8f9fa;
-            padding: 30px 30px 25px;
-            border-bottom: 1px solid #eee;
-            margin-top: 0;
+        .detail-modal p {
+          font-size: 0.9rem;
+          line-height: 1.5;
         }
 
-        .detail-model {
-            font-size: 20px;
-            font-weight: 700;
-            color: #333;
-            display: block;
-            margin-bottom: 10px;
-            line-height: 1.2;
+        /* Mobile responsive untuk spec items */
+        .spec-item {
+          font-size: 12px !important;
+          gap: 4px !important;
         }
 
-        .detail-specs {
-            font-size: 15px;
-            color: #666;
-            font-weight: 400;
-            line-height: 1.3;
+        .spec-separator {
+          margin: 0 2px !important;
+          font-size: 12px !important;
         }
 
-        .detail-trip-options {
-            display: flex;
-            margin: 30px 30px;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid #ddd;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        /* View details button smartphone responsive - tetap center */
+        .view-details-btn {
+          margin: 12px auto 0 auto !important; /* Center dengan margin lebih kecil untuk mobile */
+          text-align: center !important;
+          display: block !important;
+          width: fit-content !important;
+          padding: 8px 20px !important; /* Padding lebih kecil untuk mobile */
+          font-size: 13px !important; /* Font lebih kecil untuk mobile */
         }
 
-        .detail-trip-option {
-            flex: 1;
-            padding: 22px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .detail-modal .btn {
+          padding: 10px 20px;
+          font-size: 0.9rem;
+          margin-top: 15px;
         }
 
-        .detail-trip-option.active {
-            background: #A3B184;
-            color: white;
+        /* Trip Options Mobile Responsiveness - KONSISTEN dengan desktop */
+        .trip-options {
+          display: flex !important;
+          width: 100% !important;
+          margin-bottom: 20px !important;
+          justify-content: center !important;
+          flex-wrap: nowrap !important;
+          gap: 0 !important;
+          border-radius: 25px !important;
+          height: 45px !important;
+          overflow: visible !important; /* Force visible untuk checkmark */
+          max-width: 300px !important; /* Batasi max width */
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15) !important;
+          border: 1px solid rgba(0, 0, 0, 0.1) !important;
+          position: relative !important; /* Untuk checkmark positioning */
+          z-index: 100 !important; /* Z-index tinggi */
+          align-self: center !important; /* Center container */
         }
 
-        .detail-trip-option:not(.active) {
-            background: #EDE6DA;
-            color: #6B5B47;
+        .trip-option {
+          flex: 1 !important;
+          min-width: 0 !important;
+          font-size: 11px !important;
+          padding: 0 12px !important; /* Padding lebih kecil untuk mobile */
+          height: 45px !important;
+          white-space: nowrap !important;
+          position: relative !important; /* Untuk checkmark positioning */
+          overflow: visible !important; /* Force visible untuk checkmark */
+          transition: all 0.3s ease !important;
+          cursor: pointer !important;
+          border: none !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          font-weight: 600 !important;
+          font-family: "Noto Sans", sans-serif !important;
+          text-transform: uppercase !important;
+          letter-spacing: 0.3px !important;
         }
 
-        .detail-trip-title {
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-            letter-spacing: 0.5px;
+        /* Default state mobile - sesuai dengan desktop */
+        .product-card .trip-options .trip-option:first-child {
+          background: #ede6da !important;
+          color: #6b5b47 !important;
+          border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+          border-top-left-radius: 25px !important;
+          border-bottom-left-radius: 25px !important;
+          border-top-right-radius: 0 !important;
+          border-bottom-right-radius: 0 !important;
         }
 
-        .detail-trip-price {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 8px;
+        .product-card .trip-options .trip-option:last-child {
+          background: #a3b184 !important;
+          color: white !important;
+          border-top-left-radius: 0 !important;
+          border-bottom-left-radius: 0 !important;
+          border-top-right-radius: 25px !important;
+          border-bottom-right-radius: 25px !important;
         }
 
-        .detail-trip-time {
-            font-size: 13px;
-            opacity: 0.9;
+        /* Active state mobile - konsisten dengan desktop */
+        /* .product-card .trip-options .trip-option.active:first-child {
+          background: #f28482 !important;
+          color: white !important;
+          font-weight: 700 !important;
+          transform: translateY(-2px) !important;
+          box-shadow: 0 8px 25px rgba(242, 132, 130, 0.4) !important;
+          z-index: 2 !important;
+        } */
+
+        /* .product-card .trip-options .trip-option.active:last-child {
+          background: #f28482 !important;
+          color: white !important;
+          font-weight: 700 !important;
+          transform: translateY(-2px) !important;
+          box-shadow: 0 8px 25px rgba(242, 132, 130, 0.4) !important;
+          z-index: 2 !important;
+        } */
+
+        /* Hover state mobile */
+        .trip-option:hover:not(.active) {
+          opacity: 0.8 !important;
+          transform: translateY(-1px) !important;
         }
 
-        .detail-destinations {
-            display: flex;
-            gap: 35px;
-            margin: 30px 30px;
-            padding: 0;
+        /* Complete mobile responsive improvements */
+        .main-content {
+          margin-top: 70px !important;
+          margin-bottom: 30px !important;
+          min-height: calc(100vh - 70px) !important;
         }
 
-        .detail-dest-column {
-            flex: 1;
+        .product-section {
+          padding: 40px 0 !important;
         }
 
-        .detail-dest-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 14px;
-            font-size: 15px;
-            color: #333;
-            line-height: 1.4;
+        .product-container {
+          padding: 0 15px !important;
+          max-width: 100% !important;
         }
 
-        .detail-dest-icon {
-            width: 14px;
-            height: 14px;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0YyODQ4MiIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            flex-shrink: 0;
-            margin-top: 2px;
+        .product-title {
+          font-size: 2rem !important;
+          margin-bottom: 30px !important;
+          text-align: center !important;
         }
 
-        .detail-section {
-            margin: 30px 30px;
-            border-top: 1px solid #eee;
-            padding-top: 30px;
+        .products-grid {
+          grid-template-columns: 1fr !important;
+          gap: 20px !important;
+          max-width: 100% !important;
         }
 
-        .detail-section h3 {
-            font-size: 15px;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-            color: #333;
-            letter-spacing: 0.5px;
+        .product-card {
+          padding: 15px !important;
+          border-radius: 15px !important;
+          margin-bottom: 20px !important;
         }
 
-        .detail-included-excluded {
-            display: flex;
-            gap: 35px;
+        .product-header {
+          padding: 15px 15px 10px !important;
+          text-align: center !important;
         }
 
-        .detail-included,
-        .detail-excluded {
-            flex: 1;
+        .product-name {
+          font-size: 1.4rem !important;
+          margin-bottom: 10px !important;
         }
 
-        .detail-include-item,
-        .detail-exclude-item {
-            font-size: 14px;
-            margin-bottom: 10px;
-            color: #333;
-            line-height: 1.5;
+        .product-body {
+          padding: 0 15px 15px !important;
         }
 
-        .detail-include-item {
-            color: #4CAF50;
+        .product-image-container {
+          height: 200px !important;
+          border-radius: 12px !important;
+          margin-bottom: 15px !important;
         }
 
-        .detail-exclude-item {
-            color: #f44336;
+        .image-slider {
+          border-radius: 12px !important;
         }
 
-        .detail-footer {
-            border-top: 1px solid #eee;
-            padding: 25px 30px;
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-            background: #fafafa;
+        .product-image {
+          border-radius: 12px !important;
         }
 
-        .detail-contact {
-            margin-top: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
+        .slider-nav {
+          width: 30px !important;
+          height: 30px !important;
+          font-size: 16px !important;
         }
 
-        .detail-phone {
-            font-weight: 700;
-            color: #333;
-            font-size: 15px;
+        .slider-nav.prev {
+          left: 8px !important;
         }
 
-        .detail-back-btn {
-            position: absolute;
-            bottom: -60px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: white;
-            color: #666;
-            border: 2px solid #ddd;
-            padding: 14px 28px;
-            border-radius: 25px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Noto Sans', sans-serif;
-            font-weight: 500;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        .slider-nav.next {
+          right: 8px !important;
         }
 
-        .detail-back-btn:hover {
-            background: #f8f9fa;
-            border-color: #bbb;
-            transform: translateX(-50%) translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        .slider-nav svg {
+          width: 14px !important;
+          height: 14px !important;
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-
-            .nav-menu {
-                display: none;
-            }
-
-            .mobile-sidebar {
-                position: fixed;
-                top: 0;
-                right: -300px;
-                height: 100vh;
-                width: 300px;
-                background: white;
-                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-                transition: right 0.3s ease;
-                z-index: 1001;
-                padding: 80px 20px 20px;
-            }
-
-            .mobile-sidebar.active {
-                right: 0;
-            }
-
-            .mobile-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.5);
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.3s ease;
-                z-index: 1000;
-            }
-
-            .mobile-overlay.active {
-                opacity: 1;
-                visibility: visible;
-            }
-
-            .mobile-menu {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-            }
-
-            .mobile-menu li {
-                margin-bottom: 15px;
-            }
-
-            .mobile-menu a {
-                display: block;
-                color: #333;
-                text-decoration: none;
-                font-size: 18px;
-                font-weight: 500;
-                padding: 10px 0;
-                border-bottom: 1px solid #eee;
-            }
-
-            .product-container {
-                padding: 0 20px;
-                max-width: 100%;
-            }
-
-            .product-title {
-                font-size: 2.5rem;
-                margin-bottom: 40px;
-            }
-
-            .product-body {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .product-image-container {
-                width: 100%;
-                height: 250px;
-                border-radius: 20px;
-            }
-
-            .product-content {
-                gap: 12px;
-            }
-
-            .product-header {
-                padding: 25px 25px 15px;
-            }
-
-            .product-body {
-                padding: 0 25px 25px;
-            }
-
-            .product-image-container {
-                width: 100%;
-                height: 220px;
-                border-radius: 20px;
-            }
-
-            .slider-nav {
-                width: 35px;
-                height: 35px;
-            }
-
-            .slider-nav svg {
-                width: 16px;
-                height: 16px;
-            }
-
-            .slider-dots {
-                bottom: 12px;
-            }
-
-            .slider-dot {
-                width: 10px;
-                height: 10px;
-            }
-
-            .trip-options {
-                flex-wrap: wrap;
-                justify-content: center;
-                width: 100%;
-                margin-bottom: 15px;
-            }
-
-            .trip-option {
-                flex: 1;
-                min-width: 120px;
-                font-size: 12px;
-                padding: 0 20px;
-                height: 40px;
-            }
-
-            .additional-info {
-                font-size: 0.8rem;
-            }
+        .slider-dots {
+          bottom: 8px !important;
+          gap: 6px !important;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .product-container {
-                padding: 0 20px;
-            }
-
-            .product-title {
-                font-size: 2.5rem;
-            }
-
-            .products-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .nav-container {
-                padding: 0 20px;
-            }
-
-            /* Modal responsive for tablets */
-            .modal-content {
-                width: 95%;
-                margin: 8% auto;
-            }
-
-            .modal-image-container {
-                height: 350px;
-            }
-
-            .modal-nav {
-                width: 55px;
-                height: 55px;
-            }
-
-            .modal-nav.prev {
-                left: 20px;
-            }
-
-            .modal-nav.next {
-                right: 20px;
-            }
-
-            .modal-nav svg {
-                width: 22px;
-                height: 22px;
-            }
-
-            /* Modal Image Info for tablets */
-            .modal-image-info {
-                bottom: 15px;
-                padding: 10px 18px;
-                border-radius: 18px;
-            }
-
-            .modal-image-title {
-                font-size: 16px;
-                margin-bottom: 4px;
-            }
-
-            .modal-image-counter {
-                font-size: 12px;
-            }
-
-            .modal-close {
-                top: -15px;
-                right: 8px;
-                font-size: 36px;
-                width: 48px;
-                height: 48px;
-            }
-
-            .modal-dots {
-                gap: 10px;
-                margin-top: 18px;
-                padding: 10px 18px;
-            }
+        .slider-dot {
+          width: 8px !important;
+          height: 8px !important;
         }
 
-        @media (max-width: 1024px) and (min-width: 769px) {
-            .products-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            /* Modal styles for medium screens */
-            .modal-content {
-                width: 90%;
-                margin: 6% auto;
-            }
-
-            .modal-image-container {
-                height: 400px;
-            }
-
-            .modal-nav {
-                width: 58px;
-                height: 58px;
-            }
-
-            .modal-nav.prev {
-                left: 25px;
-            }
-
-            .modal-nav.next {
-                right: 25px;
-            }
+        .product-content {
+          text-align: center !important;
         }
 
-        @media (max-width: 480px) {
-            .product-title {
-                font-size: 2rem;
-            }
+        .trip-options {
+          margin-bottom: 15px !important;
+          max-width: 280px !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+          height: 40px !important;
+        }
 
-            /* Enhanced Mobile Modal Styles - Same as Gallery */
-            .modal {
-                align-items: center;
-                justify-content: center;
-                padding: 20px 10px;
-            }
+        .trip-option {
+          font-size: 11px !important;
+          padding: 0 12px !important;
+          height: 40px !important;
+          white-space: nowrap !important;
+        }
 
-            .modal-content {
-                width: 95%;
-                margin: 0;
-                padding: 0;
-                position: relative;
-                top: 0;
-                transform: none;
-                max-height: 85vh;
-                overflow-y: auto;
-            }
+        .product-price {
+          font-size: 1.1rem !important;
+          margin-bottom: 8px !important;
+        }
 
-            .modal-image-container {
-                height: 60vh;
-                min-height: 300px;
-                border-radius: 15px;
-            }
+        .trip-time {
+          font-size: 0.8rem !important;
+          margin-bottom: 12px !important;
+        }
 
-            .modal-close {
-                top: 15px;
-                right: 15px;
-                font-size: 24px;
-                width: 35px;
-                height: 35px;
-                background: rgba(0, 0, 0, 0.8);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: white;
-            }
+        .destinations {
+          margin-bottom: 15px !important;
+          text-align: center !important;
+          max-width: 250px !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
 
-            .modal-nav {
-                width: 45px;
-                height: 45px;
-                font-size: 20px;
-            }
+        .destinations li {
+          font-size: 0.85rem !important;
+          padding: 2px 0 !important;
+          margin-bottom: 3px !important;
+          padding-left: 16px !important;
+        }
 
-            .modal-nav.prev {
-                left: 15px;
-            }
+        .destinations li:before {
+          width: 10px !important;
+          height: 10px !important;
+          top: 3px !important;
+        }
 
-            .modal-nav.next {
-                right: 15px;
-            }
+        .view-details-btn {
+          font-size: 0.9rem !important;
+          padding: 8px 20px !important;
+          margin: 10px auto 0 !important;
+          display: block !important;
+          width: fit-content !important;
+        }
 
-            .modal-nav svg {
-                width: 18px;
-                height: 18px;
-            }
+        .additional-info {
+          font-size: 0.75rem !important;
+          margin-top: 8px !important;
+        }
 
-            .modal-image-info {
-                bottom: 15px;
-                padding: 8px 15px;
-                border-radius: 15px;
-                max-width: 90%;
-            }
+        /* WhatsApp contact button mobile */
+        .contact-btn {
+          padding: 10px 16px !important;
+          font-size: 0.85rem !important;
+          border-radius: 20px !important;
+        }
 
-            .modal-image-title {
-                font-size: 14px;
-                margin-bottom: 3px;
-            }
+        .whatsapp-icon {
+          width: 16px !important;
+          height: 16px !important;
+        }
 
-            .modal-image-counter {
-                font-size: 10px;
-            }
+        /* Modal improvements for mobile */
+        .modal {
+          padding: 10px !important;
+        }
 
-            .modal-dots {
-                gap: 6px;
-                margin-top: 15px;
-                padding: 6px 12px;
-                border-radius: 20px;
-            }
+        .modal-content {
+          width: 95% !important;
+          margin: 10% auto !important;
+          border-radius: 15px !important;
+        }
 
-            .modal-dot {
-                width: 10px;
-                height: 10px;
-            }
+        .modal-image-container {
+          height: 50vh !important;
+          border-radius: 12px !important;
+        }
 
-            /* Detail Modal Mobile Styles */
-            .detail-modal-content {
-                width: 95%;
-                margin: 5% auto;
-                padding: 15px;
-                border-radius: 15px;
-            }
+        .modal-close {
+          top: 10px !important;
+          right: 10px !important;
+          width: 30px !important;
+          height: 30px !important;
+          font-size: 20px !important;
+        }
 
-            .detail-modal-close {
-                top: 10px;
-                right: 15px;
-                font-size: 28px;
-                width: 35px;
-                height: 35px;
-            }
+        .modal-nav {
+          width: 35px !important;
+          height: 35px !important;
+          font-size: 18px !important;
+        }
 
-            .detail-modal h2 {
-                font-size: 1.5rem;
-                margin-bottom: 10px;
-            }
+        .modal-nav.prev {
+          left: 10px !important;
+        }
 
-            .detail-modal p {
-                font-size: 0.9rem;
-                line-height: 1.5;
-            }
+        .modal-nav.next {
+          right: 10px !important;
+        }
 
-            .detail-modal .btn {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-                margin-top: 15px;
-            }
+        .modal-nav svg {
+          width: 16px !important;
+          height: 16px !important;
+        }
 
-            /* Trip Options Mobile Responsiveness */
-            .trip-options {
-                display: flex;
-                width: 100%;
-                margin-bottom: 15px;
-                justify-content: center;
-                flex-wrap: nowrap;
-                gap: 0;
-                border-radius: 20px;
-                height: 42px;
-                overflow: hidden;
-                max-width: 100%;
-            }
+        .modal-image-info {
+          bottom: 10px !important;
+          padding: 6px 12px !important;
+          border-radius: 12px !important;
+          max-width: 85% !important;
+        }
 
-            .trip-option {
-                flex: 1;
-                min-width: 0;
-                font-size: 10px;
-                padding: 0 12px;
-                height: 42px;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                overflow: hidden;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-weight: 600;
-                letter-spacing: 0.5px;
-            }
+        .modal-image-title {
+          font-size: 12px !important;
+          margin-bottom: 2px !important;
+        }
 
-            .product-card .trip-options .trip-option:first-child {
-                border-top-left-radius: 20px;
-                border-bottom-left-radius: 20px;
-            }
+        .modal-image-counter {
+          font-size: 9px !important;
+        }
 
-            .product-card .trip-options .trip-option:last-child {
-                border-top-right-radius: 20px;
-                border-bottom-right-radius: 20px;
-            }
+        .modal-dots {
+          gap: 5px !important;
+          margin-top: 12px !important;
+          padding: 5px 10px !important;
+          border-radius: 15px !important;
+        }
+
+        .modal-dot {
+          width: 8px !important;
+          height: 8px !important;
+        }
+
+        /* Detail modal mobile responsive */
+        .detail-modal {
+          padding: 10px !important;
+        }
+
+        .detail-modal-content {
+          width: 95% !important;
+          margin: 5% auto !important;
+          padding: 15px !important;
+          border-radius: 15px !important;
+          border: 2px solid #f28482 !important;
+        }
+
+        .detail-modal-close {
+          top: 10px !important;
+          right: 15px !important;
+          font-size: 24px !important;
+          width: 30px !important;
+          height: 30px !important;
+        }
+
+        .detail-modal h3 {
+          font-size: 1.3rem !important;
+          margin-bottom: 15px !important;
+        }
+
+        .detail-modal .included,
+        .detail-modal .excluded {
+          margin-bottom: 15px !important;
+        }
+
+        .detail-modal .included h4,
+        .detail-modal .excluded h4 {
+          font-size: 1rem !important;
+          margin-bottom: 8px !important;
+        }
+
+        .detail-modal .included ul,
+        .detail-modal .excluded ul {
+          font-size: 0.85rem !important;
+          line-height: 1.4 !important;
+        }
+
+        .detail-modal .included li,
+        .detail-modal .excluded li {
+          margin-bottom: 4px !important;
+          padding-left: 16px !important;
+        }
+
+        .detail-modal .contact-info {
+          margin-top: 15px !important;
+          text-align: center !important;
+        }
+
+        .detail-modal .contact-info h4 {
+          font-size: 1rem !important;
+          margin-bottom: 8px !important;
+        }
+
+        .detail-modal .contact-btn {
+          padding: 10px 16px !important;
+          font-size: 0.85rem !important;
+          border-radius: 20px !important;
+          margin: 0 auto !important;
+          display: block !important;
+          width: fit-content !important;
+        }
+      }
+
+      /* Tablet responsive (768px - 1024px) */
+      @media (max-width: 1024px) and (min-width: 769px) {
+        .main-content {
+          margin-top: 75px;
+        }
+
+        .product-section {
+          padding: 60px 0;
+        }
+
+        .product-container {
+          padding: 0 30px;
+          max-width: 700px;
+        }
+
+        .product-title {
+          font-size: 2.8rem;
+          margin-bottom: 40px;
+        }
+
+        .products-grid {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+
+        .product-card {
+          padding: 25px;
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .product-header {
+          padding: 20px 20px 15px;
+        }
+
+        .product-name {
+          font-size: 1.8rem;
+        }
+
+        .product-image-container {
+          height: 300px;
+          margin-bottom: 20px;
+        }
+
+        .slider-nav {
+          width: 45px;
+          height: 45px;
+          font-size: 20px;
+        }
+
+        .slider-nav svg {
+          width: 18px;
+          height: 18px;
+        }
+
+        .trip-options {
+          max-width: 350px;
+          margin: 0 auto 20px auto;
+          height: 50px;
+        }
+
+        .trip-option {
+          font-size: 13px;
+          padding: 0 18px;
+          height: 50px;
+        }
+
+        .product-price {
+          font-size: 1.3rem;
+        }
+
+        .trip-time {
+          font-size: 0.95rem;
+        }
+
+        .destinations li {
+          font-size: 0.95rem;
+          padding-left: 22px;
+        }
+
+        .destinations li:before {
+          width: 14px;
+          height: 14px;
+          top: 2px;
+        }
+
+        .view-details-btn {
+          font-size: 1rem;
+          padding: 12px 24px;
+        }
+
+        /* Modal responsive for tablet */
+        .modal-content {
+          width: 85%;
+          margin: 5% auto;
+        }
+
+        .modal-image-container {
+          height: 400px;
+        }
+
+        .modal-nav {
+          width: 50px;
+          height: 50px;
+          font-size: 22px;
+        }
+
+        .modal-nav svg {
+          width: 20px;
+          height: 20px;
+        }
+
+        .detail-modal-content {
+          width: 80%;
+          padding: 25px;
+        }
+      }
+
+      /* Large tablet responsive (481px - 768px) */
+      @media (max-width: 768px) and (min-width: 481px) {
+        .main-content {
+          margin-top: 70px;
+        }
+
+        .product-section {
+          padding: 50px 0;
+        }
+
+        .product-container {
+          padding: 0 25px;
+        }
+
+        .product-title {
+          font-size: 2.4rem;
+          margin-bottom: 35px;
+        }
+
+        .product-card {
+          padding: 20px;
+        }
+
+        .product-body {
+          flex-direction: column; /* Stack vertically pada tablet */
+          align-items: center; /* Center alignment */
+          text-align: center; /* Center text */
+          gap: 20px;
+          padding: 0 15px 20px;
+        }
+
+        .product-content {
+          width: 100%; /* Full width pada tablet */
+          align-items: center; /* Center alignment */
+          text-align: center; /* Center text */
+        }
+
+        .product-header {
+          padding: 18px 18px 12px;
+        }
+
+        .product-name {
+          font-size: 1.6rem;
+        }
+
+        .product-image-container {
+          height: 240px;
+          margin-bottom: 18px;
+        }
+
+        .slider-nav {
+          width: 38px;
+          height: 38px;
+          font-size: 18px;
+        }
+
+        .slider-nav svg {
+          width: 16px;
+          height: 16px;
+        }
+
+        .trip-options {
+          max-width: 320px;
+          margin: 0 auto 18px auto;
+          height: 45px;
+        }
+
+        .trip-option {
+          font-size: 12px;
+          padding: 0 16px;
+          height: 45px;
+        }
+
+        .product-price {
+          font-size: 1.2rem;
+        }
+
+        .trip-time {
+          font-size: 0.9rem;
+        }
+
+        .destinations li {
+          font-size: 0.9rem;
+          padding-left: 20px;
+        }
+
+        .destinations li:before {
+          width: 12px;
+          height: 12px;
+        }
+
+        .view-details-btn {
+          font-size: 0.95rem;
+          padding: 10px 22px;
+        }
+
+        /* Modal responsive for large mobile */
+        .modal-content {
+          width: 90%;
+          margin: 8% auto;
+        }
+
+        .modal-image-container {
+          height: 280px;
+        }
+
+        .modal-nav {
+          width: 40px;
+          height: 40px;
+          font-size: 20px;
+        }
+
+        .detail-modal-content {
+          width: 90%;
+          padding: 20px;
         }
     </style>
-</head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav-container">
-            <a href="/" class="logo">
-                INDO<span class="logo-highlight">NESIA</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/product" class="active">Product</a></li>
-                <li><a href="/Gallery">Gallery</a></li>
-                <li><a href="/Contact">Contact</a></li>
-            </ul>
-            <!-- Hamburger Menu -->
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Mobile Sidebar -->
-    <div class="mobile-sidebar">
-        <ul class="nav-menu">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/product" class="active">Product</a></li>
-            <li><a href="/Gallery">Gallery</a></li>
-            <li><a href="/Contact">Contact</a></li>
-        </ul>
-    </div>
-
-    <!-- Mobile Overlay -->
-    <div class="mobile-overlay"></div>
+  </head>
+  <body>
+    <Header currentPage="product" />
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Product Section -->
-        <section class="product-section">
-            <div class="product-container">
-                <h1 class="product-title">OUR PRODUCTS</h1>
-                
-                <div class="products-grid">
-                    <!-- Zikita Speedboat -->
-                    <div class="product-card">
-                        <div class="product-header">
-                            <h3 class="product-name">Zikita Speedboat</h3>
-                        </div>
-                        <div class="product-body">
-                            <div class="product-image-container">
-<div class="image-slider">
-                                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=250&h=250&fit=crop&crop=center" alt="Zikita Speedboat Interior" class="product-image" data-slide="0">
-                                    <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?w=250&h=250&fit=crop&crop=center" alt="Zikita Speedboat Exterior" class="product-image" data-slide="1" style="display: none;">
-                                    <img src="https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=250&h=250&fit=crop&crop=center" alt="Zikita Speedboat Deck" class="product-image" data-slide="2" style="display: none;">
-                                    
-                                    <button class="slider-nav prev" data-slider="zikita">
-                                        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-                                    </button>
-                                    <button class="slider-nav next" data-slider="zikita">
-                                        <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-                                    </button>
-                                    
-                                    <div class="slider-dots">
-                                        <div class="slider-dot active" data-slider="zikita" data-slide="0"></div>
-                                        <div class="slider-dot" data-slider="zikita" data-slide="1"></div>
-                                        <div class="slider-dot" data-slider="zikita" data-slide="2"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="trip-options">
-                                    <button class="trip-option active">Half Day Trip</button>
-                                    <button class="trip-option">Full Day Trip</button>
-                                </div>
-                                <div class="product-price">Rp 9.000.000,-</div>
-                                <div class="trip-time">06,30 AM - 05,00 PM</div>
-                                <ul class="destinations">
-                                    <li>Padar Island</li>
-                                    <li>Komodo Island</li>
-                                    <li>Pink Beach</li>
-                                    <li>etc</li>
-                                </ul>
-                                <a href="#" class="view-details-btn">view details</a>
-                            </div>
-                        </div>
-                    </div>
+      <!-- Product Section -->
+      <section class="product-section">
+        <div class="product-container">
+          <h1 class="product-title">OUR PRODUCTS</h1>
 
-                    <!-- Zaviero Speedboat -->
-                    <div class="product-card">
-                        <div class="product-header">
-                            <h3 class="product-name">Zaviero Speedboat</h3>
-                        </div>
-                        <div class="product-body">
-                            <div class="product-image-container">
-                                <div class="image-slider">
-                                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=250&h=250&fit=crop&crop=center" alt="Zaviero Speedboat Interior" class="product-image" data-slide="0">
-                                    <img src="https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=250&h=250&fit=crop&crop=center" alt="Zaviero Speedboat Exterior" class="product-image" data-slide="1" style="display: none;">
-                                    <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=250&h=250&fit=crop&crop=center" alt="Zaviero Speedboat Deck" class="product-image" data-slide="2" style="display: none;">
-                                    
-                                    <button class="slider-nav prev" data-slider="zaviero">
-                                        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-                                    </button>
-                                    <button class="slider-nav next" data-slider="zaviero">
-                                        <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-                                    </button>
-                                    
-                                    <div class="slider-dots">
-                                        <div class="slider-dot active" data-slider="zaviero" data-slide="0"></div>
-                                        <div class="slider-dot" data-slider="zaviero" data-slide="1"></div>
-                                        <div class="slider-dot" data-slider="zaviero" data-slide="2"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="trip-options">
-                                    <button class="trip-option active">Half Day Trip</button>
-                                    <button class="trip-option">Full Day Trip</button>
-                                </div>
-                                <div class="product-price">Rp 4.500.000,-</div>
-                                <div class="trip-time">06:30 AM - 02:00 PM</div>
-                                <ul class="destinations">
-                                    <li>Loh Buaya (Komodo Island)</li>
-                                    <li>Kelor Island</li>
-                                    <li>Manjeriti Island</li>
-                                </ul>
-                                <a href="#" class="view-details-btn">view details</a>
-                            </div>
-                        </div>
-                    </div>
+          <div class="products-grid">
+            <!-- Zikita Speedboat -->
+            <div class="product-card">
+              <div class="product-header">
+                <h3 class="product-name">Zikita Speedboat</h3>
+              </div>
+              <div class="product-body">
+                <div class="product-image-container">
+                  <div class="image-slider">
+                    <img
+                      src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=250&h=250&fit=crop&crop=center"
+                      alt="Zikita Speedboat Interior"
+                      class="product-image"
+                      data-slide="0"
+                    />
+                    <img
+                      src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?w=250&h=250&fit=crop&crop=center"
+                      alt="Zikita Speedboat Exterior"
+                      class="product-image"
+                      data-slide="1"
+                      style="display: none;"
+                    />
+                    <img
+                      src="https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=250&h=250&fit=crop&crop=center"
+                      alt="Zikita Speedboat Deck"
+                      class="product-image"
+                      data-slide="2"
+                      style="display: none;"
+                    />
 
-                    <!-- Rent Car -->
-                    <div class="product-card rent-car">
-                        <div class="product-header">
-                            <h3 class="product-name">Rent Car</h3>
-                        </div>
-                        <div class="product-body">
-                            <div class="product-image-container">
-                                <div class="image-slider">
-                                    <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=250&h=250&fit=crop&crop=center" alt="Toyota Hiace" class="product-image" data-slide="0">
-                                    <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=250&h=250&fit=crop&crop=center" alt="Innova Reborn" class="product-image" data-slide="1" style="display: none;">
-                                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=250&h=250&fit=crop&crop=center" alt="Car Interior" class="product-image" data-slide="2" style="display: none;">
-                                    
-                                    <button class="slider-nav prev" data-slider="rentcar">
-                                        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-                                    </button>
-                                    <button class="slider-nav next" data-slider="rentcar">
-                                        <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-                                    </button>
-                                    
-                                    <div class="slider-dots">
-                                        <div class="slider-dot active" data-slider="rentcar" data-slide="0"></div>
-                                        <div class="slider-dot" data-slider="rentcar" data-slide="1"></div>
-                                        <div class="slider-dot" data-slider="rentcar" data-slide="2"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="trip-options">
-                                    <button class="trip-option active">Toyota Hiace</button>
-                                    <button class="trip-option">Innova Reborn</button>
-                                </div>
-                                <div class="product-price">Rp 1.250.000,-</div>
-                                <div class="additional-info">
-                                    We also provide premium car (Toyota Alphard & Mercedes-Benz) 
-                                    for personal or corporate. Product & details, please contact our 
-                                    admin at +62 811-3787-741
-                                </div>
-                                <a href="#" class="view-details-btn">view details</a>
-                            </div>
-                        </div>
+                    <button class="slider-nav prev" data-slider="zikita">
+                      <svg viewBox="0 0 24 24"
+                        ><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+                        ></path></svg
+                      >
+                    </button>
+                    <button class="slider-nav next" data-slider="zikita">
+                      <svg viewBox="0 0 24 24"
+                        ><path
+                          d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+                        ></path></svg
+                      >
+                    </button>
+
+                    <div class="slider-dots">
+                      <div
+                        class="slider-dot active"
+                        data-slider="zikita"
+                        data-slide="0"
+                      >
+                      </div>
+                      <div
+                        class="slider-dot"
+                        data-slider="zikita"
+                        data-slide="1"
+                      >
+                      </div>
+                      <div
+                        class="slider-dot"
+                        data-slider="zikita"
+                        data-slide="2"
+                      >
+                      </div>
                     </div>
+                  </div>
                 </div>
+                <div class="product-content">
+                  <div class="trip-options">
+                    <button class="trip-option active">Half Day Trip</button>
+                    <button class="trip-option">Full Day Trip</button>
+                  </div>
+                  <div class="product-price">Rp 5.500.000,-</div>
+                  <div class="trip-time">06:30 AM - 02:00 PM</div>
+                  <ul class="destinations">
+                    <li>Padar Island</li>
+                    <li>Komodo Island</li>
+                    <li>Pink Beach</li>
+                    <li>etc</li>
+                  </ul>
+                  <a href="#" class="view-details-btn">view details</a>
+                </div>
+              </div>
             </div>
-        </section>
+
+            <!-- Zaviero Speedboat -->
+            <div class="product-card">
+              <div class="product-header">
+                <h3 class="product-name">Zaviero Speedboat</h3>
+              </div>
+              <div class="product-body">
+                <div class="product-image-container">
+                  <div class="image-slider">
+                    <img
+                      src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=250&h=250&fit=crop&crop=center"
+                      alt="Zaviero Speedboat Interior"
+                      class="product-image"
+                      data-slide="0"
+                    />
+                    <img
+                      src="https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=250&h=250&fit=crop&crop=center"
+                      alt="Zaviero Speedboat Exterior"
+                      class="product-image"
+                      data-slide="1"
+                      style="display: none;"
+                    />
+                    <img
+                      src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=250&h=250&fit=crop&crop=center"
+                      alt="Zaviero Speedboat Deck"
+                      class="product-image"
+                      data-slide="2"
+                      style="display: none;"
+                    />
+
+                    <button class="slider-nav prev" data-slider="zaviero">
+                      <svg viewBox="0 0 24 24"
+                        ><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+                        ></path></svg
+                      >
+                    </button>
+                    <button class="slider-nav next" data-slider="zaviero">
+                      <svg viewBox="0 0 24 24"
+                        ><path
+                          d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+                        ></path></svg
+                      >
+                    </button>
+
+                    <div class="slider-dots">
+                      <div
+                        class="slider-dot active"
+                        data-slider="zaviero"
+                        data-slide="0"
+                      >
+                      </div>
+                      <div
+                        class="slider-dot"
+                        data-slider="zaviero"
+                        data-slide="1"
+                      >
+                      </div>
+                      <div
+                        class="slider-dot"
+                        data-slider="zaviero"
+                        data-slide="2"
+                      >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-content">
+                  <div class="trip-options">
+                    <button class="trip-option active">Half Day Trip</button>
+                    <button class="trip-option">Full Day Trip</button>
+                  </div>
+                  <div class="product-price">Rp 2.500.000,-</div>
+                  <div class="trip-time">06:30 AM - 01:00 PM</div>
+                  <ul class="destinations">
+                    <li>Loh Buaya (Komodo Island)</li>
+                    <li>Kelor Island</li>
+                    <li>Manjeriti Island</li>
+                  </ul>
+                  <a href="#" class="view-details-btn">view details</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rent Car -->
+            <div class="product-card rent-car">
+              <div class="product-header">
+                <h3 class="product-name">Rent Car</h3>
+              </div>
+              <div class="product-body">
+                <div class="product-image-container">
+                  <div class="image-slider">
+                    <img
+                      src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=250&h=250&fit=crop&crop=center"
+                      alt="Toyota Hiace"
+                      class="product-image"
+                      data-slide="0"
+                    />
+                    <img
+                      src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=250&h=250&fit=crop&crop=center"
+                      alt="Innova Reborn"
+                      class="product-image"
+                      data-slide="1"
+                      style="display: none;"
+                    />
+                    <img
+                      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=250&h=250&fit=crop&crop=center"
+                      alt="Car Interior"
+                      class="product-image"
+                      data-slide="2"
+                      style="display: none;"
+                    />
+
+                    <button class="slider-nav prev" data-slider="rentcar">
+                      <svg viewBox="0 0 24 24"
+                        ><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+                        ></path></svg
+                      >
+                    </button>
+                    <button class="slider-nav next" data-slider="rentcar">
+                      <svg viewBox="0 0 24 24"
+                        ><path
+                          d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+                        ></path></svg
+                      >
+                    </button>
+
+                    <div class="slider-dots">
+                      <div
+                        class="slider-dot active"
+                        data-slider="rentcar"
+                        data-slide="0"
+                      >
+                      </div>
+                      <div
+                        class="slider-dot"
+                        data-slider="rentcar"
+                        data-slide="1"
+                      >
+                      </div>
+                      <div
+                        class="slider-dot"
+                        data-slider="rentcar"
+                        data-slide="2"
+                      >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-content">
+                  <div class="trip-options">
+                    <button class="trip-option active">Toyota Hiace</button>
+                    <button class="trip-option">Innova Reborn</button>
+                  </div>
+                  <div class="product-price">Rp 1.250.000,-</div>
+                  <div class="additional-info">
+                    We also provide premium car (Toyota Alphard & Mercedes-Benz)
+                    for personal or corporate. Product & details, please contact
+                    our admin at +62 811-3787-741
+                  </div>
+                  <a href="#" class="view-details-btn">view details</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- Image Modal -->
     <div class="image-modal" id="imageModal">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <div class="modal-image-container">
-                <img id="modalImage" src="" alt="">
-                <button class="modal-nav prev" id="modalPrev">
-                    <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-                </button>
-                <button class="modal-nav next" id="modalNext">
-                    <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-                </button>
-                <div class="modal-image-info" id="modalImageInfo">
-                    <div class="modal-image-title" id="modalImageTitle"></div>
-                    <div class="modal-image-counter" id="modalImageCounter"></div>
-                </div>
-            </div>
+      <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <div class="modal-image-container">
+          <img id="modalImage" src="" alt="" />
+          <button class="modal-nav prev" id="modalPrev">
+            <svg viewBox="0 0 24 24"
+              ><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+              ></path></svg
+            >
+          </button>
+          <button class="modal-nav next" id="modalNext">
+            <svg viewBox="0 0 24 24"
+              ><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+              ></path></svg
+            >
+          </button>
+          <div class="modal-image-info" id="modalImageInfo">
+            <div class="modal-image-title" id="modalImageTitle"></div>
+            <div class="modal-image-counter" id="modalImageCounter"></div>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Detail Modal -->
     <div class="detail-modal" id="detailModal">
-        <div class="detail-modal-content">
-            <span class="detail-modal-close">&times;</span>
-            
-            <div class="detail-modal-body">
-                <!-- Header -->
-                <div class="detail-header">
-                    <div class="detail-title">
-                        <span class="detail-model">Yamaha 250 HP x2</span>
-                        <span class="detail-specs">GPS | Compass | Map | VHF Radio | 11.7 x 3 x 1.10</span>
-                    </div>
-                </div>
+      <div class="detail-modal-content">
+        <span class="detail-modal-close">&times;</span>
 
-                <!-- Trip Options -->
-                <div class="detail-trip-options">
-                    <div class="detail-trip-option active">
-                        <div class="detail-trip-title">HALF DAY TRIP</div>
-                        <div class="detail-trip-price">Rp. 5.500.000,-</div>
-                        <div class="detail-trip-time">06.30 AM - 02.00 PM</div>
-                    </div>
-                    <div class="detail-trip-option">
-                        <div class="detail-trip-title">FULL DAY TRIP</div>
-                        <div class="detail-trip-price">Rp 9.000.000,-</div>
-                        <div class="detail-trip-time">06.30 AM - 05.00 PM</div>
-                    </div>
-                </div>
-
-                <!-- Destinations -->
-                <div class="detail-destinations">
-                    <div class="detail-dest-column">
-                        <div class="detail-dest-item">
-                            <span class="detail-dest-icon"></span>
-                            <span>Rinca Island</span>
-                        </div>
-                        <div class="detail-dest-item">
-                            <span class="detail-dest-icon"></span>
-                            <span>Kelor Island</span>
-                        </div>
-                        <div class="detail-dest-item">
-                            <span class="detail-dest-icon"></span>
-                            <span>Menjerite Island</span>
-                        </div>
-                    </div>
-                    <div class="detail-dest-column">
-                        <div class="detail-dest-item">
-                            <span class="detail-dest-icon"></span>
-                            <span>Padar Island</span>
-                        </div>
-                        <div class="detail-dest-item">
-                            <span class="detail-dest-icon"></span>
-                            <span>Komodo Island</span>
-                        </div>
-                        <div class="detail-dest-item">
-                            <span class="detail-dest-icon"></span>
-                            <span>Pink Beach</span>
-                        </div>
-                        <div class="detail-dest-item">
-                            <span class="detail-dest-icon"></span>
-                            <span>Taka Makassar, Manta Point</span>
-                        </div>
-                        <div class="detail-dest-item">
-                            <span class="detail-dest-icon"></span>
-                            <span>Kanawa Island</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- What's Included -->
-                <div class="detail-section">
-                    <h3>WHAT'S INCLUDED & EXCLUDED</h3>
-                    <div class="detail-included-excluded">
-                        <div class="detail-included">
-                            <div class="detail-include-item">✓ Boat Crew</div>
-                            <div class="detail-include-item">✓ Snack & Soft Drinks</div>
-                            <div class="detail-include-item">✓ Snorkeling Gear</div>
-                            <div class="detail-include-item">✓ Mineral Water Free Flow</div>
-                            <div class="detail-include-item">✓ Lunch Box</div>
-                            <div class="detail-include-item">✓ Documentation</div>
-                            <div class="detail-include-item">✓ Life Jacket</div>
-                            <div class="detail-include-item">✓ Life Ring Boy</div>
-                            <div class="detail-include-item">✓ First Aid (P3K)</div>
-                            <div class="detail-include-item">✓ Toilet</div>
-                        </div>
-                        <div class="detail-excluded">
-                            <div class="detail-exclude-item">⊗ Komodo National Park</div>
-                            <div class="detail-exclude-item">⊗ Entrance & Ranger Fee</div>
-                            <div class="detail-exclude-item">⊗ Rental Diving Gear</div>
-                            <div class="detail-exclude-item">⊗ Photographer (By Request)</div>
-                            <div class="detail-exclude-item">⊗ Tipping Crew (Optional)</div>
-                            <div class="detail-exclude-item">⊗ Insurance</div>
-                            <div class="detail-exclude-item">⊗ (Make sure bring enough IDR cash)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Footer -->
-                <div class="detail-footer">
-                    <p>Prices very based on destination & number of passengers.</p>
-                    <div class="detail-contact">
-                        <span>Contact info</span>
-                        <span class="detail-phone">0811-3787-741</span>
-                    </div>
-                </div>
+        <div class="detail-modal-body">
+          <!-- Header -->
+          <div class="detail-header">
+            <div class="detail-title">
+              <span class="detail-model">Yamaha 250 HP x2</span>
+              <span class="detail-specs">
+                <span class="spec-item">📡 GPS</span>
+                <span class="spec-separator">|</span>
+                <span class="spec-item">🧭 Compass</span>
+                <span class="spec-separator">|</span>
+                <span class="spec-item">🗺️ Map</span>
+                <span class="spec-separator">|</span>
+                <span class="spec-item">📻 VHF Radio</span>
+                <span class="spec-separator">|</span>
+                <span class="spec-item">📏 11.7 x 3 x 1.10</span>
+              </span>
             </div>
+          </div>
 
-            <!-- Back Button -->
-            <button class="detail-back-btn">back</button>
+          <!-- Trip Options -->
+          <div class="detail-trip-options">
+            <div class="detail-trip-option active">
+              <div class="detail-trip-title">HALF DAY TRIP</div>
+              <div class="detail-trip-price">Rp. 5.500.000,-</div>
+              <div class="detail-trip-time">06.30 AM - 02.00 PM</div>
+            </div>
+            <div class="detail-trip-option">
+              <div class="detail-trip-title">FULL DAY TRIP</div>
+              <div class="detail-trip-price">Rp 9.000.000,-</div>
+              <div class="detail-trip-time">06.30 AM - 05.00 PM</div>
+            </div>
+          </div>
+
+          <!-- Destinations -->
+          <div class="detail-destinations">
+            <div class="detail-dest-column">
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Rinca Island</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Kelor Island</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Menjerite Island</span>
+              </div>
+            </div>
+            <div class="detail-dest-column">
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Padar Island</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Komodo Island</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Pink Beach</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Taka Makassar, Manta Point</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Kanawa Island</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- What's Included -->
+          <div class="detail-section">
+            <h3>WHAT'S INCLUDED & EXCLUDED</h3>
+            <div class="detail-included-excluded">
+              <div class="detail-included">
+                <div class="detail-include-item">✓ Boat Crew</div>
+                <div class="detail-include-item">✓ Snack & Soft Drinks</div>
+                <div class="detail-include-item">✓ Snorkeling Gear</div>
+                <div class="detail-include-item">✓ Mineral Water Free Flow</div>
+                <div class="detail-include-item">✓ Lunch Box</div>
+                <div class="detail-include-item">✓ Documentation</div>
+                <div class="detail-include-item">✓ Life Jacket</div>
+                <div class="detail-include-item">✓ Life Ring Boy</div>
+                <div class="detail-include-item">✓ First Aid (P3K)</div>
+                <div class="detail-include-item">✓ Toilet</div>
+              </div>
+              <div class="detail-excluded">
+                <div class="detail-exclude-item">⊗ Komodo National Park</div>
+                <div class="detail-exclude-item">⊗ Entrance & Ranger Fee</div>
+                <div class="detail-exclude-item">⊗ Rental Diving Gear</div>
+                <div class="detail-exclude-item">
+                  ⊗ Photographer (By Request)
+                </div>
+                <div class="detail-exclude-item">⊗ Tipping Crew (Optional)</div>
+                <div class="detail-exclude-item">⊗ Insurance</div>
+                <div class="detail-exclude-item">
+                  ⊗ (Make sure bring enough IDR cash)
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="detail-footer">
+            <p>Prices very based on destination & number of passengers.</p>
+            <div class="detail-contact">
+              <span>Contact info</span>
+              <span class="detail-phone">
+                <span class="whatsapp-icon"></span>
+                0811-3787-741
+              </span>
+            </div>
+          </div>
         </div>
+
+        <button class="detail-back-btn">back</button>
+      </div>
     </div>
 
     <script>
-        // Fade-in animation on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 50);
+      // Fade-in animation on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(() => {
+          document.body.style.opacity = "1";
+        }, 50);
+      });
+      // Fade-out animation on navigation
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".nav-menu a").forEach((item) => {
+          item.addEventListener("click", function (e) {
+            const href = this.getAttribute("href");
+            if (href && !href.startsWith("#")) {
+              e.preventDefault();
+              document.body.classList.add("fade-out");
+              setTimeout(() => {
+                window.location.href = href;
+              }, 500);
+            }
+          });
         });
-        // Fade-out animation on navigation
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.nav-menu a').forEach(item => {
-                item.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if (href && !href.startsWith('#')) {
-                        e.preventDefault();
-                        document.body.classList.add('fade-out');
-                        setTimeout(() => {
-                            window.location.href = href;
-                        }, 500);
+      });
+      // Fade-in animation on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(() => {
+          document.body.style.opacity = "1";
+        }, 10);
+      });
+      // Smooth scrolling for navigation links (hash links only)
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+
+          // Close mobile sidebar when clicking a link
+          const mobileSidebar = document.querySelector(".mobile-sidebar");
+          const mobileOverlay = document.querySelector(".mobile-overlay");
+          const hamburger = document.querySelector(".hamburger");
+
+          if (mobileSidebar && mobileOverlay && hamburger) {
+            mobileSidebar.classList.remove("active");
+            mobileOverlay.classList.remove("active");
+            hamburger.classList.remove("active");
+          }
+        });
+      });
+
+      // Handle external links (like /) - just close mobile menu
+      document.querySelectorAll('a[href^="/"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          // Close mobile sidebar when clicking a link
+          const mobileSidebar = document.querySelector(".mobile-sidebar");
+          const mobileOverlay = document.querySelector(".mobile-overlay");
+          const hamburger = document.querySelector(".hamburger");
+
+          if (mobileSidebar && mobileOverlay && hamburger) {
+            mobileSidebar.classList.remove("active");
+            mobileOverlay.classList.remove("active");
+            hamburger.classList.remove("active");
+          }
+        });
+      });
+
+      // Mobile Hamburger Menu
+      const hamburger = document.querySelector(".hamburger");
+      const mobileSidebar = document.querySelector(".mobile-sidebar");
+      const mobileOverlay = document.querySelector(".mobile-overlay");
+
+      if (hamburger && mobileSidebar && mobileOverlay) {
+        // Toggle sidebar when hamburger is clicked
+        hamburger.addEventListener("click", function () {
+          this.classList.toggle("active");
+          mobileSidebar.classList.toggle("active");
+          mobileOverlay.classList.toggle("active");
+          document.body.style.overflow = mobileSidebar.classList.contains(
+            "active"
+          )
+            ? "hidden"
+            : "";
+        });
+
+        // Close sidebar when overlay is clicked
+        mobileOverlay.addEventListener("click", function () {
+          hamburger.classList.remove("active");
+          mobileSidebar.classList.remove("active");
+          this.classList.remove("active");
+          document.body.style.overflow = "";
+        });
+
+        // Close sidebar when nav links are clicked
+        const navLinks = document.querySelectorAll(
+          ".mobile-sidebar .nav-menu a"
+        );
+        navLinks.forEach((link) => {
+          link.addEventListener("click", function () {
+            hamburger.classList.remove("active");
+            mobileSidebar.classList.remove("active");
+            mobileOverlay.classList.remove("active");
+            document.body.style.overflow = "";
+          });
+        });
+
+        // Close sidebar when pressing Escape key
+        document.addEventListener("keydown", function (e) {
+          if (
+            e.key === "Escape" &&
+            mobileSidebar.classList.contains("active")
+          ) {
+            hamburger.classList.remove("active");
+            mobileSidebar.classList.remove("active");
+            mobileOverlay.classList.remove("active");
+            document.body.style.overflow = "";
+          }
+        });
+      }
+
+      // Header scroll effect (enhanced shadow on scroll)
+      window.addEventListener("scroll", function () {
+        const header = document.querySelector(".header");
+        const logo = document.querySelector(".logo");
+        const navLinks = document.querySelectorAll(".nav-menu a");
+
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+          header.style.background = "rgba(255, 255, 255, 0.95)";
+          header.style.backdropFilter = "blur(20px)";
+          header.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.1)";
+          header.style.borderBottom = "1px solid rgba(255, 255, 255, 0.2)";
+
+          // Change text color to dark when scrolled
+          if (logo) {
+            logo.style.color = "#333";
+            logo.style.textShadow = "none";
+          }
+          navLinks.forEach((link) => {
+            if (link.classList.contains("active")) {
+              link.style.color = "#ff6b6b"; // Keep active link red
+            } else {
+              link.style.color = "#333";
+            }
+            link.style.textShadow = "none";
+          });
+        } else {
+          header.classList.remove("scrolled");
+          header.style.background = "transparent";
+          header.style.backdropFilter = "none";
+          header.style.boxShadow = "none";
+          header.style.borderBottom = "none";
+
+          // Change text color back to dark when at top
+          if (logo) {
+            logo.style.color = "#333";
+            logo.style.textShadow = "none";
+          }
+          navLinks.forEach((link) => {
+            if (link.classList.contains("active")) {
+              link.style.color = "#ff6b6b"; // Keep active link red
+            } else {
+              link.style.color = "#333";
+            }
+            link.style.textShadow = "none";
+          });
+        }
+      });
+
+      // Set active navigation based on current page
+      function setActiveNavigation() {
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll(".nav-menu a");
+        const mobileNavLinks = document.querySelectorAll(
+          ".mobile-sidebar .nav-menu a"
+        );
+
+        // Remove active class from all links
+        [...navLinks, ...mobileNavLinks].forEach((link) => {
+          link.classList.remove("active");
+        });
+
+        // Add active class to current page link
+        [...navLinks, ...mobileNavLinks].forEach((link) => {
+          const linkPath = new URL(link.href).pathname;
+          if (
+            currentPath === linkPath ||
+            (currentPath === "/" && linkPath === "/")
+          ) {
+            link.classList.add("active");
+          }
+        });
+      }
+
+      // Call function on page load
+      setActiveNavigation();
+
+      // Trip Options Functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        initializeTripOptions();
+      });
+
+      function initializeTripOptions() {
+        const productCards = document.querySelectorAll(".product-card");
+
+        productCards.forEach((card) => {
+          const tripOptions = card.querySelectorAll(".trip-option");
+          const tripOptionsContainer = card.querySelector(".trip-options");
+          const priceElement = card.querySelector(".product-price");
+          const timeElement = card.querySelector(".trip-time");
+          const destinationsElement = card.querySelector(".destinations");
+
+          // Data untuk setiap produk
+          const productData = getProductData(card);
+
+          tripOptions.forEach((option, index) => {
+            option.addEventListener("click", function () {
+              // Add clicked effect immediately
+              this.classList.add("clicked");
+
+              // Remove clicked effect after animation
+              setTimeout(() => {
+                this.classList.remove("clicked");
+              }, 600);
+
+              // Remove active class from all options in this card
+              tripOptions.forEach((opt) => opt.classList.remove("active"));
+
+              // Add active class to clicked option with animation
+              this.classList.add("active");
+
+              // Update konten langsung tanpa delay
+              if (productData && productData[index]) {
+                priceElement.textContent = productData[index].price;
+                timeElement.textContent = productData[index].time;
+
+                // Update destinations dengan pastikan FORMAT SAMA PERSIS dengan HTML asli
+                if (productData[index].destinations) {
+                  destinationsElement.innerHTML = "";
+                  productData[index].destinations.forEach((destination) => {
+                    const li = document.createElement("li");
+                    li.textContent = destination;
+
+                    // COPY EXACT styling dari CSS untuk konsistensi format
+                    li.style.fontFamily = '"Noto Sans", sans-serif';
+                    li.style.color = "#555";
+                    li.style.fontSize = "0.95rem";
+                    li.style.padding = "2px 0";
+                    li.style.position = "relative";
+                    li.style.paddingLeft = "20px";
+                    li.style.fontWeight = "400";
+                    li.style.transition = "all 0.3s ease";
+                    li.style.display = "left"; // Block untuk format rapi seperti gambar
+                    li.style.textAlign = "left"; // Text rata kiri untuk tampilan terstruktur
+
+                    // Responsive icon size berdasarkan screen width
+                    const screenWidth = window.innerWidth;
+                    let iconSize;
+                    if (screenWidth <= 480) {
+                      iconSize = "10px";
+                    } else if (screenWidth <= 768) {
+                      iconSize = "12px";
+                    } else {
+                      iconSize = "14px";
                     }
-                });
-            });
-        });
-        // Fade-in animation on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 10);
-        });
-        // Smooth scrolling for navigation links (hash links only)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+
+                    // Buat icon yang SAMA PERSIS dengan CSS :before
+                    const icon = document.createElement("span");
+                    icon.style.position = "absolute";
+                    icon.style.left = "0";
+                    icon.style.top = "2px";
+                    icon.style.width = iconSize;
+                    icon.style.height = iconSize;
+                    icon.style.backgroundImage =
+                      'url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0YyODQ4MiIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+")';
+                    icon.style.backgroundSize = "contain";
+                    icon.style.backgroundRepeat = "no-repeat";
+                    icon.style.backgroundPosition = "center";
+                    icon.style.display = "block";
+                    icon.style.opacity = "1";
+                    icon.style.visibility = "visible";
+                    icon.style.zIndex = "1";
+
+                    li.appendChild(icon);
+                    destinationsElement.appendChild(li);
+                  });
+
+                  // Force reflow untuk pastikan styling diterapkan
+                  destinationsElement.offsetHeight;
+                  console.log(
+                    "Destinations updated with IDENTICAL format to HTML"
+                  );
                 }
-
-                // Close mobile sidebar when clicking a link
-                const mobileSidebar = document.querySelector('.mobile-sidebar');
-                const mobileOverlay = document.querySelector('.mobile-overlay');
-                const hamburger = document.querySelector('.hamburger');
-                
-                if (mobileSidebar && mobileOverlay && hamburger) {
-                    mobileSidebar.classList.remove('active');
-                    mobileOverlay.classList.remove('active');
-                    hamburger.classList.remove('active');
-                }
+              }
             });
+          });
+
+          // Inisialisasi: Pastikan button yang sudah active saat page load menampilkan checkmark
+          const activeButton = card.querySelector(".trip-option.active");
+          if (activeButton) {
+            // Force reflow untuk memastikan checkmark CSS diterapkan
+            activeButton.offsetHeight;
+          }
         });
+      }
 
-        // Handle external links (like /) - just close mobile menu
-        document.querySelectorAll('a[href^="/"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                // Close mobile sidebar when clicking a link
-                const mobileSidebar = document.querySelector('.mobile-sidebar');
-                const mobileOverlay = document.querySelector('.mobile-overlay');
-                const hamburger = document.querySelector('.hamburger');
-                
-                if (mobileSidebar && mobileOverlay && hamburger) {
-                    mobileSidebar.classList.remove('active');
-                    mobileOverlay.classList.remove('active');
-                    hamburger.classList.remove('active');
-                }
-            });
-        });
+      function getProductData(card) {
+        const productName = card
+          .querySelector(".product-name")
+          .textContent.toLowerCase();
 
-        // Mobile Hamburger Menu
-        const hamburger = document.querySelector('.hamburger');
-        const mobileSidebar = document.querySelector('.mobile-sidebar');
-        const mobileOverlay = document.querySelector('.mobile-overlay');
-
-        if (hamburger && mobileSidebar && mobileOverlay) {
-            // Toggle sidebar when hamburger is clicked
-            hamburger.addEventListener('click', function() {
-                this.classList.toggle('active');
-                mobileSidebar.classList.toggle('active');
-                mobileOverlay.classList.toggle('active');
-                document.body.style.overflow = mobileSidebar.classList.contains('active') ? 'hidden' : '';
-            });
-
-            // Close sidebar when overlay is clicked
-            mobileOverlay.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                mobileSidebar.classList.remove('active');
-                this.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-
-            // Close sidebar when nav links are clicked
-            const navLinks = document.querySelectorAll('.mobile-sidebar .nav-menu a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    hamburger.classList.remove('active');
-                    mobileSidebar.classList.remove('active');
-                    mobileOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
-            });
-
-            // Close sidebar when pressing Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && mobileSidebar.classList.contains('active')) {
-                    hamburger.classList.remove('active');
-                    mobileSidebar.classList.remove('active');
-                    mobileOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
+        if (productName.includes("zikita")) {
+          return [
+            {
+              price: "Rp 5.500.000,-",
+              time: "06:30 AM - 02:00 PM",
+              destinations: [
+                "Padar Island",
+                "Komodo Island",
+                "Pink Beach",
+                "etc",
+              ], // Tambah "etc" untuk konsistensi
+            }, // Half Day
+            {
+              price: "Rp 9.000.000,-",
+              time: "06:30 AM - 05:00 PM",
+              destinations: [
+                "Padar Island",
+                "Komodo Island",
+                "Pink Beach",
+                "Rinca Island",
+                "Manta Point",
+                "Kanawa Island",
+              ],
+            }, // Full Day
+          ];
+        } else if (productName.includes("zaviero")) {
+          return [
+            {
+              price: "Rp 2.500.000,-",
+              time: "06:30 AM - 01:00 PM",
+              destinations: [
+                "Loh Buaya (Komodo Island)",
+                "Kelor Island",
+                "Manjeriti Island",
+              ], // Tambah Manjeriti Island untuk konsistensi
+            }, // Half Day
+            {
+              price: "Rp 4.500.000,-",
+              time: "06:30 AM - 02:00 PM",
+              destinations: [
+                "Loh Buaya (Komodo Island)",
+                "Kelor Island",
+                "Manjeriti Island",
+                "Kalong Island",
+              ],
+            }, // Full Day
+          ];
+        } else if (productName.includes("rent car")) {
+          return [
+            {
+              price: "Rp 1.250.000,-",
+              time: "Per Day (24 Hours)",
+              destinations: [
+                "Airport Transfer",
+                "City Tour",
+                "Hotel Transfer",
+                "Local Destinations",
+              ],
+            }, // Toyota Hiace
+            {
+              price: "Rp 1.500.000,-",
+              time: "Per Day (24 Hours)",
+              destinations: [
+                "Airport Transfer",
+                "City Tour",
+                "Hotel Transfer",
+                "Premium Service",
+                "Long Distance",
+              ],
+            }, // Innova Reborn
+          ];
         }
 
-        // Header scroll effect (enhanced shadow on scroll)
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('.header');
-            
-            if (window.scrollY > 50) {
-                header.style.boxShadow = '0 2px 25px rgba(0, 0, 0, 0.15)';
-            } else {
-                header.style.boxShadow = 'none';
-            }
+        return null;
+      }
+
+      // Image Slider Functions
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize all sliders
+        const sliders = document.querySelectorAll(".image-slider");
+
+        sliders.forEach((slider) => {
+          const images = slider.querySelectorAll(".product-image");
+          const dots = slider.querySelectorAll(".slider-dot");
+          const prevBtn = slider.querySelector(".slider-nav.prev");
+          const nextBtn = slider.querySelector(".slider-nav.next");
+
+          let currentIndex = 0;
+
+          // Show initial image
+          showSlide(slider, currentIndex);
+
+          // Previous button
+          prevBtn.addEventListener("click", () => {
+            currentIndex =
+              currentIndex > 0 ? currentIndex - 1 : images.length - 1;
+            showSlide(slider, currentIndex);
+          });
+
+          // Next button
+          nextBtn.addEventListener("click", () => {
+            currentIndex =
+              currentIndex < images.length - 1 ? currentIndex + 1 : 0;
+            showSlide(slider, currentIndex);
+          });
+
+          // Dots navigation
+          dots.forEach((dot, index) => {
+            dot.addEventListener("click", () => {
+              currentIndex = index;
+              showSlide(slider, currentIndex);
+            });
+          });
         });
 
-        // Image Slider Functions
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize all sliders
-            const sliders = document.querySelectorAll('.image-slider');
-            
-            sliders.forEach(slider => {
-                const images = slider.querySelectorAll('.product-image');
-                const dots = slider.querySelectorAll('.slider-dot');
-                const prevBtn = slider.querySelector('.slider-nav.prev');
-                const nextBtn = slider.querySelector('.slider-nav.next');
-                
-                let currentIndex = 0;
-                
-                // Show initial image
-                showSlide(slider, currentIndex);
-                
-                // Previous button
-                prevBtn.addEventListener('click', () => {
-                    currentIndex = currentIndex > 0 ? currentIndex - 1 : images.length - 1;
-                    showSlide(slider, currentIndex);
-                });
-                
-                // Next button
-                nextBtn.addEventListener('click', () => {
-                    currentIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
-                    showSlide(slider, currentIndex);
-                });
-                
-                // Dots navigation
-                dots.forEach((dot, index) => {
-                    dot.addEventListener('click', () => {
-                        currentIndex = index;
-                        showSlide(slider, currentIndex);
-                    });
-                });
-            });
-            
-            function showSlide(slider, index) {
-                const images = slider.querySelectorAll('.product-image');
-                const dots = slider.querySelectorAll('.slider-dot');
-                
-                // Hide all images
-                images.forEach(img => {
-                    img.style.display = 'none';
-                    img.classList.remove('active');
-                });
-                
-                // Remove active from all dots
-                dots.forEach(dot => {
-                    dot.classList.remove('active');
-                });
-                
-                // Show current image
-                images[index].style.display = 'block';
-                images[index].classList.add('active');
-                dots[index].classList.add('active');
-            }
-            
-            // Modal functionality
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
-            const modalClose = document.querySelector('.modal-close');
-            const modalPrev = document.getElementById('modalPrev');
-            const modalNext = document.getElementById('modalNext');
-            
-            let currentModal = {
-                images: [],
-                index: 0
-            };
-            
-            // Add click event to all product images
-            document.querySelectorAll('.product-image').forEach((img, imgIndex) => {
-                img.style.cursor = 'pointer';
-                img.addEventListener('click', () => {
-                    const slider = img.closest('.image-slider');
-                    const sliderImages = slider.querySelectorAll('.product-image');
-                    const productCard = slider.closest('.product-card');
-                    const productTitle = productCard ? productCard.querySelector('h3')?.textContent : 'Indonesia Travel Package';
-                    
-                    // Get all image sources for this slider
-                    currentModal.images = Array.from(sliderImages).map(image => {
-                        return image.src.replace('w=250&h=250', 'w=800&h=600');
-                    });
-                    
-                    currentModal.index = parseInt(img.dataset.slide);
-                    currentModal.title = productTitle;
-                    
-                    showModalImage();
-                    modal.classList.add('show');
-                    document.body.style.overflow = 'hidden';
-                });
-            });
-            
-            function showModalImage() {
-                modalImg.src = currentModal.images[currentModal.index];
-                
-                // Update image info
-                const modalImageTitle = document.getElementById('modalImageTitle');
-                const modalImageCounter = document.getElementById('modalImageCounter');
-                
-                if (modalImageTitle) {
-                    modalImageTitle.textContent = currentModal.title || 'Image Gallery';
-                }
-                
-                if (modalImageCounter) {
-                    modalImageCounter.textContent = `${currentModal.index + 1} / ${currentModal.images.length}`;
-                }
-            }
-            
-            // Modal navigation
-            modalPrev.addEventListener('click', () => {
-                currentModal.index = currentModal.index > 0 ? currentModal.index - 1 : currentModal.images.length - 1;
-                showModalImage();
-            });
-            
-            modalNext.addEventListener('click', () => {
-                currentModal.index = currentModal.index < currentModal.images.length - 1 ? currentModal.index + 1 : 0;
-                showModalImage();
-            });
-            
-            // Close modal
-            modalClose.addEventListener('click', () => {
-                modal.classList.remove('show');
-                document.body.style.overflow = '';
-            });
-            
-            // Close modal when clicking outside
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('show');
-                    document.body.style.overflow = '';
-                }
-            });
-            
-            // Modal keyboard navigation
-            document.addEventListener('keydown', (e) => {
-                if (modal.classList.contains('show')) {
-                    switch(e.key) {
-                        case 'Escape':
-                            modal.classList.remove('show');
-                            document.body.style.overflow = '';
-                            break;
-                        case 'ArrowLeft':
-                            e.preventDefault();
-                            currentModal.index = currentModal.index > 0 ? currentModal.index - 1 : currentModal.images.length - 1;
-                            showModalImage();
-                            break;
-                        case 'ArrowRight':
-                            e.preventDefault();
-                            currentModal.index = currentModal.index < currentModal.images.length - 1 ? currentModal.index + 1 : 0;
-                            showModalImage();
-                            break;
-                    }
-                }
+        function showSlide(slider, index) {
+          const images = slider.querySelectorAll(".product-image");
+          const dots = slider.querySelectorAll(".slider-dot");
+
+          // Hide all images
+          images.forEach((img) => {
+            img.style.display = "none";
+            img.classList.remove("active");
+          });
+
+          // Remove active from all dots
+          dots.forEach((dot) => {
+            dot.classList.remove("active");
+          });
+
+          // Show current image
+          images[index].style.display = "block";
+          images[index].classList.add("active");
+          dots[index].classList.add("active");
+        }
+
+        // Modal functionality
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImage");
+        const modalClose = document.querySelector(".modal-close");
+        const modalPrev = document.getElementById("modalPrev");
+        const modalNext = document.getElementById("modalNext");
+
+        let currentModal = {
+          images: [],
+          index: 0,
+        };
+
+        // Add click event to all product images
+        document.querySelectorAll(".product-image").forEach((img, imgIndex) => {
+          img.style.cursor = "pointer";
+          img.addEventListener("click", () => {
+            const slider = img.closest(".image-slider");
+            const sliderImages = slider.querySelectorAll(".product-image");
+            const productCard = slider.closest(".product-card");
+            const productTitle = productCard
+              ? productCard.querySelector("h3")?.textContent
+              : "Indonesia Travel Package";
+
+            // Get all image sources for this slider
+            currentModal.images = Array.from(sliderImages).map((image) => {
+              return image.src.replace("w=250&h=250", "w=800&h=600");
             });
 
-            // Detail Modal functionality
-            const detailModal = document.getElementById('detailModal');
-            const detailModalClose = document.querySelector('.detail-modal-close');
-            const detailBackBtn = document.querySelector('.detail-back-btn');
-            
-            // Add click event to all view details buttons
-            document.querySelectorAll('.view-details-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    detailModal.classList.add('show');
-                });
-            });
-            
-            // Close detail modal
-            detailModalClose.addEventListener('click', () => {
-                detailModal.classList.remove('show');
-            });
-            
-            detailBackBtn.addEventListener('click', () => {
-                detailModal.classList.remove('show');
-            });
-            
-            // Close detail modal when clicking outside
-            detailModal.addEventListener('click', (e) => {
-                if (e.target === detailModal) {
-                    detailModal.classList.remove('show');
-                }
-            });
-            
-            // Close detail modal with Escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && detailModal.classList.contains('show')) {
-                    detailModal.classList.remove('show');
-                }
-            });
+            currentModal.index = parseInt(img.dataset.slide);
+            currentModal.title = productTitle;
 
-            // Detail trip options toggle
-            document.querySelectorAll('.detail-trip-option').forEach(option => {
-                option.addEventListener('click', () => {
-                    // Remove active from all options
-                    document.querySelectorAll('.detail-trip-option').forEach(opt => {
-                        opt.classList.remove('active');
-                    });
-                    // Add active to clicked option
-                    option.classList.add('active');
-                });
-            });
+            showModalImage();
+            modal.classList.add("show");
+            document.body.style.overflow = "hidden";
+          });
         });
+
+        function showModalImage() {
+          modalImg.src = currentModal.images[currentModal.index];
+
+          // Update image info
+          const modalImageTitle = document.getElementById("modalImageTitle");
+          const modalImageCounter =
+            document.getElementById("modalImageCounter");
+
+          if (modalImageTitle) {
+            modalImageTitle.textContent = currentModal.title || "Image Gallery";
+          }
+
+          if (modalImageCounter) {
+            modalImageCounter.textContent = `${currentModal.index + 1} / ${currentModal.images.length}`;
+          }
+        }
+
+        // Modal navigation
+        modalPrev.addEventListener("click", () => {
+          currentModal.index =
+            currentModal.index > 0
+              ? currentModal.index - 1
+              : currentModal.images.length - 1;
+          showModalImage();
+        });
+
+        modalNext.addEventListener("click", () => {
+          currentModal.index =
+            currentModal.index < currentModal.images.length - 1
+              ? currentModal.index + 1
+              : 0;
+          showModalImage();
+        });
+
+        // Close modal
+        modalClose.addEventListener("click", () => {
+          modal.classList.remove("show");
+          document.body.style.overflow = "";
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) {
+            modal.classList.remove("show");
+            document.body.style.overflow = "";
+          }
+        });
+
+        // Modal keyboard navigation
+        document.addEventListener("keydown", (e) => {
+          if (modal.classList.contains("show")) {
+            switch (e.key) {
+              case "Escape":
+                modal.classList.remove("show");
+                document.body.style.overflow = "";
+                break;
+              case "ArrowLeft":
+                e.preventDefault();
+                currentModal.index =
+                  currentModal.index > 0
+                    ? currentModal.index - 1
+                    : currentModal.images.length - 1;
+                showModalImage();
+                break;
+              case "ArrowRight":
+                e.preventDefault();
+                currentModal.index =
+                  currentModal.index < currentModal.images.length - 1
+                    ? currentModal.index + 1
+                    : 0;
+                showModalImage();
+                break;
+            }
+          }
+        });
+
+        // Detail Modal functionality
+        const detailModal = document.getElementById("detailModal");
+        const detailModalClose = document.querySelector(".detail-modal-close");
+
+        // Add click event to all view details buttons
+        document.querySelectorAll(".view-details-btn").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            detailModal.classList.add("show");
+          });
+        });
+
+        // Close detail modal
+        detailModalClose.addEventListener("click", () => {
+          detailModal.classList.remove("show");
+        });
+
+        // Close detail modal with back button
+        const detailBackBtn = document.querySelector(".detail-back-btn");
+        if (detailBackBtn) {
+          detailBackBtn.addEventListener("click", () => {
+            detailModal.classList.remove("show");
+          });
+        }
+
+        // Close detail modal when clicking outside
+        detailModal.addEventListener("click", (e) => {
+          if (e.target === detailModal) {
+            detailModal.classList.remove("show");
+          }
+        });
+
+        // Close detail modal with Escape key
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && detailModal.classList.contains("show")) {
+            detailModal.classList.remove("show");
+          }
+        });
+
+        // Detail trip options toggle
+        document.querySelectorAll(".detail-trip-option").forEach((option) => {
+          option.addEventListener("click", () => {
+            // Remove active from all options
+            document.querySelectorAll(".detail-trip-option").forEach((opt) => {
+              opt.classList.remove("active");
+            });
+            // Add active to clicked option
+            option.classList.add("active");
+          });
+        });
+      });
     </script>
 
     <!-- Footer -->
     <Footer />
-</body>
+  </body>
 </html>

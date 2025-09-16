@@ -1,6 +1,7 @@
 ---
 // Halaman Contact - Indonesia Travel
 import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
 ---
 
 <!DOCTYPE html>
@@ -8,7 +9,11 @@ import Footer from '../components/Footer.astro';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Indonesia Travel</title>
+    <title>Contact | Explore Indonesia</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/LOGO.png?v=2" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/LOGO.png?v=2" />
+    <link rel="shortcut icon" type="image/png" href="/LOGO.png?v=2" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/LOGO.png?v=2" />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -17,15 +22,15 @@ import Footer from '../components/Footer.astro';
             box-sizing: border-box;
         }
         
-        body {
-            font-family: 'Noto Sans', sans-serif;
-            opacity: 0;
-            transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1);
-            background: #f7f7f7;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+		body {
+			font-family: 'Noto Sans', sans-serif;
+			opacity: 0;
+			transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1);
+			background: #F4F4F4;
+			display: flex;
+			flex-direction: column;
+			min-height: 100vh;
+		}
         
         body.fade-out {
             opacity: 0;
@@ -43,6 +48,30 @@ import Footer from '../components/Footer.astro';
             background: transparent;
             transition: all 0.3s ease;
             font-family: 'Noto Sans', sans-serif;
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header.scrolled .logo {
+            color: #333;
+            text-shadow: none;
+        }
+
+        .header.scrolled .nav-menu a {
+            color: #333;
+            text-shadow: none;
+        }
+
+        .header.scrolled .nav-menu a.active {
+            color: #ff6b6b;
+        }
+
+        .header.scrolled .nav-menu a:hover {
+            color: #ff6b6b;
         }
 
         .nav-container {
@@ -78,11 +107,13 @@ import Footer from '../components/Footer.astro';
         .nav-menu a {
             color: #333;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 700;
             font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            text-transform: none;
+            letter-spacing: 0.5px;
             position: relative;
+            transition: all 0.3s ease;
+        }
             transition: all 0.3s ease;
         }
 
@@ -90,28 +121,8 @@ import Footer from '../components/Footer.astro';
             color: #ff6b6b;
         }
 
-        .nav-menu a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 50%;
-            background-color: #ff6b6b;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .nav-menu a:hover:after {
-            width: 100%;
-        }
-
         .nav-menu a.active {
             color: #ff6b6b;
-        }
-
-        .nav-menu a.active:after {
-            width: 100%;
         }
 
         .hamburger {
@@ -124,7 +135,7 @@ import Footer from '../components/Footer.astro';
         .hamburger span {
             width: 25px;
             height: 3px;
-            background-color: #fff;
+            background-color: #333;
             transition: all 0.3s ease;
             border-radius: 2px;
         }
@@ -173,10 +184,12 @@ import Footer from '../components/Footer.astro';
         .mobile-sidebar .nav-menu a {
             color: #2c3e50;
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 700;
             padding: 15px 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.08);
             text-shadow: none;
+            text-transform: none;
+            text-decoration: none;
             transition: all 0.3s ease;
         }
 
@@ -213,16 +226,41 @@ import Footer from '../components/Footer.astro';
                 display: flex;
             }
 
-            .nav-container {
-                padding: 0 20px;
+            /* Ensure header consistency on mobile */
+            .header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 1000;
+                padding: 15px 0;
+                transition: all 0.3s ease;
             }
 
-            .header {
-                padding: 15px 0;
+            .header.scrolled {
+                background: rgba(255, 255, 255, 0.95) !important;
+                backdrop-filter: blur(20px) !important;
+                box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1) !important;
+            }
+
+            .nav-container {
+                max-width: 100%;
+                padding: 0 15px;
             }
 
             .logo {
                 font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 1024px) and (min-width: 769px) {
+            /* Ensure header consistency on tablet */
+            .header {
+                padding: 12px 0;
+            }
+
+            .nav-container {
+                padding: 0 20px;
             }
         }
 
@@ -242,39 +280,7 @@ import Footer from '../components/Footer.astro';
     </style>
 </head>
 <body>
-    <header class="header">
-        <nav class="nav-container">
-            <a href="/" class="logo">
-                INDO<span class="logo-highlight">NESIA</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/product">Product</a></li>
-                <li><a href="/Gallery">Gallery</a></li>
-                <li><a href="/Contact" class="active">Contact</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Mobile Sidebar -->
-    <div class="mobile-sidebar">
-        <ul class="nav-menu">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/product">Product</a></li>
-            <li><a href="/Gallery">Gallery</a></li>
-            <li><a href="/Contact" class="active">Contact</a></li>
-        </ul>
-    </div>
-
-    <!-- Mobile Overlay -->
-    <div class="mobile-overlay"></div>
+    <Header currentPage="contact" />
 
     <main class="main-content">
         <div class="contact-main">
@@ -461,7 +467,7 @@ import Footer from '../components/Footer.astro';
 }
 .contact-form input:focus,
 .contact-form textarea:focus {
-	border-bottom-color: #ff6b6b;
+	border-bottom-color: #f28482;
 }
 .contact-form textarea {
 	resize: vertical;
@@ -469,8 +475,8 @@ import Footer from '../components/Footer.astro';
 }
 .contact-form button {
 	align-self: flex-end;
-	border: 2px solid #ff6b6b;
-	color: #ff6b6b;
+	border: 2px solid #f28482;
+	color: #f28482;
 	background: transparent;
 	border-radius: 20px;
 	padding: 8px 30px;
@@ -482,7 +488,7 @@ import Footer from '../components/Footer.astro';
 	box-shadow: 0 2px 8px rgba(255,107,107,0.08);
 }
 .contact-form button:hover {
-	background: #ff6b6b;
+	background: #f28482;
 	color: #fff;
 	box-shadow: 0 4px 16px rgba(255,107,107,0.18);
 }
@@ -695,10 +701,16 @@ import Footer from '../components/Footer.astro';
 			(header as HTMLElement).style.backdropFilter = 'blur(20px)';
 			(header as HTMLElement).style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
 			(header as HTMLElement).style.borderBottom = '1px solid rgba(255, 255, 255, 0.2)';
+			
+			// Change text color to dark when scrolled
 			(logo as HTMLElement).style.color = '#333';
 			(logo as HTMLElement).style.textShadow = 'none';
 			navLinks.forEach(link => {
-				(link as HTMLElement).style.color = '#333';
+				if (link.classList.contains('active')) {
+					(link as HTMLElement).style.color = '#ff6b6b'; // Keep active link red
+				} else {
+					(link as HTMLElement).style.color = '#333';
+				}
 				(link as HTMLElement).style.textShadow = 'none';
 			});
 		} else if (header && logo) {
@@ -707,12 +719,43 @@ import Footer from '../components/Footer.astro';
 			(header as HTMLElement).style.backdropFilter = 'none';
 			(header as HTMLElement).style.boxShadow = 'none';
 			(header as HTMLElement).style.borderBottom = 'none';
+			
+			// Change text color back to dark when at top
+			(logo as HTMLElement).style.color = '#333';
 			(logo as HTMLElement).style.textShadow = 'none';
 			navLinks.forEach(link => {
+				if (link.classList.contains('active')) {
+					(link as HTMLElement).style.color = '#ff6b6b'; // Keep active link red
+				} else {
+					(link as HTMLElement).style.color = '#333';
+				}
 				(link as HTMLElement).style.textShadow = 'none';
 			});
 		}
 	});
+
+	// Set active navigation based on current page
+	function setActiveNavigation() {
+		const currentPath = window.location.pathname;
+		const navLinks = document.querySelectorAll('.nav-menu a');
+		const mobileNavLinks = document.querySelectorAll('.mobile-sidebar .nav-menu a');
+		
+		// Remove active class from all links
+		[...navLinks, ...mobileNavLinks].forEach(link => {
+			link.classList.remove('active');
+		});
+		
+		// Add active class to current page link
+		[...navLinks, ...mobileNavLinks].forEach(link => {
+			const linkPath = new URL(link.href).pathname;
+			if (currentPath === linkPath || (currentPath === '/' && linkPath === '/')) {
+				link.classList.add('active');
+			}
+		});
+	}
+
+	// Call function on page load
+	setActiveNavigation();
 
 // Mobile Menu Toggle
 document.addEventListener('DOMContentLoaded', function() {
