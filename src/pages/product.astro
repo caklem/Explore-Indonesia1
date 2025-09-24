@@ -1610,9 +1610,10 @@ import Header from "../components/Header.astro";
         gap: 12px !important;
         margin-bottom: 14px !important;
         font-size: 15px !important;
-        color: #333 !important;
+        color: #A3B184 !important;
         line-height: 1.4 !important;
         text-align: left !important; /* Text KIRI */
+        transition: all 0.3s ease !important;
       }
 
       .detail-dest-icon {
@@ -3685,12 +3686,12 @@ import Header from "../components/Header.astro";
 
           <!-- Trip Options -->
           <div class="detail-trip-options">
-            <div class="detail-trip-option active">
+            <div class="detail-trip-option active" data-trip="half-day">
               <div class="detail-trip-title">HALF DAY TRIP</div>
               <div class="detail-trip-price">Rp. 5.500.000,-</div>
               <div class="detail-trip-time">06.30 AM - 02.00 PM</div>
             </div>
-            <div class="detail-trip-option">
+            <div class="detail-trip-option" data-trip="full-day">
               <div class="detail-trip-title">FULL DAY TRIP</div>
               <div class="detail-trip-price">Rp 9.000.000,-</div>
               <div class="detail-trip-time">06.30 AM - 05.00 PM</div>
@@ -3699,7 +3700,7 @@ import Header from "../components/Header.astro";
 
           <!-- Destinations -->
           <div class="detail-destinations">
-            <div class="detail-dest-column">
+            <div class="detail-dest-column half-day-destinations">
               <div class="detail-dest-item">
                 <span class="detail-dest-icon"></span>
                 <span>Rinca Island</span>
@@ -3713,7 +3714,7 @@ import Header from "../components/Header.astro";
                 <span>Menjerite Island</span>
               </div>
             </div>
-            <div class="detail-dest-column">
+            <div class="detail-dest-column full-day-destinations">
               <div class="detail-dest-item">
                 <span class="detail-dest-icon"></span>
                 <span>Padar Island</span>
@@ -4444,6 +4445,63 @@ import Header from "../components/Header.astro";
           }
         });
 
+        // Function to update destination colors
+        function updateDestinationColors(selectedOption) {
+          const tripType = selectedOption.getAttribute("data-trip");
+          const halfDayDestinations = document.querySelectorAll(".half-day-destinations .detail-dest-item");
+          const fullDayDestinations = document.querySelectorAll(".full-day-destinations .detail-dest-item");
+          
+          if (tripType === "half-day") {
+            // Half day destinations - hijau #A3B184 (aktif)
+            halfDayDestinations.forEach(item => {
+              item.style.color = "#A3B184";
+              item.style.fontWeight = "600";
+              item.style.opacity = "1";
+              const icon = item.querySelector(".detail-dest-icon");
+              if (icon) {
+                icon.style.backgroundImage = "url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0EzQjE4NCIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+\")";
+                icon.style.filter = "drop-shadow(0 0 4px rgba(163, 177, 132, 0.5))";
+              }
+            });
+            
+            // Full day destinations - abu-abu (tidak aktif)
+            fullDayDestinations.forEach(item => {
+              item.style.color = "#999";
+              item.style.opacity = "0.6";
+              item.style.fontWeight = "400";
+              const icon = item.querySelector(".detail-dest-icon");
+              if (icon) {
+                icon.style.backgroundImage = "url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0NDQ0NDQyIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+\")";
+                icon.style.filter = "none";
+              }
+            });
+          } else if (tripType === "full-day") {
+            // Full day destinations - hijau #A3B184 (aktif)
+            fullDayDestinations.forEach(item => {
+              item.style.color = "#A3B184";
+              item.style.fontWeight = "600";
+              item.style.opacity = "1";
+              const icon = item.querySelector(".detail-dest-icon");
+              if (icon) {
+                icon.style.backgroundImage = "url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0EzQjE4NCIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+\")";
+                icon.style.filter = "drop-shadow(0 0 4px rgba(163, 177, 132, 0.5))";
+              }
+            });
+            
+            // Half day destinations - abu-abu (tidak aktif)
+            halfDayDestinations.forEach(item => {
+              item.style.color = "#999";
+              item.style.opacity = "0.6";
+              item.style.fontWeight = "400";
+              const icon = item.querySelector(".detail-dest-icon");
+              if (icon) {
+                icon.style.backgroundImage = "url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0NDQ0NDQyIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+\")";
+                icon.style.filter = "none";
+              }
+            });
+          }
+        }
+
         // Detail trip options toggle
         document.querySelectorAll(".detail-trip-option").forEach((option) => {
           option.addEventListener("click", () => {
@@ -4453,8 +4511,17 @@ import Header from "../components/Header.astro";
             });
             // Add active to clicked option
             option.classList.add("active");
+            
+            // Update destination colors
+            updateDestinationColors(option);
           });
         });
+
+        // Initialize destination colors for active option
+        const activeOption = document.querySelector(".detail-trip-option.active");
+        if (activeOption) {
+          updateDestinationColors(activeOption);
+        }
         
         // Initialize rent-car trip options toggle
         initializeRentCarTripOptions();

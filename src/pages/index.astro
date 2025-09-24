@@ -105,6 +105,10 @@ import Footer from "../components/Footer.astro";
         line-height: 1.2;
       }
 
+      .hero-subtitle:last-of-type {
+        margin-bottom: 50px !important;
+      }
+
       .hero-description {
         font-family: "Noto Sans", sans-serif;
         font-size: 1.1rem;
@@ -131,6 +135,7 @@ import Footer from "../components/Footer.astro";
         letter-spacing: 0.3px;
         align-self: flex-start;
         font-family: "Noto Sans", sans-serif;
+        margin-top: 60px !important;
       }
 
       .cta-button:hover {
@@ -430,8 +435,8 @@ import Footer from "../components/Footer.astro";
         }
 
         .hero-subtitle {
-          font-size: 1.4rem;
-          margin-bottom: 8px;
+          font-size: 1rem !important;
+          margin-bottom: 6px !important;
           line-height: 1.2;
         }
 
@@ -830,6 +835,18 @@ import Footer from "../components/Footer.astro";
         flex: 1;
       }
 
+      /* Destination column visibility */
+      .half-day-destinations {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .full-day-destinations {
+        display: flex;
+        flex-direction: column;
+      }
+
+
       .detail-dest-item {
         display: flex;
         align-items: flex-start;
@@ -853,26 +870,6 @@ import Footer from "../components/Footer.astro";
         transition: all 0.3s ease;
       }
 
-      /* Destination colors based on active trip option */
-      .detail-dest-item.half-day-active {
-        color: #a3b184;
-        font-weight: 600;
-      }
-
-      .detail-dest-item.half-day-active .detail-dest-icon {
-        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0EzQjE4NCIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+");
-        filter: drop-shadow(0 0 4px rgba(163, 177, 132, 0.5));
-      }
-
-      .detail-dest-item.full-day-active {
-        color: #6b5b47;
-        font-weight: 600;
-      }
-
-      .detail-dest-item.full-day-active .detail-dest-icon {
-        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iIzZCNUI0NyIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+");
-        filter: drop-shadow(0 0 4px rgba(107, 91, 71, 0.5));
-      }
 
       .detail-section {
         margin: 30px 30px;
@@ -1861,7 +1858,8 @@ import Footer from "../components/Footer.astro";
 
           <!-- Destinations -->
           <div class="detail-destinations">
-            <div class="detail-dest-column">
+            <!-- Half Day Trip Destinations -->
+            <div class="detail-dest-column half-day-destinations">
               <div class="detail-dest-item">
                 <span class="detail-dest-icon"></span>
                 <span>Rinca Island</span>
@@ -1875,7 +1873,8 @@ import Footer from "../components/Footer.astro";
                 <span>Menjerite Island</span>
               </div>
             </div>
-            <div class="detail-dest-column">
+            <!-- Full Day Trip Destinations -->
+            <div class="detail-dest-column full-day-destinations">
               <div class="detail-dest-item">
                 <span class="detail-dest-icon"></span>
                 <span>Padar Island</span>
@@ -2385,7 +2384,8 @@ import Footer from "../components/Footer.astro";
 
                     <!-- Destinations -->
                     <div class="detail-destinations">
-                        <div class="detail-dest-column">
+                        <!-- Half Day Trip Destinations -->
+                        <div class="detail-dest-column half-day-destinations">
                             <div class="detail-dest-item">
                                 <span class="detail-dest-icon"></span>
                                 <span>Rinca Island</span>
@@ -2399,7 +2399,8 @@ import Footer from "../components/Footer.astro";
                                 <span>Menjerite Island</span>
                             </div>
                         </div>
-                        <div class="detail-dest-column">
+                        <!-- Full Day Trip Destinations -->
+                        <div class="detail-dest-column full-day-destinations">
                             <div class="detail-dest-item">
                                 <span class="detail-dest-icon"></span>
                                 <span>Padar Island</span>
@@ -2486,7 +2487,8 @@ import Footer from "../components/Footer.astro";
 
                     <!-- Destinations -->
                     <div class="detail-destinations">
-                        <div class="detail-dest-column">
+                        <!-- Half Day Trip Destinations -->
+                        <div class="detail-dest-column half-day-destinations">
                             <div class="detail-dest-item">
                                 <span class="detail-dest-icon"></span>
                                 <span>Rinca Island</span>
@@ -2500,7 +2502,8 @@ import Footer from "../components/Footer.astro";
                                 <span>Pink Beach</span>
                             </div>
                         </div>
-                        <div class="detail-dest-column">
+                        <!-- Full Day Trip Destinations -->
+                        <div class="detail-dest-column full-day-destinations">
                             <div class="detail-dest-item">
                                 <span class="detail-dest-icon"></span>
                                 <span>Padar Island</span>
@@ -2664,20 +2667,57 @@ import Footer from "../components/Footer.astro";
 
       // Function to update destination colors
       function updateDestinationColors(selectedOption) {
-        const destinations = document.querySelectorAll(".detail-dest-item");
         const tripType = selectedOption.getAttribute("data-trip");
+        const halfDayDestinations = document.querySelectorAll(".half-day-destinations .detail-dest-item");
+        const fullDayDestinations = document.querySelectorAll(".full-day-destinations .detail-dest-item");
         
-        destinations.forEach((dest) => {
-          // Remove all color classes
-          dest.classList.remove("half-day-active", "full-day-active");
+        if (tripType === "half-day") {
+          // Half day destinations - hijau #A3B184 (aktif)
+          halfDayDestinations.forEach(item => {
+            item.style.color = "#A3B184";
+            item.style.fontWeight = "600";
+            item.style.opacity = "1";
+            const icon = item.querySelector(".detail-dest-icon");
+            if (icon) {
+              icon.style.backgroundImage = "url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0EzQjE4NCIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+\")";
+              icon.style.filter = "drop-shadow(0 0 4px rgba(163, 177, 132, 0.5))";
+            }
+          });
           
-          // Add appropriate class based on trip type
-          if (tripType === "half-day") {
-            dest.classList.add("half-day-active");
-          } else if (tripType === "full-day") {
-            dest.classList.add("full-day-active");
-          }
-        });
+          // Full day destinations - abu-abu (tidak aktif)
+          fullDayDestinations.forEach(item => {
+            item.style.color = "#999";
+            item.style.opacity = "0.6";
+            const icon = item.querySelector(".detail-dest-icon");
+            if (icon) {
+              icon.style.backgroundImage = "url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0NDQ0NDQyIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+\")";
+              icon.style.filter = "none";
+            }
+          });
+        } else if (tripType === "full-day") {
+          // Full day destinations - hijau #A3B184 (aktif)
+          fullDayDestinations.forEach(item => {
+            item.style.color = "#A3B184";
+            item.style.fontWeight = "600";
+            item.style.opacity = "1";
+            const icon = item.querySelector(".detail-dest-icon");
+            if (icon) {
+              icon.style.backgroundImage = "url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0EzQjE4NCIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+\")";
+              icon.style.filter = "drop-shadow(0 0 4px rgba(163, 177, 132, 0.5))";
+            }
+          });
+          
+          // Half day destinations - abu-abu (tidak aktif)
+          halfDayDestinations.forEach(item => {
+            item.style.color = "#999";
+            item.style.opacity = "0.6";
+            const icon = item.querySelector(".detail-dest-icon");
+            if (icon) {
+              icon.style.backgroundImage = "url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0NDQ0NDQyIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+\")";
+              icon.style.filter = "none";
+            }
+          });
+        }
       }
 
       // Event Listeners untuk Detail Modal
@@ -3059,7 +3099,7 @@ import Footer from "../components/Footer.astro";
     }
 
     .hero-subtitle {
-      font-size: 1.2rem;
+      font-size: 1rem;
       letter-spacing: 1px;
     }
 
