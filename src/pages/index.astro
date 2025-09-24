@@ -360,17 +360,17 @@ import Footer from "../components/Footer.astro";
       .view-details-btn {
         background: transparent;
         color: #f28482;
-        border: 1.5px solid #f28482;
-        padding: 8px 20px;
-        border-radius: 15px;
-        font-size: 12px;
-        font-weight: 400;
+        border: 2px solid #f28482;
+        padding: 16px 36px;
+        border-radius: 25px;
+        font-size: 16px;
+        font-weight: 600;
         cursor: pointer;
         text-decoration: none;
         display: inline-block;
         transition: all 0.3s ease;
         text-transform: lowercase;
-        letter-spacing: 0.3px;
+        letter-spacing: 0.8px;
         font-family: "Noto Sans", sans-serif;
         pointer-events: auto;
         user-select: none;
@@ -772,28 +772,32 @@ import Footer from "../components/Footer.astro";
       .detail-trip-options {
         display: flex;
         margin: 30px 30px;
-        border-radius: 15px;
-        overflow: hidden;
-        border: 1px solid #ddd;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        gap: 15px;
+        flex-wrap: wrap;
       }
 
       .detail-trip-option {
         flex: 1;
+        min-width: 200px;
         padding: 22px 20px;
         text-align: center;
         cursor: pointer;
         transition: all 0.3s ease;
+        border-radius: 15px;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       }
 
       .detail-trip-option.active {
         background: #a3b184;
         color: white;
+        border-color: #a3b184;
       }
 
       .detail-trip-option:not(.active) {
         background: #ede6da;
         color: #6b5b47;
+        border-color: #ddd;
       }
 
       .detail-trip-title {
@@ -834,6 +838,7 @@ import Footer from "../components/Footer.astro";
         font-size: 15px;
         color: #333;
         line-height: 1.4;
+        transition: all 0.3s ease;
       }
 
       .detail-dest-icon {
@@ -845,6 +850,28 @@ import Footer from "../components/Footer.astro";
         background-position: center;
         flex-shrink: 0;
         margin-top: 2px;
+        transition: all 0.3s ease;
+      }
+
+      /* Destination colors based on active trip option */
+      .detail-dest-item.half-day-active {
+        color: #a3b184;
+        font-weight: 600;
+      }
+
+      .detail-dest-item.half-day-active .detail-dest-icon {
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0EzQjE4NCIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+");
+        filter: drop-shadow(0 0 4px rgba(163, 177, 132, 0.5));
+      }
+
+      .detail-dest-item.full-day-active {
+        color: #6b5b47;
+        font-weight: 600;
+      }
+
+      .detail-dest-item.full-day-active .detail-dest-icon {
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iIzZCNUI0NyIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+");
+        filter: drop-shadow(0 0 4px rgba(107, 91, 71, 0.5));
       }
 
       .detail-section {
@@ -1242,15 +1269,184 @@ import Footer from "../components/Footer.astro";
       @media (max-width: 480px) {
         /* Detail modal mobile responsive */
         .detail-modal {
-          padding: 10px !important;
+          padding: 5px !important;
+          align-items: flex-start !important;
+          padding-top: 10px !important;
         }
 
         .detail-modal-content {
-          width: 95% !important;
-          margin: 5% auto !important;
-          padding: 15px !important;
+          width: 98% !important;
+          margin: 0 auto !important;
+          padding: 0 !important;
           border-radius: 15px !important;
           border: 2px solid #f28482 !important;
+          max-height: 95vh !important;
+          max-width: none !important;
+        }
+
+        .detail-modal-close {
+          top: 15px !important;
+          right: 20px !important;
+          font-size: 28px !important;
+          width: 35px !important;
+          height: 35px !important;
+          background: rgba(255, 255, 255, 0.9) !important;
+          border-radius: 50% !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          z-index: 10001 !important;
+        }
+
+        .detail-modal-body {
+          padding: 20px 15px 80px !important;
+          max-height: calc(95vh - 0px) !important;
+          overflow-y: auto !important;
+        }
+
+        .detail-header {
+          padding: 20px 15px 15px !important;
+          margin-bottom: 0 !important;
+        }
+
+        .detail-model {
+          font-size: 1.2rem !important;
+          margin-bottom: 8px !important;
+        }
+
+        .detail-specs {
+          font-size: 0.8rem !important;
+          line-height: 1.3 !important;
+        }
+
+        .detail-trip-options {
+          margin: 15px !important;
+          flex-direction: column !important;
+          gap: 10px !important;
+          border: none !important;
+          box-shadow: none !important;
+        }
+
+        .detail-trip-option {
+          padding: 15px !important;
+          border-radius: 12px !important;
+          border: 1px solid #ddd !important;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .detail-trip-title {
+          font-size: 0.9rem !important;
+        }
+
+        .detail-trip-price {
+          font-size: 1.1rem !important;
+        }
+
+        .detail-trip-time {
+          font-size: 0.8rem !important;
+        }
+
+        .detail-destinations {
+          padding: 15px !important;
+          flex-direction: column !important;
+          gap: 15px !important;
+        }
+
+        .detail-dest-column {
+          width: 100% !important;
+        }
+
+        .detail-dest-item {
+          padding: 8px 0 !important;
+          font-size: 0.85rem !important;
+        }
+
+        .detail-dest-item.half-day-active {
+          color: #a3b184 !important;
+          font-weight: 600 !important;
+        }
+
+        .detail-dest-item.full-day-active {
+          color: #6b5b47 !important;
+          font-weight: 600 !important;
+        }
+
+
+        .detail-section {
+          padding: 15px !important;
+        }
+
+        .detail-section h3 {
+          font-size: 1.1rem !important;
+          margin-bottom: 15px !important;
+        }
+
+        .detail-included-excluded {
+          flex-direction: column !important;
+          gap: 15px !important;
+        }
+
+        .detail-included,
+        .detail-excluded {
+          width: 100% !important;
+          padding: 12px !important;
+          border-radius: 8px !important;
+        }
+
+        .detail-include-item,
+        .detail-exclude-item {
+          font-size: 0.8rem !important;
+          margin-bottom: 6px !important;
+          padding-left: 20px !important;
+        }
+
+        .detail-footer {
+          padding: 15px !important;
+          text-align: center !important;
+        }
+
+        .detail-footer p {
+          font-size: 0.8rem !important;
+          margin-bottom: 10px !important;
+        }
+
+        .detail-contact {
+          flex-direction: column !important;
+          gap: 8px !important;
+        }
+
+        .detail-phone {
+          font-size: 0.9rem !important;
+        }
+
+        .detail-back-btn {
+          position: fixed !important;
+          bottom: 20px !important;
+          left: 50% !important;
+          transform: translateX(-50%) !important;
+          padding: 12px 24px !important;
+          font-size: 0.9rem !important;
+          border-radius: 20px !important;
+          z-index: 10002 !important;
+          background: white !important;
+          border: 2px solid #f28482 !important;
+          color: #f28482 !important;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+        }
+      }
+
+      @media (max-width: 375px) {
+        /* iPhone SE and similar small devices */
+        .detail-modal {
+          padding: 2px !important;
+          padding-top: 5px !important;
+        }
+
+        .detail-modal-content {
+          width: 100% !important;
+          margin: 0 !important;
+          border-radius: 0 !important;
+          max-height: 100vh !important;
         }
 
         .detail-modal-close {
@@ -1261,42 +1457,222 @@ import Footer from "../components/Footer.astro";
           height: 30px !important;
         }
 
-        .detail-modal h3 {
-          font-size: 1.3rem !important;
-          margin-bottom: 15px !important;
+        .detail-modal-body {
+          padding: 15px 10px 70px !important;
+          max-height: calc(100vh - 0px) !important;
         }
 
-        .detail-modal .included,
-        .detail-modal .excluded {
-          margin-bottom: 15px !important;
+        .detail-header {
+          padding: 15px 10px 10px !important;
         }
 
-        .detail-modal .included h4,
-        .detail-modal .excluded h4 {
-          font-size: 1rem !important;
-          margin-bottom: 8px !important;
+        .detail-model {
+          font-size: 1.1rem !important;
         }
 
-        .detail-modal .included ul,
-        .detail-modal .excluded ul {
+        .detail-specs {
+          font-size: 0.75rem !important;
+        }
+
+        .detail-trip-options {
+          margin: 10px !important;
+          flex-direction: column !important;
+          gap: 8px !important;
+          border: none !important;
+          box-shadow: none !important;
+        }
+
+        .detail-trip-option {
+          padding: 12px !important;
+          border-radius: 10px !important;
+          border: 1px solid #ddd !important;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .detail-trip-title {
           font-size: 0.85rem !important;
-          line-height: 1.4 !important;
         }
 
-        .detail-modal .included li,
-        .detail-modal .excluded li {
-          margin-bottom: 4px !important;
-          padding-left: 16px !important;
-        }
-
-        .detail-modal .contact-info {
-          margin-top: 15px !important;
-          text-align: center !important;
-        }
-
-        .detail-modal .contact-info h4 {
+        .detail-trip-price {
           font-size: 1rem !important;
-          margin-bottom: 8px !important;
+        }
+
+        .detail-trip-time {
+          font-size: 0.75rem !important;
+        }
+
+        .detail-destinations {
+          padding: 10px !important;
+        }
+
+        .detail-dest-item {
+          font-size: 0.8rem !important;
+        }
+
+        .detail-dest-item.half-day-active {
+          color: #a3b184 !important;
+          font-weight: 600 !important;
+        }
+
+        .detail-dest-item.full-day-active {
+          color: #6b5b47 !important;
+          font-weight: 600 !important;
+        }
+
+
+        .detail-section {
+          padding: 10px !important;
+        }
+
+        .detail-section h3 {
+          font-size: 1rem !important;
+        }
+
+        .detail-included,
+        .detail-excluded {
+          padding: 10px !important;
+        }
+
+        .detail-include-item,
+        .detail-exclude-item {
+          font-size: 0.75rem !important;
+          margin-bottom: 4px !important;
+        }
+
+        .detail-footer {
+          padding: 10px !important;
+        }
+
+        .detail-footer p {
+          font-size: 0.75rem !important;
+        }
+
+        .detail-phone {
+          font-size: 0.85rem !important;
+        }
+
+        .detail-back-btn {
+          bottom: 15px !important;
+          padding: 10px 20px !important;
+          font-size: 0.85rem !important;
+        }
+      }
+
+      @media (max-width: 320px) {
+        /* Extra small devices */
+        .detail-modal {
+          padding: 1px !important;
+          padding-top: 2px !important;
+        }
+
+        .detail-modal-content {
+          width: 100% !important;
+          margin: 0 !important;
+          border-radius: 0 !important;
+          max-height: 100vh !important;
+        }
+
+        .detail-modal-close {
+          top: 8px !important;
+          right: 12px !important;
+          font-size: 20px !important;
+          width: 26px !important;
+          height: 26px !important;
+        }
+
+        .detail-modal-body {
+          padding: 12px 8px 60px !important;
+          max-height: calc(100vh - 0px) !important;
+        }
+
+        .detail-header {
+          padding: 12px 8px 8px !important;
+        }
+
+        .detail-model {
+          font-size: 1rem !important;
+        }
+
+        .detail-specs {
+          font-size: 0.7rem !important;
+        }
+
+        .detail-trip-options {
+          margin: 8px !important;
+          gap: 6px !important;
+        }
+
+        .detail-trip-option {
+          padding: 8px !important;
+          border-radius: 8px !important;
+        }
+
+        .detail-trip-title {
+          font-size: 0.8rem !important;
+        }
+
+        .detail-trip-price {
+          font-size: 0.9rem !important;
+        }
+
+        .detail-trip-time {
+          font-size: 0.7rem !important;
+        }
+
+        .detail-destinations {
+          padding: 8px !important;
+        }
+
+        .detail-dest-item {
+          font-size: 0.75rem !important;
+        }
+
+        .detail-dest-item.half-day-active {
+          color: #a3b184 !important;
+          font-weight: 600 !important;
+        }
+
+        .detail-dest-item.full-day-active {
+          color: #6b5b47 !important;
+          font-weight: 600 !important;
+        }
+
+
+        .detail-section {
+          padding: 8px !important;
+        }
+
+        .detail-section h3 {
+          font-size: 0.9rem !important;
+        }
+
+        .detail-included,
+        .detail-excluded {
+          padding: 8px !important;
+        }
+
+        .detail-include-item,
+        .detail-exclude-item {
+          font-size: 0.7rem !important;
+          margin-bottom: 3px !important;
+        }
+
+        .detail-footer {
+          padding: 8px !important;
+        }
+
+        .detail-footer p {
+          font-size: 0.7rem !important;
+        }
+
+        .detail-phone {
+          font-size: 0.8rem !important;
+        }
+
+        .detail-back-btn {
+          bottom: 12px !important;
+          padding: 8px 16px !important;
+          font-size: 0.8rem !important;
         }
       }
     </style>
@@ -1397,46 +1773,46 @@ import Footer from "../components/Footer.astro";
 
           <div class="packages-grid">
             <div class="package-item">
-              <div class="package-card" data-package="zikra">
-                <img
-                  src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dc012b31-e445-47e9-b69a-ec82b2a851eb.png"
-                  alt="White luxury speedboat with blue accents on calm turquoise water, modern design with comfortable seating for island hopping adventures"
-                  class="package-image"
-                />
-                <div class="package-content">
-                  <h3 class="package-name">ZIKRA SPEEDBOAT</h3>
-                  <p class="package-price">5.500.000</p>
-                </div>
+            <div class="package-card" data-package="zikra">
+              <img
+                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dc012b31-e445-47e9-b69a-ec82b2a851eb.png"
+                alt="White luxury speedboat with blue accents on calm turquoise water, modern design with comfortable seating for island hopping adventures"
+                class="package-image"
+              />
+              <div class="package-content">
+                <h3 class="package-name">ZIKRA SPEEDBOAT</h3>
+                <p class="package-price">5.500.000</p>
+              </div>
               </div>
               <a href="#" class="view-details-btn">view details</a>
             </div>
 
             <div class="package-item">
-              <div class="package-card" data-package="zaviero">
-                <img
-                  src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/25f0f095-5ddf-4a55-be67-66d1f8bf8f28.png"
-                  alt="Sleek blue and white speedboat with modern hull design cutting through tropical waters with mountains in the background"
-                  class="package-image"
-                />
-                <div class="package-content">
-                  <h3 class="package-name">ZAVIERO SPEEDBOAT</h3>
-                  <p class="package-price">4.500.000</p>
-                </div>
+            <div class="package-card" data-package="zaviero">
+              <img
+                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/25f0f095-5ddf-4a55-be67-66d1f8bf8f28.png"
+                alt="Sleek blue and white speedboat with modern hull design cutting through tropical waters with mountains in the background"
+                class="package-image"
+              />
+              <div class="package-content">
+                <h3 class="package-name">ZAVIERO SPEEDBOAT</h3>
+                <p class="package-price">4.500.000</p>
+              </div>
               </div>
               <a href="#" class="view-details-btn">view details</a>
             </div>
 
             <div class="package-item">
-              <div class="package-card" data-package="rentcar">
-                <img
-                  src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a27bb5e8-93b3-42a5-8abd-81574c63eacb.png"
-                  alt="White luxury van with tinted windows parked on tropical beach with palm trees and ocean view, perfect for comfortable island transportation"
-                  class="package-image"
-                />
-                <div class="package-content">
-                  <h3 class="package-name">RENT CAR</h3>
-                  <p class="package-price">350.000</p>
-                </div>
+            <div class="package-card" data-package="rentcar">
+              <img
+                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a27bb5e8-93b3-42a5-8abd-81574c63eacb.png"
+                alt="White luxury van with tinted windows parked on tropical beach with palm trees and ocean view, perfect for comfortable island transportation"
+                class="package-image"
+              />
+              <div class="package-content">
+                <h3 class="package-name">RENT CAR</h3>
+                <p class="package-price">350.000</p>
+              </div>
               </div>
               <a href="#" class="view-details-btn">view details</a>
             </div>
@@ -1471,12 +1847,12 @@ import Footer from "../components/Footer.astro";
 
           <!-- Trip Options -->
           <div class="detail-trip-options">
-            <div class="detail-trip-option active">
+            <div class="detail-trip-option active" data-trip="half-day">
               <div class="detail-trip-title">HALF DAY TRIP</div>
               <div class="detail-trip-price">Rp. 5.500.000,-</div>
               <div class="detail-trip-time">06.30 AM - 02.00 PM</div>
             </div>
-            <div class="detail-trip-option">
+            <div class="detail-trip-option" data-trip="full-day">
               <div class="detail-trip-title">FULL DAY TRIP</div>
               <div class="detail-trip-price">Rp 9.000.000,-</div>
               <div class="detail-trip-time">06.30 AM - 05.00 PM</div>
@@ -1631,8 +2007,17 @@ import Footer from "../components/Footer.astro";
             });
             // Add active to clicked option
             option.classList.add("active");
+            
+            // Update destination colors
+            updateDestinationColors(option);
           });
         });
+        
+        // Set initial destination colors
+        const activeOption = document.querySelector(".detail-trip-option.active");
+        if (activeOption) {
+          updateDestinationColors(activeOption);
+        }
       });
 
       // Smooth scrolling for navigation links
@@ -1986,12 +2371,12 @@ import Footer from "../components/Footer.astro";
 
                     <!-- Trip Options -->
                     <div class="detail-trip-options">
-                        <div class="detail-trip-option active">
+                        <div class="detail-trip-option active" data-trip="half-day">
                             <div class="detail-trip-title">HALF DAY TRIP</div>
                             <div class="detail-trip-price">Rp. 5.500.000,-</div>
                             <div class="detail-trip-time">06.30 AM - 02.00 PM</div>
                         </div>
-                        <div class="detail-trip-option">
+                        <div class="detail-trip-option" data-trip="full-day">
                             <div class="detail-trip-title">FULL DAY TRIP</div>
                             <div class="detail-trip-price">Rp 9.000.000,-</div>
                             <div class="detail-trip-time">06.30 AM - 05.00 PM</div>
@@ -2087,12 +2472,12 @@ import Footer from "../components/Footer.astro";
 
                     <!-- Trip Options -->
                     <div class="detail-trip-options">
-                        <div class="detail-trip-option active">
+                        <div class="detail-trip-option active" data-trip="half-day">
                             <div class="detail-trip-title">HALF DAY TRIP</div>
                             <div class="detail-trip-price">Rp. 4.500.000,-</div>
                             <div class="detail-trip-time">06.30 AM - 02.00 PM</div>
                         </div>
-                        <div class="detail-trip-option">
+                        <div class="detail-trip-option" data-trip="full-day">
                             <div class="detail-trip-title">FULL DAY TRIP</div>
                             <div class="detail-trip-price">Rp 7.500.000,-</div>
                             <div class="detail-trip-time">06.30 AM - 05.00 PM</div>
@@ -2177,12 +2562,12 @@ import Footer from "../components/Footer.astro";
 
                     <!-- Trip Options -->
                     <div class="detail-trip-options">
-                        <div class="detail-trip-option active">
+                        <div class="detail-trip-option active" data-trip="half-day">
                             <div class="detail-trip-title">HALF DAY</div>
                             <div class="detail-trip-price">Rp. 350.000,-</div>
                             <div class="detail-trip-time">4 Hours</div>
                         </div>
-                        <div class="detail-trip-option">
+                        <div class="detail-trip-option" data-trip="full-day">
                             <div class="detail-trip-title">FULL DAY</div>
                             <div class="detail-trip-price">Rp 600.000,-</div>
                             <div class="detail-trip-time">8 Hours</div>
@@ -2262,8 +2647,6 @@ import Footer from "../components/Footer.astro";
           modal.classList.add("show");
         }, 10);
 
-        // Setup trip option switching
-        setupTripOptions();
       };
 
       window.closeDetailModal = function () {
@@ -2277,15 +2660,23 @@ import Footer from "../components/Footer.astro";
         }
       };
 
-      function setupTripOptions() {
-        const tripOptions = document.querySelectorAll(".detail-trip-option");
-        tripOptions.forEach((option) => {
-          option.addEventListener("click", function () {
-            // Remove active from all options
-            tripOptions.forEach((opt) => opt.classList.remove("active"));
-            // Add active to clicked option
-            this.classList.add("active");
-          });
+
+
+      // Function to update destination colors
+      function updateDestinationColors(selectedOption) {
+        const destinations = document.querySelectorAll(".detail-dest-item");
+        const tripType = selectedOption.getAttribute("data-trip");
+        
+        destinations.forEach((dest) => {
+          // Remove all color classes
+          dest.classList.remove("half-day-active", "full-day-active");
+          
+          // Add appropriate class based on trip type
+          if (tripType === "half-day") {
+            dest.classList.add("half-day-active");
+          } else if (tripType === "full-day") {
+            dest.classList.add("full-day-active");
+          }
         });
       }
 
