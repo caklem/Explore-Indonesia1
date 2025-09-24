@@ -87,22 +87,22 @@ import Footer from "../components/Footer.astro";
         font-size: 4rem;
         font-weight: 600;
         letter-spacing: 3px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         text-transform: uppercase;
         text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-        line-height: 1.1;
+        line-height: 1.0;
       }
 
       .hero-subtitle {
         font-family: "Noto Sans", sans-serif;
         font-size: 1.2rem;
-        margin-bottom: 15px;
+        margin-bottom: 8px;
         font-weight: 300;
         opacity: 0.9;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         font-style: normal;
         letter-spacing: 0.3px;
-        line-height: 1.4;
+        line-height: 1.2;
       }
 
       .hero-description {
@@ -118,8 +118,8 @@ import Footer from "../components/Footer.astro";
 
       .cta-button {
         background: white;
-        color: #F28482;
-        border: 2px solid #F28482;
+        color: #f28482;
+        border: 2px solid #f28482;
         padding: 10px 24px;
         border-radius: 20px;
         font-size: 14px;
@@ -172,7 +172,7 @@ import Footer from "../components/Footer.astro";
         width: 60px;
         height: 60px;
         border-radius: 50%;
-        background-color: #fff;
+        background-color: transparent;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -180,35 +180,28 @@ import Footer from "../components/Footer.astro";
         color: #666;
         font-size: 24px;
         transition: all 0.3s ease;
-        border: 1px solid #e9ecef;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border: none;
+        box-shadow: none;
       }
 
       .social-icon:nth-child(1):hover {
-        background-color: #25d366;
-        color: white;
-        border-color: #25d366;
+        background-color: transparent;
+        color: #25d366;
+        border-color: transparent;
         transform: translateY(-2px);
       }
 
       .social-icon:nth-child(2):hover {
-        background: linear-gradient(
-          45deg,
-          #f09433 0%,
-          #e6683c 25%,
-          #dc2743 50%,
-          #cc2366 75%,
-          #bc1888 100%
-        );
-        color: white;
-        border-color: #bc1888;
+        background: transparent;
+        color: #e4405f;
+        border-color: transparent;
         transform: translateY(-2px);
       }
 
       .social-icon:nth-child(3):hover {
-        background-color: #000;
-        color: white;
-        border-color: #000;
+        background-color: transparent;
+        color: #000;
+        border-color: transparent;
         transform: translateY(-2px);
       }
 
@@ -266,52 +259,90 @@ import Footer from "../components/Footer.astro";
         margin-bottom: 60px;
       }
 
+      .package-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        position: relative;
+      }
+
       .package-card {
         background: white;
         border-radius: 50px;
         overflow: hidden;
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+        box-shadow: none;
         transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         position: relative;
         border: 1px solid rgba(0, 0, 0, 0.05);
+        height: 300px;
+        width: 100%;
       }
 
       .package-card:hover {
-        transform: translateY(-12px);
-        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12);
+        transform: none;
+        box-shadow: none;
       }
 
       .package-image {
         width: 100%;
-        height: 200px;
+        height: 100%;
         object-fit: cover;
-        position: relative;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
       }
 
       .package-content {
-        padding: 10px 100px;
+        padding: 15px 30px;
         text-align: center;
-        background: linear-gradient(135deg, #ffffff 0%);
+        background: transparent;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 250px;
+        z-index: 2;
+      }
+      
+      .package-content::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 0 0 15px 15px;
+        z-index: -1;
+        box-shadow: none;
       }
 
       .package-name {
         font-family: "Noto Sans", sans-serif;
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-weight: 700;
         color: #2c3e50;
-        margin-bottom: 12px;
+        margin-bottom: 8px;
         text-transform: uppercase;
         letter-spacing: 0.8px;
         line-height: 1.3;
+        position: relative;
+        z-index: 1;
       }
 
       .package-price {
         font-family: "Noto Sans", sans-serif;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         font-weight: 700;
         color: #ff6b6b;
         margin-bottom: 0;
         position: relative;
+        z-index: 1;
       }
 
       .package-price::before {
@@ -330,9 +361,9 @@ import Footer from "../components/Footer.astro";
         background: transparent;
         color: #f28482;
         border: 1.5px solid #f28482;
-        padding: 10px 24px;
-        border-radius: 20px;
-        font-size: 14px;
+        padding: 8px 20px;
+        border-radius: 15px;
+        font-size: 12px;
         font-weight: 400;
         cursor: pointer;
         text-decoration: none;
@@ -341,8 +372,6 @@ import Footer from "../components/Footer.astro";
         text-transform: lowercase;
         letter-spacing: 0.3px;
         font-family: "Noto Sans", sans-serif;
-        position: relative;
-        z-index: 999;
         pointer-events: auto;
         user-select: none;
       }
@@ -396,11 +425,14 @@ import Footer from "../components/Footer.astro";
         .hero h1 {
           font-size: 3rem;
           letter-spacing: 2px;
+          margin-bottom: 10px;
+          line-height: 1.0;
         }
 
         .hero-subtitle {
           font-size: 1.4rem;
-          margin-bottom: 15px;
+          margin-bottom: 8px;
+          line-height: 1.2;
         }
 
         .packages-grid {
@@ -475,42 +507,13 @@ import Footer from "../components/Footer.astro";
         }
       }
 
-      /* Additional styling for better visual appeal */
+      /* Additional styling for better visual appeal - DISABLED */
       .package-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(
-          135deg,
-          transparent 0%,
-          rgba(255, 107, 107, 0.05) 100%
-        );
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        border-radius: 16px;
-      }
-
-      .package-card:hover::before {
-        opacity: 1;
+        display: none;
       }
 
       .package-card::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #ff6b6b, #ff5252);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-
-      .package-card:hover::after {
-        opacity: 1;
+        display: none;
       }
 
       /* Smooth animations */
@@ -670,7 +673,7 @@ import Footer from "../components/Footer.astro";
       }
 
       .detail-modal-content {
-        position: relative ;
+        position: relative;
         width: 95%;
         max-width: 550px;
         max-height: 85vh;
@@ -1300,7 +1303,7 @@ import Footer from "../components/Footer.astro";
   </head>
   <body>
     <!-- Header Component -->
-    <Header currentPage="home" />
+    <Header currentPage="home" isHomePage={true} />
 
     <!-- Main Content -->
     <main class="main-content">
@@ -1393,43 +1396,49 @@ import Footer from "../components/Footer.astro";
           <h2 class="packages-title">VEHICLE PACKAGES</h2>
 
           <div class="packages-grid">
-            <div class="package-card" data-package="zikra">
-              <img
-                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dc012b31-e445-47e9-b69a-ec82b2a851eb.png"
-                alt="White luxury speedboat with blue accents on calm turquoise water, modern design with comfortable seating for island hopping adventures"
-                class="package-image"
-              />
-              <div class="package-content">
-                <h3 class="package-name">ZIKRA SPEEDBOAT</h3>
-                <p class="package-price">5.500.000</p>
-                <a href="#" class="view-details-btn">view details</a>
+            <div class="package-item">
+              <div class="package-card" data-package="zikra">
+                <img
+                  src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dc012b31-e445-47e9-b69a-ec82b2a851eb.png"
+                  alt="White luxury speedboat with blue accents on calm turquoise water, modern design with comfortable seating for island hopping adventures"
+                  class="package-image"
+                />
+                <div class="package-content">
+                  <h3 class="package-name">ZIKRA SPEEDBOAT</h3>
+                  <p class="package-price">5.500.000</p>
+                </div>
               </div>
+              <a href="#" class="view-details-btn">view details</a>
             </div>
 
-            <div class="package-card" data-package="zaviero">
-              <img
-                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/25f0f095-5ddf-4a55-be67-66d1f8bf8f28.png"
-                alt="Sleek blue and white speedboat with modern hull design cutting through tropical waters with mountains in the background"
-                class="package-image"
-              />
-              <div class="package-content">
-                <h3 class="package-name">ZAVIERO SPEEDBOAT</h3>
-                <p class="package-price">4.500.000</p>
-                <a href="#" class="view-details-btn">view details</a>
+            <div class="package-item">
+              <div class="package-card" data-package="zaviero">
+                <img
+                  src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/25f0f095-5ddf-4a55-be67-66d1f8bf8f28.png"
+                  alt="Sleek blue and white speedboat with modern hull design cutting through tropical waters with mountains in the background"
+                  class="package-image"
+                />
+                <div class="package-content">
+                  <h3 class="package-name">ZAVIERO SPEEDBOAT</h3>
+                  <p class="package-price">4.500.000</p>
+                </div>
               </div>
+              <a href="#" class="view-details-btn">view details</a>
             </div>
 
-            <div class="package-card" data-package="rentcar">
-              <img
-                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a27bb5e8-93b3-42a5-8abd-81574c63eacb.png"
-                alt="White luxury van with tinted windows parked on tropical beach with palm trees and ocean view, perfect for comfortable island transportation"
-                class="package-image"
-              />
-              <div class="package-content">
-                <h3 class="package-name">RENT CAR</h3>
-                <p class="package-price">350.000</p>
-                <a href="#" class="view-details-btn">view details</a>
+            <div class="package-item">
+              <div class="package-card" data-package="rentcar">
+                <img
+                  src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a27bb5e8-93b3-42a5-8abd-81574c63eacb.png"
+                  alt="White luxury van with tinted windows parked on tropical beach with palm trees and ocean view, perfect for comfortable island transportation"
+                  class="package-image"
+                />
+                <div class="package-content">
+                  <h3 class="package-name">RENT CAR</h3>
+                  <p class="package-price">350.000</p>
+                </div>
               </div>
+              <a href="#" class="view-details-btn">view details</a>
             </div>
           </div>
         </div>
@@ -2570,14 +2579,14 @@ import Footer from "../components/Footer.astro";
     background: white;
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: none;
     transition: all 0.4s;
     border: 1px solid rgba(0, 0, 0, 0.05);
   }
 
   .package-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    transform: none;
+    box-shadow: none;
   }
 
   .package-image {

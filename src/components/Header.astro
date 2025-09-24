@@ -1,5 +1,5 @@
 ---
-const { currentPage = '', isDarkMode = false } = Astro.props;
+const { currentPage = '', isDarkMode = false, isHomePage = false } = Astro.props;
 ---
 
 <style>
@@ -91,19 +91,10 @@ const { currentPage = '', isDarkMode = false } = Astro.props;
   }
 
   .header.scrolled {
-    bac    function toggleMobileMenu() {
-      hamburger?.classList.toggle("active");
-      sidebar?.classList.toggle("active");
-      overlay?.classList.toggle("active");
-    }
-
-    function closeMobileMenu() {
-      hamburger?.classList.remove("active");
-      sidebar?.classList.remove("active");
-      overlay?.classList.remove("active");
-    }ba(255, 255, 255, 0.95);
+    background: #F4F4F4;
     backdrop-filter: blur(20px);
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    padding: 12px 0;
   }
 
   .header.scrolled .logo-image {
@@ -117,14 +108,20 @@ const { currentPage = '', isDarkMode = false } = Astro.props;
 
   .header.scrolled .nav-menu a.active {
     color: #ff6b6b;
+    text-shadow: none;
   }
 
   .header.scrolled .nav-menu a:hover {
     color: #ff6b6b;
+    text-shadow: none;
   }
 
   .header.scrolled .hamburger span {
     background-color: #333;
+  }
+
+  .header.scrolled .nav-menu {
+    gap: 30px;
   }
 
   .nav-container {
@@ -147,7 +144,7 @@ const { currentPage = '', isDarkMode = false } = Astro.props;
     height: 85px;
     width: auto;
     transition: all 0.3s ease;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
   }
 
   .logo:hover .logo-image {
@@ -167,19 +164,35 @@ const { currentPage = '', isDarkMode = false } = Astro.props;
     color: #333;
     text-decoration: none;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 18px;
     text-transform: none;
     letter-spacing: 0.5px;
     position: relative;
     transition: all 0.3s ease;
+    text-shadow: none;
   }
 
   .nav-menu a:hover {
     color: #ff6b6b;
+    text-shadow: none;
   }
 
   .nav-menu a.active {
     color: #ff6b6b;
+    text-shadow: none;
+  }
+
+  /* Shadow untuk semua menu ketika di halaman Home */
+  .header.home-page .nav-menu a {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .header.home-page .nav-menu a:hover {
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+  }
+
+  .header.home-page .nav-menu a.active {
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
   }
 
   .hamburger {
@@ -473,7 +486,7 @@ const { currentPage = '', isDarkMode = false } = Astro.props;
     }
 
     .nav-menu a {
-      font-size: 13px;
+      font-size: 15px;
     }
 
     .header:not(.dark-mode) .logo {
@@ -503,7 +516,7 @@ const { currentPage = '', isDarkMode = false } = Astro.props;
     }
 
     .nav-menu a {
-      font-size: 15px;
+      font-size: 17px;
     }
 
     .logo-image {
@@ -512,7 +525,7 @@ const { currentPage = '', isDarkMode = false } = Astro.props;
   }
 </style>
 
-<header class={`header ${isDarkMode ? 'dark-mode' : ''}`}>
+<header class={`header ${isDarkMode ? 'dark-mode' : ''} ${isHomePage ? 'home-page' : ''}`}>
   <nav class="nav-container">
     <a href="/" class="logo">
       <img src="/LOGO.png" alt="Indonesia Logo" class="logo-image" />
@@ -712,26 +725,39 @@ const { currentPage = '', isDarkMode = false } = Astro.props;
         const navLinks = document.querySelectorAll(".nav-menu a") as NodeListOf<HTMLElement>;    if (!header) return;
 
     const isDarkMode = header.classList.contains('dark-mode');
+    const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html';
+    
+    // Add home-page class if on home page
+    if (isHomePage) {
+      header.classList.add('home-page');
+    } else {
+      header.classList.remove('home-page');
+    }
 
     window.addEventListener("scroll", () => {
       if (window.scrollY > 50) {
         header.classList.add("scrolled");
         
-        header.style.background = "rgba(255, 255, 255, 0.95)";
+        header.style.background = "#F4F4F4";
         header.style.backdropFilter = "blur(20px)";
         header.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.1)";
 
         if (logo) {
           logo.style.color = "#333";
           logo.style.textShadow = "none";
+          const logoImage = logo.querySelector('.logo-image') as HTMLImageElement;
+          if (logoImage) {
+            logoImage.style.filter = "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15))";
+          }
         }
         navLinks.forEach((link) => {
           if (link.classList.contains("active")) {
             link.style.color = "#ff6b6b";
+            link.style.textShadow = "none";
           } else {
             link.style.color = "#333";
+            link.style.textShadow = "none";
           }
-          link.style.textShadow = "none";
         });
       } else {
         header.classList.remove("scrolled");
@@ -747,17 +773,34 @@ const { currentPage = '', isDarkMode = false } = Astro.props;
             logo.style.color = "#333";
             logo.style.textShadow = "none";
           }
+          const logoImage = logo.querySelector('.logo-image') as HTMLImageElement;
+          if (logoImage) {
+            logoImage.style.filter = "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3))";
+          }
         }
         navLinks.forEach((link) => {
           if (link.classList.contains("active")) {
             link.style.color = "#ff6b6b";
+            if (isHomePage) {
+              link.style.textShadow = "2px 2px 6px rgba(0, 0, 0, 0.4)";
+            } else {
+              link.style.textShadow = "none";
+            }
           } else {
             if (isDarkMode) {
               link.style.color = "white";
-              link.style.textShadow = "1px 1px 2px rgba(0, 0, 0, 0.5)";
+              if (isHomePage) {
+                link.style.textShadow = "2px 2px 4px rgba(0, 0, 0, 0.6)";
+              } else {
+                link.style.textShadow = "none";
+              }
             } else {
               link.style.color = "#333";
-              link.style.textShadow = "none";
+              if (isHomePage) {
+                link.style.textShadow = "2px 2px 4px rgba(0, 0, 0, 0.3)";
+              } else {
+                link.style.textShadow = "none";
+              }
             }
           }
         });

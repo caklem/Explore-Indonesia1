@@ -302,8 +302,8 @@ import Header from "../components/Header.astro";
       }
 
       .product-image-container {
-        width: 250px;
-        height: 250px;
+        width: 300px;
+        height: 300px;
         border-radius: 20px;
         flex-shrink: 0;
         position: relative;
@@ -764,7 +764,9 @@ import Header from "../components/Header.astro";
 
       /* Hover effect untuk checkmark */
       .product-card .trip-options .trip-option.active:first-child:hover::after,
-      .product-card .trip-options .trip-option.active:last-child:hover::after {
+      .product-card .trip-options .trip-option.active:last-child:hover::after,
+      .product-card.rent-car .trip-option.active:first-child:hover::after,
+      .product-card.rent-car .trip-option.active:last-child:hover::after {
         transform: scale(1.15);
         box-shadow:
           0 6px 20px rgba(242, 132, 130, 0.8),
@@ -774,22 +776,24 @@ import Header from "../components/Header.astro";
         transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      /* Enhanced mobile hover effect - konsisten dengan desktop */
+        /* Enhanced mobile hover effect - konsisten dengan desktop */
       @media (max-width: 768px) {
         .product-card
           .trip-options
           .trip-option.active:first-child:hover::after,
         .product-card
           .trip-options
+          .trip-option.active:last-child:hover::after,
+        .product-card.rent-car
+          .trip-option.active:first-child:hover::after,
+        .product-card.rent-car
           .trip-option.active:last-child:hover::after {
           transform: scale(1.1);
           box-shadow:
             0 6px 20px rgba(242, 132, 130, 0.6),
             0 0 0 4px rgba(242, 132, 130, 0.3);
           transition: all 0.2s ease;
-        }
-
-        /* Responsive checkmark untuk tablet */
+        }        /* Responsive checkmark untuk tablet */
         .product-card .trip-options .trip-option.active:first-child::after {
           top: -10px !important;
           left: -10px !important;
@@ -860,7 +864,7 @@ import Header from "../components/Header.astro";
         font-size: 1.4rem;
         font-weight: 700;
         color: #333;
-        margin-bottom: 5px;
+        margin-bottom: 0px;
         text-align: center; /* Center aligned */
       }
 
@@ -868,32 +872,69 @@ import Header from "../components/Header.astro";
         font-family: "Noto Sans", sans-serif;
         font-size: 0.9rem;
         color: #666;
-        margin-bottom: 15px;
+        margin-bottom: 4px;
         font-weight: 400;
         text-align: center; /* Center aligned */
       }
 
       .destinations {
         list-style: none;
-        margin-bottom: 20px;
+        margin-bottom: 8px;
         padding: 0;
-        display: flex; /* Flexbox untuk positioning container di tengah */
-        flex-direction: column; /* Stack items vertically */
-        align-items: center; /* Container berada di tengah halaman */
-        text-align: left; /* Text dalam container rata kiri */
+        display: flex !important; /* Flexbox untuk positioning container di tengah */
+        flex-direction: column !important; /* Stack items vertically */
+        align-items: center !important; /* Container berada di tengah halaman */
+        text-align: left !important; /* Text dalam container rata KIRI */
+        width: fit-content !important; /* Container menyesuaikan konten */
+        margin-left: auto !important; /* Center container horizontally */
+        margin-right: auto !important; /* Center container horizontally */
+      }
+
+      /* CSS spesifik untuk destinations di product card */
+      .product-card .destinations,
+      .product-card .trip-option.active ~ .destinations,
+      .product-card .trip-option:not(.active) ~ .destinations {
+        list-style: none !important;
+        margin-bottom: 20px !important;
+        padding: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: left !important;
+        width: fit-content !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
       }
 
       .destinations li {
         font-family: "Noto Sans", sans-serif;
         color: #555;
         font-size: 0.95rem;
-        padding: 2px 0;
+        padding: 0px 0;
         position: relative;
         padding-left: 20px;
         font-weight: 400;
         transition: all 0.3s ease;
-        display: block; /* Block untuk left alignment dalam flex container */
-        text-align: left; /* Text left dalam center positioned container */
+        display: block !important; /* Block untuk left alignment dalam flex container */
+        text-align: left !important; /* Text KIRI dalam center positioned container */
+        width: 100% !important; /* Full width dalam container */
+      }
+
+      /* CSS spesifik untuk destinations li di product card */
+      .product-card .destinations li,
+      .product-card .trip-option.active ~ .destinations li,
+      .product-card .trip-option:not(.active) ~ .destinations li {
+        font-family: "Noto Sans", sans-serif !important;
+        color: #555 !important;
+        font-size: 0.95rem !important;
+        padding: 2px 0 !important;
+        position: relative !important;
+        padding-left: 20px !important;
+        font-weight: 400 !important;
+        transition: all 0.3s ease !important;
+        display: block !important;
+        text-align: left !important;
+        width: 100% !important;
       }
 
       .destinations li:before {
@@ -910,7 +951,43 @@ import Header from "../components/Header.astro";
         display: block !important;
         opacity: 1 !important;
         visibility: visible !important;
+        text-align: left !important;
         z-index: 1 !important;
+      }
+      
+      /* SUPER OVERRIDE untuk memastikan konsistensi destinations di card */
+      .product-card .destinations,
+      .product-card[data-trip="halfday"] .destinations,
+      .product-card[data-trip="fullday"] .destinations,
+      .product-card .trip-option.active ~ .destinations,
+      .product-card .trip-option:not(.active) ~ .destinations,
+      .product-card .trip-options + .destinations {
+        list-style: none !important;
+        margin-bottom: 20px !important;
+        padding: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important; /* Align kiri bukan center */
+        text-align: left !important;
+        width: fit-content !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+
+      /* ULTIMATE OVERRIDE - CSS PALING KUAT untuk destinations text alignment */
+      .product-card .destinations,
+      .product-card .destinations li,
+      .product-card[data-trip="halfday"] .destinations,
+      .product-card[data-trip="halfday"] .destinations li,
+      .product-card[data-trip="fullday"] .destinations,
+      .product-card[data-trip="fullday"] .destinations li,
+      .product-card .trip-option.active ~ .destinations,
+      .product-card .trip-option.active ~ .destinations li,
+      .product-card .trip-option:not(.active) ~ .destinations,
+      .product-card .trip-option:not(.active) ~ .destinations li,
+      .product-card .trip-options + .destinations,
+      .product-card .trip-options + .destinations li {
+        text-align: left !important;
       }
 
       .view-details-btn {
@@ -941,15 +1018,197 @@ import Header from "../components/Header.astro";
       }
 
       /* Styling sederhana untuk rent car */
-      .product-card.rent-car .trip-option:first-child {
-        background: #e6f3ff;
-        color: #4a90e2;
-        border-right: 1px solid rgba(74, 144, 226, 0.2);
+      .product-card.rent-car .product-body {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 0 30px 30px 30px;
+        gap: 30px;
+      }
+      
+      /* Style the product header to match the Zaviero Speedboat layout */
+      .product-card.rent-car .product-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 30px;
+        background: transparent;
+        /* border-bottom: 1px solid rgba(0,0,0,0.05); */
+      }
+      
+      .product-card.rent-car .product-name {
+        margin: 0;
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
       }
 
-      .product-card.rent-car .trip-option:last-child {
-        background: #4a90e2;
+      .product-card.rent-car .product-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        text-align: right;
+        padding: 0 15px 15px 0;
+      }
+
+      .product-card.rent-car .additional-info {
+        text-align: center !important;
+      }
+      
+      .product-card.rent-car .view-details-btn {
+        display: inline-block;
+        background-color: transparent;
+        border: 2px solid #f28482;
+        color: #f28482;
+        padding: 10px 24px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 400;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        text-transform: lowercase;
+        letter-spacing: 0.3px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: 0;
+      }
+
+      /* View details button untuk Zaviero dan Zikita Speedboat - posisi kanan */
+      .product-card:not(.rent-car) .view-details-btn {
+        align-self: flex-end;
+        margin-left: auto;
+        margin-top: auto;
+        margin-right: 0;
+      }
+      
+      .product-card.rent-car .view-details-btn:hover {
+        background-color: #f28482;
         color: white;
+        transform: translateY(-2px);
+      }
+      
+      .product-card.rent-car .view-details-btn:hover::after {
+        content: " →";
+        display: inline-block;
+        transform: translateX(3px);
+        transition: transform 0.2s ease;
+      }
+
+      /* Header trip options for rent car - styled like the image */
+      .product-card.rent-car .product-header .trip-options {
+        display: flex;
+        border-radius: 25px;
+        overflow: visible; /* Changed from hidden to visible so checkmark isn't cut off */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 0;
+        position: relative;
+      }
+
+      /* First option - left side with light beige background */
+      .product-card.rent-car .trip-option:first-child {
+        background: #ede6da !important;
+        color: #6b5b47 !important;
+        border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+        position: relative;
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+        padding: 10px 20px;
+      }
+
+      /* Second option - right side with green background */
+      .product-card.rent-car .trip-option:last-child {
+        background: #a3b184 !important;
+        color: white !important;
+        position: relative;
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+        padding: 10px 20px;
+      }
+      
+      /* Active state for first option */
+      .product-card.rent-car .trip-option.active:first-child {
+        background: #ede6da !important;
+        color: #6b5b47 !important;
+        font-weight: 700 !important;
+        position: relative;
+        animation: buttonGlow 0.4s ease-out;
+        transform: scale(1.02);
+        box-shadow:
+          0 4px 15px rgba(212, 196, 168, 0.4),
+          inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        text-shadow: 0 1px 2px rgba(90, 74, 55, 0.2);
+      }
+      
+      /* Active state for second option */
+      .product-card.rent-car .trip-option.active:last-child {
+        background: #8fa06c !important;
+        color: white !important;
+        font-weight: 700 !important;
+        position: relative;
+        animation: buttonGlow 0.4s ease-out;
+        transform: scale(1.02);
+        box-shadow:
+          0 4px 15px rgba(143, 160, 108, 0.4),
+          inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      }
+      
+      /* Add checkmark to first active option - exactly the same as regular product-card */
+      .product-card.rent-car .trip-option.active:first-child::after {
+        content: "✓";
+        position: absolute;
+        top: -12px; /* Di atas button, tidak overlap dengan teks */
+        left: -12px; /* Di luar button, tidak overlap dengan teks */
+        width: 32px; /* Sedikit lebih besar untuk visibility */
+        height: 32px;
+        background: linear-gradient(135deg, #f28482, #ff6b6b);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px; /* Font lebih besar untuk readability */
+        font-weight: bold;
+        border: 3px solid white;
+        box-shadow:
+          0 6px 20px rgba(242, 132, 130, 0.6),
+          0 3px 12px rgba(0, 0, 0, 0.3);
+        z-index: 99999;
+        pointer-events: none;
+        animation:
+          checkmarkPulse 0.6s ease-out,
+          checkmarkBounce 0.4s ease-out;
+        transform: scale(1);
+      }
+      
+      /* Add checkmark to second active option - exactly the same as regular product-card */
+      .product-card.rent-car .trip-option.active:last-child::after {
+        content: "✓";
+        position: absolute;
+        top: -12px; /* Di atas button, tidak overlap dengan teks */
+        right: -12px; /* Di luar button, tidak overlap dengan teks */
+        width: 32px; /* Sedikit lebih besar untuk visibility */
+        height: 32px;
+        background: linear-gradient(135deg, #f28482, #ff6b6b);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px; /* Font lebih besar untuk readability */
+        font-weight: bold;
+        border: 3px solid white;
+        box-shadow:
+          0 6px 20px rgba(242, 132, 130, 0.6),
+          0 3px 12px rgba(0, 0, 0, 0.3);
+        z-index: 99999;
+        pointer-events: none;
+        animation:
+          checkmarkPulse 0.6s ease-out,
+          checkmarkBounce 0.4s ease-out;
+        transform: scale(1);
       }
       .additional-info {
         font-family: "Noto Sans", sans-serif;
@@ -958,6 +1217,38 @@ import Header from "../components/Header.astro";
         line-height: 1.5;
         margin-bottom: 20px;
         font-weight: 400;
+      }
+      
+      /* For consistency with align-right and align-left classes */
+      .product-card.rent-car .additional-info,
+      .product-card.rent-car .product-price,
+      .product-card.rent-car .trip-time {
+        text-align: right;
+      }
+      
+      
+      /* Create more vertical space before the button */
+      .product-card.rent-car .additional-info {
+        margin-bottom: 25px;
+      }
+      
+      /* Responsive checkmark for rent-car in tablet size */
+      @media (max-width: 768px) {
+        .product-card.rent-car .trip-option.active:first-child::after {
+          top: -10px !important;
+          left: -10px !important;
+          width: 28px !important;
+          height: 28px !important;
+          font-size: 14px !important;
+        }
+        
+        .product-card.rent-car .trip-option.active:last-child::after {
+          top: -10px !important;
+          right: -10px !important;
+          width: 28px !important;
+          height: 28px !important;
+          font-size: 14px !important;
+        }
       }
 
       /* Image Modal Styles */
@@ -1300,24 +1591,28 @@ import Header from "../components/Header.astro";
       }
 
       .detail-destinations {
-        display: flex;
-        gap: 35px;
-        margin: 30px 30px;
-        padding: 0;
+        display: flex !important;
+        gap: 35px !important;
+        margin: 30px auto !important; /* Auto margin untuk center */
+        padding: 0 !important;
+        width: fit-content !important; /* Container menyesuaikan konten */
+        justify-content: center !important; /* Center content */
       }
 
       .detail-dest-column {
-        flex: 1;
+        flex: 1 !important;
+        width: auto !important; /* Auto width untuk kolom */
       }
 
       .detail-dest-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
-        margin-bottom: 14px;
-        font-size: 15px;
-        color: #333;
-        line-height: 1.4;
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+        margin-bottom: 14px !important;
+        font-size: 15px !important;
+        color: #333 !important;
+        line-height: 1.4 !important;
+        text-align: left !important; /* Text KIRI */
       }
 
       .detail-dest-icon {
@@ -1706,29 +2001,36 @@ import Header from "../components/Header.astro";
         /* Mobile responsive untuk product info elements */
         .product-price {
           font-size: 1.2rem; /* Sedikit lebih kecil untuk mobile */
-          margin-bottom: 8px;
+          margin-bottom: 0px;
           text-align: center;
         }
 
         .trip-time {
           font-size: 0.85rem; /* Sedikit lebih kecil untuk mobile */
-          margin-bottom: 12px;
+          margin-bottom: 2px;
           text-align: center;
         }
 
         .destinations {
-          margin-bottom: 18px;
-          text-align: center; /* Center untuk konsistensi */
+          margin-bottom: 6px !important;
+          display: flex !important; /* Flexbox untuk positioning container di tengah */
+          flex-direction: column !important; /* Stack items vertically */
+          align-items: center !important; /* Container berada di tengah halaman */
+          text-align: left !important; /* Text dalam container rata KIRI */
+          width: fit-content !important; /* Container menyesuaikan konten */
+          margin-left: auto !important; /* Center container horizontally */
+          margin-right: auto !important; /* Center container horizontally */
         }
 
         .destinations li {
-          font-size: 0.9rem; /* Sedikit lebih kecil untuk mobile */
-          padding: 3px 0; /* Sedikit lebih besar spacing */
-          display: inline-block; /* Konsisten dengan desktop */
-          text-align: left; /* Text left tapi container center */
-          padding-left: 20px; /* Restore padding untuk icon */
-          margin-bottom: 4px;
-          position: relative; /* Required untuk icon positioning */
+          font-size: 0.9rem !important; /* Sedikit lebih kecil untuk mobile */
+          padding: 0px 0 !important; /* Spacing minimal */
+          display: block !important; /* Block untuk left alignment dalam flex container */
+          text-align: left !important; /* Text KIRI dalam center positioned container */
+          padding-left: 20px !important; /* Restore padding untuk icon */
+          margin-bottom: 4px !important;
+          position: relative !important; /* Required untuk icon positioning */
+          width: 100% !important; /* Full width dalam container */
         }
 
         .destinations li:before {
@@ -2051,29 +2353,36 @@ import Header from "../components/Header.astro";
         /* Very small mobile responsive untuk product info elements */
         .product-price {
           font-size: 1.1rem; /* Lebih kecil untuk layar sangat kecil */
-          margin-bottom: 6px;
+          margin-bottom: 0px;
           text-align: center;
         }
 
         .trip-time {
           font-size: 0.8rem; /* Lebih kecil untuk layar sangat kecil */
-          margin-bottom: 10px;
+          margin-bottom: 1px;
           text-align: center;
         }
 
         .destinations {
-          margin-bottom: 15px;
-          text-align: center; /* Center untuk konsistensi */
+          margin-bottom: 4px !important;
+          display: flex !important; /* Flexbox untuk positioning container di tengah */
+          flex-direction: column !important; /* Stack items vertically */
+          align-items: center !important; /* Container berada di tengah halaman */
+          text-align: left !important; /* Text dalam container rata KIRI */
+          width: fit-content !important; /* Container menyesuaikan konten */
+          margin-left: auto !important; /* Center container horizontally */
+          margin-right: auto !important; /* Center container horizontally */
         }
 
         .destinations li {
-          font-size: 0.85rem; /* Lebih kecil untuk layar sangat kecil */
-          padding: 2px 0;
-          display: inline-block; /* Konsisten dengan desktop */
-          text-align: left; /* Text left tapi container center */
-          padding-left: 18px; /* Restore padding untuk icon */
-          margin-bottom: 3px;
-          position: relative; /* Required untuk icon positioning */
+          font-size: 0.85rem !important; /* Lebih kecil untuk layar sangat kecil */
+          padding: 0px 0 !important;
+          display: block !important; /* Block untuk left alignment dalam flex container */
+          text-align: left !important; /* Text KIRI dalam center positioned container */
+          padding-left: 18px !important; /* Restore padding untuk icon */
+          margin-bottom: 3px !important;
+          position: relative !important; /* Required untuk icon positioning */
+          width: 100%; /* Full width dalam container */
         }
 
         .destinations li:before {
@@ -2160,9 +2469,9 @@ import Header from "../components/Header.astro";
           position: relative !important;
         }
 
-        /* View details button mobile responsive - tetap center */
+        /* View details button mobile responsive - posisi kanan untuk semua card */
         .view-details-btn {
-          margin: 15px auto 0 auto !important; /* Center dengan margin top */
+          margin: 15px 0 0 auto !important; /* Posisi kanan dengan margin top */
           text-align: center !important;
           display: block !important;
           width: fit-content !important;
@@ -2206,9 +2515,9 @@ import Header from "../components/Header.astro";
           font-size: 12px !important;
         }
 
-        /* View details button smartphone responsive - tetap center */
+        /* View details button smartphone responsive - posisi kanan untuk semua card */
         .view-details-btn {
-          margin: 12px auto 0 auto !important; /* Center dengan margin lebih kecil untuk mobile */
+          margin: 12px 0 0 auto !important; /* Posisi kanan dengan margin lebih kecil untuk mobile */
           text-align: center !important;
           display: block !important;
           width: fit-content !important;
@@ -2429,10 +2738,13 @@ import Header from "../components/Header.astro";
 
         .destinations {
           margin-bottom: 15px !important;
-          text-align: center !important;
-          max-width: 250px !important;
-          margin-left: auto !important;
-          margin-right: auto !important;
+          display: flex !important; /* Flexbox untuk positioning container di tengah */
+          flex-direction: column !important; /* Stack items vertically */
+          align-items: center !important; /* Container berada di tengah halaman */
+          text-align: left !important; /* Text dalam container rata KIRI */
+          width: fit-content !important; /* Container menyesuaikan konten */
+          margin-left: auto !important; /* Center container horizontally */
+          margin-right: auto !important; /* Center container horizontally */
         }
 
         .destinations li {
@@ -2440,6 +2752,10 @@ import Header from "../components/Header.astro";
           padding: 2px 0 !important;
           margin-bottom: 3px !important;
           padding-left: 16px !important;
+          display: block !important; /* Block untuk left alignment dalam flex container */
+          text-align: left !important; /* Text KIRI dalam center positioned container */
+          position: relative !important; /* Required untuk icon positioning */
+          width: 100% !important; /* Full width dalam container */
         }
 
         .destinations li:before {
@@ -2451,7 +2767,7 @@ import Header from "../components/Header.astro";
         .view-details-btn {
           font-size: 0.9rem !important;
           padding: 8px 20px !important;
-          margin: 10px auto 0 !important;
+          margin: 10px 0 0 auto !important;
           display: block !important;
           width: fit-content !important;
         }
@@ -2847,6 +3163,211 @@ import Header from "../components/Header.astro";
           width: 90%;
           padding: 20px;
         }
+
+      /* OVERRIDES SUPER KUAT untuk konsistensi destinations di card */
+      .product-card .destinations,
+      .product-card[data-trip="halfday"] .destinations,
+      .product-card[data-trip="fullday"] .destinations,
+      .product-card .trip-option.active ~ .destinations,
+      .product-card .trip-option:not(.active) ~ .destinations,
+      .product-card .trip-options + .destinations {
+        list-style: none !important;
+        margin-bottom: 20px !important;
+        padding: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: left !important;
+        width: fit-content !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      
+
+      .product-card .destinations li,
+      .product-card[data-trip="halfday"] .destinations li,
+      .product-card[data-trip="fullday"] .destinations li,
+      .product-card .trip-option.active ~ .destinations li,
+      .product-card .trip-option:not(.active) ~ .destinations li,
+      .product-card .trip-options + .destinations li {
+        font-family: "Noto Sans", sans-serif !important;
+        color: #555 !important;
+        font-size: 0.95rem !important;
+        padding: 2px 0 !important;
+        position: relative !important;
+        padding-left: 20px !important;
+        font-weight: 400 !important;
+        transition: all 0.3s ease !important;
+        display: block !important;
+        text-align: left !important;
+        width: 100% !important;
+      }
+
+      /* Mobile responsiveness yang konsisten */
+      @media (max-width: 980px) {
+        .product-card .destinations,
+        .product-card[data-trip="halfday"] .destinations,
+        .product-card[data-trip="fullday"] .destinations,
+        .product-card .trip-option.active ~ .destinations,
+        .product-card .trip-option:not(.active) ~ .destinations,
+        .product-card .trip-options + .destinations {
+          margin-bottom: 15px !important;
+        }
+
+        .product-card .destinations li,
+        .product-card[data-trip="halfday"] .destinations li,
+        .product-card[data-trip="fullday"] .destinations li,
+        .product-card .trip-option.active ~ .destinations li,
+        .product-card .trip-option:not(.active) ~ .destinations li,
+        .product-card .trip-options + .destinations li {
+          padding: 1px 0 !important;
+          font-size: 0.9rem !important;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .product-card .destinations,
+        .product-card[data-trip="halfday"] .destinations,
+        .product-card[data-trip="fullday"] .destinations,
+        .product-card .trip-option.active ~ .destinations,
+        .product-card .trip-option:not(.active) ~ .destinations,
+        .product-card .trip-options + .destinations {
+          margin-bottom: 12px !important;
+        }
+
+        .product-card .destinations li,
+        .product-card[data-trip="halfday"] .destinations li,
+        .product-card[data-trip="fullday"] .destinations li,
+        .product-card .trip-option.active ~ .destinations li,
+        .product-card .trip-option:not(.active) ~ .destinations li,
+        .product-card .trip-options + .destinations li {
+          font-size: 0.85rem !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .product-card .destinations,
+        .product-card[data-trip="halfday"] .destinations,
+        .product-card[data-trip="fullday"] .destinations,
+        .product-card .trip-option.active ~ .destinations,
+        .product-card .trip-option:not(.active) ~ .destinations,
+        .product-card .trip-options + .destinations {
+          margin-bottom: 10px !important;
+        }
+
+        .product-card .destinations li,
+        .product-card[data-trip="halfday"] .destinations li,
+        .product-card[data-trip="fullday"] .destinations li,
+        .product-card .trip-option.active ~ .destinations li,
+        .product-card .trip-option:not(.active) ~ .destinations li,
+        .product-card .trip-options + .destinations li {
+          font-size: 0.8rem !important;
+        }
+      }
+
+      /* ULTIMATE OVERRIDE - CSS PALING KUAT untuk destinations text alignment */
+      .product-card .destinations,
+      .product-card .destinations li,
+      .product-card[data-trip="halfday"] .destinations,
+      .product-card[data-trip="halfday"] .destinations li,
+      .product-card[data-trip="fullday"] .destinations,
+      .product-card[data-trip="fullday"] .destinations li,
+      .product-card .trip-option.active ~ .destinations,
+      .product-card .trip-option.active ~ .destinations li,
+      .product-card .trip-option:not(.active) ~ .destinations,
+      .product-card .trip-option:not(.active) ~ .destinations li,
+      .product-card .trip-options + .destinations,
+      .product-card .trip-options + .destinations li {
+        text-align: left !important;
+      }
+
+      /* Container centering tetap untuk destinations */
+      .product-card .destinations,
+      .product-card[data-trip="halfday"] .destinations,
+      .product-card[data-trip="fullday"] .destinations,
+      .product-card .trip-option.active ~ .destinations,
+      .product-card .trip-option:not(.active) ~ .destinations,
+      .product-card .trip-options + .destinations {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: fit-content !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      
+      /* Trip options styling - now inside product-content like Zikita Speedboat */
+      .product-card.rent-car .trip-options {
+        display: flex !important;
+        flex-direction: row !important;
+        width: 90% !important;
+        justify-content: center !important;
+        border-radius: 25px !important;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+        overflow: visible !important; /* Make sure checkmark isn't cut off */
+        margin: 0 auto 15px auto !important;
+      }
+      
+      /* Style the trip option buttons */
+      .product-card.rent-car .trip-options .trip-option {
+        flex: 1 !important;
+        padding: 8px 15px !important;
+        border: none !important;
+        background-color: #ede6da !important; /* Light beige background */
+        color: #555 !important;
+        font-family: "Noto Sans", sans-serif !important;
+        font-size: 0.85rem !important;
+        font-weight: 600 !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        position: relative !important;
+        overflow: visible !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+        text-transform: uppercase !important;
+      }
+      
+      /* First option (Toyota Hiace) */
+      .product-card.rent-car .trip-options .trip-option:first-child {
+        border-top-left-radius: 25px !important;
+        border-bottom-left-radius: 25px !important;
+        background-color: #ede6da !important;
+      }
+      
+      /* Second option (Innova Reborn) */
+      .product-card.rent-car .trip-options .trip-option:last-child {
+        border-top-right-radius: 25px !important;
+        border-bottom-right-radius: 25px !important;
+        background-color: #a3b184 !important; /* Green background */
+        color: white !important;
+      }
+      
+      /* Product content styling untuk rent-car */
+      .product-card.rent-car .product-content {
+        padding: 15px 20px 20px 20px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+      }
+      
+      
+      /* Trip time styling untuk rent-car */
+      .product-card.rent-car .trip-time {
+        font-size: 1rem !important;
+        color: #666 !important;
+        margin-bottom: 15px !important;
+      }
+      
+      /* Additional info styling untuk rent-car */
+      .product-card.rent-car .additional-info {
+        font-size: 0.95rem !important;
+        line-height: 1.5 !important;
+        color: #555 !important;
+        margin-bottom: 15px !important;
+        max-width: 80% !important;
+      }
+      
     </style>
   </head>
   <body>
@@ -3091,11 +3612,13 @@ import Header from "../components/Header.astro";
                   </div>
                 </div>
                 <div class="product-content">
+                  <!-- Trip options sekarang di dalam product-content, seperti Zikita Speedboat -->
                   <div class="trip-options">
-                    <button class="trip-option active">Toyota Hiace</button>
-                    <button class="trip-option">Innova Reborn</button>
+                    <button class="trip-option active">TOYOTA HIACE</button>
+                    <button class="trip-option">INNOVA REBORN</button>
                   </div>
                   <div class="product-price">Rp 1.250.000,-</div>
+                  <div class="trip-time">08:00 AM - 08:00 PM</div>
                   <div class="additional-info">
                     We also provide premium car (Toyota Alphard & Mercedes-Benz)
                     for personal or corporate. Product & details, please contact
@@ -3465,7 +3988,53 @@ import Header from "../components/Header.astro";
       // Trip Options Functionality
       document.addEventListener("DOMContentLoaded", function () {
         initializeTripOptions();
+        initializeMobileTripOptions();
       });
+      
+      function initializeMobileTripOptions() {
+        const rentCarCard = document.querySelector(".product-card.rent-car");
+        if (rentCarCard) {
+          const desktopTripOptions = rentCarCard.querySelectorAll(".product-header .trip-options .trip-option");
+          const mobileTripOptions = rentCarCard.querySelectorAll(".mobile-trip-options .trip-option");
+          
+          // Set initial active state on mobile based on desktop
+          desktopTripOptions.forEach((option, index) => {
+            if (option.classList.contains("active") && mobileTripOptions[index]) {
+              mobileTripOptions[index].classList.add("active");
+            }
+          });
+          
+          // Synchronize mobile to desktop
+          mobileTripOptions.forEach((option, index) => {
+            option.addEventListener("click", function() {
+              // Update mobile UI
+              mobileTripOptions.forEach(opt => opt.classList.remove("active"));
+              this.classList.add("active");
+              
+              // Synchronize with desktop options
+              if (desktopTripOptions[index]) {
+                const event = new MouseEvent("click", {
+                  bubbles: true,
+                  cancelable: true,
+                  view: window
+                });
+                desktopTripOptions[index].dispatchEvent(event);
+              }
+            });
+          });
+          
+          // Synchronize desktop to mobile
+          desktopTripOptions.forEach((option, index) => {
+            option.addEventListener("click", function() {
+              // Update mobile UI when desktop options are clicked
+              mobileTripOptions.forEach(opt => opt.classList.remove("active"));
+              if (mobileTripOptions[index]) {
+                mobileTripOptions[index].classList.add("active");
+              }
+            });
+          });
+        }
+      }
 
       function initializeTripOptions() {
         const productCards = document.querySelectorAll(".product-card");
@@ -3504,6 +4073,13 @@ import Header from "../components/Header.astro";
                 // Update destinations dengan pastikan FORMAT SAMA PERSIS dengan HTML asli
                 if (productData[index].destinations) {
                   destinationsElement.innerHTML = "";
+                  // Memastikan parent container memiliki style yang benar
+                  destinationsElement.style.display = "flex";
+                  destinationsElement.style.flexDirection = "column";
+                  destinationsElement.style.alignItems = "flex-start";
+                  destinationsElement.style.textAlign = "left";
+                  destinationsElement.style.width = "fit-content";
+                  
                   productData[index].destinations.forEach((destination) => {
                     const li = document.createElement("li");
                     li.textContent = destination;
@@ -3517,8 +4093,9 @@ import Header from "../components/Header.astro";
                     li.style.paddingLeft = "20px";
                     li.style.fontWeight = "400";
                     li.style.transition = "all 0.3s ease";
-                    li.style.display = "left"; // Block untuk format rapi seperti gambar
+                    li.style.display = "block"; // Sebelumnya salah nilai 'left'
                     li.style.textAlign = "left"; // Text rata kiri untuk tampilan terstruktur
+                    li.style.width = "100%"; // Pastikan lebar penuh
 
                     // Responsive icon size berdasarkan screen width
                     const screenWidth = window.innerWidth;
@@ -3737,7 +4314,10 @@ import Header from "../components/Header.astro";
 
             // Get all image sources for this slider
             currentModal.images = Array.from(sliderImages).map((image) => {
-              return image.src.replace("w=250&h=250", "w=800&h=600");
+              // Handle both 250x250 and 300x300 image sizes
+              return image.src
+                .replace("w=250&h=250", "w=800&h=600")
+                .replace("w=300&h=300", "w=800&h=600");
             });
 
             currentModal.index = parseInt(img.dataset.slide);
@@ -3875,7 +4455,27 @@ import Header from "../components/Header.astro";
             option.classList.add("active");
           });
         });
+        
+        // Initialize rent-car trip options toggle
+        initializeRentCarTripOptions();
       });
+      
+      function initializeRentCarTripOptions() {
+        const rentCarCard = document.querySelector(".product-card.rent-car");
+        if (rentCarCard) {
+          const tripOptions = rentCarCard.querySelectorAll(".product-content .trip-options .trip-option");
+          
+          // Add click event listeners to trip options
+          tripOptions.forEach((option) => {
+            option.addEventListener("click", function() {
+              // Remove active class from all options
+              tripOptions.forEach(opt => opt.classList.remove("active"));
+              // Add active class to clicked option
+              this.classList.add("active");
+            });
+          });
+        }
+      }
     </script>
 
     <!-- Footer -->
