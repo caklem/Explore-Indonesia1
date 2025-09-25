@@ -260,7 +260,7 @@ import Footer from "../components/Footer.astro";
       .packages-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 35px;
+        gap: 30px;
         margin-bottom: 60px;
       }
 
@@ -307,9 +307,9 @@ import Footer from "../components/Footer.astro";
         text-align: center;
         width: calc(100% - 80px);
         margin: 0 40px;
-        box-shadow: none;
+        box-shadow: 0 4px 12px #F4F4F4;
         position: absolute;
-        bottom: -80px;
+        bottom: -60px;
         left: 0;
         right: 0;
         display: flex;
@@ -392,6 +392,12 @@ import Footer from "../components/Footer.astro";
 
         .nav-container {
           padding: 0 30px;
+        }
+
+        .package-content {
+          width: calc(100% - 60px);
+          margin: 0 30px;
+          bottom: -60px;
         }
 
         /* .hero-boat removed */
@@ -485,6 +491,23 @@ import Footer from "../components/Footer.astro";
           text-align: center;
           margin-bottom: 50px;
         }
+
+        .packages-grid {
+          grid-template-columns: 1fr;
+          gap: 50px;
+        }
+
+        .package-card {
+          margin: 0 auto;
+          max-width: 350px;
+        }
+
+        .package-content {
+          width: calc(100% - 100px);
+          margin: 0 50px;
+          bottom: -40px;
+          box-shadow: 0 3px 8px #F4F4F4;
+        }
       }
 
       @media (max-width: 480px) {
@@ -495,6 +518,31 @@ import Footer from "../components/Footer.astro";
         .packages-title,
         .why-choose h2 {
           font-size: 1.6rem;
+        }
+
+        .packages-container {
+          padding: 0 15px;
+        }
+
+        .package-content {
+          width: calc(100% - 90px);
+          margin: 0 45px;
+          bottom: -35px;
+          padding: 12px 15px 20px 15px;
+          box-shadow: 0 2px 6px #F4F4F4;
+        }
+
+        .package-name {
+          font-size: 0.75rem;
+        }
+
+        .package-price {
+          font-size: 1rem;
+        }
+
+        .view-details-btn {
+          font-size: 0.7rem;
+          padding: 6px 15px;
         }
       }
 
