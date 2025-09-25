@@ -275,7 +275,7 @@ import Footer from "../components/Footer.astro";
       .package-card {
         background: white;
         border-radius: 50px;
-        overflow: hidden;
+        overflow: visible;
         box-shadow: none;
         transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         position: relative;
@@ -297,57 +297,43 @@ import Footer from "../components/Footer.astro";
         top: 0;
         left: 0;
         z-index: 1;
+        border-radius: 50px;
       }
 
       .package-content {
-        padding: 15px 30px;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 15px 20px 25px 20px;
+        border-radius: 8px;
         text-align: center;
-        background: transparent;
+        width: calc(100% - 80px);
+        margin: 0 40px;
+        box-shadow: none;
         position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
+        bottom: -80px;
+        left: 0;
+        right: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
-        max-width: 250px;
         z-index: 2;
-      }
-      
-      .package-content::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.9);
-        border-radius: 0 0 15px 15px;
-        z-index: -1;
-        box-shadow: none;
       }
 
       .package-name {
         font-family: "Noto Sans", sans-serif;
-        font-size: 0.9rem;
-        font-weight: 700;
-        color: #2c3e50;
-        margin-bottom: 8px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 5px;
         text-transform: uppercase;
-        letter-spacing: 0.8px;
-        line-height: 1.3;
-        position: relative;
-        z-index: 1;
+        letter-spacing: 0.5px;
       }
 
       .package-price {
         font-family: "Noto Sans", sans-serif;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         font-weight: 700;
-        color: #ff6b6b;
-        margin-bottom: 0;
-        position: relative;
-        z-index: 1;
+        color: #333;
+        margin-bottom: 10px;
       }
 
       .package-price::before {
@@ -363,19 +349,19 @@ import Footer from "../components/Footer.astro";
       }
 
       .view-details-btn {
-        background: transparent;
+        background: #fff;
         color: #f28482;
-        border: 2px solid #f28482;
-        padding: 16px 36px;
-        border-radius: 25px;
-        font-size: 16px;
-        font-weight: 600;
+        border: 1px solid #f28482;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
         cursor: pointer;
         text-decoration: none;
         display: inline-block;
         transition: all 0.3s ease;
-        text-transform: lowercase;
-        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
         font-family: "Noto Sans", sans-serif;
         pointer-events: auto;
         user-select: none;
@@ -766,6 +752,28 @@ import Footer from "../components/Footer.astro";
         font-size: 14px;
         color: #555;
         white-space: nowrap;
+      }
+
+      .spec-icon {
+        width: 24px;
+        height: 24px;
+        opacity: 1;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+        image-rendering: pixelated;
+        image-rendering: auto;
+        filter: contrast(1.6) brightness(1.3) saturate(1.2) sharpness(1.1);
+        object-fit: contain;
+        transform: scale(1.05);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        will-change: transform;
+      }
+
+      .spec-item:first-child .spec-icon {
+        width: 28px;
+        height: 28px;
+        transform: scale(1.1);
       }
 
       .spec-separator {
@@ -1779,9 +1787,9 @@ import Footer from "../components/Footer.astro";
               <div class="package-content">
                 <h3 class="package-name">ZIKRA SPEEDBOAT</h3>
                 <p class="package-price">5.500.000</p>
+                <a href="#" class="view-details-btn">view details</a>
               </div>
               </div>
-              <a href="#" class="view-details-btn">view details</a>
             </div>
 
             <div class="package-item">
@@ -1794,9 +1802,9 @@ import Footer from "../components/Footer.astro";
               <div class="package-content">
                 <h3 class="package-name">ZAVIERO SPEEDBOAT</h3>
                 <p class="package-price">4.500.000</p>
+                <a href="#" class="view-details-btn">view details</a>
               </div>
               </div>
-              <a href="#" class="view-details-btn">view details</a>
             </div>
 
             <div class="package-item">
@@ -1809,9 +1817,9 @@ import Footer from "../components/Footer.astro";
               <div class="package-content">
                 <h3 class="package-name">RENT CAR</h3>
                 <p class="package-price">350.000</p>
+                <a href="#" class="view-details-btn">view details</a>
               </div>
               </div>
-              <a href="#" class="view-details-btn">view details</a>
             </div>
           </div>
         </div>
@@ -1829,15 +1837,25 @@ import Footer from "../components/Footer.astro";
             <div class="detail-title">
               <span class="detail-model">Yamaha 250 HP x2</span>
               <span class="detail-specs">
-                <span class="spec-item">📡 GPS</span>
+                <span class="spec-item">
+                  <img src="/icon yamaha.png" alt="Engine" class="spec-icon" />
+                  Yamaha 250 HP x2
+                </span>
                 <span class="spec-separator">|</span>
-                <span class="spec-item">🧭 Compass</span>
+                <span class="spec-item">
+                  <img src="/icon GPS.png" alt="Navigation" class="spec-icon" />
+                  GPS | Compass | Map
+                </span>
                 <span class="spec-separator">|</span>
-                <span class="spec-item">🗺️ Map</span>
+                <span class="spec-item">
+                  <img src="/icon VFH Radio.png" alt="Radio" class="spec-icon" />
+                  VHF Radio
+                </span>
                 <span class="spec-separator">|</span>
-                <span class="spec-item">📻 VHF Radio</span>
-                <span class="spec-separator">|</span>
-                <span class="spec-item">📏 11.7 x 3 x 1.10</span>
+                <span class="spec-item">
+                  <img src="/icon 11,7.png" alt="Dimensions" class="spec-icon" />
+                  11,7 x 3 x 1.10
+                </span>
               </span>
             </div>
           </div>
