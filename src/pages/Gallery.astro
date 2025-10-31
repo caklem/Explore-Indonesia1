@@ -226,6 +226,7 @@ import Header from "../components/Header.astro";
         max-width: 1200px;
         margin: 0 auto;
         padding: 60px 40px;
+        margin-top: 120px;
         margin-bottom: 60px;
       }
       .title {
@@ -366,6 +367,7 @@ import Header from "../components/Header.astro";
         display: flex;
         align-items: center;
         justify-content: center;
+        z-index: 10002;
       }
 
       .gallery-prev {
@@ -446,28 +448,94 @@ import Header from "../components/Header.astro";
 
         .nav-container {
           max-width: 100%;
-          padding: 0 15px;
+          padding: 0 20px;
         }
 
         .logo {
-          font-size: 1.5rem;
+          font-size: 1.4rem;
         }
 
         .container {
-          padding: 40px 20px;
+          padding: 30px 15px;
+          margin-top: 100px !important;
         }
+
         .destinations-grid {
           grid-template-columns: 1fr;
-          gap: 20px;
+          gap: 15px;
+          padding: 0 5px;
         }
+
+        .destination-card img {
+          height: 280px;
+        }
+
         .title {
-          font-size: 32px;
+          font-size: 28px;
           text-align: center;
+          margin-bottom: 25px;
+          padding: 0 10px;
+        }
+
+        /* Gallery Modal Mobile Adjustments */
+        .gallery-modal-content {
+          width: 100%;
+          padding: 0;
+        }
+
+        .gallery-modal img {
+          max-height: 70vh;
+          max-width: 95%;
+          border-radius: 8px;
+        }
+
+        .gallery-prev,
+        .gallery-next {
+          width: 45px;
+          height: 45px;
+          font-size: 20px;
+          padding: 8px;
+        }
+
+        .gallery-prev {
+          left: 10px;
+        }
+
+        .gallery-next {
+          right: 10px;
+        }
+
+        .gallery-close {
+          top: 15px;
+          right: 15px;
+          font-size: 32px;
+          width: 45px;
+          height: 45px;
+        }
+
+        .gallery-info {
+          bottom: 15px;
+          padding: 10px 20px;
+          max-width: 90%;
+        }
+
+        .gallery-title {
+          font-size: 18px;
+          margin-bottom: 5px;
+        }
+
+        .gallery-counter {
+          font-size: 13px;
         }
       }
       @media (max-width: 1024px) and (min-width: 769px) {
         .destinations-grid {
           grid-template-columns: repeat(2, 1fr);
+          gap: 25px;
+        }
+
+        .destination-card img {
+          height: 280px;
         }
 
         /* Ensure header consistency on tablet */
@@ -476,7 +544,36 @@ import Header from "../components/Header.astro";
         }
 
         .nav-container {
-          padding: 0 20px;
+          padding: 0 25px;
+        }
+
+        .container {
+          padding: 40px 25px;
+          margin-top: 110px !important;
+        }
+
+        .title {
+          font-size: 36px;
+          margin-bottom: 30px;
+        }
+
+        .gallery-modal img {
+          max-height: 85vh;
+        }
+
+        .gallery-prev,
+        .gallery-next {
+          width: 55px;
+          height: 55px;
+          font-size: 26px;
+        }
+
+        .gallery-prev {
+          left: 20px;
+        }
+
+        .gallery-next {
+          right: 20px;
         }
       }
 
@@ -486,25 +583,42 @@ import Header from "../components/Header.astro";
         }
 
         .logo {
-          font-size: 1.5rem;
+          font-size: 1.3rem;
         }
 
         .title {
           font-size: 24px;
+          margin-bottom: 20px;
         }
 
         .container {
-          padding: 30px 15px;
+          padding: 25px 10px;
+          margin-top: 95px !important;
         }
 
-        /* Gallery Modal Mobile Styles */
+        .destinations-grid {
+          gap: 12px;
+        }
+
+        .destination-card img {
+          height: 280px;
+        }
+
+        /* Gallery Modal Extra Small Mobile Styles */
         .gallery-modal-content {
-          width: 95%;
-          padding: 0 10px;
+          width: 100%;
+          padding: 0;
         }
 
         .gallery-image-container {
           position: relative;
+          width: 100%;
+        }
+
+        .gallery-modal img {
+          max-height: 65vh;
+          max-width: 90%;
+          border-radius: 6px;
         }
 
         .gallery-close {
@@ -534,59 +648,72 @@ import Header from "../components/Header.astro";
 
         .gallery-prev,
         .gallery-next {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          color: #fff;
-          font-size: 24px;
-          font-weight: bold;
-          cursor: pointer;
-          padding: 10px;
-          background: rgba(0, 0, 0, 0.7);
-          border-radius: 50%;
-          transition: all 0.3s ease;
-          user-select: none;
-          width: 50px;
-          height: 50px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 10001;
+          width: 40px;
+          height: 40px;
+          font-size: 18px;
+          padding: 6px;
         }
 
         .gallery-prev {
-          left: 15px;
+          left: 8px;
         }
 
         .gallery-next {
-          right: 15px;
+          right: 8px;
         }
 
         .gallery-info {
-          position: absolute;
-          bottom: 20px;
-          left: 50%;
-          transform: translateX(-50%);
-          color: #fff;
-          text-align: center;
-          background: rgba(0, 0, 0, 0.9);
+          bottom: 12px;
           padding: 8px 15px;
-          border-radius: 15px;
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.3);
-          max-width: 85%;
+          max-width: 80%;
+          border-radius: 12px;
         }
 
         .gallery-title {
-          font-size: 20px;
+          font-size: 16px;
+          margin-bottom: 3px;
         }
 
         .gallery-counter {
-          font-size: 12px;
+          font-size: 11px;
+        }
+      }
+
+      /* Extra Large Screens */
+      @media (min-width: 1440px) {
+        .container {
+          max-width: 1400px;
+          margin-left: auto;
+          margin-right: auto;
         }
 
-        .gallery-modal img {
-          max-height: 80vh;
+        .destinations-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 35px;
+        }
+
+        .destination-card img {
+          height: 280px;
+        }
+
+        .title {
+          font-size: 48px;
+        }
+      }
+
+      /* Small Desktop / Large Tablet */
+      @media (min-width: 1025px) and (max-width: 1439px) {
+        .destinations-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 30px;
+        }
+
+        .destination-card img {
+          height: 280px;
+        }
+
+        .container {
+          padding: 50px 30px;
         }
       }
     </style>
@@ -597,59 +724,59 @@ import Header from "../components/Header.astro";
     <div class="container" style="margin-top:100px;">
       <h1 class="title">Top Pick Destinations</h1>
       <div class="destinations-grid">
-        <!-- ...existing destination cards from your previous HTML... -->
+        <!-- Gallery images from hero images folder -->
         <div class="destination-card">
-          <img
-            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/eea2f8ae-27ae-46b3-a246-3f28c99018a2.png"
-            alt="Scenic tropical island with traditional wooden boats anchored in crystal clear turquoise water, surrounded by dramatic limestone cliffs and lush green vegetation under a bright blue sky with white clouds"
-          />
+          <img src="/hero images/HI-1.jpeg" alt="Explore Indonesia" />
           <div class="card-overlay">
-            <div class="destination-name">Kejor Island</div>
+            <div class="destination-name"></div>
           </div>
         </div>
         <div class="destination-card">
-          <img
-            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/df0f0416-680e-487b-8687-28206c0a4fa6.png"
-            alt="Beautiful coral reef lagoon with colorful tropical fish swimming near vibrant coral formations, crystal clear blue water with sun rays penetrating through, creating an underwater paradise scene"
-          />
+          <img src="/hero images/HI-3.jpeg" alt="Explore Indonesia" />
           <div class="card-overlay">
-            <div class="destination-name">Raja Ampat</div>
+            <div class="destination-name"></div>
           </div>
         </div>
         <div class="destination-card">
-          <img
-            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cf7b0246-662d-448e-ba41-49007cf481ca.png"
-            alt="Wooden pier extending into calm turquoise waters with traditional Indonesian boats moored alongside, surrounded by towering limestone karst cliffs covered in tropical rainforest under a cloudy sky"
-          />
+          <img src="/hero images/HI-4.jpeg" alt="Explore Indonesia" />
           <div class="card-overlay">
-            <div class="destination-name">Labuan Bajo</div>
+            <div class="destination-name"></div>
           </div>
         </div>
         <div class="destination-card">
-          <img
-            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/059c73b0-bfe4-4461-b442-42b4e51f65de.png"
-            alt="Person standing on a wooden dock overlooking pristine tropical bay with multiple traditional boats floating on emerald green water, surrounded by jungle-covered mountains and limestone formations"
-          />
+          <img src="/hero images/HI-6.jpeg" alt="Explore Indonesia" />
           <div class="card-overlay">
-            <div class="destination-name">Wayag Island</div>
+            <div class="destination-name"></div>
           </div>
         </div>
         <div class="destination-card">
-          <img
-            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d5024252-1a9a-4c70-b2cf-46e39363341d.png"
-            alt="Vibrant underwater scene showing a scuba diver exploring colorful coral gardens with tropical fish, pink and orange corals, and clear blue water with natural lighting filtering down from above"
-          />
+          <img src="/hero images/HI-7.png" alt="Explore Indonesia" />
           <div class="card-overlay">
-            <div class="destination-name">Bunaken</div>
+            <div class="destination-name"></div>
           </div>
         </div>
         <div class="destination-card">
-          <img
-            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8f75eb74-4382-47e5-97d2-a3e3f7693d84.png"
-            alt="Peaceful wooden boardwalk extending over calm tropical waters toward dramatic towering limestone cliffs and karst formations covered in dense green jungle, with soft natural lighting"
-          />
+          <img src="/hero images/HI-8.png" alt="Explore Indonesia" />
           <div class="card-overlay">
-            <div class="destination-name">Pianemo</div>
+            <div class="destination-name"></div>
+          </div>
+        </div>
+        <div class="destination-card">
+          <img src="/hero images/HI-9.png" alt="Explore Indonesia" />
+          <div class="card-overlay">
+            <div class="destination-name"></div>
+          </div>
+        </div>
+        <div class="destination-card">
+          <img src="/Product_ZV/ZV-10.jpg" alt="Explore Indonesia" />
+          <div class="card-overlay">
+            <div class="destination-name"></div>
+          </div>
+        </div>
+        <div class="destination-card">
+          <img src="/ABOUT.JPG" alt="Explore Indonesia" />
+          <div class="card-overlay">
+            <div class="destination-name"></div>
           </div>
         </div>
       </div>
@@ -841,46 +968,49 @@ import Header from "../components/Header.astro";
 
       const destinations = [
         {
-          name: "Kejor Island",
-          image:
-            "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/eea2f8ae-27ae-46b3-a246-3f28c99018a2.png",
-          description:
-            "Scenic tropical island with traditional wooden boats anchored in crystal clear turquoise water",
+          name: "",
+          image: "/hero images/HI-1.jpeg",
+          description: "",
         },
         {
-          name: "Raja Ampat",
-          image:
-            "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/df0f0416-680e-487b-8687-28206c0a4fa6.png",
-          description:
-            "Beautiful coral reef lagoon with colorful tropical fish swimming near vibrant coral formations",
+          name: "",
+          image: "/hero images/HI-3.jpeg",
+          description: "",
         },
         {
-          name: "Labuan Bajo",
-          image:
-            "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cf7b0246-662d-448e-ba41-49007cf481ca.png",
-          description:
-            "Wooden pier extending into calm turquoise waters with traditional Indonesian boats",
+          name: "",
+          image: "/hero images/HI-4.jpeg",
+          description: "",
         },
         {
-          name: "Wayag Island",
-          image:
-            "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/059c73b0-bfe4-4461-b442-42b4e51f65de.png",
-          description:
-            "Person standing on a wooden dock overlooking pristine tropical bay with multiple traditional boats",
+          name: "",
+          image: "/hero images/HI-6.jpeg",
+          description: "",
         },
         {
-          name: "Bunaken",
-          image:
-            "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d5024252-1a9a-4c70-b2cf-46e39363341d.png",
-          description:
-            "Vibrant underwater scene showing a scuba diver exploring colorful coral gardens",
+          name: "",
+          image: "/hero images/HI-7.png",
+          description: "",
         },
         {
-          name: "Pianemo",
-          image:
-            "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8f75eb74-4382-47e5-97d2-a3e3f7693d84.png",
-          description:
-            "Peaceful wooden boardwalk extending over calm tropical waters toward dramatic limestone cliffs",
+          name: "",
+          image: "/hero images/HI-8.png",
+          description: "",
+        },
+        {
+          name: "",
+          image: "/hero images/HI-9.png",
+          description: "",
+        },
+        {
+          name: "",
+          image: "/Product_ZV/ZV-10.jpg",
+          description: "",
+        },
+        {
+          name: "",
+          image: "/ABOUT.JPG",
+          description: "",
         },
       ];
 

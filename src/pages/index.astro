@@ -90,7 +90,7 @@ import Footer from "../components/Footer.astro";
         margin-bottom: 10px;
         text-transform: uppercase;
         text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-        line-height: 1.0;
+        line-height: 1;
       }
 
       .hero-subtitle {
@@ -280,7 +280,7 @@ import Footer from "../components/Footer.astro";
         transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         position: relative;
         border: 1px solid rgba(0, 0, 0, 0.05);
-        height: 300px;
+        height: 450px;
         width: 100%;
       }
 
@@ -293,6 +293,7 @@ import Footer from "../components/Footer.astro";
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: top center;
         position: absolute;
         top: 0;
         left: 0;
@@ -301,21 +302,21 @@ import Footer from "../components/Footer.astro";
       }
 
       .package-content {
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.98);
         padding: 15px 20px 25px 20px;
         border-radius: 8px;
         text-align: center;
         width: calc(100% - 80px);
         margin: 0 40px;
-        box-shadow: 0 4px 12px #F4F4F4;
+        box-shadow: 0 4px 12px #f4f4f4;
         position: absolute;
-        bottom: -60px;
+        bottom: -80px;
         left: 0;
         right: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
-        z-index: 2;
+        z-index: 10;
       }
 
       .package-name {
@@ -423,7 +424,7 @@ import Footer from "../components/Footer.astro";
           font-size: 3rem;
           letter-spacing: 2px;
           margin-bottom: 10px;
-          line-height: 1.0;
+          line-height: 1;
         }
 
         .hero-subtitle {
@@ -506,7 +507,7 @@ import Footer from "../components/Footer.astro";
           width: calc(100% - 100px);
           margin: 0 50px;
           bottom: -40px;
-          box-shadow: 0 3px 8px #F4F4F4;
+          box-shadow: 0 3px 8px #f4f4f4;
         }
       }
 
@@ -529,7 +530,7 @@ import Footer from "../components/Footer.astro";
           margin: 0 45px;
           bottom: -35px;
           padding: 12px 15px 20px 15px;
-          box-shadow: 0 2px 6px #F4F4F4;
+          box-shadow: 0 2px 6px #f4f4f4;
         }
 
         .package-name {
@@ -902,7 +903,6 @@ import Footer from "../components/Footer.astro";
         flex-direction: column;
       }
 
-
       .detail-dest-item {
         display: flex;
         align-items: flex-start;
@@ -925,7 +925,6 @@ import Footer from "../components/Footer.astro";
         margin-top: 2px;
         transition: all 0.3s ease;
       }
-
 
       .detail-section {
         margin: 30px 30px;
@@ -1424,7 +1423,6 @@ import Footer from "../components/Footer.astro";
           font-weight: 600 !important;
         }
 
-
         .detail-section {
           padding: 15px !important;
         }
@@ -1572,7 +1570,6 @@ import Footer from "../components/Footer.astro";
           font-weight: 600 !important;
         }
 
-
         .detail-section {
           padding: 10px !important;
         }
@@ -1690,7 +1687,6 @@ import Footer from "../components/Footer.astro";
           font-weight: 600 !important;
         }
 
-
         .detail-section {
           padding: 8px !important;
         }
@@ -1740,23 +1736,38 @@ import Footer from "../components/Footer.astro";
       <section class="hero" id="home">
         <!-- Hero Background Images Slider -->
         <img
-          src="https://picsum.photos/1920/1080?random=1"
+          src="/hero images/HI-1.jpeg"
           alt="White speedboat cruising through crystal clear turquoise waters with tropical islands in the background"
           class="hero-bg active"
         />
         <img
-          src="https://picsum.photos/1920/1080?random=2"
+          src="/hero images/HI-3.jpeg"
           alt="Luxury speedboat at sunset with golden reflections on calm ocean waters and tropical coastline"
           class="hero-bg"
         />
         <img
-          src="https://picsum.photos/1920/1080?random=3"
+          src="/hero images/HI-4.jpeg"
           alt="Modern speedboat racing across emerald green waters with lush tropical mountains in the distance"
           class="hero-bg"
         />
         <img
-          src="https://picsum.photos/1920/1080?random=4"
+          src="/hero images/HI-6.jpeg"
           alt="Sleek speedboat navigating through azure blue waters with pristine white sand beaches and palm trees"
+          class="hero-bg"
+        />
+        <img
+          src="/hero images/HI-7.png"
+          alt="Beautiful tropical scenery with speedboat and island adventures"
+          class="hero-bg"
+        />
+        <img
+          src="/hero images/HI-8.png"
+          alt="Exciting speedboat journey through Indonesian waters"
+          class="hero-bg"
+        />
+        <img
+          src="/hero images/HI-9.png"
+          alt="Stunning coastal views with speedboat experience"
           class="hero-bg"
         />
         <div class="hero-content">
@@ -1826,47 +1837,47 @@ import Footer from "../components/Footer.astro";
 
           <div class="packages-grid">
             <div class="package-item">
-            <div class="package-card" data-package="zikra">
-              <img
-                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dc012b31-e445-47e9-b69a-ec82b2a851eb.png"
-                alt="White luxury speedboat with blue accents on calm turquoise water, modern design with comfortable seating for island hopping adventures"
-                class="package-image"
-              />
-              <div class="package-content">
-                <h3 class="package-name">ZIKRA SPEEDBOAT</h3>
-                <p class="package-price">5.500.000</p>
-                <a href="#" class="view-details-btn">view details</a>
-              </div>
-              </div>
-            </div>
-
-            <div class="package-item">
-            <div class="package-card" data-package="zaviero">
-              <img
-                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/25f0f095-5ddf-4a55-be67-66d1f8bf8f28.png"
-                alt="Sleek blue and white speedboat with modern hull design cutting through tropical waters with mountains in the background"
-                class="package-image"
-              />
-              <div class="package-content">
-                <h3 class="package-name">ZAVIERO SPEEDBOAT</h3>
-                <p class="package-price">4.500.000</p>
-                <a href="#" class="view-details-btn">view details</a>
-              </div>
+              <div class="package-card" data-package="zikita">
+                <img
+                  src="/Product_index/Zikita S-1.png"
+                  alt="White luxury speedboat with blue accents on calm turquoise water, modern design with comfortable seating for island hopping adventures"
+                  class="package-image"
+                />
+                <div class="package-content">
+                  <h3 class="package-name">ZIKRA SPEEDBOAT</h3>
+                  <p class="package-price">5.500.000</p>
+                  <a href="#" class="view-details-btn">view details</a>
+                </div>
               </div>
             </div>
 
             <div class="package-item">
-            <div class="package-card" data-package="rentcar">
-              <img
-                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a27bb5e8-93b3-42a5-8abd-81574c63eacb.png"
-                alt="White luxury van with tinted windows parked on tropical beach with palm trees and ocean view, perfect for comfortable island transportation"
-                class="package-image"
-              />
-              <div class="package-content">
-                <h3 class="package-name">RENT CAR</h3>
-                <p class="package-price">350.000</p>
-                <a href="#" class="view-details-btn">view details</a>
+              <div class="package-card" data-package="zaviero">
+                <img
+                  src="/Product_index/Zaviero V-1.png"
+                  alt="Sleek blue and white speedboat with modern hull design cutting through tropical waters with mountains in the background"
+                  class="package-image"
+                />
+                <div class="package-content">
+                  <h3 class="package-name">ZAVIERO SPEEDBOAT</h3>
+                  <p class="package-price">4.500.000</p>
+                  <a href="#" class="view-details-btn">view details</a>
+                </div>
               </div>
+            </div>
+
+            <div class="package-item">
+              <div class="package-card" data-package="rentcar">
+                <img
+                  src="/Product_index/RENT- Car.jpg"
+                  alt="White luxury van with tinted windows parked on tropical beach with palm trees and ocean view, perfect for comfortable island transportation"
+                  class="package-image"
+                />
+                <div class="package-content">
+                  <h3 class="package-name">RENT CAR</h3>
+                  <p class="package-price">350.000</p>
+                  <a href="#" class="view-details-btn">view details</a>
+                </div>
               </div>
             </div>
           </div>
@@ -1896,12 +1907,20 @@ import Footer from "../components/Footer.astro";
                 </span>
                 <span class="spec-separator">|</span>
                 <span class="spec-item">
-                  <img src="/icon VFH Radio.png" alt="Radio" class="spec-icon" />
+                  <img
+                    src="/icon VFH Radio.png"
+                    alt="Radio"
+                    class="spec-icon"
+                  />
                   VHF Radio
                 </span>
                 <span class="spec-separator">|</span>
                 <span class="spec-item">
-                  <img src="/icon 11,7.png" alt="Dimensions" class="spec-icon" />
+                  <img
+                    src="/icon 11,7.png"
+                    alt="Dimensions"
+                    class="spec-icon"
+                  />
                   11,7 x 3 x 1.10
                 </span>
               </span>
@@ -2072,14 +2091,16 @@ import Footer from "../components/Footer.astro";
             });
             // Add active to clicked option
             option.classList.add("active");
-            
+
             // Update destination colors
             updateDestinationColors(option);
           });
         });
-        
+
         // Set initial destination colors
-        const activeOption = document.querySelector(".detail-trip-option.active");
+        const activeOption = document.querySelector(
+          ".detail-trip-option.active"
+        );
         if (activeOption) {
           updateDestinationColors(activeOption);
         }
@@ -2715,7 +2736,6 @@ import Footer from "../components/Footer.astro";
         setTimeout(() => {
           modal.classList.add("show");
         }, 10);
-
       };
 
       window.closeDetailModal = function () {
@@ -2729,57 +2749,65 @@ import Footer from "../components/Footer.astro";
         }
       };
 
-
-
       // Function to update destination colors
       function updateDestinationColors(selectedOption) {
         const tripType = selectedOption.getAttribute("data-trip");
-        const halfDayDestinations = document.querySelectorAll(".half-day-destinations .detail-dest-item");
-        const fullDayDestinations = document.querySelectorAll(".full-day-destinations .detail-dest-item");
-        
+        const halfDayDestinations = document.querySelectorAll(
+          ".half-day-destinations .detail-dest-item"
+        );
+        const fullDayDestinations = document.querySelectorAll(
+          ".full-day-destinations .detail-dest-item"
+        );
+
         if (tripType === "half-day") {
           // Half day destinations - hijau #A3B184 (aktif)
-          halfDayDestinations.forEach(item => {
+          halfDayDestinations.forEach((item) => {
             item.style.color = "#A3B184";
             item.style.fontWeight = "600";
             item.style.opacity = "1";
             const icon = item.querySelector(".detail-dest-icon");
             if (icon) {
-              icon.style.backgroundImage = "url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0EzQjE4NCIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+\")";
-              icon.style.filter = "drop-shadow(0 0 4px rgba(163, 177, 132, 0.5))";
+              icon.style.backgroundImage =
+                'url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0EzQjE4NCIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+")';
+              icon.style.filter =
+                "drop-shadow(0 0 4px rgba(163, 177, 132, 0.5))";
             }
           });
-          
+
           // Full day destinations - abu-abu (tidak aktif)
-          fullDayDestinations.forEach(item => {
+          fullDayDestinations.forEach((item) => {
             item.style.color = "#999";
             item.style.opacity = "0.6";
             const icon = item.querySelector(".detail-dest-icon");
             if (icon) {
-              icon.style.backgroundImage = "url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0NDQ0NDQyIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+\")";
+              icon.style.backgroundImage =
+                'url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0NDQ0NDQyIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+")';
               icon.style.filter = "none";
             }
           });
         } else if (tripType === "full-day") {
           // Full day destinations - hijau #A3B184 (aktif)
-          fullDayDestinations.forEach(item => {
+          fullDayDestinations.forEach((item) => {
             item.style.color = "#A3B184";
             item.style.fontWeight = "600";
             item.style.opacity = "1";
             const icon = item.querySelector(".detail-dest-icon");
             if (icon) {
-              icon.style.backgroundImage = "url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0EzQjE4NCIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+\")";
-              icon.style.filter = "drop-shadow(0 0 4px rgba(163, 177, 132, 0.5))";
+              icon.style.backgroundImage =
+                'url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0EzQjE4NCIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+")';
+              icon.style.filter =
+                "drop-shadow(0 0 4px rgba(163, 177, 132, 0.5))";
             }
           });
-          
+
           // Half day destinations - abu-abu (tidak aktif)
-          halfDayDestinations.forEach(item => {
+          halfDayDestinations.forEach((item) => {
             item.style.color = "#999";
             item.style.opacity = "0.6";
             const icon = item.querySelector(".detail-dest-icon");
             if (icon) {
-              icon.style.backgroundImage = "url(\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0NDQ0NDQyIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+\")";
+              icon.style.backgroundImage =
+                'url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0NDQ0NDQyIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+")';
               icon.style.filter = "none";
             }
           });
