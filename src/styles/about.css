@@ -1,0 +1,447 @@
+/* ============================================
+   ABOUT PAGE STYLES
+   File: about.css
+   Description: Styles untuk halaman About
+   ============================================ */
+
+/* ==========================================
+   1. HEADER STYLES
+   ========================================== */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 20px 0;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.header.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.header.scrolled .logo {
+  color: #333;
+  text-shadow: none;
+}
+
+.header.scrolled .nav-menu a {
+  color: #333;
+  text-shadow: none;
+}
+
+.header.scrolled .nav-menu a.active {
+  color: #ff6b6b;
+}
+
+.header.scrolled .nav-menu a:hover {
+  color: #ff6b6b;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+}
+
+.logo {
+  color: #333;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.logo-highlight {
+  color: #ff6b6b;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+  font-family: "Noto Sans", sans-serif;
+}
+
+.nav-menu a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-menu a:hover {
+  color: #ff6b6b;
+}
+
+.nav-menu a.active {
+  color: #ff6b6b;
+}
+
+/* Mobile Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.header.scrolled .hamburger span {
+  background-color: #333;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Mobile Sidebar */
+.mobile-sidebar {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  z-index: 9999;
+  transition: right 0.3s ease;
+  padding: 80px 30px 30px;
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-sidebar.active {
+  right: 0;
+}
+
+.mobile-sidebar .nav-menu {
+  flex-direction: column;
+  gap: 20px;
+  display: flex;
+}
+
+.mobile-sidebar .nav-menu a {
+  color: #2c3e50;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  text-shadow: none;
+  text-transform: none;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.mobile-sidebar .nav-menu a:hover {
+  color: #ff6b6b;
+  transform: translateX(5px);
+}
+
+/* Overlay */
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.mobile-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* ==========================================
+   2. MAIN CONTENT - ABOUT SECTION
+   ========================================== */
+
+.main-content {
+  margin-top: 80px;
+  min-height: calc(100vh - 80px);
+  margin-bottom: 60px;
+}
+
+.about-section {
+  padding: 80px 0;
+  background-color: #F4F4F4;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-content {
+  padding-right: 20px;
+}
+
+.about-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.about-subtitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.about-description {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 5px;
+}
+
+.about-journey {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 0;
+}
+
+.about-image-container {
+  position: relative;
+  padding-left: 20px;
+}
+
+.about-image {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.about-image:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ==========================================
+   3. ANIMATIONS
+   ========================================== */
+
+.about-content > * {
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.about-title {
+  animation-delay: 0.1s;
+}
+
+.about-subtitle {
+  animation-delay: 0.2s;
+}
+
+.about-description {
+  animation-delay: 0.3s;
+}
+
+.about-journey {
+  animation-delay: 0.4s;
+}
+
+.about-image {
+  animation: fadeInRight 0.8s ease forwards;
+  animation-delay: 1s;
+  opacity: 0;
+  transform: translateX(50px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* ==========================================
+   4. RESPONSIVE STYLES
+   ========================================== */
+
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .about-container {
+    gap: 60px;
+  }
+
+  .about-title {
+    font-size: 3.5rem;
+  }
+
+  .about-subtitle {
+    font-size: 2rem;
+  }
+
+  .header {
+    padding: 12px 0;
+  }
+
+  .nav-container {
+    padding: 0 20px;
+  }
+}
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .logo {
+    text-shadow: none;
+  }
+
+  .nav-menu a {
+    text-shadow: none;
+  }
+
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 50px;
+    padding: 0 20px;
+  }
+
+  .about-content {
+    padding-right: 0;
+    order: 2;
+  }
+
+  .about-image-container {
+    padding-left: 0;
+    order: 1;
+  }
+
+  .about-title {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .about-subtitle {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+
+  .about-description,
+  .about-journey {
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .about-description {
+    margin-bottom: 4px;
+  }
+
+  .about-image {
+    height: 350px;
+  }
+
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 15px 0;
+    transition: all 0.3s ease;
+  }
+
+  .header.scrolled {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px) !important;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .nav-container {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+}
+
+/* Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+  .about-title {
+    font-size: 2.2rem;
+  }
+
+  .about-subtitle {
+    font-size: 1.5rem;
+  }
+
+  .about-image {
+    height: 280px;
+  }
+}

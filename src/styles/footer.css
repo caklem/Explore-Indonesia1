@@ -1,0 +1,56 @@
+/* ============================================
+   FOOTER COMPONENT STYLES
+   ============================================
+   
+   KOMPONEN INI DIGUNAKAN DI SEMUA HALAMAN
+   
+   STRUKTUR CSS:
+   1. Footer Container
+   2. Footer Content
+   3. Social Links
+   4. Copyright
+   5. Responsive Styles
+   
+   ============================================ */
+
+/* ==========================================
+   1. FOOTER CONTAINER
+   ========================================== */
+
+/* Tambahkan CSS .footer dari Footer.astro di sini */
+
+
+/* ==========================================
+   2. FOOTER CONTENT
+   ========================================== */
+
+/* CSS untuk konten footer (3 kolom: About, Links, Contact) */
+
+
+/* ==========================================
+   3. SOCIAL LINKS
+   ========================================== */
+
+/* CSS untuk social media icons */
+
+
+/* ==========================================
+   4. COPYRIGHT
+   ========================================== */
+
+/* CSS untuk copyright text */
+
+
+/* ==========================================
+   5. RESPONSIVE STYLES
+   ========================================== */
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  /* Stack footer columns vertically */
+}
+
+/* Tablet (769px - 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  /* Tablet specific styles */
+}

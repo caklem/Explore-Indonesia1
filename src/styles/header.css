@@ -1,0 +1,64 @@
+/* ============================================
+   HEADER COMPONENT STYLES
+   ============================================
+   
+   KOMPONEN INI DIGUNAKAN DI SEMUA HALAMAN
+   
+   STRUKTUR CSS:
+   1. Header Container
+   2. Logo
+   3. Navigation Menu
+   4. Mobile Hamburger Menu
+   5. Scrolled State
+   6. Responsive Styles
+   
+   ============================================ */
+
+/* ==========================================
+   1. HEADER CONTAINER
+   ========================================== */
+
+/* Tambahkan CSS .header dari Header.astro di sini */
+
+
+/* ==========================================
+   2. LOGO
+   ========================================== */
+
+/* CSS untuk logo */
+
+
+/* ==========================================
+   3. NAVIGATION MENU
+   ========================================== */
+
+/* CSS untuk nav-menu desktop */
+
+
+/* ==========================================
+   4. MOBILE HAMBURGER MENU
+   ========================================== */
+
+/* CSS untuk hamburger icon dan mobile menu */
+
+
+/* ==========================================
+   5. SCROLLED STATE
+   ========================================== */
+
+/* CSS untuk .header.scrolled */
+
+
+/* ==========================================
+   6. RESPONSIVE STYLES
+   ========================================== */
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  /* Hide desktop menu, show hamburger */
+}
+
+/* Tablet (769px - 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  /* Tablet specific styles */
+}

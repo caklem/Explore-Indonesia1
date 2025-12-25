@@ -1,0 +1,111 @@
+/* ============================================
+   GLOBAL STYLES - Explore Indonesia
+   ============================================
+   File ini berisi styling global yang digunakan
+   di semua halaman website.
+   ============================================ */
+
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main content wrapper */
+.main-content {
+  flex: 1;
+}
+
+/* Fade transitions */
+body {
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Buttons - Global Style */
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background: #ff6b6b;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid #ff6b6b;
+  cursor: pointer;
+  font-family: "Noto Sans", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn:hover {
+  background: transparent;
+  color: #ff6b6b;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+.btn-secondary {
+  background: #a3b184;
+  border-color: #a3b184;
+}
+
+.btn-secondary:hover {
+  background: transparent;
+  color: #a3b184;
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.mt-1 { margin-top: 10px; }
+.mt-2 { margin-top: 20px; }
+.mt-3 { margin-top: 30px; }
+.mt-4 { margin-top: 40px; }
+.mt-5 { margin-top: 50px; }
+
+.mb-1 { margin-bottom: 10px; }
+.mb-2 { margin-bottom: 20px; }
+.mb-3 { margin-bottom: 30px; }
+.mb-4 { margin-bottom: 40px; }
+.mb-5 { margin-bottom: 50px; }
+
+/* Responsive Breakpoints Reference:
+   - Mobile: max-width: 480px
+   - Tablet: 481px - 768px
+   - Desktop: 769px - 1024px
+   - Large Desktop: 1025px+
+*/
