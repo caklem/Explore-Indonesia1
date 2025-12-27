@@ -339,29 +339,28 @@ body {
 }
 
 .view-details-btn {
-  background: #fff;
-  color: #f28482;
-  border: 1px solid #f28482;
-  padding: 8px 20px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-family: "Noto Sans", sans-serif;
-  pointer-events: auto;
-  user-select: none;
+  background-color: transparent !important;
+  border: 2px solid #f28482 !important;
+  color: #f28482 !important;
+  padding: 10px 24px !important;
+  border-radius: 20px !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  transition: all 0.3s ease !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.3px !important;
+  font-family: "Noto Sans", sans-serif !important;
+  pointer-events: auto !important;
+  user-select: none !important;
 }
 
 .view-details-btn:hover {
-  background-color: #f28482;
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(242, 132, 130, 0.3);
+  background-color: #f28482 !important;
+  color: white !important;
+  transform: translateY(-2px) !important;
 }
 
 /* Responsive Design */
@@ -708,7 +707,7 @@ body {
   max-height: 85vh;
   background: white;
   border-radius: 20px;
-  padding: 0;
+  padding: 12px; /* added padding so text isn't flush to edge */
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
   border: 2px solid #f28482;
   overflow: hidden;
@@ -719,7 +718,7 @@ body {
 .detail-modal-body {
   overflow-y: auto;
   flex: 1;
-  padding-bottom: 60px;
+  padding: 20px 28px 60px; /* top/right/left/bottom padding to avoid text touching edges */
 }
 
 .detail-modal-body::-webkit-scrollbar {
@@ -759,7 +758,7 @@ body {
 .detail-header {
   background: #ffff;
   padding: 30px 30px 25px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #Ffff;
   margin-top: 0;
 }
 
@@ -871,48 +870,424 @@ body {
 }
 
 .detail-destinations {
-  display: flex;
-  gap: 35px;
-  margin: 30px 30px;
-  padding: 0;
+  display: flex !important;
+  gap: 35px !important;
+  margin: 30px auto !important; /* Auto margin untuk center */
+  padding: 0 12px !important; /* add horizontal inner padding */
+  width: auto !important; /* Allow columns to respect padding */
+  justify-content: center !important; /* Center content */
 }
 
 .detail-dest-column {
-  flex: 1;
+  flex: 1 !important;
+  width: auto !important; /* Auto width untuk kolom */
 }
 
-/* Destination column visibility */
-.half-day-destinations {
-  display: flex;
-  flex-direction: column;
-}
+/* Responsive tweak for small screens: slightly reduce gaps and keep comfortable padding */
+@media (max-width: 520px) {
+  .detail-modal-content {
+    padding: 10px;
+    max-width: 96%;
+    border-radius: 16px;
+  }
 
-.full-day-destinations {
-  display: flex;
-  flex-direction: column;
+  .detail-modal-body {
+    padding: 8px 12px 70px;
+  }
+
+  .detail-trip-options {
+    margin: 12px;
+  }
+
+  .detail-destinations {
+    gap: 18px !important;
+    padding: 0 12px !important;
+    width: 100% !important;
+    justify-content: flex-start !important;
+  }
+
+  .detail-dest-column {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  /* Mobile: prevent icon and text overlap */
+  .detail-dest-item {
+    align-items: center !important;
+    gap: 10px !important;
+  }
+  .detail-dest-item span:last-child {
+    display: block !important;
+    min-width: 0 !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+  }
+  .detail-dest-icon {
+    margin-top: 0 !important;
+  }
 }
 
 .detail-dest-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 14px;
-  font-size: 15px;
-  color: #333;
-  line-height: 1.4;
-  transition: all 0.3s ease;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  margin-bottom: 14px !important;
+  font-size: 15px !important;
+  color: #c9d3bf !important; /* default pale (inactive) */
+  line-height: 1.4 !important;
+  text-align: left !important; /* Text KIRI */
+  transition: all 0.3s ease !important;
+}
+
+/* Active / Inactive states applied via JS classes */
+.detail-dest-item.active-dest {
+  color: #A3B184 !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+}
+
+.detail-dest-item.inactive-dest {
+        color: #6b5b47 !important;
+  opacity: 0.95 !important;
 }
 
 .detail-dest-icon {
   width: 14px;
   height: 14px;
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0YyODQ4MiIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+");
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0NDQ0NDQyIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   flex-shrink: 0;
   margin-top: 2px;
-  transition: all 0.3s ease;
+  transition: filter 0.2s ease, background-image 0.2s ease;
+}
+
+.detail-dest-icon.active-icon {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0EzQjE4NCIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+");
+  filter: drop-shadow(0 0 4px rgba(163, 177, 132, 0.5));
+}
+
+.detail-dest-icon.inactive-icon {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0NDQ0NDQyIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+");
+  filter: none;
+}
+
+/* Mobile: stronger override to prevent icon/text overlap (higher specificity) */
+@media (max-width: 520px) {
+  .detail-destinations .detail-dest-item {
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  .detail-destinations .detail-dest-item > .detail-dest-icon {
+    margin-top: 0 !important;
+    flex: 0 0 18px !important;
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .detail-destinations .detail-dest-item > span:last-child {
+    display: block !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+  }
+}
+
+/* Zaviero description block */
+.detail-description {
+  margin: 20px 30px;
+  background: #f2e9de; /* soft beige (adjusted) */
+  padding: 18px 20px;
+  border-radius: 10px;
+}
+
+.detail-desc-title {
+  display: inline-block;
+  background: #A3B184; /* sage green */
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(163,177,132,0.12);
+}
+
+.detail-desc-text {
+  margin-top: 12px;
+  color: #6b5b47; /* same color as trip option text */
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.detail-desc-text a {
+  color: #A3B184; /* sage green for phone */
+  font-weight: 800;
+  text-decoration: none;
+}
+
+/* Zikita variant for description - match Zaviero (soft beige + green pill) */
+.detail-description.zikita {
+  margin: 20px 30px;
+  background: #f3e8db; /* soft beige - same as Zaviero */
+  padding: 16px;
+  border-radius: 10px;
+}
+
+.detail-desc-title.zikita {
+  display: inline-block;
+  background: #A3B184; /* sage green */
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.detail-desc-text.zikita {
+  margin-top: 12px;
+  color: #6b5b47;
+  line-height: 1.6;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.detail-desc-text.zikita a {
+  color: #A3B184; /* sage green */
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Rent Car specific description styling */
+.detail-description.rentcar {
+  margin: 20px 30px;
+  background: #f3e8db;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.detail-description.rentcar .detail-desc-title.zikita {
+  margin-bottom: 18px;
+  font-size: 17px;
+  padding: 12px 22px;
+  background: #A3B184;
+}
+
+.detail-description.rentcar .detail-desc-text.zikita {
+  margin-bottom: 24px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #6b5b47;
+}
+
+.detail-description.rentcar .detail-desc-text.zikita a {
+  font-weight: 800;
+  color: #A3B184;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Rent Car Modal - Wider on desktop for better table display */
+#detailModalRentcar .detail-modal-content {
+  max-width: 700px;
+}
+
+/* Rent Car themed table (overlay-like, pill titles, white borders) */
+.detail-description.rentcar .rentcar-section-title {
+  display: block;
+  background: #A3B184;
+  color: #fff;
+  padding: 16px 28px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(163,177,132,0.25);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  width: 100%;
+}
+
+.detail-description.rentcar .rentcar-content {
+  margin-top: 24px;
+}
+
+.detail-description.rentcar .rentcar-section {
+  margin-bottom: 35px;
+}
+
+.detail-description.rentcar .rentcar-section:last-child {
+  margin-bottom: 0;
+}
+
+.detail-description.rentcar .rentcar-table-wrap {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  margin-top: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: 1px solid rgba(163,177,132,0.1);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+/* Scrollbar styling for table wrapper */
+.detail-description.rentcar .rentcar-table-wrap::-webkit-scrollbar {
+  height: 6px;
+}
+
+.detail-description.rentcar .rentcar-table-wrap::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.detail-description.rentcar .rentcar-table-wrap::-webkit-scrollbar-thumb {
+  background: #A3B184;
+  border-radius: 3px;
+}
+
+.detail-description.rentcar .rentcar-table-wrap::-webkit-scrollbar-thumb:hover {
+  background: #8A9B7A;
+}
+
+.detail-description.rentcar .rentcar-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.98rem;
+  background: transparent;
+}
+
+.detail-description.rentcar .rentcar-table thead th {
+  padding: 14px 16px;
+  text-align: center;
+  font-weight: 700;
+  color: #A3B184;
+  background: rgba(163,177,132,0.05);
+  border-bottom: 3px solid #A3B184;
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+.detail-description.rentcar .rentcar-table thead th:first-child {
+  text-align: left;
+  font-weight: 700;
+  color: #A3B184;
+  background: transparent;
+}
+
+.detail-description.rentcar .rentcar-table thead th:nth-child(2),
+.detail-description.rentcar .rentcar-table thead th:nth-child(3) {
+  background: rgba(163,177,132,0.08);
+}
+
+.detail-description.rentcar .rentcar-table tbody tr {
+  border-bottom: 1px solid rgba(163,177,132,0.12);
+  transition: background-color 0.2s ease;
+}
+
+.detail-description.rentcar .rentcar-table tbody tr:hover {
+  background-color: rgba(163,177,132,0.03);
+}
+
+.detail-description.rentcar .rentcar-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.detail-description.rentcar .rentcar-table tbody td {
+  padding: 16px;
+  color: #23515a;
+  vertical-align: middle;
+  background: transparent;
+  font-size: 0.95rem;
+}
+
+.detail-description.rentcar .rentcar-table tbody td:first-child {
+  text-align: left;
+  font-weight: 600;
+  color: #2f595c;
+  line-height: 1.5;
+}
+
+.detail-description.rentcar .rentcar-table tbody td:nth-child(2),
+.detail-description.rentcar .rentcar-table tbody td:nth-child(3) {
+  text-align: right;
+  font-weight: 700;
+  color: #A3B184;
+  font-size: 1rem;
+}
+
+.detail-description.rentcar .rc-cap {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  background: #A3B184;
+  border-radius: 20px;
+  margin-top: 6px;
+  line-height: 1.2;
+  box-shadow: 0 2px 6px rgba(163,177,132,0.2);
+}
+
+.detail-description.rentcar .rentcar-note {
+  color: #23515a;
+  margin-top: 16px;
+  font-size: 0.9rem;
+  font-style: italic;
+  text-align: center;
+  padding-top: 12px;
+  border-top: 1px solid rgba(163,177,132,0.1);
+}
+
+/* New list layout for mobile-friendly display */
+.detail-description.rentcar .rentcar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.detail-description.rentcar .rentcar-item {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.detail-description.rentcar .rentcar-destination {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.detail-description.rentcar .rentcar-prices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-description.rentcar .rentcar-price {
+  font-size: 0.9rem;
+  color: #555;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 8px;
+  border-left: 4px solid #A3B184;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.detail-description.rentcar .rentcar-price strong {
+  color: #A3B184;
+  font-weight: 700;
 }
 
 .detail-section {
@@ -959,14 +1334,14 @@ body {
   color: #333;
 }
 
-/* .detail-footer {
+.detail-footer {
   border-top: 1px solid #eee;
   padding: 25px 30px;
   text-align: center;
   font-size: 14px;
   color: #333;
-  background: #333;
-} */
+  background: #ffffff;
+}
 
 .detail-contact {
   margin-top: 15px;
@@ -997,7 +1372,7 @@ body {
 }
 
 .detail-back-btn {
-  background: transparent;
+  background: white;
   border: 2px solid #f28482;
   color: #f28482;
   padding: 12px 30px;
@@ -1024,6 +1399,316 @@ body {
 .detail-back-btn:active {
   transform: translateY(0);
   box-shadow: 0 2px 8px rgba(242, 132, 130, 0.2);
+}
+
+/* Responsive styles for Rent Car Modal */
+@media (max-width: 768px) {
+  /* Modal container adjustments for mobile */
+  .detail-modal {
+    padding: 5px !important;
+    align-items: flex-start !important;
+    padding-top: 10px !important;
+  }
+
+  /* Modal content responsive for all modals */
+  .detail-modal-content {
+    width: 98% !important;
+    max-width: 100% !important;
+    max-height: 95vh !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border-radius: 15px !important;
+    border: 2px solid #f28482 !important;
+  }
+
+  .detail-modal-body {
+    padding: 20px 15px 80px !important;
+    max-height: calc(95vh - 40px) !important;
+    overflow-y: auto !important;
+  }
+
+  /* Close button mobile positioning */
+  .detail-modal-close {
+    top: 15px !important;
+    right: 20px !important;
+    font-size: 28px !important;
+    width: 35px !important;
+    height: 35px !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 10001 !important;
+  }
+
+  /* Header responsive for all modals */
+  .detail-header {
+    padding: 20px 15px 15px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .detail-model {
+    font-size: 1.2rem !important;
+    margin-bottom: 8px !important;
+  }
+
+  .detail-specs {
+    font-size: 0.8rem !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Trip options responsive for all modals */
+  .detail-trip-options {
+    margin: 15px !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .detail-trip-option {
+    padding: 15px !important;
+    border-radius: 12px !important;
+    border: 1px solid #ddd !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .detail-trip-title {
+    font-size: 0.9rem !important;
+  }
+
+  .detail-trip-price {
+    font-size: 1.1rem !important;
+  }
+
+  .detail-trip-time {
+    font-size: 0.8rem !important;
+  }
+
+  /* Description card responsive for all modals */
+  .detail-description {
+    margin: 15px 15px !important;
+    padding: 18px !important;
+  }
+
+  .detail-desc-title {
+    font-size: 14px !important;
+    padding: 10px 16px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .detail-desc-text {
+    font-size: 12px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 18px !important;
+  }
+
+  /* Destinations responsive */
+  .detail-destinations {
+    padding: 15px !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+  }
+
+  .detail-dest-column {
+    width: 100% !important;
+  }
+
+  .detail-dest-item {
+    padding: 8px 0 !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* Sections responsive */
+  .detail-section {
+    padding: 15px !important;
+  }
+
+  .detail-section h3 {
+    font-size: 1.1rem !important;
+    margin-bottom: 15px !important;
+  }
+
+  /* Included/Excluded responsive */
+  .detail-included-excluded {
+    flex-direction: column !important;
+    gap: 15px !important;
+  }
+
+  .detail-included,
+  .detail-excluded {
+    width: 100% !important;
+    padding: 12px !important;
+    border-radius: 8px !important;
+  }
+
+  .detail-include-item,
+  .detail-exclude-item {
+    font-size: 0.8rem !important;
+    margin-bottom: 6px !important;
+    padding-left: 20px !important;
+  }
+
+  /* Footer responsive */
+  .detail-footer {
+    padding: 15px !important;
+    text-align: center !important;
+  }
+
+  .detail-footer p {
+    font-size: 0.8rem !important;
+    margin-bottom: 10px !important;
+  }
+
+  .detail-contact {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .detail-phone {
+    font-size: 0.9rem !important;
+  }
+
+  /* Back button responsive */
+  .detail-back-btn {
+    position: fixed !important;
+    bottom: 20px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    padding: 12px 24px !important;
+    font-size: 0.9rem !important;
+    border-radius: 20px !important;
+    z-index: 10002 !important;
+    background: white !important;
+    border: 2px solid #f28482 !important;
+    color: #f28482 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  .detail-description.rentcar .rentcar-table thead th {
+    padding: 8px 6px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .detail-description.rentcar .rentcar-table tbody td { 
+    padding: 8px 6px; 
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+
+  .detail-description.rentcar .rentcar-table tbody td:first-child {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    white-space: normal;
+    min-width: 150px;
+  }
+
+  .detail-description.rentcar .rentcar-table tbody td:nth-child(2),
+  .detail-description.rentcar .rentcar-table tbody td:nth-child(3) {
+    font-size: 0.8rem;
+    white-space: normal;
+  }
+
+  /* Guest capacity badge responsive */
+  .detail-description.rentcar .rc-cap {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    margin-top: 3px;
+  }
+
+  /* Note responsive */
+  .detail-description.rentcar .rentcar-note {
+    font-size: 0.8rem;
+    margin-top: 12px;
+  }
+
+  /* Section spacing responsive */
+  .detail-description.rentcar .rentcar-section {
+    margin-bottom: 24px;
+  }
+
+  .detail-description.rentcar .rentcar-content {
+    margin-top: 18px;
+  }
+
+  /* Included/Excluded responsive */
+  #detailModalRentcar .detail-section {
+    margin: 20px 15px;
+    padding-top: 20px;
+  }
+
+  #detailModalRentcar .detail-included-excluded {
+    flex-direction: column;
+    gap: 20px;
+    padding: 18px;
+  }
+
+  /* Footer responsive */
+  #detailModalRentcar .detail-footer {
+    padding: 15px;
+    margin: 15px;
+  }
+
+  #detailModalRentcar .detail-footer p {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small mobile */
+  #detailModalRentcar .detail-modal-content {
+    width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+    margin: 0;
+  }
+
+  #detailModalRentcar .detail-modal-body {
+    padding: 12px 15px 50px;
+  }
+
+  .detail-description.rentcar {
+    margin: 12px 12px;
+    padding: 15px;
+  }
+
+  .detail-description.rentcar .rentcar-section-title { 
+    font-size: 0.88rem; 
+    padding: 10px 15px;
+    margin-bottom: 14px;
+  }
+
+  .detail-description.rentcar .rentcar-table-wrap {
+    padding: 12px;
+  }
+
+  .detail-description.rentcar .rentcar-table {
+    min-width: 450px;
+    font-size: 0.85rem;
+  }
+
+  .detail-description.rentcar .rentcar-table thead th {
+    padding: 8px 6px;
+    font-size: 0.75rem;
+  }
+
+  .detail-description.rentcar .rentcar-table tbody td { 
+    padding: 8px 6px; 
+    font-size: 0.78rem;
+  }
+
+  .detail-description.rentcar .rentcar-table tbody td:first-child {
+    font-size: 0.75rem;
+    min-width: 160px;
+  }
+
+  .detail-description.rentcar .rc-cap {
+    font-size: 0.65rem;
+    padding: 3px 6px;
+  }
 }
 
 /* Mobile Responsive */

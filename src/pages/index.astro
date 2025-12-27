@@ -149,9 +149,9 @@ import Footer from "../components/Footer.astro";
                 />
                 <div class="package-content">
                   <h3 class="package-name">ZIKITA SPEEDBOAT</h3>
-                  <p class="package-price">7.000.000</p>
+                  <p class="package-price">8.000.000</p>
                   <a href="#" class="view-details-btn" data-package="zikita"
-                    >view details</a
+                    >VIEW DETAILS</a
                   >
                 </div>
               </div>
@@ -166,9 +166,9 @@ import Footer from "../components/Footer.astro";
                 />
                 <div class="package-content">
                   <h3 class="package-name">ZAVIERO SPEEDBOAT</h3>
-                  <p class="package-price">5.000.000</p>
+                  <p class="package-price">7.000.000</p>
                   <a href="#" class="view-details-btn" data-package="zaviero"
-                    >view details</a
+                    >VIEW DETAILS</a
                   >
                 </div>
               </div>
@@ -185,7 +185,7 @@ import Footer from "../components/Footer.astro";
                   <h3 class="package-name">RENT CAR</h3>
                   <p class="package-price">350.000</p>
                   <a href="#" class="view-details-btn" data-package="rentcar"
-                    >view details</a
+                    >VIEW DETAILS</a
                   >
                 </div>
               </div>
@@ -202,14 +202,14 @@ import Footer from "../components/Footer.astro";
 
         <div class="detail-modal-body">
           <!-- Header -->
+          <!-- Header -->
           <div class="detail-header">
             <div class="detail-title">
-              <h2>ZIKITA SPEEDBOAT</h2>
-              <span class="detail-model">Yamaha 250 HP x2</span>
+              <span class="detail-model">Yamaha - 250 HP x 2</span>
               <span class="detail-specs">
                 <span class="spec-item">
                   <img src="/icon yamaha.png" alt="Engine" class="spec-icon" />
-                  Yamaha 250 HP x2
+                  Yamaha -250 HP x 2
                 </span>
                 <span class="spec-separator">|</span>
                 <span class="spec-item">
@@ -232,7 +232,7 @@ import Footer from "../components/Footer.astro";
                     alt="Dimensions"
                     class="spec-icon"
                   />
-                  11,7 x 3 x 1.10
+                  11.0 M x 2.40 M x 1.10 M
                 </span>
               </span>
             </div>
@@ -242,24 +242,26 @@ import Footer from "../components/Footer.astro";
           <div class="detail-trip-options">
             <div class="detail-trip-option active" data-trip="half-day">
               <div class="detail-trip-title">HALF DAY TRIP</div>
-              <div class="detail-trip-price">Rp. 5.500.000,-</div>
-              <div class="detail-trip-time">06.30 AM - 02.00 PM</div>
+              <div class="detail-trip-price">Rp. 8.000.000,-</div>
+              <div class="detail-trip-time">08.30 AM - 02.00 PM</div>
             </div>
             <div class="detail-trip-option" data-trip="full-day">
               <div class="detail-trip-title">FULL DAY TRIP</div>
-              <div class="detail-trip-price">Rp 7.000.000,-</div>
+              <div class="detail-trip-price">Rp 8.000.000,-</div>
               <div class="detail-trip-time">06.30 AM - 05.00 PM</div>
+            </div>
+            <div class="detail-trip-option" data-trip="full-day-sunset">
+              <div class="detail-trip-title">
+                FULL DAY TRIP + SUNSET FLYING FOX
+              </div>
+              <div class="detail-trip-price">Rp 8.000.000,-</div>
+              <div class="detail-trip-time">06.30 AM - 06.15 PM</div>
             </div>
           </div>
 
           <!-- Destinations -->
           <div class="detail-destinations">
-            <!-- Half Day Trip Destinations -->
             <div class="detail-dest-column half-day-destinations">
-              <div class="detail-dest-item">
-                <span class="detail-dest-icon"></span>
-                <span>Rinca Island</span>
-              </div>
               <div class="detail-dest-item">
                 <span class="detail-dest-icon"></span>
                 <span>Kelor Island</span>
@@ -268,8 +270,11 @@ import Footer from "../components/Footer.astro";
                 <span class="detail-dest-icon"></span>
                 <span>Menjerite Island</span>
               </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Sunset at Kalong Island (flying foxes)</span>
+              </div>
             </div>
-            <!-- Full Day Trip Destinations -->
             <div class="detail-dest-column full-day-destinations">
               <div class="detail-dest-item">
                 <span class="detail-dest-icon"></span>
@@ -277,11 +282,11 @@ import Footer from "../components/Footer.astro";
               </div>
               <div class="detail-dest-item">
                 <span class="detail-dest-icon"></span>
-                <span>Komodo Island</span>
+                <span>Pink Beach</span>
               </div>
               <div class="detail-dest-item">
                 <span class="detail-dest-icon"></span>
-                <span>Pink Beach</span>
+                <span>Komodo Island</span>
               </div>
               <div class="detail-dest-item">
                 <span class="detail-dest-icon"></span>
@@ -289,9 +294,49 @@ import Footer from "../components/Footer.astro";
               </div>
               <div class="detail-dest-item">
                 <span class="detail-dest-icon"></span>
-                <span>Kanawa Island</span>
+                <span>Angel Island/Siaba Island</span>
               </div>
             </div>
+            <div class="detail-dest-column full-day-sunset">
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Padar Island</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Pink Beach</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Komodo Island</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Taka Makassar, Manta Point</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Angel Island/Siaba Island</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Sunset at Kalong Island (flying foxes)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Description (Zikita) -->
+          <div class="detail-description zikita">
+            <div class="detail-desc-title zikita">
+              Zikita can accommodate up to 14 pax
+            </div>
+            <p class="detail-desc-text zikita">
+              Price is customize depend on destination &amp; number of
+              passenger. For further details about our daily trip or private
+              charter please contact our admin at <a href="tel:082192895105"
+                >0821-9289-5105</a
+              >
+            </p>
           </div>
 
           <!-- What's Included -->
@@ -328,7 +373,7 @@ import Footer from "../components/Footer.astro";
 
           <!-- Footer -->
           <div class="detail-footer">
-            <p>Prices very based on destination & number of passengers.</p>
+            <p>Prices vary based on destination & number of passengers.</p>
             <div class="detail-contact">
               <span>Contact info</span>
               <span class="detail-phone">
@@ -360,12 +405,11 @@ import Footer from "../components/Footer.astro";
           <!-- Header -->
           <div class="detail-header">
             <div class="detail-title">
-              <h2>ZAVIERO SPEEDBOAT</h2>
-              <span class="detail-model">Yamaha 200 HP x2</span>
+              <span class="detail-model">Zaviero Speedboat</span>
               <span class="detail-specs">
                 <span class="spec-item">
                   <img src="/icon yamaha.png" alt="Engine" class="spec-icon" />
-                  Yamaha 200 HP x2
+                  Suzuki 2 X 150 PK
                 </span>
                 <span class="spec-separator">|</span>
                 <span class="spec-item">
@@ -388,7 +432,7 @@ import Footer from "../components/Footer.astro";
                     alt="Dimensions"
                     class="spec-icon"
                   />
-                  10,5 x 2,8 x 1.05
+                  8.85 M x 2.60 M x 0.92 M
                 </span>
               </span>
             </div>
@@ -398,24 +442,26 @@ import Footer from "../components/Footer.astro";
           <div class="detail-trip-options">
             <div class="detail-trip-option active" data-trip="half-day">
               <div class="detail-trip-title">HALF DAY TRIP</div>
-              <div class="detail-trip-price">Rp. 4.500.000,-</div>
-              <div class="detail-trip-time">06.30 AM - 02.00 PM</div>
+              <div class="detail-trip-price">Rp. 7.000.000,-</div>
+              <div class="detail-trip-time">08.30 AM - 02.00 PM</div>
             </div>
             <div class="detail-trip-option" data-trip="full-day">
               <div class="detail-trip-title">FULL DAY TRIP</div>
-              <div class="detail-trip-price">Rp 6.000.000,-</div>
+              <div class="detail-trip-price">Rp 7.000.000,-</div>
               <div class="detail-trip-time">06.30 AM - 05.00 PM</div>
+            </div>
+            <div class="detail-trip-option" data-trip="full-day-sunset">
+              <div class="detail-trip-title">
+                FULL DAY TRIP + SUNSET FLYING FOX
+              </div>
+              <div class="detail-trip-price">Rp 7.000.000,-</div>
+              <div class="detail-trip-time">06.30 AM - 06.15 PM</div>
             </div>
           </div>
 
           <!-- Destinations -->
           <div class="detail-destinations">
-            <!-- Half Day Trip Destinations -->
             <div class="detail-dest-column half-day-destinations">
-              <div class="detail-dest-item">
-                <span class="detail-dest-icon"></span>
-                <span>Rinca Island</span>
-              </div>
               <div class="detail-dest-item">
                 <span class="detail-dest-icon"></span>
                 <span>Kelor Island</span>
@@ -424,8 +470,11 @@ import Footer from "../components/Footer.astro";
                 <span class="detail-dest-icon"></span>
                 <span>Menjerite Island</span>
               </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Sunset at Kalong Island (flying foxes)</span>
+              </div>
             </div>
-            <!-- Full Day Trip Destinations -->
             <div class="detail-dest-column full-day-destinations">
               <div class="detail-dest-item">
                 <span class="detail-dest-icon"></span>
@@ -433,11 +482,11 @@ import Footer from "../components/Footer.astro";
               </div>
               <div class="detail-dest-item">
                 <span class="detail-dest-icon"></span>
-                <span>Komodo Island</span>
+                <span>Pink Beach</span>
               </div>
               <div class="detail-dest-item">
                 <span class="detail-dest-icon"></span>
-                <span>Pink Beach</span>
+                <span>Komodo Island</span>
               </div>
               <div class="detail-dest-item">
                 <span class="detail-dest-icon"></span>
@@ -445,9 +494,49 @@ import Footer from "../components/Footer.astro";
               </div>
               <div class="detail-dest-item">
                 <span class="detail-dest-icon"></span>
-                <span>Kanawa Island</span>
+                <span>Angel Island/Siaba Island</span>
               </div>
             </div>
+            <div class="detail-dest-column full-day-sunset">
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Padar Island</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Pink Beach</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Komodo Island</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Taka Makassar, Manta Point</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Angel Island/Siaba Island</span>
+              </div>
+              <div class="detail-dest-item">
+                <span class="detail-dest-icon"></span>
+                <span>Sunset at Kalong Island (flying foxes)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Description (Zaviero) -->
+          <div class="detail-description">
+            <div class="detail-desc-title">
+              Zaviero can accommodate up to 10 pax
+            </div>
+            <p class="detail-desc-text">
+              Price is customize depend on destination &amp; number of
+              passenger. For further details about our daily trip or private
+              charter please contact our admin at <a href="tel:082192895105">
+                0821-9289-5105
+              </a>
+            </p>
           </div>
 
           <!-- What's Included -->
@@ -484,12 +573,12 @@ import Footer from "../components/Footer.astro";
 
           <!-- Footer -->
           <div class="detail-footer">
-            <p>Prices very based on destination & number of passengers.</p>
+            <p>Prices vary based on destination & number of passengers.</p>
             <div class="detail-contact">
               <span>Contact info</span>
               <span class="detail-phone">
                 <span class="whatsapp-icon"></span>
-                0811-3787-741
+                0821-9289-5105
               </span>
             </div>
           </div>
@@ -508,86 +597,205 @@ import Footer from "../components/Footer.astro";
           <!-- Header -->
           <div class="detail-header">
             <div class="detail-title">
-              <h2>RENT CAR</h2>
-              <span class="detail-model">Toyota Hiace & Innova Reborn</span>
+              <span class="detail-model">Rent Car</span>
+              <span class="detail-specs">
+                <span class="spec-item">TOYOTA HIACE</span>
+                <span class="spec-separator">|</span>
+                <span class="spec-item">INNOVA REBORN</span>
+              </span>
             </div>
           </div>
 
-          <!-- Trip Options for Rent Car -->
+          <!-- Vehicle Options (styled like trip-card) -->
           <div class="detail-trip-options">
-            <div class="detail-trip-option active" data-trip="hiace">
+            <div class="detail-trip-option active" data-trip="toyota-hiace">
               <div class="detail-trip-title">TOYOTA HIACE</div>
-              <div class="detail-trip-price">Rp. 850.000,-/day</div>
-              <div class="detail-trip-time">Capacity: 12-14 passengers</div>
+              <div class="detail-trip-price">Guest 16</div>
+              <div class="detail-trip-time">Per Day (24 Hours)</div>
             </div>
-            <div class="detail-trip-option" data-trip="innova">
+            <div class="detail-trip-option" data-trip="innova-reborn">
               <div class="detail-trip-title">INNOVA REBORN</div>
-              <div class="detail-trip-price">Rp 650.000,-/day</div>
-              <div class="detail-trip-time">Capacity: 6-7 passengers</div>
+              <div class="detail-trip-price">Guest 5</div>
+              <div class="detail-trip-time">Per Day (24 Hours)</div>
             </div>
           </div>
 
-          <!-- Destinations for Rent Car -->
-          <div class="detail-destinations">
-            <div class="detail-dest-column hiace-destinations">
-              <div class="detail-dest-item">
-                <span class="detail-dest-icon"></span>
-                <span>Spacious Interior</span>
+          <!-- Rates (inside description card - same style as Zaviero/Zikita) -->
+          <div class="detail-description zikita rentcar">
+            <div class="detail-desc-title zikita">Rent Car Rates</div>
+
+            <p class="detail-desc-text zikita">
+              Our rent car service offers Toyota Hiace and Innova Reborn for
+              city tours, airport transfers, and multi-day overland trips.
+              Prices vary based on distance, duration, and number of passengers.
+              For bookings and further details, please contact our admin at
+              <a href="tel:082192895105">0821-9289-5105</a>
+            </p>
+
+            <div class="rentcar-content">
+              <div class="rentcar-section">
+                <h3 class="rentcar-section-title">Airport Transfer</h3>
+                <div class="rentcar-list">
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">
+                      Airport - Hotel Ayana/Plataran
+                    </div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 300.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 150.000
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">
+                      Airport - Hotel Jayakarta/Sudamala
+                    </div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 300.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 150.000
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">
+                      Airport - Hotel In Town
+                    </div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 250.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 125.000
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p class="rentcar-note">Other drop point on request</p>
               </div>
-              <div class="detail-dest-item">
-                <span class="detail-dest-icon"></span>
-                <span>Air Conditioning</span>
+
+              <div class="rentcar-section">
+                <h3 class="rentcar-section-title">Half Day Tour</h3>
+                <div class="rentcar-list">
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">City Tour Labuan Bajo</div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 1.000.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 600.000
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">Rangko Cave Tour</div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 1.100.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 700.000
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">Mello Village Tour</div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 1.100.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 900.000
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="detail-dest-item">
-                <span class="detail-dest-icon"></span>
-                <span>Comfortable Seats</span>
+
+              <div class="rentcar-section">
+                <h3 class="rentcar-section-title">Full Day Tour</h3>
+                <div class="rentcar-list">
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">
+                      Labuan Bajo Full day Tour
+                    </div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 1.500.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 900.000
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">Wae Rebo Village Tour</div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 4.500.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 2.500.000
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">
+                      Todo Village/Ruteng One Day Tour
+                    </div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 2.500.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 2.000.000
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="detail-dest-item">
-                <span class="detail-dest-icon"></span>
-                <span>Professional Driver</span>
-              </div>
-            </div>
-            <div class="detail-dest-column innova-destinations">
-              <div class="detail-dest-item">
-                <span class="detail-dest-icon"></span>
-                <span>Modern Design</span>
-              </div>
-              <div class="detail-dest-item">
-                <span class="detail-dest-icon"></span>
-                <span>Air Conditioning</span>
-              </div>
-              <div class="detail-dest-item">
-                <span class="detail-dest-icon"></span>
-                <span>Comfortable Ride</span>
-              </div>
-              <div class="detail-dest-item">
-                <span class="detail-dest-icon"></span>
-                <span>Experienced Driver</span>
+
+              <div class="rentcar-section">
+                <h3 class="rentcar-section-title">
+                  Flores Overland (Overnight)
+                </h3>
+                <div class="rentcar-list">
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">
+                      Private Transport Overland/Day
+                    </div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 2.000.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 1.300.000
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- What's Included for Rent Car -->
+          <!-- What's Included -->
           <div class="detail-section">
             <h3>WHAT'S INCLUDED & EXCLUDED</h3>
             <div class="detail-included-excluded">
               <div class="detail-included">
-                <div class="detail-include-item">✓ Professional Driver</div>
-                <div class="detail-include-item">✓ Fuel for 10 hours</div>
-                <div class="detail-include-item">✓ Air Conditioning</div>
-                <div class="detail-include-item">✓ Vehicle Insurance</div>
-                <div class="detail-include-item">
-                  ✓ Parking Fees (within city)
-                </div>
+                <div class="detail-include-item">✓ Driver</div>
+                <div class="detail-include-item">✓ Fuel</div>
+                <div class="detail-include-item">✓ Toll & Parking</div>
               </div>
               <div class="detail-excluded">
-                <div class="detail-exclude-item">⊗ Entrance Tickets</div>
-                <div class="detail-exclude-item">⊗ Meals & Beverages</div>
-                <div class="detail-exclude-item">⊗ Overtime Charges</div>
-                <div class="detail-exclude-item">
-                  ⊗ Tipping Driver (Optional)
-                </div>
-                <div class="detail-exclude-item">⊗ Extra Destination Fees</div>
+                <div class="detail-exclude-item">⊗ Entrance Fees</div>
+                <div class="detail-exclude-item">⊗ Meals</div>
               </div>
             </div>
           </div>
@@ -595,15 +803,13 @@ import Footer from "../components/Footer.astro";
           <!-- Footer -->
           <div class="detail-footer">
             <p>
-              Price is for 10 hours usage per day. Additional hours charged
-              separately.
+              Price may vary depending on distance &amp; passenger. For further
+              details please contact our admin at
             </p>
             <div class="detail-contact">
-              <span>Contact info</span>
-              <span class="detail-phone">
-                <span class="whatsapp-icon"></span>
-                0811-3787-741
-              </span>
+              <span class="detail-phone"
+                ><span class="whatsapp-icon"></span>0821-9289-5105</span
+              >
             </div>
           </div>
         </div>
@@ -614,33 +820,44 @@ import Footer from "../components/Footer.astro";
 
     <script>
       // MULTIPLE MODAL SYSTEM - Each package has its own modal
+
+      // Global modal variables
+      let modalZikita, modalZaviero, modalRentCar;
+
+      // Function to open specific modal
+      function openModal(modalType) {
+        let modal;
+        if (modalType === "zikita") {
+          modal = modalZikita;
+        } else if (modalType === "zaviero") {
+          modal = modalZaviero;
+        } else if (modalType === "rentcar") {
+          modal = modalRentCar;
+        }
+        if (modal) {
+          modal.classList.add("show");
+          // Initialize destination colors
+          const activeOpt = modal.querySelector(".detail-trip-option.active");
+          if (activeOpt) updateDestinationColors(activeOpt, modal);
+        }
+      }
+
+      // Function to close specific modal
+      function closeModal(modalType) {
+        if (modalType === "zikita") {
+          modalZikita.classList.remove("show");
+        } else if (modalType === "zaviero") {
+          modalZaviero.classList.remove("show");
+        } else if (modalType === "rentcar") {
+          modalRentCar.classList.remove("show");
+        }
+      }
+
       document.addEventListener("DOMContentLoaded", function () {
         // Get all modals
-        const modalZikita = document.getElementById("detailModalZikita");
-        const modalZaviero = document.getElementById("detailModalZaviero");
-        const modalRentCar = document.getElementById("detailModalRentCar");
-
-        // Function to open specific modal
-        function openModal(modalType) {
-          if (modalType === "zikita") {
-            modalZikita.classList.add("show");
-          } else if (modalType === "zaviero") {
-            modalZaviero.classList.add("show");
-          } else if (modalType === "rentcar") {
-            modalRentCar.classList.add("show");
-          }
-        }
-
-        // Function to close specific modal
-        function closeModal(modalType) {
-          if (modalType === "zikita") {
-            modalZikita.classList.remove("show");
-          } else if (modalType === "zaviero") {
-            modalZaviero.classList.remove("show");
-          } else if (modalType === "rentcar") {
-            modalRentCar.classList.remove("show");
-          }
-        }
+        modalZikita = document.getElementById("detailModalZikita");
+        modalZaviero = document.getElementById("detailModalZaviero");
+        modalRentCar = document.getElementById("detailModalRentCar");
 
         // Add click event to all view details buttons
         document.querySelectorAll(".view-details-btn").forEach((btn) => {
@@ -688,25 +905,18 @@ import Footer from "../components/Footer.astro";
         // Detail trip options toggle
         document.querySelectorAll(".detail-trip-option").forEach((option) => {
           option.addEventListener("click", () => {
-            // Remove active from all options
-            document.querySelectorAll(".detail-trip-option").forEach((opt) => {
+            // Remove active from all options in the same modal
+            const modal = option.closest(".detail-modal");
+            modal.querySelectorAll(".detail-trip-option").forEach((opt) => {
               opt.classList.remove("active");
             });
             // Add active to clicked option
             option.classList.add("active");
 
             // Update destination colors
-            updateDestinationColors(option);
+            updateDestinationColors(option, modal);
           });
         });
-
-        // Set initial destination colors
-        const activeOption = document.querySelector(
-          ".detail-trip-option.active"
-        );
-        if (activeOption) {
-          updateDestinationColors(activeOption);
-        }
       });
 
       // Smooth scrolling for navigation links
@@ -1032,8 +1242,9 @@ import Footer from "../components/Footer.astro";
         },
       };
 
-      // Global Debug Function
-      window.openModal = function (packageType) {
+      // Global Debug Function - REMOVED, now navigating to product page
+      // window.openModal = function (packageType) {
+      /*
         console.log("openModal called with packageType:", packageType);
         const modal = document.getElementById("detailModal");
         const modalBody = document.getElementById("modalDetailBody");
@@ -1144,7 +1355,7 @@ import Footer from "../components/Footer.astro";
 
                     <!-- Footer -->
                     <div class="detail-footer">
-                        <p>Prices very based on destination & number of passengers.</p>
+                        <p>Prices vary based on destination & number of passengers.</p>
                         <div class="detail-contact">
                             <span>Contact info</span>
                             <span class="detail-phone">0811-3787-741</span>
@@ -1236,7 +1447,7 @@ import Footer from "../components/Footer.astro";
 
                     <!-- Footer -->
                     <div class="detail-footer">
-                        <p>Prices very based on destination & number of passengers.</p>
+                        <p>Prices vary based on destination & number of passengers.</p>
                         <div class="detail-contact">
                             <span>Contact info</span>
                             <span class="detail-phone">0811-3787-741</span>
@@ -1323,10 +1534,9 @@ import Footer from "../components/Footer.astro";
 
                     <!-- Footer -->
                     <div class="detail-footer">
-                        <p>Prices very based on destination & duration.</p>
+                        <p>Price may vary depending on distance &amp; passenger. For further details please contact our admin at</p>
                         <div class="detail-contact">
-                            <span>Contact info</span>
-                            <span class="detail-phone">0811-3787-741</span>
+                            <span class="detail-phone"><span class="whatsapp-icon"></span>0821-9289-5105</span>
                         </div>
                     </div>
                 `;
@@ -1340,6 +1550,7 @@ import Footer from "../components/Footer.astro";
           modal.classList.add("show");
         }, 10);
       };
+      */
 
       window.closeDetailModal = function () {
         console.log("Closing modal");
@@ -1353,73 +1564,61 @@ import Footer from "../components/Footer.astro";
       };
 
       // Function to update destination colors
-      function updateDestinationColors(selectedOption) {
+      function updateDestinationColors(selectedOption, modal) {
         const tripType = selectedOption.getAttribute("data-trip");
-        const halfDayDestinations = document.querySelectorAll(
+        const halfDayDestinations = modal.querySelectorAll(
           ".half-day-destinations .detail-dest-item"
         );
-        const fullDayDestinations = document.querySelectorAll(
+        const fullDayDestinations = modal.querySelectorAll(
           ".full-day-destinations .detail-dest-item"
         );
+        const sunsetDestinations = modal.querySelectorAll(
+          ".full-day-sunset .detail-dest-item"
+        );
+
+        const setActive = (items) => {
+          items.forEach((item) => {
+            item.classList.add("active-dest");
+            item.classList.remove("inactive-dest");
+            const icon = item.querySelector(".detail-dest-icon");
+            if (icon) {
+              icon.classList.add("active-icon");
+              icon.classList.remove("inactive-icon");
+            }
+          });
+        };
+
+        const setInactive = (items) => {
+          items.forEach((item) => {
+            item.classList.add("inactive-dest");
+            item.classList.remove("active-dest");
+            const icon = item.querySelector(".detail-dest-icon");
+            if (icon) {
+              icon.classList.add("inactive-icon");
+              icon.classList.remove("active-icon");
+            }
+          });
+        };
+
+        // Reset all to inactive first
+        setInactive(halfDayDestinations);
+        setInactive(fullDayDestinations);
+        setInactive(sunsetDestinations);
 
         if (tripType === "half-day") {
-          // Half day destinations - hijau #A3B184 (aktif)
-          halfDayDestinations.forEach((item) => {
-            item.style.color = "#A3B184";
-            item.style.fontWeight = "600";
-            item.style.opacity = "1";
-            const icon = item.querySelector(".detail-dest-icon");
-            if (icon) {
-              icon.style.backgroundImage =
-                'url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0EzQjE4NCIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+")';
-              icon.style.filter =
-                "drop-shadow(0 0 4px rgba(163, 177, 132, 0.5))";
-            }
-          });
-
-          // Full day destinations - abu-abu (tidak aktif)
-          fullDayDestinations.forEach((item) => {
-            item.style.color = "#999";
-            item.style.opacity = "0.6";
-            const icon = item.querySelector(".detail-dest-icon");
-            if (icon) {
-              icon.style.backgroundImage =
-                'url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0NDQ0NDQyIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+")';
-              icon.style.filter = "none";
-            }
-          });
+          setActive(halfDayDestinations);
         } else if (tripType === "full-day") {
-          // Full day destinations - hijau #A3B184 (aktif)
-          fullDayDestinations.forEach((item) => {
-            item.style.color = "#A3B184";
-            item.style.fontWeight = "600";
-            item.style.opacity = "1";
-            const icon = item.querySelector(".detail-dest-icon");
-            if (icon) {
-              icon.style.backgroundImage =
-                'url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0EzQjE4NCIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+")';
-              icon.style.filter =
-                "drop-shadow(0 0 4px rgba(163, 177, 132, 0.5))";
-            }
-          });
-
-          // Half day destinations - abu-abu (tidak aktif)
-          halfDayDestinations.forEach((item) => {
-            item.style.color = "#999";
-            item.style.opacity = "0.6";
-            const icon = item.querySelector(".detail-dest-icon");
-            if (icon) {
-              icon.style.backgroundImage =
-                'url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOC4xMzQgMiA1IDUuMTM0IDUgOUM1IDEwLjA3NiA1LjQzNyAxMS4xMTEgNi4xOTQgMTEuOTQ0TDEyIDIyTDE3LjgwNiAxMS45NDRDMTguNTYzIDExLjExMSAxOSAxMC4wNzYgMTkgOUMxOSA1LjEzNCAxNS44NjYgMiAxMiAyWiIgZmlsbD0iI0NDQ0NDQyIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjIuNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+")';
-              icon.style.filter = "none";
-            }
-          });
+          setActive(fullDayDestinations);
+        } else if (tripType === "full-day-sunset") {
+          setActive(sunsetDestinations);
         }
       }
 
       // Event Listeners untuk Detail Modal
       document.addEventListener("DOMContentLoaded", function () {
-        console.log("DOM loaded, setting up button listeners");
+        console.log(
+          "DOM loaded, setting up button listeners - UPDATED VERSION"
+        );
 
         // Setup view details buttons dengan cara yang lebih langsung
         const buttons = document.querySelectorAll(
@@ -1445,11 +1644,7 @@ import Footer from "../components/Footer.astro";
             console.log("Package type:", packageType);
 
             // Panggil function secara langsung
-            if (window.openModal) {
-              window.openModal(packageType);
-            } else {
-              console.error("openModal function not found");
-            }
+            openModal(packageType);
           };
         });
 

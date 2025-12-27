@@ -997,30 +997,33 @@
       }
 
       .view-details-btn {
-        background: transparent;
-        color: #f28482;
-        border: 2px solid #f28482;
-        padding: 10px 24px;
-        border-radius: 20px;
-        font-size: 14px;
-        font-weight: 400;
-        cursor: pointer;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        text-transform: lowercase;
-        letter-spacing: 0.3px;
-        align-self: center; /* Center mengikuti destinations */
-        font-family: "Noto Sans", sans-serif;
-        display: block; /* Block element untuk text centering */
-        text-align: center; /* Center text konsisten dengan destinations */
-        margin: 0 auto; /* Center horizontal positioning */
-        width: fit-content; /* Width sesuai content */
+        background-color: transparent !important;
+        border: 2px solid #f28482 !important;
+        color: #f28482 !important;
+        padding: 10px 24px !important;
+        border-radius: 20px !important;
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        cursor: pointer !important;
+        text-decoration: none !important;
+        display: inline-block !important;
+        transition: all 0.3s ease !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.3px !important;
+        font-family: "Noto Sans", sans-serif !important;
+        pointer-events: auto !important;
+        user-select: none !important;
+        text-align: center !important;
+        margin: 0 auto !important;
+        width: fit-content !important;
+        margin-left: auto !important;
+        margin-right: 0 !important;
       }
 
       .view-details-btn:hover {
-        background-color: #f28482;
-        color: white;
-        transform: translateY(-2px);
+        background-color: #f28482 !important;
+        color: white !important;
+        transform: translateY(-2px) !important;
       }
 
       /* Styling sederhana untuk rent car */
@@ -1063,36 +1066,30 @@
       }
       
       .product-card.rent-car .view-details-btn {
-        display: inline-block;
-        background-color: transparent;
-        border: 2px solid #f28482;
-        color: #f28482;
-        padding: 10px 24px;
-        border-radius: 20px;
-        font-size: 14px;
-        font-weight: 400;
-        cursor: pointer;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        text-transform: lowercase;
-        letter-spacing: 0.3px;
-        text-align: center;
-        margin-left: auto;
-        margin-right: 0;
+        display: inline-block !important;
+        background-color: transparent !important;
+        border: 2px solid #f28482 !important;
+        color: #f28482 !important;
+        padding: 10px 24px !important;
+        border-radius: 20px !important;
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        cursor: pointer !important;
+        text-decoration: none !important;
+        transition: all 0.3s ease !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.3px !important;
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: 0 !important;
       }
 
-      /* View details button untuk Zaviero dan Zikita Speedboat - posisi kanan */
-      .product-card:not(.rent-car) .view-details-btn {
-        align-self: flex-end;
-        margin-left: auto;
-        margin-top: auto;
-        margin-right: 0;
-      }
+      /* All view details buttons now have the same positioning as Rent Car */
       
       .product-card.rent-car .view-details-btn:hover {
-        background-color: #f28482;
-        color: white;
-        transform: translateY(-2px);
+        background-color: #f28482 !important;
+        color: white !important;
+        transform: translateY(-2px) !important;
       }
       
 
@@ -1641,17 +1638,67 @@
       /* Responsive tweak for small screens: slightly reduce gaps and keep comfortable padding */
       @media (max-width: 520px) {
         .detail-modal-content {
-          padding: 10px;
-          max-width: 96%;
-          border-radius: 16px;
+          padding: 10px !important;
+          max-width: 96% !important;
+          border-radius: 16px !important;
+          max-height: 95vh !important;
         }
 
         .detail-modal-body {
-          padding: 12px 16px 70px;
+          padding: 12px 16px 70px !important;
+          max-height: calc(95vh - 40px) !important;
+          overflow-y: auto !important;
+        }
+
+        .detail-header {
+          padding: 15px 10px 10px !important;
+        }
+
+        .detail-model {
+          font-size: 1.1rem !important;
+        }
+
+        .detail-specs {
+          font-size: 0.75rem !important;
         }
 
         .detail-trip-options {
-          margin: 16px;
+          margin: 12px !important;
+          flex-direction: column !important;
+          gap: 8px !important;
+        }
+
+        .detail-trip-option {
+          padding: 12px !important;
+          border-radius: 8px !important;
+        }
+
+        .detail-trip-title {
+          font-size: 0.9rem !important;
+        }
+
+        .detail-trip-price {
+          font-size: 1rem !important;
+        }
+
+        .detail-trip-time {
+          font-size: 0.75rem !important;
+        }
+
+        .detail-description {
+          margin: 12px 10px !important;
+          padding: 14px !important;
+        }
+
+        .detail-desc-title {
+          font-size: 13px !important;
+          padding: 8px 14px !important;
+          margin-bottom: 10px !important;
+        }
+
+        .detail-desc-text {
+          font-size: 12px !important;
+          line-height: 1.5 !important;
         }
 
         .detail-destinations {
@@ -1659,17 +1706,20 @@
           padding: 0 12px !important;
           width: 100% !important;
           justify-content: flex-start !important;
+          flex-direction: column !important;
         }
 
         .detail-dest-column {
-          flex: 1 1 100%;
-          min-width: 0;
+          flex: 1 1 100% !important;
+          min-width: 0 !important;
         }
 
         /* Mobile: prevent icon and text overlap */
         .detail-dest-item {
           align-items: center !important;
           gap: 10px !important;
+          font-size: 13px !important;
+          padding: 6px 0 !important;
         }
         .detail-dest-item span:last-child {
           display: block !important;
@@ -1679,6 +1729,66 @@
         }
         .detail-dest-icon {
           margin-top: 0 !important;
+          flex: 0 0 16px !important;
+          width: 16px !important;
+          height: 16px !important;
+        }
+
+        .detail-section {
+          padding: 12px 10px !important;
+        }
+
+        .detail-section h3 {
+          font-size: 1rem !important;
+          margin-bottom: 12px !important;
+        }
+
+        .detail-included-excluded {
+          flex-direction: column !important;
+          gap: 12px !important;
+        }
+
+        .detail-included,
+        .detail-excluded {
+          width: 100% !important;
+          padding: 10px !important;
+          border-radius: 6px !important;
+        }
+
+        .detail-include-item,
+        .detail-exclude-item {
+          font-size: 12px !important;
+          margin-bottom: 4px !important;
+          padding-left: 18px !important;
+        }
+
+        .detail-footer {
+          padding: 12px 10px !important;
+        }
+
+        .detail-footer p {
+          font-size: 12px !important;
+          margin-bottom: 8px !important;
+        }
+
+        .detail-contact {
+          flex-direction: column !important;
+          gap: 6px !important;
+        }
+
+        .detail-phone {
+          font-size: 13px !important;
+        }
+
+        .detail-back-btn {
+          position: fixed !important;
+          bottom: 15px !important;
+          left: 50% !important;
+          transform: translateX(-50%) !important;
+          padding: 10px 20px !important;
+          font-size: 13px !important;
+          border-radius: 18px !important;
+          z-index: 10002 !important;
         }
       }
 
@@ -1774,7 +1884,7 @@
 
       .detail-desc-text {
         margin-top: 12px;
-        color: #2f595c; /* darker teal for body text */
+        color: #6b5b47; /* same color as trip option text */
         line-height: 1.6;
         font-size: 14px;
       }
@@ -1806,7 +1916,7 @@
 
       .detail-desc-text.zikita {
         margin-top: 12px;
-        color: #23515a;
+        color: #6b5b47;
         line-height: 1.6;
         font-size: 14px;
         font-weight: 600;
@@ -1838,7 +1948,7 @@
         margin-bottom: 24px;
         font-size: 14px;
         line-height: 1.7;
-        color: #2f595c;
+        color: #6b5b47;
       }
 
       .detail-description.rentcar .detail-desc-text.zikita a {
@@ -2000,6 +2110,50 @@
         text-align: center;
         padding-top: 12px;
         border-top: 1px solid rgba(163,177,132,0.1);
+      }
+
+      /* New list layout for mobile-friendly display */
+      .detail-description.rentcar .rentcar-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .detail-description.rentcar .rentcar-item {
+        background: #f9f9f9;
+        border-radius: 12px;
+        padding: 16px;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      }
+
+      .detail-description.rentcar .rentcar-destination {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 12px;
+        font-size: 0.95rem;
+        line-height: 1.4;
+      }
+
+      .detail-description.rentcar .rentcar-prices {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .detail-description.rentcar .rentcar-price {
+        font-size: 0.9rem;
+        color: #555;
+        padding: 8px 12px;
+        background: white;
+        border-radius: 8px;
+        border-left: 4px solid #A3B184;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      }
+
+      .detail-description.rentcar .rentcar-price strong {
+        color: #A3B184;
+        font-weight: 700;
       }
 
       /* Responsive styles for Rent Car Modal */
@@ -2287,7 +2441,7 @@
       }
 
       .detail-back-btn {
-        background: transparent;
+        background: white;
         border: 2px solid #f28482;
         color: #f28482;
         padding: 12px 30px;
@@ -4018,6 +4172,170 @@
    ========================================== */
 
 /* CSS untuk Zikita dan Zaviero Speedboat */
+
+/* Vehicle Packages */
+.packages-section {
+  padding: 100px 0;
+  background-color: #f4f4f4;
+}
+
+.packages-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.packages-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 70px;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.packages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.package-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+}
+
+.package-card {
+  background: white;
+  border-radius: 50px;
+  overflow: visible;
+  box-shadow: none;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  height: 450px;
+  width: 100%;
+}
+
+.package-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.package-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  border-radius: 50px;
+}
+
+.package-content {
+  background: rgba(255, 255, 255, 0.98);
+  padding: 15px 20px 25px 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: calc(100% - 80px);
+  margin: 0 40px;
+  box-shadow: 0 4px 12px #f4f4f4;
+  position: absolute;
+  bottom: -80px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+}
+
+.package-name {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.package-price {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.package-price::before {
+  content: "IDR ";
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #666;
+}
+
+.view-details-btn {
+  background: #fff;
+  color: #f28482;
+  border: 1px solid #f28482;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.view-details-btn:hover {
+  background: #f28482;
+  color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .packages-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .packages-container {
+    padding: 0 30px;
+  }
+
+  .package-content {
+    width: calc(100% - 60px);
+    margin: 0 30px;
+    bottom: -60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .packages-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .packages-container {
+    padding: 0 20px;
+  }
+
+  .package-content {
+    width: calc(100% - 40px);
+    margin: 0 20px;
+    bottom: -40px;
+  }
+}
 
 
 /* ==========================================

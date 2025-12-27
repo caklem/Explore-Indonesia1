@@ -129,7 +129,9 @@ import Header from "../components/Header.astro";
                     <li>Manjarite Island</li>
                     <li>Sunset at Kalong Island (Flying Foxes)</li>
                   </ul>
-                  <a href="#" class="view-details-btn">view details</a>
+                  <a href="#" class="view-details-btn" data-modal="zikita"
+                    >VIEW DETAILS</a
+                  >
                 </div>
               </div>
             </div>
@@ -303,7 +305,7 @@ import Header from "../components/Header.astro";
                     <li>Sunset at Kalong Island (Flying Foxes)</li>
                   </ul>
                   <a href="#" class="view-details-btn" data-modal="zaviero"
-                    >view details</a
+                    >VIEW DETAILS</a
                   >
                 </div>
               </div>
@@ -367,10 +369,10 @@ import Header from "../components/Header.astro";
                   <div class="additional-info">
                     We also provide premium car (Toyota Alphard & Mercedes-Benz)
                     for personal or corporate. Product & details, please contact
-                    our admin at +62 811-3787-741
+                    our admin at 0821-9289-5105
                   </div>
                   <a href="#" class="view-details-btn" data-modal="rentcar"
-                    >view details</a
+                    >VIEW DETAILS</a
                   >
                 </div>
               </div>
@@ -407,7 +409,7 @@ import Header from "../components/Header.astro";
     </div>
 
     <!-- Detail Modal -->
-    <div class="detail-modal" id="detailModal">
+    <div class="detail-modal" id="detailModalZikita">
       <div class="detail-modal-content">
         <span class="detail-modal-close">&times;</span>
 
@@ -541,7 +543,7 @@ import Header from "../components/Header.astro";
               Zikita can accommodate up to 14 pax
             </div>
             <p class="detail-desc-text zikita">
-              Price is customize depend on destination &amp; number or
+              Price is customize depend on destination &amp; number of
               passenger. For further details about our daily trip or private
               charter please contact our admin at <a href="tel:082192895105"
                 >0821-9289-5105</a
@@ -583,7 +585,7 @@ import Header from "../components/Header.astro";
 
           <!-- Footer -->
           <div class="detail-footer">
-            <p>Prices very based on destination & number of passengers.</p>
+            <p>Prices vary based on destination & number of passengers.</p>
             <div class="detail-contact">
               <span>Contact info</span>
               <span class="detail-phone">
@@ -594,7 +596,7 @@ import Header from "../components/Header.astro";
           </div>
         </div>
 
-        <button class="detail-back-btn">back</button>
+        <button class="detail-back-btn" data-modal="zikita">back</button>
       </div>
     </div>
 
@@ -733,7 +735,7 @@ import Header from "../components/Header.astro";
               Zaviero can accommodate up to 10 pax
             </div>
             <p class="detail-desc-text">
-              Price is customize depend on destination &amp; number or
+              Price is customize depend on destination &amp; number of
               passenger. For further details about our daily trip or private
               charter please contact our admin at <a href="tel:082192895105">
                 0821-9289-5105
@@ -841,7 +843,7 @@ import Header from "../components/Header.astro";
 
           <!-- Footer -->
           <div class="detail-footer">
-            <p>Prices very based on destination & number of passengers.</p>
+            <p>Prices vary based on destination & number of passengers.</p>
             <div class="detail-contact">
               <span>Contact info</span>
               <span class="detail-phone">
@@ -852,12 +854,12 @@ import Header from "../components/Header.astro";
           </div>
         </div>
 
-        <button class="detail-back-btn">back</button>
+        <button class="detail-back-btn" data-modal="zaviero">back</button>
       </div>
     </div>
 
     <!-- Detail Modal Rent Car -->
-    <div class="detail-modal" id="detailModalRentcar">
+    <div class="detail-modal" id="detailModalRentCar">
       <div class="detail-modal-content">
         <span class="detail-modal-close">&times;</span>
 
@@ -903,95 +905,129 @@ import Header from "../components/Header.astro";
             <div class="rentcar-content">
               <div class="rentcar-section">
                 <h3 class="rentcar-section-title">Airport Transfer</h3>
-                <div class="rentcar-table-wrap">
-                  <table class="rentcar-table">
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th>Toyota Hiace</th>
-                        <th>Innova Reborn</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Airport - Hotel Ayana/Plataran</td>
-                        <td>Rp 300.000</td>
-                        <td>Rp 150.000</td>
-                      </tr>
-                      <tr>
-                        <td>Airport - Hotel Jayakarta/Sudamala</td>
-                        <td>Rp 300.000</td>
-                        <td>Rp 150.000</td>
-                      </tr>
-                      <tr>
-                        <td>Airport - Hotel In Town</td>
-                        <td>Rp 250.000</td>
-                        <td>Rp 125.000</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <p class="rentcar-note">Other drop point on request</p>
+                <div class="rentcar-list">
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">
+                      Airport - Hotel Ayana/Plataran
+                    </div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 300.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 150.000
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">
+                      Airport - Hotel Jayakarta/Sudamala
+                    </div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 300.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 150.000
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">
+                      Airport - Hotel In Town
+                    </div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 250.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 125.000
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                <p class="rentcar-note">Other drop point on request</p>
               </div>
 
               <div class="rentcar-section">
                 <h3 class="rentcar-section-title">Half Day Tour</h3>
-                <div class="rentcar-table-wrap">
-                  <table class="rentcar-table">
-                    <thead>
-                      <tr
-                        ><th>Tour</th><th>Toyota Hiace</th><th>Innova Reborn</th
-                        ></tr
-                      >
-                    </thead>
-                    <tbody>
-                      <tr
-                        ><td>City Tour Labuan Bajo</td><td>Rp 1.000.000</td><td
-                          >Rp 600.000</td
-                        ></tr
-                      >
-                      <tr
-                        ><td>Rangko Cave Tour</td><td>Rp 1.100.000</td><td
-                          >Rp 700.000</td
-                        ></tr
-                      >
-                      <tr
-                        ><td>Mello Village Tour</td><td>Rp 1.100.000</td><td
-                          >Rp 900.000</td
-                        ></tr
-                      >
-                    </tbody>
-                  </table>
+                <div class="rentcar-list">
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">City Tour Labuan Bajo</div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 1.000.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 600.000
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">Rangko Cave Tour</div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 1.100.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 700.000
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">Mello Village Tour</div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 1.100.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 900.000
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
               <div class="rentcar-section">
                 <h3 class="rentcar-section-title">Full Day Tour</h3>
-                <div class="rentcar-table-wrap">
-                  <table class="rentcar-table">
-                    <thead>
-                      <tr
-                        ><th>Tour</th><th>Toyota Hiace</th><th>Innova Reborn</th
-                        ></tr
-                      >
-                    </thead>
-                    <tbody>
-                      <tr
-                        ><td>Labuan Bajo Full day Tour</td><td>Rp 1.500.000</td
-                        ><td>Rp 900.000</td></tr
-                      >
-                      <tr
-                        ><td>Wae Rebo Village Tour</td><td>Rp 4.500.000</td><td
-                          >Rp 2.500.000</td
-                        ></tr
-                      >
-                      <tr
-                        ><td>Todo Village/Ruteng One Day Tour</td><td
-                          >Rp 2.500.000</td
-                        ><td>Rp 2.000.000</td></tr
-                      >
-                    </tbody>
-                  </table>
+                <div class="rentcar-list">
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">
+                      Labuan Bajo Full day Tour
+                    </div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 1.500.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 900.000
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">Wae Rebo Village Tour</div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 4.500.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 2.500.000
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">
+                      Todo Village/Ruteng One Day Tour
+                    </div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 2.500.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 2.000.000
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -999,23 +1035,20 @@ import Header from "../components/Header.astro";
                 <h3 class="rentcar-section-title">
                   Flores Overland (Overnight)
                 </h3>
-                <div class="rentcar-table-wrap">
-                  <table class="rentcar-table">
-                    <thead>
-                      <tr
-                        ><th>Service</th><th>Toyota Hiace</th><th
-                          >Innova Reborn</th
-                        ></tr
-                      >
-                    </thead>
-                    <tbody>
-                      <tr
-                        ><td>Private Transport Overland/Day</td><td
-                          >Rp 2.000.000</td
-                        ><td>Rp 1.300.000</td></tr
-                      >
-                    </tbody>
-                  </table>
+                <div class="rentcar-list">
+                  <div class="rentcar-item">
+                    <div class="rentcar-destination">
+                      Private Transport Overland/Day
+                    </div>
+                    <div class="rentcar-prices">
+                      <div class="rentcar-price">
+                        Toyota Hiace: Start From 2.000.000
+                      </div>
+                      <div class="rentcar-price">
+                        Innova Reborn: Start From 1.300.000
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1051,7 +1084,7 @@ import Header from "../components/Header.astro";
           </div>
         </div>
 
-        <button class="detail-back-btn">back</button>
+        <button class="detail-back-btn" data-modal="rentcar">back</button>
       </div>
     </div>
 
